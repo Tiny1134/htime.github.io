@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Echipa | H-TIME</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- Setări Generale --- */
+        :root {
+            --dark-header: #4a4541;
+            --peach-bg: #fcbf88;
+            --gold-accent: #e6b981; /* Culoarea aurie pentru nume */
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Space Mono', monospace; background-color: var(--peach-bg); color: black; padding-top: 80px; }
+        h1, h2, h3, .sync-font { font-family: 'Syncopate', sans-serif; text-transform: uppercase; }
+        a { text-decoration: none; color: inherit; }
+
+        /* --- Bara de Navigație (Identică cu celelalte pagini) --- */
+        nav {
+            background-color: var(--dark-header); color: white; display: flex;
+            justify-content: space-between; align-items: center; padding: 15px 50px;
+            position: fixed; width: 100%; top: 0; z-index: 1000;
+        }
+        .logo { font-size: 24px; font-weight: bold; color: var(--gold-accent); font-family: 'Syncopate', sans-serif;}
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a { font-size: 0.9rem; transition: color 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--peach-bg); text-decoration: underline; }
+        
+        .nav-icons { display: flex; gap: 15px; align-items: center; }
+        .nav-icons a { font-size: 0.9rem; }
+        .icon-circle { border: 1px solid white; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; }
+        .cart-btn {
+            border: 1px solid white; padding: 5px 15px; border-radius: 20px;
+            background: transparent; color: white; cursor: pointer; font-family: 'Space Mono';
+            display: flex; align-items: center; gap: 5px;
+        }
+        .cart-btn:hover { background-color: white; color: black; }
+
+        /* --- Secțiunea Echipei --- */
+        .team-container {
+            text-align: center;
+            padding: 60px 20px;
+            min-height: calc(100vh - 80px);
+        }
+
+        .team-title {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            letter-spacing: 2px;
+        }
+
+        /* Grid-ul pentru carduri (3 sus, 2 jos) */
+        .team-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Card Membru Echipa */
+        .member-card {
+            background-color: black;
+            width: 320px; /* Lățimea cardului negru */
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        .member-card img {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%; /* Face poza rotundă */
+            object-fit: cover;
+            margin-bottom: 25px;
+        }
+
+        .member-card h3 {
+            color: var(--gold-accent);
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            line-height: 1.4;
+            letter-spacing: 1px;
+        }
+
+        .member-card p {
+            color: white;
+            font-size: 0.8rem;
+            line-height: 1.4;
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">H-T</div>
+        <div class="nav-links">
+            <a href="index.html">Ofertele Lunii</a>
+            <a href="magazin.html">Magazin</a>
+            <a href="despre-noi.html">Despre Noi</a>
+            <a href="echipa.html" class="active">Echipa H-Time</a>
+            <a href="contact.html">Contactează-ne</a>
+        </div>
+        <div class="nav-icons">
+            <a href="#">Login</a>
+            <a href="#" class="icon-circle">ig</a>
+            <a href="checkout.html">
+                <button class="cart-btn">Cart</button>
+            </a>
+        </div>
+    </nav>
+
+    <div class="team-container">
+        <h1 class="team-title">ÎNTÂLNEȘTE ECHIPA H-TIME</h1>
+        
+        <div class="team-grid">
+            <div class="member-card">
+                <img src="valeria.jpg" alt="Mija Valeria">
+                <h3>MIJA VALERIA</h3>
+                <p>Director General/CEO</p>
+            </div>
+
+            <div class="member-card">
+                <img src="alexandru.jpg" alt="Bujor Alexandru Emanuel">
+                <h3>BUJOR<br>ALEXANDRU<br>EMANUEL</h3>
+                <p>Departament Financiar și<br>HR</p>
+            </div>
+
+            <div class="member-card">
+                <img src="andreea.jpg" alt="Ifrim Andreea Claudia">
+                <h3>IFRIM<br>ANDREEA<br>CLAUDIA</h3>
+                <p>Departament Achiziții și<br>Logistică</p>
+            </div>
+
+            <div class="member-card">
+                <img src="iustina.jpg" alt="Agavriloaie Iustina">
+                <h3>AGAVRILOAIE<br>IUSTINA</h3>
+                <p>Departament Vânzări și<br>Relații cu Clienții</p>
+            </div>
+
+            <div class="member-card">
+                <img src="denisa.jpg" alt="Farțade Șerban Denisa Cristina">
+                <h3>FARȚADE<br>ȘERBAN<br>DENISA<br>CRISTINA</h3>
+                <p>Departament Marketing și<br>PR</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
