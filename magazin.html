@@ -32,16 +32,24 @@
         }
         .cart-btn:hover { background-color: white; color: black; }
 
-        .shop-container { display: flex; max-width: 1400px; margin: 40px auto; padding: 0 20px; flex-grow: 1; }
+        .shop-container { display: flex; width: 100%; max-width: 1400px; margin: 40px auto; padding: 0 20px; flex-grow: 1; }
         
-        .sidebar { width: 200px; flex-shrink: 0; }
+        .sidebar { width: 220px; flex-shrink: 0; }
         .sidebar h2 { font-size: 2.5rem; margin-bottom: 20px; }
         .category-list li { margin-bottom: 15px; cursor: pointer; transition: 0.2s; }
         .category-list li:hover, .category-list li.active { font-weight: bold; text-decoration: underline; }
 
+        /* AICI AM FĂCUT MODIFICAREA: Forțăm 4 produse pe un rând */
         .products-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 40px; flex-grow: 1; padding-left: 40px; margin-bottom: 60px;
+            display: grid; 
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 30px; 
+            flex-grow: 1; 
+            padding-left: 40px; 
+            margin-bottom: 60px;
+            width: 100%;
         }
+
         .product-card { text-align: center; background: white; padding: 15px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
         .product-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 5px; margin-bottom: 15px; }
         .product-card h3 { font-size: 0.9rem; margin-bottom: 10px; min-height: 40px; }
@@ -55,7 +63,7 @@
 
         /* --- Footer --- */
         footer {
-            background-color: #eaddd7; /* O nuanță care se potrivește cu bara de sus */
+            background-color: #eaddd7;
             padding: 50px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; border-top: 1px solid #ddd;
         }
         .footer-col { flex: 1; min-width: 200px; }
