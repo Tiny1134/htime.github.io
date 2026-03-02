@@ -7,37 +7,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
-        /* --- Footer --- */
-        footer {
-            background-color: #f5f5f5;
-            color: black;
-            padding: 50px;
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 30px;
-            border-top: 1px solid #ddd;
-            font-family: 'Space Mono', monospace;
-            text-align: left;
-        }
-        .footer-col { flex: 1; min-width: 200px; }
-        .footer-col h2, .footer-col h3 { font-family: 'Syncopate', sans-serif; text-transform: uppercase; margin-bottom: 20px; font-size: 1.2rem; }
-        .footer-col ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px; }
-        .footer-col a:hover { text-decoration: underline; }
-        /* --- Setări Generale --- */
         :root {
             --dark-header: #4a4541;
             --light-bg: #f5f5f5;
             --peach-bg: #fcbf88;
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Space Mono', monospace; background-color: var(--light-bg); color: black; padding-top: 80px; }
+        body { font-family: 'Space Mono', monospace; background-color: var(--light-bg); color: black; padding-top: 80px; display: flex; flex-direction: column; min-height: 100vh; }
         h1, h2, h3, .sync-font { font-family: 'Syncopate', sans-serif; text-transform: uppercase; }
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; }
 
-        /* --- Bara de Navigație --- */
         nav {
             background-color: var(--dark-header); color: white; display: flex;
             justify-content: space-between; align-items: center; padding: 15px 50px;
@@ -52,38 +32,36 @@
         }
         .cart-btn:hover { background-color: white; color: black; }
 
-        /* --- Structura Magazinului --- */
-        .shop-container { display: flex; max-width: 1400px; margin: 40px auto; padding: 0 20px; }
+        .shop-container { display: flex; max-width: 1400px; margin: 40px auto; padding: 0 20px; flex-grow: 1; }
         
-        /* Sidebar Categorii */
         .sidebar { width: 200px; flex-shrink: 0; }
         .sidebar h2 { font-size: 2.5rem; margin-bottom: 20px; }
         .category-list li { margin-bottom: 15px; cursor: pointer; transition: 0.2s; }
         .category-list li:hover, .category-list li.active { font-weight: bold; text-decoration: underline; }
 
-        /* Grid Produse */
         .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 40px;
-            flex-grow: 1;
-            padding-left: 40px;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 40px; flex-grow: 1; padding-left: 40px; margin-bottom: 60px;
         }
-
         .product-card { text-align: center; background: white; padding: 15px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
         .product-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 5px; margin-bottom: 15px; }
         .product-card h3 { font-size: 0.9rem; margin-bottom: 10px; min-height: 40px; }
         .product-card p { font-size: 1rem; font-weight: bold; margin-bottom: 15px; }
         
         .add-to-cart-btn {
-            background-color: black; color: white; border: none; padding: 10px 0;
-            width: 100%; border-radius: 25px; cursor: pointer; font-family: 'Space Mono';
-            transition: 0.3s;
+            background-color: black; color: white; border: none; padding: 10px 0; width: 100%; border-radius: 25px; cursor: pointer; font-family: 'Space Mono'; transition: 0.3s;
         }
         .add-to-cart-btn:hover { background-color: var(--peach-bg); color: black; }
-        
         .cart-count { background: var(--peach-bg); color: black; border-radius: 50%; padding: 2px 8px; font-size: 0.8rem; margin-left: 5px; font-weight: bold; }
 
+        /* --- Footer --- */
+        footer {
+            background-color: #eaddd7; /* O nuanță care se potrivește cu bara de sus */
+            padding: 50px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; border-top: 1px solid #ddd;
+        }
+        .footer-col { flex: 1; min-width: 200px; }
+        .footer-col h2, .footer-col h3 { font-family: 'Syncopate', sans-serif; text-transform: uppercase; margin-bottom: 20px; font-size: 1.2rem; }
+        .footer-col ul { display: flex; flex-direction: column; gap: 10px; }
+        .footer-col a:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
@@ -117,120 +95,54 @@
         </div>
 
         <div class="products-grid" id="products-container">
-            
-            <div class="product-card" data-category="ceasuri">
-                <img src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=400&q=80" alt="Poza">
-                <h3 class="sync-font">NUME CEAS 1</h3>
-                <p>€1200.00</p>
-                <button class="add-to-cart-btn" onclick="addToCart('Nume Ceas 1', 1200)">Adaugă în coș</button>
-            </div>
-            <div class="product-card" data-category="ceasuri">
-                <img src="https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=400&q=80" alt="Poza">
-                <h3 class="sync-font">NUME CEAS 2</h3>
-                <p>€1450.00</p>
-                <button class="add-to-cart-btn" onclick="addToCart('Nume Ceas 2', 1450)">Adaugă în coș</button>
-            </div>
-            <div class="product-card" data-category="ceasuri">
-                <img src="https://images.unsplash.com/photo-1587836142125-9f5b66d48e0d?auto=format&fit=crop&w=400&q=80" alt="Poza">
-                <h3 class="sync-font">NUME CEAS 3</h3>
-                <p>€980.00</p>
-                <button class="add-to-cart-btn" onclick="addToCart('Nume Ceas 3', 980)">Adaugă în coș</button>
-            </div>
-            <div class="product-card" data-category="ceasuri">
-                <img src="https://images.unsplash.com/photo-1548690312-e3b507d8c110?auto=format&fit=crop&w=400&q=80" alt="Poza">
-                <h3 class="sync-font">NUME CEAS 4</h3>
-                <p>€2100.00</p>
-                <button class="add-to-cart-btn" onclick="addToCart('Nume Ceas 4', 2100)">Adaugă în coș</button>
-            </div>
-
-            <div class="product-card" data-category="inele">
-                <img src="https://images.unsplash.com/photo-1605100804763-247f66126e28?auto=format&fit=crop&w=400&q=80" alt="Poza">
-                <h3 class="sync-font">NUME INEL 1</h3>
-                <p>€150.00</p>
-                <button class="add-to-cart-btn" onclick="addToCart('Nume Inel 1', 150)">Adaugă în coș</button>
-            </div>
-            <div class="product-card" data-category="inele">
-                <img src="https://images.unsplash.com/photo-1599643477874-124b8159bb84?auto=format&fit=crop&w=400&q=80" alt="Poza">
-                <h3 class="sync-font">NUME INEL 2</h3>
-                <p>€220.00</p>
-                <button class="add-to-cart-btn" onclick="addToCart('Nume Inel 2', 220)">Adaugă în coș</button>
-            </div>
-            <div class="product-card" data-category="inele">
-                <img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=400&q=80" alt="Poza">
-                <h3 class="sync-font">NUME INEL 3</h3>
-                <p>€85.00</p>
-                <button class="add-to-cart-btn" onclick="addToCart('Nume Inel 3', 85)">Adaugă în coș</button>
-            </div>
-            <div class="product-card" data-category="inele">
-                <img src="https://images.unsplash.com/photo-1589674781759-c21c37956a44?auto=format&fit=crop&w=400&q=80" alt="Poza">
-                <h3 class="sync-font">NUME INEL 4</h3>
-                <p>€310.00</p>
-                <button class="add-to-cart-btn" onclick="addToCart('Nume Inel 4', 310)">Adaugă în coș</button>
-            </div>
-
-            <div class="product-card" data-category="cercei">
-                <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=400&q=80" alt="Poza">
-                <h3 class="sync-font">NUME CERCEI 1</h3>
-                <p>€110.00</p>
-                <button class="add-to-cart-btn" onclick="addToCart('Nume Cercei 1', 110)">Adaugă în coș</button>
-            </div>
-            <div class="product-card" data-category="cercei">
-                <img src="https://images.unsplash.com/photo-1630019852942-f89202989a59?auto=format&fit=crop&w=400&q=80" alt="Poza">
-                <h3 class="sync-font">NUME CERCEI 2</h3>
-                <p>€190.00</p>
-                <button class="add-to-cart-btn" onclick="addToCart('Nume Cercei 2', 190)">Adaugă în coș</button>
-            </div>
-            <div class="product-card" data-category="cercei">
-                <img src="https://images.unsplash.com/photo-1629224316810-9d8805b95e76?auto=format&fit=crop&w=400&q=80" alt="Poza">
-                <h3 class="sync-font">NUME CERCEI 3</h3>
-                <p>€75.00</p>
-                <button class="add-to-cart-btn" onclick="addToCart('Nume Cercei 3', 75)">Adaugă în coș</button>
-            </div>
-            <div class="product-card" data-category="cercei">
-                <img src="https://images.unsplash.com/photo-1599643478514-46b15d21a8cd?auto=format&fit=crop&w=400&q=80" alt="Poza">
-                <h3 class="sync-font">NUME CERCEI 4</h3>
-                <p>€240.00</p>
-                <button class="add-to-cart-btn" onclick="addToCart('Nume Cercei 4', 240)">Adaugă în coș</button>
-            </div>
-
-            <div class="product-card" data-category="bratari">
-                <img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=400&q=80" alt="Poza">
-                <h3 class="sync-font">NUME BRATARA 1</h3>
-                <p>€65.00</p>
-                <button class="add-to-cart-btn" onclick="addToCart('Nume Bratara 1', 65)">Adaugă în coș</button>
-            </div>
-            <div class="product-card" data-category="bratari">
-                <img src="https://images.unsplash.com/photo-1573408301145-b98c4af01086?auto=format&fit=crop&w=400&q=80" alt="Poza">
-                <h3 class="sync-font">NUME BRATARA 2</h3>
-                <p>€130.00</p>
-                <button class="add-to-cart-btn" onclick="addToCart('Nume Bratara 2', 130)">Adaugă în coș</button>
-            </div>
-            <div class="product-card" data-category="bratari">
-                <img src="https://images.unsplash.com/photo-1602752250014-411db109559c?auto=format&fit=crop&w=400&q=80" alt="Poza">
-                <h3 class="sync-font">NUME BRATARA 3</h3>
-                <p>€90.00</p>
-                <button class="add-to-cart-btn" onclick="addToCart('Nume Bratara 3', 90)">Adaugă în coș</button>
-            </div>
-            <div class="product-card" data-category="bratari">
-                <img src="https://images.unsplash.com/photo-1531315630201-bb15abeb1653?auto=format&fit=crop&w=400&q=80" alt="Poza">
-                <h3 class="sync-font">NUME BRATARA 4</h3>
-                <p>€180.00</p>
-                <button class="add-to-cart-btn" onclick="addToCart('Nume Bratara 4', 180)">Adaugă în coș</button>
-            </div>
-
+            <div class="product-card" data-category="ceasuri"><img src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=400&q=80" alt="Poza"><h3 class="sync-font">NUME CEAS 1</h3><p>€1200.00</p><button class="add-to-cart-btn" onclick="addToCart('Nume Ceas 1', 1200)">Adaugă în coș</button></div>
+            <div class="product-card" data-category="ceasuri"><img src="https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=400&q=80" alt="Poza"><h3 class="sync-font">NUME CEAS 2</h3><p>€1450.00</p><button class="add-to-cart-btn" onclick="addToCart('Nume Ceas 2', 1450)">Adaugă în coș</button></div>
+            <div class="product-card" data-category="ceasuri"><img src="https://images.unsplash.com/photo-1587836142125-9f5b66d48e0d?auto=format&fit=crop&w=400&q=80" alt="Poza"><h3 class="sync-font">NUME CEAS 3</h3><p>€980.00</p><button class="add-to-cart-btn" onclick="addToCart('Nume Ceas 3', 980)">Adaugă în coș</button></div>
+            <div class="product-card" data-category="ceasuri"><img src="https://images.unsplash.com/photo-1548690312-e3b507d8c110?auto=format&fit=crop&w=400&q=80" alt="Poza"><h3 class="sync-font">NUME CEAS 4</h3><p>€2100.00</p><button class="add-to-cart-btn" onclick="addToCart('Nume Ceas 4', 2100)">Adaugă în coș</button></div>
+            <div class="product-card" data-category="inele"><img src="https://images.unsplash.com/photo-1605100804763-247f66126e28?auto=format&fit=crop&w=400&q=80" alt="Poza"><h3 class="sync-font">NUME INEL 1</h3><p>€150.00</p><button class="add-to-cart-btn" onclick="addToCart('Nume Inel 1', 150)">Adaugă în coș</button></div>
+            <div class="product-card" data-category="inele"><img src="https://images.unsplash.com/photo-1599643477874-124b8159bb84?auto=format&fit=crop&w=400&q=80" alt="Poza"><h3 class="sync-font">NUME INEL 2</h3><p>€220.00</p><button class="add-to-cart-btn" onclick="addToCart('Nume Inel 2', 220)">Adaugă în coș</button></div>
+            <div class="product-card" data-category="inele"><img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=400&q=80" alt="Poza"><h3 class="sync-font">NUME INEL 3</h3><p>€85.00</p><button class="add-to-cart-btn" onclick="addToCart('Nume Inel 3', 85)">Adaugă în coș</button></div>
+            <div class="product-card" data-category="inele"><img src="https://images.unsplash.com/photo-1589674781759-c21c37956a44?auto=format&fit=crop&w=400&q=80" alt="Poza"><h3 class="sync-font">NUME INEL 4</h3><p>€310.00</p><button class="add-to-cart-btn" onclick="addToCart('Nume Inel 4', 310)">Adaugă în coș</button></div>
+            <div class="product-card" data-category="cercei"><img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=400&q=80" alt="Poza"><h3 class="sync-font">NUME CERCEI 1</h3><p>€110.00</p><button class="add-to-cart-btn" onclick="addToCart('Nume Cercei 1', 110)">Adaugă în coș</button></div>
+            <div class="product-card" data-category="cercei"><img src="https://images.unsplash.com/photo-1630019852942-f89202989a59?auto=format&fit=crop&w=400&q=80" alt="Poza"><h3 class="sync-font">NUME CERCEI 2</h3><p>€190.00</p><button class="add-to-cart-btn" onclick="addToCart('Nume Cercei 2', 190)">Adaugă în coș</button></div>
+            <div class="product-card" data-category="cercei"><img src="https://images.unsplash.com/photo-1629224316810-9d8805b95e76?auto=format&fit=crop&w=400&q=80" alt="Poza"><h3 class="sync-font">NUME CERCEI 3</h3><p>€75.00</p><button class="add-to-cart-btn" onclick="addToCart('Nume Cercei 3', 75)">Adaugă în coș</button></div>
+            <div class="product-card" data-category="cercei"><img src="https://images.unsplash.com/photo-1599643478514-46b15d21a8cd?auto=format&fit=crop&w=400&q=80" alt="Poza"><h3 class="sync-font">NUME CERCEI 4</h3><p>€240.00</p><button class="add-to-cart-btn" onclick="addToCart('Nume Cercei 4', 240)">Adaugă în coș</button></div>
+            <div class="product-card" data-category="bratari"><img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=400&q=80" alt="Poza"><h3 class="sync-font">NUME BRATARA 1</h3><p>€65.00</p><button class="add-to-cart-btn" onclick="addToCart('Nume Bratara 1', 65)">Adaugă în coș</button></div>
+            <div class="product-card" data-category="bratari"><img src="https://images.unsplash.com/photo-1573408301145-b98c4af01086?auto=format&fit=crop&w=400&q=80" alt="Poza"><h3 class="sync-font">NUME BRATARA 2</h3><p>€130.00</p><button class="add-to-cart-btn" onclick="addToCart('Nume Bratara 2', 130)">Adaugă în coș</button></div>
+            <div class="product-card" data-category="bratari"><img src="https://images.unsplash.com/photo-1602752250014-411db109559c?auto=format&fit=crop&w=400&q=80" alt="Poza"><h3 class="sync-font">NUME BRATARA 3</h3><p>€90.00</p><button class="add-to-cart-btn" onclick="addToCart('Nume Bratara 3', 90)">Adaugă în coș</button></div>
+            <div class="product-card" data-category="bratari"><img src="https://images.unsplash.com/photo-1531315630201-bb15abeb1653?auto=format&fit=crop&w=400&q=80" alt="Poza"><h3 class="sync-font">NUME BRATARA 4</h3><p>€180.00</p><button class="add-to-cart-btn" onclick="addToCart('Nume Bratara 4', 180)">Adaugă în coș</button></div>
         </div>
     </div>
 
+    <footer>
+        <div class="footer-col">
+            <h2>H-TIME</h2>
+            <p style="margin-top: 10px;">Copyright © 2026 H-TIME FE.</p>
+        </div>
+        <div class="footer-col">
+            <h3>LINK-URI UTILE</h3>
+            <ul>
+                <li><a href="termeni.html">Termeni și condiții</a></li>
+                <li><a href="confidentialitate.html">Politica de confidențialitate</a></li>
+                <li><a href="https://anpc.ro/" target="_blank">ANPC</a></li>
+                <li><a href="https://ec.europa.eu/consumers/odr" target="_blank">SOL (Soluționarea Litigiilor)</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h3>LOCATION</h3>
+            <p>Strada Milcov 18A, Iași<br>700259</p>
+        </div>
+        <div class="footer-col">
+            <h3>CONTACT</h3>
+            <p>h.time.business@gmail.com</p>
+        </div>
+    </footer>
+
     <script>
-        // Funcția de filtrare
         function filterCategory(category) {
             const products = document.querySelectorAll('.product-card');
             const title = document.getElementById('category-title');
-            
-            // Schimbă titlul meniului
             title.innerText = category.toUpperCase();
-
-            // Arată/ascunde produsele
             products.forEach(product => {
                 if(category === 'all' || product.getAttribute('data-category') === category) {
                     product.style.display = 'block';
@@ -239,33 +151,22 @@
                 }
             });
         }
-
-        // Funcția de adăugare în coș
         function addToCart(name, price) {
             let cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
             cart.push({ name: name, price: price });
             localStorage.setItem('htimeCart', JSON.stringify(cart));
             updateCartCounter();
-            
-            // Mic efect vizual în loc de alert() plictisitor
             const btn = event.target;
             const originalText = btn.innerText;
             btn.innerText = "Adăugat! ✔";
             btn.style.backgroundColor = "#4caf50";
             btn.style.color = "white";
-            
-            setTimeout(() => {
-                btn.innerText = originalText;
-                btn.style.backgroundColor = "black";
-            }, 1500);
+            setTimeout(() => { btn.innerText = originalText; btn.style.backgroundColor = "black"; }, 1500);
         }
-
-        // Actualizare număr coș
         function updateCartCounter() {
             let cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
             document.getElementById('cart-counter').innerText = cart.length;
         }
-
         window.onload = updateCartCounter;
     </script>
 </body>
