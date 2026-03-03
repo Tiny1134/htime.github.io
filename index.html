@@ -11,111 +11,144 @@
         :root {
             --peach: #fcbf88;
             --dark: #0a0a0a;
-            --glow-x: 50%;
-            --glow-y: 50%;
+            --light-bg: #f5f5f5;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body { 
             font-family: 'Space Mono', monospace; 
-            background-color: var(--dark); 
-            color: white; 
+            background-color: var(--light-bg); 
+            color: var(--dark); 
             overflow-x: hidden;
-            /* Efectul de gradient care urmareste mouse-ul */
-            background: radial-gradient(circle at var(--glow-x) var(--glow-y), rgba(252, 191, 136, 0.15) 0%, rgba(10, 10, 10, 1) 40%);
-            background-attachment: fixed;
         }
 
         h1, h2, h3 { font-family: 'Syncopate', sans-serif; text-transform: uppercase; }
+        a { text-decoration: none; color: inherit; }
 
         /* --- Navigatie --- */
         nav {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 20px 50px; position: fixed; width: 100%; top: 0; z-index: 1000;
-            background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(10px);
+            padding: 15px 50px; position: fixed; width: 100%; top: 0; z-index: 1000;
+            background: rgba(10, 10, 10, 0.9); backdrop-filter: blur(10px); color: white;
         }
-        .logo img { height: 45px; }
-        .nav-links a { color: white; text-decoration: none; margin: 0 15px; font-size: 0.8rem; transition: 0.3s; }
+        .logo img { height: 45px; margin-top: 5px; }
+        .nav-links a { color: white; text-decoration: none; margin: 0 15px; font-size: 0.9rem; transition: 0.3s; }
         .nav-links a:hover { color: var(--peach); }
 
-        /* --- Hero --- */
+        /* --- Hero (Curbat lin) --- */
         .hero {
-            height: 100vh; display: flex; flex-direction: column; 
+            height: 90vh; display: flex; flex-direction: column; 
             justify-content: center; align-items: center; text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1547996160-81dfa63595aa?q=80&w=1920') center/cover;
-            clip-path: polygon(0 0, 100% 0, 100% 90%, 50% 100%, 0 90%); /* Zig zag/Taietura jos */
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1547996160-81dfa63595aa?q=80&w=1920') center/cover;
+            color: white;
+            /* Aici e curbura lina la baza pozei */
+            border-bottom-left-radius: 50% 8vh;
+            border-bottom-right-radius: 50% 8vh;
+            margin-bottom: 50px;
         }
-        .hero h1 { font-size: 8vw; letter-spacing: 15px; margin-bottom: 10px; }
-        .hero p { background: var(--peach); color: black; padding: 5px 20px; font-weight: bold; }
+        .hero h1 { font-size: 7vw; letter-spacing: 15px; margin-bottom: 10px; }
+        .hero p { background: transparent; color: var(--peach); font-size: 1.5rem; font-weight: bold; font-family: 'Syncopate', sans-serif;}
 
-        /* --- Categorii (Semi-oval / Arcuri) --- */
-        .section-white { background: white; color: black; padding: 100px 20px; text-align: center; position: relative; }
-        .section-white h2 { margin-bottom: 60px; font-size: 3rem; }
-        
-        .arch-container { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
-        .arch-item { width: 300px; cursor: pointer; }
-        .arch-img {
-            width: 100%; height: 400px; 
-            border-radius: 150px 150px 0 0; /* Forma de Arc/Semi-oval */
-            object-fit: cover; transition: 0.5s;
-            border: 2px solid black;
+        /* --- Categorii (Cercuri) --- */
+        .categories-section { text-align: center; padding: 50px 20px 80px; }
+        .categories-section h2 { margin-bottom: 50px; font-size: 2.5rem; }
+        .circles-container { display: flex; justify-content: center; gap: 60px; flex-wrap: wrap; margin-bottom: 40px; }
+        .circle-item { text-align: center; cursor: pointer; }
+        .circle-img {
+            width: 250px; height: 250px; border-radius: 50%; object-fit: cover; margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .arch-item:hover .arch-img { transform: translateY(-10px); border-color: var(--peach); }
-        .arch-item h3 { margin-top: 20px; font-size: 1.2rem; }
+        .circle-item:hover .circle-img { transform: scale(1.05); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        .circle-item h3 { font-size: 1.2rem; margin-bottom: 10px; }
+        .circle-item p { font-size: 0.8rem; color: #555; }
+        .btn-descopera { background: black; color: white; padding: 15px 30px; border-radius: 30px; border: none; cursor: pointer; font-family: 'Space Mono'; transition: 0.3s; margin-top: 20px;}
+        .btn-descopera:hover { background: var(--peach); color: black; }
 
-        /* --- Marquee Triplu --- */
-        .triple-marquee { padding: 60px 0; background: var(--dark); border-top: 4px solid white; border-bottom: 4px solid white; }
-        .marquee-row { overflow: hidden; display: flex; white-space: nowrap; padding: 10px 0; }
-        .marquee-content { display: flex; animation: scroll 40s linear infinite; font-size: 2rem; font-weight: bold; font-family: 'Syncopate'; }
+        /* --- Carusel Produse la Oferta (Merg spre dreapta) --- */
+        .sale-marquee-section {
+            background: var(--dark); padding: 60px 0; overflow: hidden; white-space: nowrap; margin-bottom: 50px;
+        }
+        .sale-track {
+            display: inline-flex; gap: 30px;
+            /* Animatia merge spre dreapta */
+            animation: scroll-right 30s linear infinite;
+            padding-left: 30px;
+        }
+        @keyframes scroll-right {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(0); }
+        }
         
-        /* Directia opusa pentru randul 2 */
-        .rev .marquee-content { animation: scroll-rev 40s linear infinite; color: var(--peach); }
+        .sale-card {
+            width: 320px; background: white; padding: 20px; position: relative;
+            display: flex; flex-direction: column; align-items: center; text-align: center;
+        }
+        .sale-card img { width: 100%; height: 250px; object-fit: cover; margin-bottom: 15px; }
+        .sale-badge { position: absolute; top: 15px; left: 15px; background: black; color: white; padding: 5px 10px; font-size: 0.8rem; font-weight: bold; }
+        .sale-card h3 { font-size: 0.9rem; font-family: 'Space Mono', monospace; text-transform: none; margin-bottom: 10px; white-space: normal; line-height: 1.3; min-height: 40px;}
+        .old-price { text-decoration: line-through; color: #888; font-size: 0.9rem; margin-right: 10px; }
+        .new-price { color: black; font-weight: bold; font-size: 1.1rem; }
 
-        @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-        @keyframes scroll-rev { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+        /* --- Obiectivele Noastre --- */
+        .objectives-section { max-width: 1200px; margin: 80px auto; padding: 0 20px; text-align: center; }
+        .objectives-header {
+            display: flex; align-items: center; justify-content: center; margin-bottom: 60px;
+        }
+        .objectives-header::before, .objectives-header::after {
+            content: ""; flex: 1; border-bottom: 2px solid black; margin: 0 20px;
+        }
+        .objectives-header h2 { font-size: 2.5rem; letter-spacing: 2px; }
+        
+        .objectives-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; text-align: left; }
+        .obj-col h3 { font-size: 1.2rem; border-bottom: 2px solid black; padding-bottom: 10px; margin-bottom: 20px; }
+        .obj-col p { font-size: 0.9rem; line-height: 1.6; color: #333; }
 
-        /* --- FAQ Animatie --- */
-        .faq-section { padding: 100px 20px; background: var(--dark); }
-        .faq-item { max-width: 900px; margin: 0 auto 20px; border-bottom: 1px solid #333; }
-        .faq-question { 
-            width: 100%; padding: 25px 0; display: flex; justify-content: space-between; 
+        /* --- Sectiune Contact (Piersica) --- */
+        .contact-teaser { background: var(--peach); padding: 80px 20px; text-align: center; color: black; }
+        .contact-teaser h2 { font-size: 3rem; margin-bottom: 20px; }
+        .contact-teaser p { font-size: 1.1rem; }
+
+        /* --- Separator Zig-Zag SVG perfect --- */
+        .zigzag-separator { display: block; width: 100%; height: 40px; background: var(--peach); margin-bottom: -1px;}
+
+        /* --- FAQ Section --- */
+        .faq-section { background: var(--dark); padding: 80px 20px 100px; color: white; }
+        .faq-container { max-width: 900px; margin: 0 auto; }
+        .faq-container h2 { font-size: 3.5rem; margin-bottom: 50px; color: var(--peach);}
+        
+        .faq-item { border-bottom: 1px solid #333; }
+        .faq-question {
+            width: 100%; padding: 25px 0; display: flex; justify-content: space-between; align-items: center;
             background: none; border: none; color: white; cursor: pointer; 
-            font-family: 'Syncopate'; font-size: 1.1rem; text-align: left;
+            font-family: 'Syncopate', sans-serif; font-size: 1.2rem; text-align: left;
         }
-        .faq-answer { 
-            max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            color: #888; padding-right: 50px;
+        .faq-icon { font-size: 2rem; color: var(--peach); font-family: 'Space Mono', monospace; font-weight: normal;}
+        
+        .faq-answer {
+            max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out;
+            color: #ccc; font-size: 0.9rem; line-height: 1.6;
         }
-        .faq-item.active .faq-answer { max-height: 300px; padding-bottom: 25px; }
-        .plus-icon { color: var(--peach); font-size: 1.5rem; transition: 0.3s; }
-        .faq-item.active .plus-icon { transform: rotate(45deg); }
-
-        /* --- Zig Zag Divisor --- */
-        .zigzag-divider {
-            height: 100px; background: white;
-            clip-path: polygon(0 0, 10% 40%, 20% 0, 30% 40%, 40% 0, 50% 40%, 60% 0, 70% 40%, 80% 0, 90% 40%, 100% 0, 100% 100%, 0 100%);
-            margin-top: -2px;
-        }
+        .faq-answer-content { padding-bottom: 25px; padding-right: 40px; }
 
         /* --- Footer --- */
-        footer { background: #f5f5f5; color: black; padding: 60px 50px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
-        .footer-col h3 { margin-bottom: 20px; font-size: 1rem; }
-        .footer-col ul { list-style: none; }
-        .footer-col li { margin-bottom: 10px; font-size: 0.8rem; }
+        footer { background: #eaddd7; color: black; padding: 60px 50px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; border-top: 1px solid #ddd; }
+        .footer-col h2, .footer-col h3 { font-family: 'Syncopate', sans-serif; text-transform: uppercase; margin-bottom: 20px; font-size: 1.2rem; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .footer-col a:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
 
-    <nav id="navbar">
+    <nav>
         <a href="index.html" class="logo"><img src="logo.png" alt="Logo"></a>
         <div class="nav-links">
             <a href="index.html">Acasă</a>
             <a href="magazin.html">Magazin</a>
             <a href="echipa.html">Echipa H-Time</a>
-            <a href="contact.html">Contact</a>
+            <a href="contact.html">Contactează-ne</a>
         </div>
-        <button class="cart-btn" onclick="window.location.href='checkout.html'" style="background:none; border: 1px solid white; color:white; padding: 5px 15px; border-radius: 20px; cursor:pointer;">Cart (0)</button>
+        <button class="btn-descopera" onclick="window.location.href='checkout.html'" style="margin: 0; padding: 5px 15px; border-radius: 20px; border: 1px solid white; background: transparent; color: white;">Cart (0)</button>
     </nav>
 
     <header class="hero">
@@ -123,70 +156,141 @@
         <p>EMOȚII SCULPTATE ÎN ELEGANȚĂ</p>
     </header>
 
-    <section class="section-white">
+    <section class="categories-section">
         <h2>CE PRODUSE OFERIM</h2>
-        <div class="arch-container">
-            <div class="arch-item">
-                <img src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?q=80&w=400" class="arch-img">
-                <h3>Ceasuri</h3>
+        <div class="circles-container">
+            <div class="circle-item" onclick="window.location.href='magazin.html'">
+                <img src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?q=80&w=400" alt="Ceasuri" class="circle-img">
+                <h3 class="sync-font">CEASURI</h3>
+                <p>Prețuri începând de la 100 €</p>
             </div>
-            <div class="arch-item">
-                <img src="https://images.unsplash.com/photo-1605100804763-247f66126e28?q=80&w=400" class="arch-img">
-                <h3>Inele</h3>
+            <div class="circle-item" onclick="window.location.href='magazin.html'">
+                <img src="https://images.unsplash.com/photo-1605100804763-247f66126e28?q=80&w=400" alt="Inele" class="circle-img">
+                <h3 class="sync-font">INELE</h3>
+                <p>Prețuri începând de la 100 €</p>
             </div>
-            <div class="arch-item">
-                <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=400" class="arch-img">
-                <h3>Cercei</h3>
+            <div class="circle-item" onclick="window.location.href='magazin.html'">
+                <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=400" alt="Cercei" class="circle-img">
+                <h3 class="sync-font">CERCEI</h3>
+                <p>Prețuri începând de la 100 €</p>
+            </div>
+        </div>
+        <button class="btn-descopera" onclick="window.location.href='magazin.html'">Descoperă mai multe</button>
+    </section>
+
+    <section class="sale-marquee-section">
+        <div class="sale-track">
+            <div class="sale-card">
+                <div class="sale-badge">SALE</div>
+                <img src="https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?q=80&w=400" alt="Produs">
+                <h3>Ceas Rolex Oyster Perpetual</h3>
+                <p><span class="old-price">€1,500.00</span> <span class="new-price">€1,200.00</span></p>
+            </div>
+            <div class="sale-card">
+                <div class="sale-badge">SALE</div>
+                <img src="https://images.unsplash.com/photo-1599643477874-124b8159bb84?q=80&w=400" alt="Produs">
+                <h3>Inel Din Argint Cu Diamante</h3>
+                <p><span class="old-price">€120.00</span> <span class="new-price">€95.00</span></p>
+            </div>
+            <div class="sale-card">
+                <div class="sale-badge">SALE</div>
+                <img src="https://images.unsplash.com/photo-1629224316810-9d8805b95e76?q=80&w=400" alt="Produs">
+                <h3>Cercei Din Aur Alb Cu Diamante</h3>
+                <p><span class="old-price">€290.00</span> <span class="new-price">€240.00</span></p>
+            </div>
+            <div class="sale-card">
+                <div class="sale-badge">SALE</div>
+                <img src="https://images.unsplash.com/photo-1548690312-e3b507d8c110?q=80&w=400" alt="Produs">
+                <h3>Ceas Tissot Elegant Gold</h3>
+                <p><span class="old-price">€850.00</span> <span class="new-price">€650.00</span></p>
+            </div>
+
+            <div class="sale-card">
+                <div class="sale-badge">SALE</div>
+                <img src="https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?q=80&w=400" alt="Produs">
+                <h3>Ceas Rolex Oyster Perpetual</h3>
+                <p><span class="old-price">€1,500.00</span> <span class="new-price">€1,200.00</span></p>
+            </div>
+            <div class="sale-card">
+                <div class="sale-badge">SALE</div>
+                <img src="https://images.unsplash.com/photo-1599643477874-124b8159bb84?q=80&w=400" alt="Produs">
+                <h3>Inel Din Argint Cu Diamante</h3>
+                <p><span class="old-price">€120.00</span> <span class="new-price">€95.00</span></p>
+            </div>
+            <div class="sale-card">
+                <div class="sale-badge">SALE</div>
+                <img src="https://images.unsplash.com/photo-1629224316810-9d8805b95e76?q=80&w=400" alt="Produs">
+                <h3>Cercei Din Aur Alb Cu Diamante</h3>
+                <p><span class="old-price">€290.00</span> <span class="new-price">€240.00</span></p>
+            </div>
+            <div class="sale-card">
+                <div class="sale-badge">SALE</div>
+                <img src="https://images.unsplash.com/photo-1548690312-e3b507d8c110?q=80&w=400" alt="Produs">
+                <h3>Ceas Tissot Elegant Gold</h3>
+                <p><span class="old-price">€850.00</span> <span class="new-price">€650.00</span></p>
             </div>
         </div>
     </section>
 
-    <div class="zigzag-divider"></div>
-
-    <section class="triple-marquee">
-        <div class="marquee-row">
-            <div class="marquee-content">
-                &nbsp; STRĂLUCIREA VINE DIN INTERIOR — BIJUTERIILE SUNT MIRODENIILE VIEȚII — STRĂLUCIREA VINE DIN INTERIOR — BIJUTERIILE SUNT MIRODENIILE VIEȚII —
-            </div>
-            <div class="marquee-content">
-                &nbsp; STRĂLUCIREA VINE DIN INTERIOR — BIJUTERIILE SUNT MIRODENIILE VIEȚII — STRĂLUCIREA VINE DIN INTERIOR — BIJUTERIILE SUNT MIRODENIILE VIEȚII —
-            </div>
+    <section class="objectives-section">
+        <div class="objectives-header">
+            <h2 class="sync-font">OBIECTIVELE NOASTRE</h2>
         </div>
-        <div class="marquee-row rev">
-            <div class="marquee-content">
-                &nbsp; ELEGANȚĂ ETERNĂ — H-TIME LUXURY EXPERIENCE — CALITATE ȘI RAFINAMENT — ELEGANȚĂ ETERNĂ — H-TIME LUXURY EXPERIENCE — CALITATE ȘI RAFINAMENT —
+        <div class="objectives-grid">
+            <div class="obj-col">
+                <h3 class="sync-font">CE NE DORIM</h3>
+                <p>Ne dorim să oferim clienților noștri o identitate care să inspire încredere, să reflecte atitudinea de profesionist a produselor și serviciilor noastre. Totodată, dorim să creăm o cultură de brand bazată pe loialitate și satisfacție, fiindcă interacțiunile contează.</p>
             </div>
-            <div class="marquee-content">
-                &nbsp; ELEGANȚĂ ETERNĂ — H-TIME LUXURY EXPERIENCE — CALITATE ȘI RAFINAMENT — ELEGANȚĂ ETERNĂ — H-TIME LUXURY EXPERIENCE — CALITATE ȘI RAFINAMENT —
+            <div class="obj-col">
+                <h3 class="sync-font">MISIUNEA NOASTRA</h3>
+                <p>Misiunea noastră este de a aduce rafinament și eleganță în viața fiecărui client, prin crearea de bijuterii de înaltă calitate, cu un design inovativ.<br><br>Ne dedicăm pasiunii de a transforma momentele speciale în amintiri prețioase, oferind bijuterii care spun o poveste personală, în fiecare detaliu.</p>
             </div>
-        </div>
-        <div class="marquee-row">
-            <div class="marquee-content">
-                &nbsp; UN ZÂMBET ESTE CEA MAI FRUMOASĂ BIJUTERIE — CREEAZĂ AMINTIRI — UN ZÂMBET ESTE CEA MAI FRUMOASĂ BIJUTERIE — CREEAZĂ AMINTIRI —
-            </div>
-            <div class="marquee-content">
-                &nbsp; UN ZÂMBET ESTE CEA MAI FRUMOASĂ BIJUTERIE — CREEAZĂ AMINTIRI — UN ZÂMBET ESTE CEA MAI FRUMOASĂ BIJUTERIE — CREEAZĂ AMINTIRI —
+            <div class="obj-col">
+                <h3 class="sync-font">VIZIUNEA NOASTRA</h3>
+                <p>Viziunea noastră este de a deveni un lider în industria bijuteriilor, recunoscuți pentru creativitate, excelență și responsabilitate socială. Ne propunem să fim un brand de referință care să redefinească standardele de frumusețe, fiind prezenți în cele mai importante momente din viața lor.</p>
             </div>
         </div>
     </section>
+
+    <section class="contact-teaser">
+        <h2 class="sync-font">CONTACTEAZĂ-NE</h2>
+        <p>Ai vrea să ne sugerezi o idee sau să colaborezi cu noi? Scrie-ne, abia așteptăm să auzim!</p>
+    </section>
+
+    <svg class="zigzag-separator" viewBox="0 0 100 10" preserveAspectRatio="none">
+        <polygon points="0,0 5,10 10,0 15,10 20,0 25,10 30,0 35,10 40,0 45,10 50,0 55,10 60,0 65,10 70,0 75,10 80,0 85,10 90,0 95,10 100,0 100,10 0,10" fill="#0a0a0a"></polygon>
+    </svg>
 
     <section class="faq-section">
-        <div class="faq-container" style="max-width: 900px; margin: 0 auto;">
-            <h2 style="color: var(--peach); margin-bottom: 50px; font-size: 3rem;">FAQS</h2>
+        <div class="faq-container">
+            <h2 class="sync-font">FAQS</h2>
             
             <div class="faq-item">
-                <button class="faq-question">CE NE FACE UNICI? <span class="plus-icon">+</span></button>
-                <div class="faq-answer">H-TIME se diferențiază prin selecția riguroasă a materialelor și prin experiența personalizată oferită fiecărui client în parte.</div>
+                <button class="faq-question">CE NE FACE UNICI? <span class="faq-icon">+</span></button>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">Bijuteriile H-Time sunt o operă de artă, nu doar un simplu accesoriu, ce exprimă rafinament, dedicare și calitate excepțională. Ne diferențiem prin atenția la detalii și experiența premium oferită fiecărui client.</div>
+                </div>
             </div>
 
             <div class="faq-item">
-                <button class="faq-question">CE REPREZINTĂ SIGLA NOASTRĂ? <span class="plus-icon">+</span></button>
-                <div class="faq-answer">Sigla noastră îmbină simbolul infinitului cu structura unui diamant, reprezentând durabilitatea și valoarea timpului.</div>
+                <button class="faq-question">CE REPREZINTĂ SIGLA NOASTRĂ? <span class="faq-icon">+</span></button>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">Sigla noastră îmbină elemente clasice cu accente moderne. Diamantul simbolizează eternitatea și rezistența în timp, în timp ce literele H și T conturează identitatea brandului, reprezentând o ancoră a încrederii în produsele noastre.</div>
+                </div>
             </div>
 
             <div class="faq-item">
-                <button class="faq-question">CUI NE ADRESĂM? <span class="plus-icon">+</span></button>
-                <div class="faq-answer">Persoanelor care nu caută doar un obiect, ci un simbol al succesului și al eleganței personale.</div>
+                <button class="faq-question">DE CE ACEST SLOGAN? <span class="faq-icon">+</span></button>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">„Emoții sculptate în eleganță” reflectă credința noastră profundă că bijuteriile nu sunt doar obiecte materiale, ci purtătoare de amintiri și sentimente ce dăinuie generații întregi.</div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question">CUI NE ADRESĂM? <span class="faq-icon">+</span></button>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">Ne adresăm tuturor persoanelor care apreciază bunul gust și rafinamentul. Fie că vrei să marchezi un moment important sau pur și simplu să te răsfeți, H-Time creează piesa perfectă pentru tine.</div>
+                </div>
             </div>
         </div>
     </section>
@@ -194,37 +298,54 @@
     <footer>
         <div class="footer-col">
             <h2>H-TIME</h2>
-            <p>Copyright © 2026 H-TIME FE.</p>
+            <p style="margin-top: 10px;">Copyright © 2026 H-TIME FE.</p>
         </div>
         <div class="footer-col">
-            <h3>Link-uri utile</h3>
+            <h3>LINK-URI UTILE</h3>
             <ul>
-                <li><a href="https://anpc.ro/">ANPC</a></li>
-                <li><a href="https://anpc.ro/ce-este-sal/">ANPC-SAL</a></li>
-                <li>Politica de confidentialitate</li>
+                <li><a href="#">Termeni și condiții</a></li>
+                <li><a href="#">Politica de confidențialitate</a></li>
+                <li><a href="https://anpc.ro/" target="_blank">ANPC</a></li>
+                <li><a href="https://ec.europa.eu/consumers/odr" target="_blank">ANPC-SAL</a></li>
             </ul>
         </div>
         <div class="footer-col">
-            <h3>Contact</h3>
-            <p>Strada Milcov 18A, Iași</p>
+            <h3>LOCATION</h3>
+            <p>Strada Milcov 18A, Iași<br>700259</p>
+        </div>
+        <div class="footer-col">
+            <h3>CONTACT</h3>
             <p>h.time.business@gmail.com</p>
         </div>
     </footer>
 
     <script>
-        // SCRIPT PENTRU GLOW-UL CARE URMARESTE MOUSE-UL
-        document.addEventListener('mousemove', e => {
-            const x = (e.clientX / window.innerWidth) * 100;
-            const y = (e.clientY / window.innerHeight) * 100;
-            document.documentElement.style.setProperty('--glow-x', x + '%');
-            document.documentElement.style.setProperty('--glow-y', y + '%');
-        });
-
-        // SCRIPT PENTRU FAQ ANIMAT
+        // SCRIPT PENTRU FAQ ANIMAT EXACT CA PE VECHIUL SITE
         document.querySelectorAll('.faq-question').forEach(button => {
             button.addEventListener('click', () => {
                 const item = button.parentElement;
-                item.classList.toggle('active');
+                const answer = item.querySelector('.faq-answer');
+                const icon = item.querySelector('.faq-icon');
+                
+                // Daca este deja deschis, il inchidem
+                if (item.classList.contains('active')) {
+                    item.classList.remove('active');
+                    answer.style.maxHeight = null;
+                    icon.innerText = '+';
+                } else {
+                    // Inchidem orice alt FAQ deschis anterior
+                    document.querySelectorAll('.faq-item.active').forEach(activeItem => {
+                        activeItem.classList.remove('active');
+                        activeItem.querySelector('.faq-answer').style.maxHeight = null;
+                        activeItem.querySelector('.faq-icon').innerText = '+';
+                    });
+                    
+                    // Il deschidem pe cel curent
+                    item.classList.add('active');
+                    // Calculam exact inaltimea textului ca sa culiseze fluid
+                    answer.style.maxHeight = answer.scrollHeight + "px";
+                    icon.innerText = '-';
+                }
             });
         });
     </script>
