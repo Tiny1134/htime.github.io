@@ -179,57 +179,7 @@
     </section>
 
     <section class="sale-marquee-section">
-        <div class="sale-track">
-            <div class="sale-card">
-                <div class="sale-badge">SALE</div>
-                <img src="https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?q=80&w=400" alt="Produs">
-                <h3>Ceas Rolex Oyster Perpetual</h3>
-                <p><span class="old-price">€1,500.00</span> <span class="new-price">€1,200.00</span></p>
-            </div>
-            <div class="sale-card">
-                <div class="sale-badge">SALE</div>
-                <img src="https://images.unsplash.com/photo-1599643477874-124b8159bb84?q=80&w=400" alt="Produs">
-                <h3>Inel Din Argint Cu Diamante</h3>
-                <p><span class="old-price">€120.00</span> <span class="new-price">€95.00</span></p>
-            </div>
-            <div class="sale-card">
-                <div class="sale-badge">SALE</div>
-                <img src="https://images.unsplash.com/photo-1629224316810-9d8805b95e76?q=80&w=400" alt="Produs">
-                <h3>Cercei Din Aur Alb Cu Diamante</h3>
-                <p><span class="old-price">€290.00</span> <span class="new-price">€240.00</span></p>
-            </div>
-            <div class="sale-card">
-                <div class="sale-badge">SALE</div>
-                <img src="https://images.unsplash.com/photo-1548690312-e3b507d8c110?q=80&w=400" alt="Produs">
-                <h3>Ceas Tissot Elegant Gold</h3>
-                <p><span class="old-price">€850.00</span> <span class="new-price">€650.00</span></p>
-            </div>
-
-            <div class="sale-card">
-                <div class="sale-badge">SALE</div>
-                <img src="https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?q=80&w=400" alt="Produs">
-                <h3>Ceas Rolex Oyster Perpetual</h3>
-                <p><span class="old-price">€1,500.00</span> <span class="new-price">€1,200.00</span></p>
-            </div>
-            <div class="sale-card">
-                <div class="sale-badge">SALE</div>
-                <img src="https://images.unsplash.com/photo-1599643477874-124b8159bb84?q=80&w=400" alt="Produs">
-                <h3>Inel Din Argint Cu Diamante</h3>
-                <p><span class="old-price">€120.00</span> <span class="new-price">€95.00</span></p>
-            </div>
-            <div class="sale-card">
-                <div class="sale-badge">SALE</div>
-                <img src="https://images.unsplash.com/photo-1629224316810-9d8805b95e76?q=80&w=400" alt="Produs">
-                <h3>Cercei Din Aur Alb Cu Diamante</h3>
-                <p><span class="old-price">€290.00</span> <span class="new-price">€240.00</span></p>
-            </div>
-            <div class="sale-card">
-                <div class="sale-badge">SALE</div>
-                <img src="https://images.unsplash.com/photo-1548690312-e3b507d8c110?q=80&w=400" alt="Produs">
-                <h3>Ceas Tissot Elegant Gold</h3>
-                <p><span class="old-price">€850.00</span> <span class="new-price">€650.00</span></p>
-            </div>
-        </div>
+        <div class="sale-track" id="sale-track-container"></div>
     </section>
 
     <section class="objectives-section">
@@ -319,7 +269,30 @@
         </div>
     </footer>
 
+<script src="produse.js"></script>
+
     <script>
+        // SCRIPT PENTRU CARUSELUL DE PRODUSE SALE
+        const trackContainer = document.getElementById('sale-track-container');
+        
+        // Filtram doar produsele care au isSale: true
+        const produseSale = produse.filter(p => p.isSale === true);
+        
+        let carduriHTML = '';
+        produseSale.forEach(p => {
+            carduriHTML += `
+                <div class="sale-card">
+                    <div class="sale-badge">SALE</div>
+                    <img src="${p.imagine}" alt="${p.nume}">
+                    <h3 style="font-family: 'Space Mono', monospace; text-transform: none; margin-bottom: 10px; white-space: normal; line-height: 1.3; min-height: 40px;">${p.nume}</h3>
+                    <p><span class="old-price">€${p.pretVechi.toFixed(2)}</span> <span class="new-price">€${p.pret.toFixed(2)}</span></p>
+                </div>
+            `;
+        });
+
+        // Punem cardurile de 2 ori ca animatia sa mearga in bucla infinit
+        trackContainer.innerHTML = carduriHTML + carduriHTML;
+
         // SCRIPT PENTRU FAQ ANIMAT EXACT CA PE VECHIUL SITE
         document.querySelectorAll('.faq-question').forEach(button => {
             button.addEventListener('click', () => {
@@ -327,22 +300,17 @@
                 const answer = item.querySelector('.faq-answer');
                 const icon = item.querySelector('.faq-icon');
                 
-                // Daca este deja deschis, il inchidem
                 if (item.classList.contains('active')) {
                     item.classList.remove('active');
                     answer.style.maxHeight = null;
                     icon.innerText = '+';
                 } else {
-                    // Inchidem orice alt FAQ deschis anterior
                     document.querySelectorAll('.faq-item.active').forEach(activeItem => {
                         activeItem.classList.remove('active');
                         activeItem.querySelector('.faq-answer').style.maxHeight = null;
                         activeItem.querySelector('.faq-icon').innerText = '+';
                     });
-                    
-                    // Il deschidem pe cel curent
                     item.classList.add('active');
-                    // Calculam exact inaltimea textului ca sa culiseze fluid
                     answer.style.maxHeight = answer.scrollHeight + "px";
                     icon.innerText = '-';
                 }
