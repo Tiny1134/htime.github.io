@@ -3,147 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>H-TIME | Bijuterii și Ceasuri</title>
+    <title>Acasă | H-TIME</title>
     <link rel="icon" type="image/png" href="logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     
-    <script src="script.js" defer></script>
-
     <style>
-        /* --- Footer --- */
-        footer {
-            background-color: #f5f5f5;
-            color: black;
-            padding: 50px;
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 30px;
-            border-top: 1px solid #ddd;
-            font-family: 'Space Mono', monospace;
-            text-align: left;
-        }
-        .footer-col { flex: 1; min-width: 200px; }
-        .footer-col h2, .footer-col h3 { font-family: 'Syncopate', sans-serif; text-transform: uppercase; margin-bottom: 20px; font-size: 1.2rem; }
-        .footer-col ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px; }
-        .footer-col a:hover { text-decoration: underline; }
-        /* --- Setări Generale și Culori --- */
         :root {
-            --dark-header: #4a4541;
+            --dark-bg: #1a1a1a;
             --light-bg: #f5f5f5;
             --peach-bg: #fcbf88;
-            --text-dark: #000000;
-            --text-light: #ffffff;
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Space Mono', monospace;
-            background-color: var(--light-bg);
-            color: var(--text-dark);
-            font-size: 14px;
-        }
-
-        h1, h2, h3, .wide-font {
-            font-family: 'Syncopate', sans-serif;
-            text-transform: uppercase;
-        }
-
+        body { font-family: 'Space Mono', monospace; background-color: var(--light-bg); color: black; padding-top: 80px; overflow-x: hidden; }
+        h1, h2, h3, .sync-font { font-family: 'Syncopate', sans-serif; text-transform: uppercase; }
         a { text-decoration: none; color: inherit; }
-        ul { list-style: none; }
 
-        /* --- Bara de Navigație --- */
+        /* --- Navbar --- */
         nav {
-            background-color: var(--dark-header);
-            color: var(--text-light);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 50px;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
+            background-color: #4a4541; color: white; display: flex;
+            justify-content: space-between; align-items: center; padding: 15px 50px;
+            position: fixed; width: 100%; top: 0; z-index: 1000;
         }
-
-        .logo { font-size: 24px; font-weight: bold; color: #d4af37; }
-        
+        .logo img { height: 50px; width: auto; object-fit: contain; }
         .nav-links { display: flex; gap: 20px; }
         .nav-links a:hover { text-decoration: underline; color: var(--peach-bg); }
-
-        .nav-icons { display: flex; gap: 15px; align-items: center; }
-        .cart-btn {
-            border: 1px solid white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            background: transparent;
-            color: white;
-            cursor: pointer;
-            font-family: 'Space Mono', monospace;
-        }
+        .cart-btn { border: 1px solid white; padding: 5px 15px; border-radius: 20px; background: transparent; color: white; cursor: pointer; font-family: 'Space Mono'; }
         .cart-btn:hover { background-color: white; color: black; }
 
-        /* --- Secțiunea Hero --- */
+        /* --- Hero Section --- */
         .hero {
             height: 80vh;
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1523170335258-f5ed11844a49?auto=format&fit=crop&q=80') center/cover;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            text-align: center;
-            margin-top: 60px;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=1920&q=80') center/cover;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center;
         }
+        .hero h1 { font-size: 5rem; letter-spacing: 5px; margin-bottom: 10px; }
+        .hero p { font-size: 1.2rem; letter-spacing: 2px; }
 
-        .hero h1 { font-size: 6rem; letter-spacing: 5px; margin-bottom: 20px; }
-        .hero p {
-            background-color: rgba(252, 191, 136, 0.8);
-            color: black;
-            padding: 10px 20px;
-            font-weight: bold;
-            font-size: 1.2rem;
-            font-family: 'Syncopate', sans-serif;
+        /* --- Categorii Rotunde --- */
+        .categories-section { padding: 80px 20px; text-align: center; background-color: white; }
+        .categories-section h2 { font-size: 2.5rem; margin-bottom: 50px; }
+        .circles-container { display: flex; justify-content: center; gap: 50px; flex-wrap: wrap; margin-bottom: 40px; }
+        .circle-item { text-align: center; cursor: pointer; }
+        .circle-img {
+            width: 250px; height: 250px; border-radius: 50%; object-fit: cover; margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+        .circle-item:hover .circle-img { transform: scale(1.05); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        .circle-item h3 { font-size: 1.2rem; }
+        .btn-descopera { background: black; color: white; padding: 15px 30px; border-radius: 30px; text-transform: uppercase; font-family: 'Space Mono'; cursor: pointer; border: none; transition: 0.3s; }
+        .btn-descopera:hover { background: var(--peach-bg); color: black; }
 
-        /* --- Secțiunea Produse --- */
-        .products-section { padding: 60px 20px; text-align: center; background-color: var(--light-bg); }
-        .products-section h2 { margin-bottom: 50px; font-size: 2rem; }
-        .categories { display: flex; justify-content: center; gap: 50px; margin-bottom: 40px; flex-wrap: wrap; }
-        .category { text-align: center; }
-        .category-img { width: 200px; height: 200px; border-radius: 50%; background-color: #000; margin-bottom: 20px; object-fit: cover; }
-        .category h3 { margin-bottom: 10px; }
-        
-        .btn-black {
-            background-color: black;
-            color: white;
-            padding: 15px 30px;
-            border-radius: 30px;
-            display: inline-block;
-            margin-top: 20px;
-            transition: 0.3s;
+        /* --- Marquee (Textul Curgator) --- */
+        .marquee-wrapper {
+            background-color: var(--light-bg); padding: 20px 0; overflow: hidden; white-space: nowrap; border-top: 2px solid black; border-bottom: 2px solid black;
         }
-        .btn-black:hover { background-color: #333; }
+        .marquee-content {
+            display: inline-block; padding-left: 100%; animation: scroll-left 25s linear infinite; font-size: 1.2rem; font-weight: bold;
+        }
+        @keyframes scroll-left { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
 
-        /* --- Obiective --- */
-        .objectives { padding: 60px 50px; background-color: white; text-align: center; }
-        .objectives h2 { margin-bottom: 40px; font-size: 2.5rem; }
-        .obj-grid { display: flex; justify-content: space-between; gap: 30px; text-align: left; }
-        .obj-col { flex: 1; }
-        .obj-col h3 { border-bottom: 2px solid black; padding-bottom: 10px; margin-bottom: 15px; }
+        /* --- FAQ Section --- */
+        .faq-section { background-color: black; color: white; padding: 80px 20px; }
+        .faq-container { max-width: 800px; margin: 0 auto; }
+        .faq-container h2 { text-align: center; color: var(--peach-bg); font-size: 3rem; margin-bottom: 40px; }
+        details { border-bottom: 1px solid #444; padding: 20px 0; }
+        summary { font-family: 'Syncopate', sans-serif; font-size: 1.2rem; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+        summary::-webkit-details-marker { display: none; }
+        summary::after { content: '+'; font-size: 1.5rem; color: var(--peach-bg); }
+        details[open] summary::after { content: '-'; }
+        .faq-answer { padding-top: 15px; line-height: 1.6; color: #ccc; }
 
         /* --- Footer --- */
-        footer {
-            background-color: var(--light-bg);
-            padding: 50px;
-            display: flex;
-            justify-content: space-between;
-            border-top: 1px solid #ddd;
-        }
-
-        .footer-col h3 { margin-bottom: 20px; font-size: 1.2rem; }
-        .footer-col ul { display: flex; flex-direction: column; gap: 10px; }
+        footer { background-color: #eaddd7; padding: 50px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; border-top: 1px solid #ddd; color: black; }
+        .footer-col { flex: 1; min-width: 200px; }
+        .footer-col h2, .footer-col h3 { font-family: 'Syncopate', sans-serif; text-transform: uppercase; margin-bottom: 20px; font-size: 1.2rem; }
+        .footer-col ul { display: flex; flex-direction: column; gap: 10px; list-style: none; }
         .footer-col a:hover { text-decoration: underline; }
     </style>
 </head>
@@ -151,8 +85,8 @@
 
     <nav>
         <a href="index.html" class="logo">
-    <img src="logo.png" alt="Logo H-Time" style="height: 75px; width: auto; object-fit: contain; margin-top: 3px;">
-</a>
+            <img src="logo.png" alt="H-TIME Logo">
+        </a>
         <div class="nav-links">
             <a href="index.html">Acasă</a>
             <a href="magazin.html">Magazin</a>
@@ -160,69 +94,87 @@
             <a href="contact.html">Contactează-ne</a>
         </div>
         <div class="nav-icons">
-            <a href="#">Login</a>
-            <a href="#">IG</a>
-            <button class="cart-btn">Cart</button>
+            <a href="checkout.html">
+                <button class="cart-btn">Cart <span id="cart-counter">0</span></button>
+            </a>
         </div>
     </nav>
 
     <header class="hero">
         <h1>H-TIME</h1>
-        <p>"EMOȚII SCULPTATE ÎN ELEGANȚĂ"</p>
+        <p class="sync-font">Emoții sculptate în eleganță</p>
     </header>
 
-    <section class="products-section">
+    <section class="categories-section">
         <h2>CE PRODUSE OFERIM</h2>
-        <div class="categories">
-            <div class="category">
-                <img src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=200&q=80" alt="Ceasuri" class="category-img">
-                <h3>CEASURI</h3>
-                <p>Preturi incepand de la 1.200 €</p>
+        <div class="circles-container">
+            <div class="circle-item" onclick="window.location.href='magazin.html'">
+                <img src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=400&q=80" alt="Ceasuri" class="circle-img">
+                <h3 class="sync-font">Ceasuri</h3>
             </div>
-            <div class="category">
-                <img src="https://images.unsplash.com/photo-1605100804763-247f66126e28?auto=format&fit=crop&w=200&q=80" alt="Inele" class="category-img">
-                <h3>INELE</h3>
-                <p>Preturi incepand de la 100 €</p>
+            <div class="circle-item" onclick="window.location.href='magazin.html'">
+                <img src="https://images.unsplash.com/photo-1605100804763-247f66126e28?auto=format&fit=crop&w=400&q=80" alt="Inele" class="circle-img">
+                <h3 class="sync-font">Inele</h3>
             </div>
-            <div class="category">
-                <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=200&q=80" alt="Cercei" class="category-img">
-                <h3>CERCEI</h3>
-                <p>Preturi incepand de la 230 €</p>
+            <div class="circle-item" onclick="window.location.href='magazin.html'">
+                <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=400&q=80" alt="Cercei" class="circle-img">
+                <h3 class="sync-font">Cercei</h3>
             </div>
         </div>
-        <a href="magazin.html" class="btn-black">Descopera mai multe</a>
+        <button class="btn-descopera" onclick="window.location.href='magazin.html'">Descoperă mai multe</button>
     </section>
 
-    <section class="objectives">
-        <h2>OBIECTIVELE NOASTRE</h2>
-        <div class="obj-grid">
-            <div class="obj-col">
-                <h3>CE NE DORIM</h3>
-                <p>Ne dorim să oferim clienților noștri o identitate care să inspire încredere, să reflecte calitatea și rafinamentul produselor noastre.</p>
-            </div>
-            <div class="obj-col">
-                <h3>MISIUNEA NOASTRA</h3>
-                <p>Misiunea noastră este de a aduce rafinament și eleganță în viața fiecărui client, prin crearea de bijuterii de înaltă calitate.</p>
-            </div>
-            <div class="obj-col">
-                <h3>VIZIUNEA NOASTRA</h3>
-                <p>Viziunea noastră este de a deveni un lider în industria bijuteriilor, recunoscuți pentru creativitatea, excelența și responsabilitatea noastră.</p>
-            </div>
+    <div class="marquee-wrapper">
+        <div class="marquee-content">
+            "STRĂLUCIREA VINE DIN INTERIOR." - "BIJUTERIILE SUNT CA MIRODENIILE PE MÂNCARE, DAR FĂRĂ ELE, VIAȚA AR FI FADĂ." - MARIAN KEYES - "FRUMUSEȚEA ESTE O PUTERE, UN ZÂMBET ESTE SABIA SA." - JOHN RAY - 
+        </div>
+    </div>
+
+    <section class="faq-section">
+        <div class="faq-container">
+            <h2>FAQS</h2>
+            
+            <details>
+                <summary>CE NE FACE UNICI?</summary>
+                <div class="faq-answer">
+                    H-TIME se diferențiază prin atenția la detalii, calitatea materialelor și designul exclusivist. Fiecare piesă este gândită pentru a spune o poveste.
+                </div>
+            </details>
+
+            <details>
+                <summary>CE REPREZINTĂ SIGLA NOASTRĂ?</summary>
+                <div class="faq-answer">
+                    Sigla noastră îmbină elemente clasice cu accente moderne, simbolizând eternitatea diamantelor și trecerea timpului.
+                </div>
+            </details>
+
+            <details>
+                <summary>DE CE ACEST SLOGAN?</summary>
+                <div class="faq-answer">
+                    "Emoții sculptate în eleganță" reflectă credința noastră că bijuteriile nu sunt doar accesorii, ci amintiri și sentimente purtate zi de zi.
+                </div>
+            </details>
+
+            <details>
+                <summary>CUI NE ADRESĂM?</summary>
+                <div class="faq-answer">
+                    Ne adresăm tuturor persoanelor care apreciază rafinamentul și care doresc să marcheze momentele importante din viață cu o bijuterie de excepție.
+                </div>
+            </details>
         </div>
     </section>
 
     <footer>
-        <div class="footer-col wide-font">
+        <div class="footer-col">
             <h2>H-TIME</h2>
             <p style="margin-top: 10px;">Copyright © 2026 H-TIME FE.</p>
         </div>
         <div class="footer-col">
             <h3>LINK-URI UTILE</h3>
             <ul>
-                <li><a href="termeni.html">Termeni și condiții</a></li>
-                <li><a href="confidentialitate.html">Politica de confidențialitate</a></li>
+                <li><a href="#">Termeni și condiții</a></li>
+                <li><a href="#">Politica de confidențialitate</a></li>
                 <li><a href="https://anpc.ro/" target="_blank">ANPC</a></li>
-                <li><a href="https://ec.europa.eu/consumers/odr" target="_blank">SOL (Soluționarea Litigiilor)</a></li>
             </ul>
         </div>
         <div class="footer-col">
@@ -235,5 +187,12 @@
         </div>
     </footer>
 
+    <script>
+        function updateCartCounter() {
+            let cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
+            document.getElementById('cart-counter').innerText = cart.length;
+        }
+        window.onload = updateCartCounter;
+    </script>
 </body>
 </html>
