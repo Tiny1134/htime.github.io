@@ -3,196 +3,230 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acasă | H-TIME</title>
+    <title>H-TIME | Luxury Experience</title>
     <link rel="icon" type="image/png" href="logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --dark-bg: #1a1a1a;
-            --light-bg: #f5f5f5;
-            --peach-bg: #fcbf88;
+            --peach: #fcbf88;
+            --dark: #0a0a0a;
+            --glow-x: 50%;
+            --glow-y: 50%;
         }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Space Mono', monospace; background-color: var(--light-bg); color: black; padding-top: 80px; overflow-x: hidden; }
-        h1, h2, h3, .sync-font { font-family: 'Syncopate', sans-serif; text-transform: uppercase; }
-        a { text-decoration: none; color: inherit; }
+        
+        body { 
+            font-family: 'Space Mono', monospace; 
+            background-color: var(--dark); 
+            color: white; 
+            overflow-x: hidden;
+            /* Efectul de gradient care urmareste mouse-ul */
+            background: radial-gradient(circle at var(--glow-x) var(--glow-y), rgba(252, 191, 136, 0.15) 0%, rgba(10, 10, 10, 1) 40%);
+            background-attachment: fixed;
+        }
 
-        /* --- Navbar --- */
+        h1, h2, h3 { font-family: 'Syncopate', sans-serif; text-transform: uppercase; }
+
+        /* --- Navigatie --- */
         nav {
-            background-color: #4a4541; color: white; display: flex;
-            justify-content: space-between; align-items: center; padding: 15px 50px;
-            position: fixed; width: 100%; top: 0; z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 50px; position: fixed; width: 100%; top: 0; z-index: 1000;
+            background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(10px);
         }
-        .logo img { height: 50px; width: auto; object-fit: contain; }
-        .nav-links { display: flex; gap: 20px; }
-        .nav-links a:hover { text-decoration: underline; color: var(--peach-bg); }
-        .cart-btn { border: 1px solid white; padding: 5px 15px; border-radius: 20px; background: transparent; color: white; cursor: pointer; font-family: 'Space Mono'; }
-        .cart-btn:hover { background-color: white; color: black; }
+        .logo img { height: 45px; }
+        .nav-links a { color: white; text-decoration: none; margin: 0 15px; font-size: 0.8rem; transition: 0.3s; }
+        .nav-links a:hover { color: var(--peach); }
 
-        /* --- Hero Section --- */
+        /* --- Hero --- */
         .hero {
-            height: 80vh;
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=1920&q=80') center/cover;
-            display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center;
+            height: 100vh; display: flex; flex-direction: column; 
+            justify-content: center; align-items: center; text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1547996160-81dfa63595aa?q=80&w=1920') center/cover;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 50% 100%, 0 90%); /* Zig zag/Taietura jos */
         }
-        .hero h1 { font-size: 5rem; letter-spacing: 5px; margin-bottom: 10px; }
-        .hero p { font-size: 1.2rem; letter-spacing: 2px; }
+        .hero h1 { font-size: 8vw; letter-spacing: 15px; margin-bottom: 10px; }
+        .hero p { background: var(--peach); color: black; padding: 5px 20px; font-weight: bold; }
 
-        /* --- Categorii Rotunde --- */
-        .categories-section { padding: 80px 20px; text-align: center; background-color: white; }
-        .categories-section h2 { font-size: 2.5rem; margin-bottom: 50px; }
-        .circles-container { display: flex; justify-content: center; gap: 50px; flex-wrap: wrap; margin-bottom: 40px; }
-        .circle-item { text-align: center; cursor: pointer; }
-        .circle-img {
-            width: 250px; height: 250px; border-radius: 50%; object-fit: cover; margin-bottom: 20px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        /* --- Categorii (Semi-oval / Arcuri) --- */
+        .section-white { background: white; color: black; padding: 100px 20px; text-align: center; position: relative; }
+        .section-white h2 { margin-bottom: 60px; font-size: 3rem; }
+        
+        .arch-container { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
+        .arch-item { width: 300px; cursor: pointer; }
+        .arch-img {
+            width: 100%; height: 400px; 
+            border-radius: 150px 150px 0 0; /* Forma de Arc/Semi-oval */
+            object-fit: cover; transition: 0.5s;
+            border: 2px solid black;
         }
-        .circle-item:hover .circle-img { transform: scale(1.05); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
-        .circle-item h3 { font-size: 1.2rem; }
-        .btn-descopera { background: black; color: white; padding: 15px 30px; border-radius: 30px; text-transform: uppercase; font-family: 'Space Mono'; cursor: pointer; border: none; transition: 0.3s; }
-        .btn-descopera:hover { background: var(--peach-bg); color: black; }
+        .arch-item:hover .arch-img { transform: translateY(-10px); border-color: var(--peach); }
+        .arch-item h3 { margin-top: 20px; font-size: 1.2rem; }
 
-        /* --- Marquee (Textul Curgator) --- */
-        .marquee-wrapper {
-            background-color: var(--light-bg); padding: 20px 0; overflow: hidden; white-space: nowrap; border-top: 2px solid black; border-bottom: 2px solid black;
-        }
-        .marquee-content {
-            display: inline-block; padding-left: 100%; animation: scroll-left 25s linear infinite; font-size: 1.2rem; font-weight: bold;
-        }
-        @keyframes scroll-left { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
+        /* --- Marquee Triplu --- */
+        .triple-marquee { padding: 60px 0; background: var(--dark); border-top: 4px solid white; border-bottom: 4px solid white; }
+        .marquee-row { overflow: hidden; display: flex; white-space: nowrap; padding: 10px 0; }
+        .marquee-content { display: flex; animation: scroll 40s linear infinite; font-size: 2rem; font-weight: bold; font-family: 'Syncopate'; }
+        
+        /* Directia opusa pentru randul 2 */
+        .rev .marquee-content { animation: scroll-rev 40s linear infinite; color: var(--peach); }
 
-        /* --- FAQ Section --- */
-        .faq-section { background-color: black; color: white; padding: 80px 20px; }
-        .faq-container { max-width: 800px; margin: 0 auto; }
-        .faq-container h2 { text-align: center; color: var(--peach-bg); font-size: 3rem; margin-bottom: 40px; }
-        details { border-bottom: 1px solid #444; padding: 20px 0; }
-        summary { font-family: 'Syncopate', sans-serif; font-size: 1.2rem; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
-        summary::-webkit-details-marker { display: none; }
-        summary::after { content: '+'; font-size: 1.5rem; color: var(--peach-bg); }
-        details[open] summary::after { content: '-'; }
-        .faq-answer { padding-top: 15px; line-height: 1.6; color: #ccc; }
+        @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        @keyframes scroll-rev { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+
+        /* --- FAQ Animatie --- */
+        .faq-section { padding: 100px 20px; background: var(--dark); }
+        .faq-item { max-width: 900px; margin: 0 auto 20px; border-bottom: 1px solid #333; }
+        .faq-question { 
+            width: 100%; padding: 25px 0; display: flex; justify-content: space-between; 
+            background: none; border: none; color: white; cursor: pointer; 
+            font-family: 'Syncopate'; font-size: 1.1rem; text-align: left;
+        }
+        .faq-answer { 
+            max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            color: #888; padding-right: 50px;
+        }
+        .faq-item.active .faq-answer { max-height: 300px; padding-bottom: 25px; }
+        .plus-icon { color: var(--peach); font-size: 1.5rem; transition: 0.3s; }
+        .faq-item.active .plus-icon { transform: rotate(45deg); }
+
+        /* --- Zig Zag Divisor --- */
+        .zigzag-divider {
+            height: 100px; background: white;
+            clip-path: polygon(0 0, 10% 40%, 20% 0, 30% 40%, 40% 0, 50% 40%, 60% 0, 70% 40%, 80% 0, 90% 40%, 100% 0, 100% 100%, 0 100%);
+            margin-top: -2px;
+        }
 
         /* --- Footer --- */
-        footer { background-color: #eaddd7; padding: 50px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; border-top: 1px solid #ddd; color: black; }
-        .footer-col { flex: 1; min-width: 200px; }
-        .footer-col h2, .footer-col h3 { font-family: 'Syncopate', sans-serif; text-transform: uppercase; margin-bottom: 20px; font-size: 1.2rem; }
-        .footer-col ul { display: flex; flex-direction: column; gap: 10px; list-style: none; }
-        .footer-col a:hover { text-decoration: underline; }
+        footer { background: #f5f5f5; color: black; padding: 60px 50px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
+        .footer-col h3 { margin-bottom: 20px; font-size: 1rem; }
+        .footer-col ul { list-style: none; }
+        .footer-col li { margin-bottom: 10px; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
-    <nav>
-        <a href="index.html" class="logo">
-            <img src="logo.png" alt="H-TIME Logo">
-        </a>
+    <nav id="navbar">
+        <a href="index.html" class="logo"><img src="logo.png" alt="Logo"></a>
         <div class="nav-links">
             <a href="index.html">Acasă</a>
             <a href="magazin.html">Magazin</a>
             <a href="echipa.html">Echipa H-Time</a>
-            <a href="contact.html">Contactează-ne</a>
+            <a href="contact.html">Contact</a>
         </div>
-        <div class="nav-icons">
-            <a href="checkout.html">
-                <button class="cart-btn">Cart <span id="cart-counter">0</span></button>
-            </a>
-        </div>
+        <button class="cart-btn" onclick="window.location.href='checkout.html'" style="background:none; border: 1px solid white; color:white; padding: 5px 15px; border-radius: 20px; cursor:pointer;">Cart (0)</button>
     </nav>
 
     <header class="hero">
         <h1>H-TIME</h1>
-        <p class="sync-font">Emoții sculptate în eleganță</p>
+        <p>EMOȚII SCULPTATE ÎN ELEGANȚĂ</p>
     </header>
 
-    <section class="categories-section">
+    <section class="section-white">
         <h2>CE PRODUSE OFERIM</h2>
-        <div class="circles-container">
-            <div class="circle-item" onclick="window.location.href='magazin.html'">
-                <img src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=400&q=80" alt="Ceasuri" class="circle-img">
-                <h3 class="sync-font">Ceasuri</h3>
+        <div class="arch-container">
+            <div class="arch-item">
+                <img src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?q=80&w=400" class="arch-img">
+                <h3>Ceasuri</h3>
             </div>
-            <div class="circle-item" onclick="window.location.href='magazin.html'">
-                <img src="https://images.unsplash.com/photo-1605100804763-247f66126e28?auto=format&fit=crop&w=400&q=80" alt="Inele" class="circle-img">
-                <h3 class="sync-font">Inele</h3>
+            <div class="arch-item">
+                <img src="https://images.unsplash.com/photo-1605100804763-247f66126e28?q=80&w=400" class="arch-img">
+                <h3>Inele</h3>
             </div>
-            <div class="circle-item" onclick="window.location.href='magazin.html'">
-                <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=400&q=80" alt="Cercei" class="circle-img">
-                <h3 class="sync-font">Cercei</h3>
+            <div class="arch-item">
+                <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=400" class="arch-img">
+                <h3>Cercei</h3>
             </div>
         </div>
-        <button class="btn-descopera" onclick="window.location.href='magazin.html'">Descoperă mai multe</button>
     </section>
 
-    <div class="marquee-wrapper">
-        <div class="marquee-content">
-            "STRĂLUCIREA VINE DIN INTERIOR." - "BIJUTERIILE SUNT CA MIRODENIILE PE MÂNCARE, DAR FĂRĂ ELE, VIAȚA AR FI FADĂ." - MARIAN KEYES - "FRUMUSEȚEA ESTE O PUTERE, UN ZÂMBET ESTE SABIA SA." - JOHN RAY - 
+    <div class="zigzag-divider"></div>
+
+    <section class="triple-marquee">
+        <div class="marquee-row">
+            <div class="marquee-content">
+                &nbsp; STRĂLUCIREA VINE DIN INTERIOR — BIJUTERIILE SUNT MIRODENIILE VIEȚII — STRĂLUCIREA VINE DIN INTERIOR — BIJUTERIILE SUNT MIRODENIILE VIEȚII —
+            </div>
+            <div class="marquee-content">
+                &nbsp; STRĂLUCIREA VINE DIN INTERIOR — BIJUTERIILE SUNT MIRODENIILE VIEȚII — STRĂLUCIREA VINE DIN INTERIOR — BIJUTERIILE SUNT MIRODENIILE VIEȚII —
+            </div>
         </div>
-    </div>
+        <div class="marquee-row rev">
+            <div class="marquee-content">
+                &nbsp; ELEGANȚĂ ETERNĂ — H-TIME LUXURY EXPERIENCE — CALITATE ȘI RAFINAMENT — ELEGANȚĂ ETERNĂ — H-TIME LUXURY EXPERIENCE — CALITATE ȘI RAFINAMENT —
+            </div>
+            <div class="marquee-content">
+                &nbsp; ELEGANȚĂ ETERNĂ — H-TIME LUXURY EXPERIENCE — CALITATE ȘI RAFINAMENT — ELEGANȚĂ ETERNĂ — H-TIME LUXURY EXPERIENCE — CALITATE ȘI RAFINAMENT —
+            </div>
+        </div>
+        <div class="marquee-row">
+            <div class="marquee-content">
+                &nbsp; UN ZÂMBET ESTE CEA MAI FRUMOASĂ BIJUTERIE — CREEAZĂ AMINTIRI — UN ZÂMBET ESTE CEA MAI FRUMOASĂ BIJUTERIE — CREEAZĂ AMINTIRI —
+            </div>
+            <div class="marquee-content">
+                &nbsp; UN ZÂMBET ESTE CEA MAI FRUMOASĂ BIJUTERIE — CREEAZĂ AMINTIRI — UN ZÂMBET ESTE CEA MAI FRUMOASĂ BIJUTERIE — CREEAZĂ AMINTIRI —
+            </div>
+        </div>
+    </section>
 
     <section class="faq-section">
-        <div class="faq-container">
-            <h2>FAQS</h2>
+        <div class="faq-container" style="max-width: 900px; margin: 0 auto;">
+            <h2 style="color: var(--peach); margin-bottom: 50px; font-size: 3rem;">FAQS</h2>
             
-            <details>
-                <summary>CE NE FACE UNICI?</summary>
-                <div class="faq-answer">
-                    H-TIME se diferențiază prin atenția la detalii, calitatea materialelor și designul exclusivist. Fiecare piesă este gândită pentru a spune o poveste.
-                </div>
-            </details>
+            <div class="faq-item">
+                <button class="faq-question">CE NE FACE UNICI? <span class="plus-icon">+</span></button>
+                <div class="faq-answer">H-TIME se diferențiază prin selecția riguroasă a materialelor și prin experiența personalizată oferită fiecărui client în parte.</div>
+            </div>
 
-            <details>
-                <summary>CE REPREZINTĂ SIGLA NOASTRĂ?</summary>
-                <div class="faq-answer">
-                    Sigla noastră îmbină elemente clasice cu accente moderne, simbolizând eternitatea diamantelor și trecerea timpului.
-                </div>
-            </details>
+            <div class="faq-item">
+                <button class="faq-question">CE REPREZINTĂ SIGLA NOASTRĂ? <span class="plus-icon">+</span></button>
+                <div class="faq-answer">Sigla noastră îmbină simbolul infinitului cu structura unui diamant, reprezentând durabilitatea și valoarea timpului.</div>
+            </div>
 
-            <details>
-                <summary>DE CE ACEST SLOGAN?</summary>
-                <div class="faq-answer">
-                    "Emoții sculptate în eleganță" reflectă credința noastră că bijuteriile nu sunt doar accesorii, ci amintiri și sentimente purtate zi de zi.
-                </div>
-            </details>
-
-            <details>
-                <summary>CUI NE ADRESĂM?</summary>
-                <div class="faq-answer">
-                    Ne adresăm tuturor persoanelor care apreciază rafinamentul și care doresc să marcheze momentele importante din viață cu o bijuterie de excepție.
-                </div>
-            </details>
+            <div class="faq-item">
+                <button class="faq-question">CUI NE ADRESĂM? <span class="plus-icon">+</span></button>
+                <div class="faq-answer">Persoanelor care nu caută doar un obiect, ci un simbol al succesului și al eleganței personale.</div>
+            </div>
         </div>
     </section>
 
     <footer>
         <div class="footer-col">
             <h2>H-TIME</h2>
-            <p style="margin-top: 10px;">Copyright © 2026 H-TIME FE.</p>
+            <p>Copyright © 2026 H-TIME FE.</p>
         </div>
         <div class="footer-col">
-            <h3>LINK-URI UTILE</h3>
+            <h3>Link-uri utile</h3>
             <ul>
-                <li><a href="#">Termeni și condiții</a></li>
-                <li><a href="#">Politica de confidențialitate</a></li>
-                <li><a href="https://anpc.ro/" target="_blank">ANPC</a></li>
+                <li><a href="https://anpc.ro/">ANPC</a></li>
+                <li><a href="https://anpc.ro/ce-este-sal/">ANPC-SAL</a></li>
+                <li>Politica de confidentialitate</li>
             </ul>
         </div>
         <div class="footer-col">
-            <h3>LOCATION</h3>
-            <p>Strada Milcov 18A, Iași<br>700259</p>
-        </div>
-        <div class="footer-col">
-            <h3>CONTACT</h3>
+            <h3>Contact</h3>
+            <p>Strada Milcov 18A, Iași</p>
             <p>h.time.business@gmail.com</p>
         </div>
     </footer>
 
     <script>
-        function updateCartCounter() {
-            let cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
-            document.getElementById('cart-counter').innerText = cart.length;
-        }
-        window.onload = updateCartCounter;
+        // SCRIPT PENTRU GLOW-UL CARE URMARESTE MOUSE-UL
+        document.addEventListener('mousemove', e => {
+            const x = (e.clientX / window.innerWidth) * 100;
+            const y = (e.clientY / window.innerHeight) * 100;
+            document.documentElement.style.setProperty('--glow-x', x + '%');
+            document.documentElement.style.setProperty('--glow-y', y + '%');
+        });
+
+        // SCRIPT PENTRU FAQ ANIMAT
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const item = button.parentElement;
+                item.classList.toggle('active');
+            });
+        });
     </script>
 </body>
 </html>
