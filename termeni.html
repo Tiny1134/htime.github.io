@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Termeni și Condiții | H-TIME</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --dark-header: #000000;
+            --light-bg: #f5f5f5;
+            --peach-bg: #fcbf88;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Space Mono', monospace; background-color: var(--light-bg); color: black; padding-top: 80px; display: flex; flex-direction: column; min-height: 100vh; }
+        h1, h2, h3, .sync-font { font-family: 'Syncopate', sans-serif; text-transform: uppercase; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* --- Navigația --- */
+        nav { background-color: var(--dark-header); color: white; display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: fixed; width: 100%; top: 0; z-index: 1000; }
+        .logo { font-size: 24px; font-weight: bold; color: #d4af37; font-family: 'Syncopate', sans-serif;}
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a:hover { text-decoration: underline; color: var(--peach-bg); }
+        .nav-icons { display: flex; align-items: center; gap: 25px; }
+        .nav-icons a { font-family: 'Space Mono', monospace; font-size: 0.9rem; text-transform: uppercase; transition: 0.3s; color: white; }
+        .nav-icons a:hover { color: var(--peach-bg); }
+
+        /* --- Layout Pagini Legale --- */
+        .legal-container {
+            max-width: 900px;
+            margin: 80px auto;
+            padding: 0 20px;
+            flex-grow: 1;
+        }
+        .legal-container h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            letter-spacing: 2px;
+        }
+        .legal-section {
+            margin-bottom: 40px;
+        }
+        .legal-section h2 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+        .legal-section p, .legal-section ul {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .legal-section ul {
+            padding-left: 20px;
+            list-style-type: none; /* Fără bullet-uri standard, folosim design curat */
+        }
+
+        /* --- Footer --- */
+        footer { background-color: #eaddd7; padding: 50px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; border-top: 1px solid #ddd; }
+        .footer-col { flex: 1; min-width: 200px; }
+        .footer-col h2, .footer-col h3 { font-family: 'Syncopate', sans-serif; text-transform: uppercase; margin-bottom: 20px; font-size: 1.2rem; }
+        .footer-col ul { display: flex; flex-direction: column; gap: 10px; }
+        .footer-col a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">
+            <img src="logo.png" alt="Logo H-Time" style="height: 40px; width: auto; object-fit: contain;">
+        </a>
+        <div class="nav-links">
+            <a href="index.html">Acasă</a>
+            <a href="magazin.html">Magazin</a>
+            <a href="despre-noi.html">Despre Noi</a>
+            <a href="echipa.html">Echipa H-Time</a>
+            <a href="contact.html">Contactează-ne</a>
+        </div>
+        <div class="nav-icons">
+            <a href="#">Login</a>
+        </div>
+    </nav>
+
+    <div class="legal-container">
+        <h1>TERMENI ȘI CONDIȚII</h1>
+
+        <div class="legal-section">
+            <h2>1. INTRODUCERE</h2>
+            <p>Bine ați venit pe site-ul H-TIME. Utilizarea acestui site și plasarea comenzilor implică acceptarea termenilor și condițiilor de mai jos. Vă rugăm să citiți cu atenție aceste condiții înainte de a folosi site-ul.</p>
+        </div>
+
+        <div class="legal-section">
+            <h2>2. INFORMAȚII DESPRE COMERCIANT</h2>
+            <p>
+                Denumire: H-Time<br>
+                Adresă: Strada Milcov 18A, Iași 700259, România<br>
+                Email: h.time.business@gmail.com<br>
+                Telefon: +04 124 113 456
+            </p>
+        </div>
+
+        <div class="legal-section">
+            <h2>3. PRODUSE ȘI COMENZI</h2>
+            <p>H-Time comercializează bijuterii de oțel/inox. Iar imaginile și descrierile produselor sunt orientative. Ne rezervăm dreptul de a modifica oricând detaliile produselor fără notificare prealabilă.</p>
+            <p>Plasarea unei comenzi pe site reprezintă oferta dumneavoastră de a achiziționa un produs. H-Time își rezervă dreptul de a accepta sau refuza comanda, în funcție de disponibilitate și alte criterii comerciale.</p>
+        </div>
+
+        <div class="legal-section">
+            <h2>4. PREȚURI ȘI PLATĂ</h2>
+            <p>Toate prețurile afișate pe site sunt în RON/EUR și includ TVA, dacă este cazul. Modalitățile de plată acceptate sunt:</p>
+            <ul>
+                <li>- Plata cu cardul</li>
+                <li>- Ramburs la livrare</li>
+                <li>- Transfer bancar (doar cu confirmare în prealabil)</li>
+            </ul>
+            <p>Ne rezervăm dreptul de a modifica prețurile fără notificare prealabilă.</p>
+        </div>
+
+        <div class="legal-section">
+            <h2>5. LIVRARE</h2>
+            <p>Livrarea se efectuează prin curier. Termenul estimat de livrare este de 2-5 zile lucrătoare. Costurile de livrare sunt afișate la finalizarea comenzii.</p>
+        </div>
+
+        <div class="legal-section">
+            <h2>6. POLITICA DE RETUR</h2>
+            <p>Conform legislației din România, aveți dreptul de a returna produsele achiziționate online în termen de 14 zile calendaristice de la primirea acestora, fără a fi necesară justificarea deciziei. Produsele trebuie returnate în starea originală, fără urme de utilizare, însoțite de documentele de achiziție.</p>
+            <p>Costurile de retur sunt suportate de către cumpărător, cu excepția cazurilor în care produsul este defect sau diferit de cel comandat.</p>
+        </div>
+
+        <div class="legal-section">
+            <h2>7. GARANȚIE</h2>
+            <p>Produsele beneficiază de garanție conform legislației în vigoare. Pentru orice problemă legată de garanție, vă rugăm să ne contactați la adresa de email h.time.business@gmail.com.</p>
+        </div>
+        
+        <div class="legal-section">
+            <h2>8. PROTECȚIA DATELOR</h2>
+            <p>Datele personale furnizate de către utilizatori sunt protejate conform legislației în vigoare (GDPR). Detalii suplimentare sunt disponibile în Politica de Confidențialitate.</p>
+        </div>
+
+        <div class="legal-section">
+            <h2>9. LIMITAREA RĂSPUNDERII</h2>
+            <p>H-Time nu este responsabilă pentru eventualele erori de afișare a prețurilor sau a descrierilor produselor, precum și pentru eventualele probleme tehnice ale site-ului. De asemenea, nu răspundem pentru daunele cauzate de utilizarea necorespunzătoare a produselor.</p>
+        </div>
+
+        <div class="legal-section">
+            <h2>10. MODIFICAREA TERMENILOR ȘI CONDIȚIILOR</h2>
+            <p>Ne rezervăm dreptul de a modifica acești termeni și condiții oricând, fără notificare prealabilă. Versiunea actualizată va fi disponibilă pe site.</p>
+        </div>
+
+        <div class="legal-section">
+            <h2>11. CONTACT</h2>
+            <p>Pentru orice întrebări sau nelămuriri, ne puteți contacta la email: h.time.business@gmail.com sau la telefon: +04 124 113 456.<br>Adresă: Strada Milcov 18A, Iași 700259, România</p>
+            <p><br>Prin utilizarea acestui site, confirmați că ați citit și acceptați Termenii și Condițiile de mai sus.</p>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-col">
+            <h2>H-TIME</h2>
+            <p style="margin-top: 10px;">Copyright © 2026 H-TIME FE.</p>
+        </div>
+        <div class="footer-col">
+            <h3>LINK-URI UTILE</h3>
+            <ul>
+                <li><a href="termeni.html">Termeni și condiții</a></li>
+                <li><a href="confidentialitate.html">Politica de confidențialitate</a></li>
+                <li><a href="https://anpc.ro/" target="_blank">ANPC</a></li>
+                <li><a href="https://ec.europa.eu/consumers/odr" target="_blank">SOL (Soluționarea Litigiilor)</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h3>LOCATION</h3>
+            <p>Strada Milcov 18A, Iași<br>700259</p>
+        </div>
+        <div class="footer-col">
+            <h3>CONTACT</h3>
+            <p>h.time.business@gmail.com</p>
+        </div>
+    </footer>
+
+</body>
+</html>
