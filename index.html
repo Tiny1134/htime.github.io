@@ -186,18 +186,18 @@
             text-decoration: underline; 
         }
 
-        /* Sectiunea de Citate - Fără goluri */
+/* MODIFICĂ AICI: Fundalul trebuie să fie negru (#000) nu alb (#fff) */
 .quotes-section {
-    padding: 80px 0;
-    background: #fff; /* Negru complet */
+    padding: 60px 0;
+    background: #000; 
     overflow: hidden;
     display: flex;
     flex-direction: column;
     gap: 40px;
-    margin: 0; /* Elimină orice spațiu exterior */
+    margin: 0;
+    border: none; /* Elimină orice bordură care ar putea lăsa linii albe */
 }
 
-/* Containerul care se mișcă */
 .quote-track {
     display: flex;
     white-space: nowrap;
@@ -205,10 +205,9 @@
     font-family: 'Syncopate', sans-serif;
     font-size: 1.8rem;
     font-weight: 700;
-    color: #000;
+    color: #fff; /* Textul trebuie să fie ALB pentru a se vedea pe negru */
     text-transform: uppercase;
 }
-
 /* Definirea animațiilor direct în CSS */
 .scroll-right-fast {
     animation: scroll-right 40s linear infinite;
@@ -323,7 +322,6 @@
         <div style="height: 50px; background: #000; border-bottom: 1px solid #1a1a1a;"></div>
 
 <section class="quotes-section">
-    
     <div class="quote-track scroll-right-fast">
         <div class="quote-item">"Bijuteriile sunt cele care fac femeia să se simtă unică" <span>- Coco Chanel</span></div>
         <div class="quote-item">"Stilul este o modalitate de a spune cine ești fără să vorbești" <span>- Rachel Zoe</span></div>
@@ -344,9 +342,8 @@
         <div class="quote-item">"Eleganța nu înseamnă să ieși în evidență, ci să fii memorabil" <span>- Giorgio Armani</span></div>
         <div class="quote-item">"Simplitatea este forma supremă a rafinamentului" <span>- Leonardo da Vinci</span></div>
     </div>
-
 </section>
-
+        
 <div style="height: 50px; background: #000; border-top: 1px solid #1a1a1a;"></div>
     </section>
     
