@@ -150,13 +150,23 @@
             el.classList.add('active');
         }
 
-        function addToCart(name, price) {
-            let cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
-            cart.push({ name: name, price: price });
-            localStorage.setItem('htimeCart', JSON.stringify(cart));
-            updateCartCounter();
-            alert("Produsul a fost adăugat în coș!");
-        }
+function addToCart(name, price) {
+    // Luăm valoarea selectată din dropdown-ul de aur/material
+    const variant = document.getElementById('variant-select').value;
+    
+    let cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
+    
+    // Salvăm obiectul cu tot cu variantă
+    cart.push({ 
+        name: name, 
+        price: price, 
+        variant: variant 
+    });
+    
+    localStorage.setItem('htimeCart', JSON.stringify(cart));
+    updateCartCounter();
+    alert(`Produsul (${variant}) a fost adăugat în coș!`);
+}
 
         function updateCartCounter() {
             let cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
