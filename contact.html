@@ -32,11 +32,14 @@
         .submit-btn { background-color: black; color: white; border: none; padding: 15px 30px; border-radius: 30px; font-family: 'Space Mono'; font-weight: bold; cursor: pointer; transition: 0.3s; width: 100%; text-transform: uppercase; }
         .submit-btn:hover { background-color: var(--peach-bg); color: black; }
 
-        /* Informații Contact */
+        /* Informații Contact & Hartă */
         .contact-info-sec { flex: 1; min-width: 300px; background: var(--dark-header); color: white; padding: 40px; border-radius: 15px; display: flex; flex-direction: column; gap: 30px; }
         .contact-info-sec h2 { color: var(--peach-bg); font-size: 1.5rem; }
         .info-item h3 { font-size: 1rem; margin-bottom: 5px; color: #ddd; }
         .info-item p { line-height: 1.5; font-size: 0.95rem; }
+        
+        /* Container Hartă */
+        .map-container { width: 100%; height: 250px; border-radius: 10px; overflow: hidden; margin-top: auto; border: 2px solid var(--peach-bg); }
 
         footer { background-color: #eaddd7; padding: 50px; border-top: 1px solid #ddd; margin-top: auto; }
     </style>
@@ -87,6 +90,10 @@
             <div class="info-item">
                 <h3 class="sync-font">Adresă Sediu</h3>
                 <p>Strada Milcov 18A<br>Iași, 700259<br>România</p>
+            </div>
+            
+            <div class="map-container">
+                <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q=Strada%20Milcov%2018A,%20Iasi&t=&z=15&ie=UTF8&iwloc=&output=embed"></iframe>
             </div>
         </div>
     </div>
