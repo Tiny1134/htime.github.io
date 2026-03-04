@@ -143,42 +143,53 @@
         .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
         .footer-col a:hover { text-decoration: underline; }
 
-        .quotes-section {
-    padding: 60px 0;
-    background: #000; /* Fundal negru pentru interior */
+        /* Sectiunea de Citate - Fără goluri */
+.quotes-section {
+    padding: 80px 0;
+    background: #000; /* Negru complet */
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    gap: 30px;
-    border-top: 20px solid #000; /* Banda neagra sus */
-    border-bottom: 20px solid #000; /* Banda neagra jos */
+    gap: 40px;
+    margin: 0; /* Elimină orice spațiu exterior */
 }
 
-        .quote-track {
+/* Containerul care se mișcă */
+.quote-track {
     display: flex;
     white-space: nowrap;
-    gap: 80px;
+    gap: 100px;
     font-family: 'Syncopate', sans-serif;
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     font-weight: 700;
-    color: #fff; /* Text alb pe fundal negru */
+    color: #fff;
     text-transform: uppercase;
 }
 
-/* Stil pentru autor, ca sa iasa in evidenta pe negru */
-        .quote-item span {
-    color: var(--peach); 
-    font-family: 'Space Mono', monospace;
-    font-size: 1.1rem;
-    margin-left: 15px;
+/* Definirea animațiilor direct în CSS */
+.scroll-right-fast {
+    animation: scroll-right 40s linear infinite;
 }
 
-/* Titlu pentru sectiunea Sale */
-        .sale-title {
-    text-align: center;
-    background: var(--dark);
-    color: white;
-    padding-top: 40px;
+.scroll-left-fast {
+    animation: scroll-left 40s linear infinite;
+}
+
+@keyframes scroll-right {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+}
+
+@keyframes scroll-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.quote-item span {
+    color: var(--peach);
+    font-family: 'Space Mono', monospace;
+    font-size: 1.2rem;
+    margin-left: 20px;
 }
         .sale-title h2 { font-size: 2rem; color: var(--peach); }
         
@@ -269,26 +280,28 @@
         <div style="height: 50px; background: #000; border-bottom: 1px solid #1a1a1a;"></div>
 
 <section class="quotes-section">
+    
     <div class="quote-track scroll-right-fast">
         <div class="quote-item">"Bijuteriile sunt cele care fac femeia să se simtă unică" <span>- Coco Chanel</span></div>
-        <div class="quote-item">"Stilul este o modalitate de a spune cine ești fără să fii nevoit să vorbești" <span>- Rachel Zoe</span></div>
-        <div class="quote-item">"Bijuteriile au puterea de a fi acel lucru mic care te face să te simți specială" <span>- Elizabeth Taylor</span></div>
+        <div class="quote-item">"Stilul este o modalitate de a spune cine ești fără să vorbești" <span>- Rachel Zoe</span></div>
         <div class="quote-item">"Bijuteriile sunt cele care fac femeia să se simtă unică" <span>- Coco Chanel</span></div>
+        <div class="quote-item">"Stilul este o modalitate de a spune cine ești fără să vorbești" <span>- Rachel Zoe</span></div>
     </div>
     
     <div class="quote-track scroll-left-fast">
         <div class="quote-item">"Diamantele sunt cele mai bune prietene ale unei fete" <span>- Marilyn Monroe</span></div>
-        <div class="quote-item">"O bijuterie are puterea de a păstra amintiri vii pentru totdeauna" <span>- Anonim</span></div>
         <div class="quote-item">"Fiecare bijuterie spune o poveste fără a folosi niciun cuvânt" <span>- H-TIME</span></div>
         <div class="quote-item">"Diamantele sunt cele mai bune prietene ale unei fete" <span>- Marilyn Monroe</span></div>
+        <div class="quote-item">"Fiecare bijuterie spune o poveste fără a folosi niciun cuvânt" <span>- H-TIME</span></div>
     </div>
 
     <div class="quote-track scroll-right-fast">
         <div class="quote-item">"Eleganța nu înseamnă să ieși în evidență, ci să fii memorabil" <span>- Giorgio Armani</span></div>
         <div class="quote-item">"Simplitatea este forma supremă a rafinamentului" <span>- Leonardo da Vinci</span></div>
-        <div class="quote-item">"Accesoriile sunt vitamina modei" <span>- Anna Dello Russo</span></div>
         <div class="quote-item">"Eleganța nu înseamnă să ieși în evidență, ci să fii memorabil" <span>- Giorgio Armani</span></div>
+        <div class="quote-item">"Simplitatea este forma supremă a rafinamentului" <span>- Leonardo da Vinci</span></div>
     </div>
+
 </section>
 
 <div style="height: 50px; background: #000; border-top: 1px solid #1a1a1a;"></div>
