@@ -273,132 +273,210 @@
     </footer>
 
 <script>
-        // Citim coșul care acum va conține obiecte de tip {name, price, variant}
-        let rawCart = JSON.parse(localStorage.getItem('htimeCart')) || [];
-        let groupedCart = [];
-        let currentDiscount = 0; let isFreeShipping = false; const shippingCost = 15.00;
-        let finalCalculatedTotal = 0;
-        let rateMessage = "";
+    // Citim coșul care conține obiecte de tip {name, price, variant}
+    let rawCart = JSON.parse(localStorage.getItem('htimeCart')) || [];
+    let groupedCart = [];
+    let currentDiscount = 0; 
+    let isFreeShipping = false; 
+    const shippingCost = 15.00;
+    let finalCalculatedTotal = 0;
+    let rateMessage = "";
 
-        function updateNavCartCount() {
-            let currentRawCart = JSON.parse(localStorage.getItem('htimeCart')) || [];
-            const cartBtn = document.getElementById('cart-nav-btn');
-            if (cartBtn) {
-                cartBtn.innerText = `Cart (${currentRawCart.length})`;
-            }
+    function updateNavCartCount() {
+        let currentRawCart = JSON.parse(localStorage.getItem('htimeCart')) || [];
+        const cartBtn = document.getElementById('cart-nav-btn');
+        if (cartBtn) {
+            cartBtn.innerText = `Cart (${currentRawCart.length})`;
         }
+    }
 
-        function initCart() {
-            let tempObj = {};
-            rawCart.forEach(item => {
-                // Creăm o cheie unică formată din Nume + Variantă (ex: "Inel Aur-18K")
-                let uniqueKey = item.name + (item.variant ? "-" + item.variant : "");
-                
-                if(tempObj[uniqueKey]) { 
-                    tempObj[uniqueKey].quantity += 1; 
-                } else { 
-                    tempObj[uniqueKey] = { 
-                        name: item.name, 
-                        price: item.price, 
-                        variant: item.variant || "", // Salvăm varianta
-                        quantity: 1 
-                    }; 
-                }
-            });
-            groupedCart = Object.values(tempObj);
-            renderCart();
-            updateNavCartCount();
-        }
-
-        function renderCart() {
-            const container = document.getElementById('cart-items-container');
-            container.innerHTML = '';
-            if(groupedCart.length === 0) {
-                container.innerHTML = '<div class="empty-cart">Coșul tău este gol.<br><a href="magazin.html" style="color:var(--peach-bg);text-decoration:underline;">Înapoi la magazin</a></div>';
-                document.querySelector('.checkout-btn').disabled = true;
-                updateSummary(); return;
-            }
-            document.querySelector('.checkout-btn').disabled = false;
-            groupedCart.forEach((item, index) => {
-                container.innerHTML += `
-                    <div class="cart-item">
-                        <div class="item-info">
-                            <div class="item-name">${item.name}</div>
-                            <div style="font-size: 0.8rem; color: #888;">Varianta: ${item.variant || 'Standard'}</div>
-                            <div class="item-price">€${item.price.toFixed(2)}</div>
-                        </div>
-                        <div class="item-controls">
-                            <button class="qty-btn" type="button" onclick="changeQty(${index}, -1)">-</button>
-                            <span class="item-qty">${item.quantity}</span>
-                            <button class="qty-btn" type="button" onclick="changeQty(${index}, 1)">+</button>
-                            <button class="remove-btn" type="button" onclick="removeItem(${index})">Șterge</button>
-                        </div>
-                    </div>`;
-            });
-            updateSummary();
-        }
-
-        function saveCart() {
-            let newRawCart = [];
-            groupedCart.forEach(item => { 
-                for(let i=0; i<item.quantity; i++) 
-                    newRawCart.push({name: item.name, price: item.price, variant: item.variant}); 
-            });
-            localStorage.setItem('htimeCart', JSON.stringify(newRawCart));
-            updateNavCartCount();
-        }
-
-        // --- Restul funcțiilor (applyVoucher, updateSummary, toggleInstallments) rămân la fel ---
-        // ... (păstrează-le din codul tău original)
-
-        function generateInvoice(event) {
-            event.preventDefault();
-            if(groupedCart.length === 0) return;
-
-            document.getElementById('inv-client-name').innerText = document.getElementById('b-name').value;
-            document.getElementById('inv-client-address').innerText = document.getElementById('b-address').value;
+    function initCart() {
+        let tempObj = {};
+        rawCart.forEach(item => {
+            // Creăm o cheie unică formată din Nume + Variantă
+            let uniqueKey = item.name + (item.variant ? "-" + item.variant : "");
             
-            let paymentMethod = document.querySelector('input[name="payment"]:checked').value;
-            document.getElementById('inv-payment-method').innerText = paymentMethod === 'Rate' ? `Rate ${rateMessage}` : paymentMethod;
-
-            document.getElementById('inv-number').innerText = Math.floor(Math.random() * 90000) + 10000;
-            document.getElementById('inv-date').innerText = new Date().toLocaleDateString('ro-RO');
-
-            const invTbody = document.getElementById('inv-items');
-            invTbody.innerHTML = '';
-            
-            groupedCart.forEach(item => {
-                let rowTotal = item.price * item.quantity;
-                // AICI AM ADĂUGAT VARIANTA ÎN TABELUL FACTURII
-                invTbody.innerHTML += `
-                    <tr>
-                        <td>${item.name} <br><small>(Varianta: ${item.variant})</small></td>
-                        <td>${item.quantity}</td>
-                        <td>€${item.price.toFixed(2)}</td>
-                        <td>€${rowTotal.toFixed(2)}</td>
-                    </tr>`;
-            });
-
-            let currentShipping = isFreeShipping ? 0 : shippingCost;
-            invTbody.innerHTML += `<tr><td colspan="3">Transport prin curier</td><td>€${currentShipping.toFixed(2)}</td></tr>`;
-
-            let subtotalCalculat = groupedCart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            let discountValue = subtotalCalculat * currentDiscount;
-            if(discountValue > 0) {
-                invTbody.innerHTML += `<tr><td colspan="3">Reducere Voucher</td><td style="color:red;">-€${discountValue.toFixed(2)}</td></tr>`;
+            if(tempObj[uniqueKey]) { 
+                tempObj[uniqueKey].quantity += 1; 
+            } else { 
+                tempObj[uniqueKey] = { 
+                    name: item.name, 
+                    price: Number(item.price), // Ne asigurăm că prețul e număr
+                    variant: item.variant || "Standard",
+                    quantity: 1 
+                }; 
             }
+        });
+        groupedCart = Object.values(tempObj);
+        renderCart();
+        updateNavCartCount();
+    }
 
-            document.getElementById('inv-total').innerText = '€' + finalCalculatedTotal.toFixed(2);
-
-            document.getElementById('checkout-section').style.display = 'none';
-            document.getElementById('invoice-section').style.display = 'block';
-            
-            localStorage.removeItem('htimeCart');
-            updateNavCartCount();
-            setTimeout(() => { window.print(); }, 500);
+    function renderCart() {
+        const container = document.getElementById('cart-items-container');
+        if (!container) return;
+        
+        container.innerHTML = '';
+        if(groupedCart.length === 0) {
+            container.innerHTML = '<div class="empty-cart">Coșul tău este gol.<br><a href="magazin.html" style="color:var(--peach-bg);text-decoration:underline;">Înapoi la magazin</a></div>';
+            document.querySelector('.checkout-btn').disabled = true;
+            updateSummary(); 
+            return;
         }
 
-        initCart();
-    </script>
+        document.querySelector('.checkout-btn').disabled = false;
+        groupedCart.forEach((item, index) => {
+            container.innerHTML += `
+                <div class="cart-item">
+                    <div class="item-info">
+                        <div class="item-name">${item.name}</div>
+                        <div style="font-size: 0.8rem; color: #888;">Varianta: ${item.variant}</div>
+                        <div class="item-price">€${item.price.toFixed(2)}</div>
+                    </div>
+                    <div class="item-controls">
+                        <button class="qty-btn" type="button" onclick="changeQty(${index}, -1)">-</button>
+                        <span class="item-qty">${item.quantity}</span>
+                        <button class="qty-btn" type="button" onclick="changeQty(${index}, 1)">+</button>
+                        <button class="remove-btn" type="button" onclick="removeItem(${index})">Șterge</button>
+                    </div>
+                </div>`;
+        });
+        updateSummary();
+    }
+
+    // FUNCȚIA DE CALCUL (Cea care lipsea sau era incompletă)
+    function updateSummary() {
+        let subtotal = 0;
+        groupedCart.forEach(item => {
+            subtotal += item.price * item.quantity;
+        });
+
+        let currentShipping = (subtotal === 0 || isFreeShipping) ? 0 : shippingCost;
+        let discountValue = subtotal * currentDiscount;
+        finalCalculatedTotal = subtotal + currentShipping - discountValue;
+
+        // Actualizare afișaj
+        document.getElementById('subtotal-val').innerText = `€${subtotal.toFixed(2)}`;
+        document.getElementById('shipping-val').innerText = (currentShipping === 0 && subtotal > 0) ? "GRATUIT" : `€${currentShipping.toFixed(2)}`;
+        
+        const discountRow = document.getElementById('discount-row');
+        if (discountValue > 0) {
+            discountRow.style.display = "flex";
+            document.getElementById('discount-val').innerText = `-€${discountValue.toFixed(2)}`;
+        } else {
+            discountRow.style.display = "none";
+        }
+
+        document.getElementById('total-val').innerText = `€${finalCalculatedTotal.toFixed(2)}`;
+        
+        if (typeof calculateInstallments === "function") calculateInstallments();
+    }
+
+    function changeQty(index, amount) {
+        groupedCart[index].quantity += amount;
+        if(groupedCart[index].quantity <= 0) {
+            groupedCart.splice(index, 1);
+        }
+        saveCart();
+        renderCart();
+    }
+
+    function removeItem(index) {
+        groupedCart.splice(index, 1);
+        saveCart();
+        renderCart();
+    }
+
+    function saveCart() {
+        let newRawCart = [];
+        groupedCart.forEach(item => { 
+            for(let i=0; i<item.quantity; i++) 
+                newRawCart.push({name: item.name, price: item.price, variant: item.variant}); 
+        });
+        localStorage.setItem('htimeCart', JSON.stringify(newRawCart));
+        updateNavCartCount();
+    }
+
+    function applyVoucher() {
+        const code = document.getElementById('voucher-input').value.trim().toUpperCase();
+        const msg = document.getElementById('voucher-msg');
+        currentDiscount = 0; isFreeShipping = false;
+
+        if (code === 'HTIME10') { currentDiscount = 0.10; msg.innerText = "-10% aplicat!"; msg.style.color = "green"; } 
+        else if (code === 'HTIMEFREE') { isFreeShipping = true; msg.innerText = "Transport gratuit!"; msg.style.color = "green"; } 
+        else { msg.innerText = "Cod invalid."; msg.style.color = "red"; }
+        updateSummary();
+    }
+
+    function toggleInstallments() {
+        const isRate = document.querySelector('input[name="payment"]:checked').value === 'Rate';
+        document.getElementById('installments-box').style.display = isRate ? 'block' : 'none';
+        calculateInstallments();
+    }
+
+    function calculateInstallments() {
+        const select = document.getElementById('installments-select');
+        const months = parseInt(select.value);
+        const paymentVal = document.querySelector('input[name="payment"]:checked').value;
+
+        if (paymentVal !== 'Rate') { rateMessage = ""; return; }
+
+        let totalInRate = finalCalculatedTotal;
+        if (months === 6) totalInRate *= 1.05;
+        if (months === 12) totalInRate *= 1.10;
+
+        let rataLunara = totalInRate / months;
+        rateMessage = `(${months} rate x €${rataLunara.toFixed(2)})`;
+        document.getElementById('rate-details').innerText = `Total: €${totalInRate.toFixed(2)} ${rateMessage}`;
+    }
+
+    function generateInvoice(event) {
+        event.preventDefault();
+        if(groupedCart.length === 0) return;
+
+        document.getElementById('inv-client-name').innerText = document.getElementById('b-name').value;
+        document.getElementById('inv-client-address').innerText = document.getElementById('b-address').value;
+        
+        let paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+        document.getElementById('inv-payment-method').innerText = paymentMethod === 'Rate' ? `Rate ${rateMessage}` : paymentMethod;
+
+        document.getElementById('inv-number').innerText = Math.floor(Math.random() * 90000) + 10000;
+        document.getElementById('inv-date').innerText = new Date().toLocaleDateString('ro-RO');
+
+        const invTbody = document.getElementById('inv-items');
+        invTbody.innerHTML = '';
+        
+        groupedCart.forEach(item => {
+            let rowTotal = item.price * item.quantity;
+            invTbody.innerHTML += `
+                <tr>
+                    <td>${item.name} <br><small>(Varianta: ${item.variant})</small></td>
+                    <td>${item.quantity}</td>
+                    <td>€${item.price.toFixed(2)}</td>
+                    <td>€${rowTotal.toFixed(2)}</td>
+                </tr>`;
+        });
+
+        let currentShipping = isFreeShipping ? 0 : shippingCost;
+        invTbody.innerHTML += `<tr><td colspan="3">Transport prin curier</td><td>€${currentShipping.toFixed(2)}</td></tr>`;
+
+        let subtotalCalculat = groupedCart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        let discountValue = subtotalCalculat * currentDiscount;
+        if(discountValue > 0) {
+            invTbody.innerHTML += `<tr><td colspan="3">Reducere Voucher</td><td style="color:red;">-€${discountValue.toFixed(2)}</td></tr>`;
+        }
+
+        document.getElementById('inv-total').innerText = '€' + finalCalculatedTotal.toFixed(2);
+
+        document.getElementById('checkout-section').style.display = 'none';
+        document.getElementById('invoice-section').style.display = 'block';
+        
+        localStorage.removeItem('htimeCart');
+        updateNavCartCount();
+        setTimeout(() => { window.print(); }, 500);
+    }
+
+    initCart();
+</script>
 </body>
 </html>
