@@ -19,20 +19,21 @@
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; }
 
-        nav {
-            background-color: var(--dark-header); color: white; display: flex;
-            justify-content: space-between; align-items: center; padding: 15px 50px;
-            position: fixed; width: 100%; top: 0; z-index: 1000;
-        }
+        /* --- Navigația (Standardizată) --- */
+        nav { background-color: var(--dark-header); color: white; display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: fixed; width: 100%; top: 0; z-index: 1000; }
         .logo { font-size: 24px; font-weight: bold; color: #d4af37; font-family: 'Syncopate', sans-serif;}
         .nav-links { display: flex; gap: 20px; }
         .nav-links a:hover { text-decoration: underline; color: var(--peach-bg); }
-        .cart-btn {
-            border: 1px solid white; padding: 5px 15px; border-radius: 20px;
-            background: transparent; color: white; cursor: pointer; font-family: 'Space Mono';
-        }
-        .cart-btn:hover { background-color: white; color: black; }
+        
+        /* Zona din dreapta: Login, Social, Cart */
+        .nav-icons { display: flex; align-items: center; gap: 25px; }
+        .nav-icons a { font-family: 'Space Mono', monospace; font-size: 0.9rem; text-transform: uppercase; transition: 0.3s; color: white; }
+        .nav-icons a:hover { color: var(--peach-bg); }
+        .social-icon { display: flex; align-items: center; }
+        .cart-btn { border: 1px solid white; padding: 8px 20px; border-radius: 30px; display: inline-block; }
+        .cart-btn:hover { background-color: white; color: var(--dark-header); border-color: white; }
 
+        /* --- Layout Magazin --- */
         .shop-container { display: flex; width: 100%; max-width: 1400px; margin: 40px auto; padding: 0 20px; flex-grow: 1; }
         
         .sidebar { width: 220px; flex-shrink: 0; }
@@ -50,7 +51,6 @@
             width: 100%;
         }
 
-        /* Am adaugat position: relative pentru ca eticheta SALE sa stea corect in colt */
         .product-card { position: relative; text-align: center; background: white; padding: 15px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
         .product-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 5px; margin-bottom: 15px; }
         .product-card h3 { font-size: 0.9rem; margin-bottom: 10px; min-height: 40px; }
@@ -66,7 +66,6 @@
             background-color: black; color: white; border: none; padding: 10px 0; width: 100%; border-radius: 25px; cursor: pointer; font-family: 'Space Mono'; transition: 0.3s;
         }
         .add-to-cart-btn:hover { background-color: var(--peach-bg); color: black; }
-        .cart-count { background: var(--peach-bg); color: black; border-radius: 50%; padding: 2px 8px; font-size: 0.8rem; margin-left: 5px; font-weight: bold; }
 
         /* --- Footer --- */
         footer {
@@ -77,6 +76,18 @@
         .footer-col h2, .footer-col h3 { font-family: 'Syncopate', sans-serif; text-transform: uppercase; margin-bottom: 20px; font-size: 1.2rem; }
         .footer-col ul { display: flex; flex-direction: column; gap: 10px; }
         .footer-col a:hover { text-decoration: underline; }
+        
+        @media (max-width: 1024px) {
+            .products-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .shop-container { flex-direction: column; }
+            .sidebar { width: 100%; margin-bottom: 30px; }
+            .products-grid { padding-left: 0; grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 480px) {
+            .products-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
@@ -92,10 +103,17 @@
             <a href="echipa.html">Echipa H-Time</a>
             <a href="contact.html">Contactează-ne</a>
         </div>
+        
         <div class="nav-icons">
-            <a href="checkout.html">
-                <button class="cart-btn">Cart <span id="cart-counter" class="cart-count">0</span></button>
+            <a href="#">Login</a>
+            <a href="#" class="social-icon" title="Instagram">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
             </a>
+            <a href="checkout.html" id="cart-nav-btn" class="cart-btn">Cart (0)</a>
         </div>
     </nav>
 
@@ -114,6 +132,7 @@
 
         <div class="products-grid" id="products-container"></div>
     </div>
+    
     <footer>
         <div class="footer-col">
             <h2>H-TIME</h2>
@@ -157,7 +176,7 @@
                     <img src="${p.imagine}" alt="${p.nume}">
                     <h3 class="sync-font">${p.nume}</h3>
                     ${priceHTML}
-                    <button class="add-to-cart-btn" onclick="addToCart('${p.nume}', ${p.pret})">Adaugă în coș</button>
+                    <button class="add-to-cart-btn" onclick="addToCart('${p.nume}', ${p.pret}, event)">Adaugă în coș</button>
                 </div>
             `;
         });
@@ -181,7 +200,7 @@
         }
 
         // Functiile pentru Cosul de Cumparaturi
-        function addToCart(name, price) {
+        function addToCart(name, price, event) {
             let cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
             cart.push({ name: name, price: price });
             localStorage.setItem('htimeCart', JSON.stringify(cart));
@@ -194,10 +213,16 @@
             btn.style.color = "white";
             setTimeout(() => { btn.innerText = originalText; btn.style.backgroundColor = "black"; }, 1500);
         }
+
+        // Actualizeaza meniul din navigație
         function updateCartCounter() {
             let cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
-            document.getElementById('cart-counter').innerText = cart.length;
+            const cartBtn = document.getElementById('cart-nav-btn');
+            if(cartBtn) {
+                cartBtn.innerText = `Cart (${cart.length})`;
+            }
         }
+        
         window.onload = updateCartCounter;
     </script>
 </body>
