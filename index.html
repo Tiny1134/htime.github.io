@@ -35,7 +35,13 @@
         .logo img { height: 45px; margin-top: 5px; }
         .nav-links a { color: white; text-decoration: none; margin: 0 15px; font-size: 0.9rem; transition: 0.3s; }
         .nav-links a:hover { color: var(--peach); }
-
+        /* --- Zona din dreapta: Login, Social, Cart --- */
+        .nav-icons { display: flex; align-items: center; gap: 25px; }
+        .nav-icons a { font-family: 'Space Mono', monospace; font-size: 0.9rem; text-transform: uppercase; transition: 0.3s; color: white; }
+        .nav-icons a:hover { color: var(--peach); }
+        .social-icon { display: flex; align-items: center; }
+        .cart-btn { border: 1px solid white; padding: 8px 20px; border-radius: 30px; }
+        .cart-btn:hover { background-color: white; color: var(--dark); border-color: white; }
         /* --- Hero (Curbat lin) --- */
         .hero {
             height: 90vh; display: flex; flex-direction: column; 
@@ -149,9 +155,20 @@
             <a href="echipa.html">Echipa H-Time</a>
             <a href="contact.html">Contactează-ne</a>
         </div>
-        <button class="btn-descopera" onclick="window.location.href='checkout.html'" style="margin: 0; padding: 5px 15px; border-radius: 20px; border: 1px solid white; background: transparent; color: white;">Cart (0)</button>
+        
+        <div class="nav-icons">
+            <a href="#">Login</a>
+            <a href="#" class="social-icon" title="Instagram">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+            </a>
+            <a href="checkout.html" id="cart-nav-btn" class="cart-btn">Cart (0)</a>
+        </div>
     </nav>
-
+    
     <header class="hero">
         <h1>H-TIME</h1>
         <p>EMOȚII SCULPTATE ÎN ELEGANȚĂ</p>
