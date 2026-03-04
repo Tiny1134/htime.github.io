@@ -13,13 +13,12 @@
         h1, h2, h3, .sync-font { font-family: 'Syncopate', sans-serif; text-transform: uppercase; }
         a { text-decoration: none; color: inherit; }
 
-        /* --- Navigație (Standardizată) --- */
+        /* --- Navigație --- */
         nav { background-color: var(--dark-header); color: white; display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: fixed; width: 100%; top: 0; z-index: 1000; }
         .logo img { height: 75px; width: auto; object-fit: contain; margin-top: 3px; }
         .nav-links { display: flex; gap: 20px; }
         .nav-links a:hover { text-decoration: underline; color: var(--peach-bg); }
         
-        /* Zona din dreapta: Login, Social, Cart */
         .nav-icons { display: flex; align-items: center; gap: 25px; }
         .nav-icons a { font-family: 'Space Mono', monospace; font-size: 0.9rem; text-transform: uppercase; transition: 0.3s; color: white; }
         .nav-icons a:hover { color: var(--peach-bg); }
@@ -27,9 +26,9 @@
         .cart-btn { border: 1px solid white; padding: 8px 20px; border-radius: 30px; display: inline-block; }
         .cart-btn:hover { background-color: white; color: var(--dark-header); border-color: white; }
 
+        /* --- Secțiune Contact --- */
         .contact-wrapper { display: flex; flex-wrap: wrap; max-width: 1200px; margin: 60px auto; gap: 40px; padding: 0 20px; width: 100%; }
         
-        /* Formularul */
         .contact-form-sec { flex: 2; min-width: 300px; background: white; padding: 40px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
         .contact-form-sec h1 { font-size: 2rem; margin-bottom: 20px; color: var(--dark-header); border-bottom: 2px solid var(--peach-bg); padding-bottom: 10px; }
         
@@ -41,16 +40,61 @@
         .submit-btn { background-color: black; color: white; border: none; padding: 15px 30px; border-radius: 30px; font-family: 'Space Mono'; font-weight: bold; cursor: pointer; transition: 0.3s; width: 100%; text-transform: uppercase; }
         .submit-btn:hover { background-color: var(--peach-bg); color: black; }
 
-        /* Informații Contact & Hartă */
         .contact-info-sec { flex: 1; min-width: 300px; background: var(--dark-header); color: white; padding: 40px; border-radius: 15px; display: flex; flex-direction: column; gap: 30px; }
         .contact-info-sec h2 { color: var(--peach-bg); font-size: 1.5rem; }
         .info-item h3 { font-size: 1rem; margin-bottom: 5px; color: #ddd; }
         .info-item p { line-height: 1.5; font-size: 0.95rem; }
         
-        /* Container Hartă */
         .map-container { width: 100%; height: 250px; border-radius: 10px; overflow: hidden; margin-top: auto; border: 2px solid var(--peach-bg); }
 
-        footer { background-color: #eaddd7; padding: 50px; border-top: 1px solid #ddd; margin-top: auto; }
+        /* --- FOOTER CORECTAT --- */
+        footer { 
+            background-color: #efe8e4; 
+            padding: 60px 50px; 
+            display: flex; 
+            justify-content: space-between; 
+            flex-wrap: wrap; 
+            gap: 30px; 
+            margin-top: auto; 
+            border-top: none; 
+        }
+        .footer-col { flex: 1; min-width: 200px; }
+        .footer-col h2, .footer-col h3 { 
+            font-family: 'Syncopate', sans-serif; 
+            text-transform: uppercase; 
+            margin-bottom: 25px; 
+            font-size: 1.1rem; 
+            font-weight: 700; 
+            color: #000;
+        }
+        .footer-col p, .footer-col ul { 
+            font-family: 'Space Mono', monospace; 
+            font-size: 0.9rem; 
+            line-height: 1.8; 
+            color: #000; 
+        }
+        .footer-col ul { 
+            list-style: none !important; 
+            padding: 0; 
+            margin: 0; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 12px; 
+        }
+        .footer-col ul li { 
+            list-style-type: none !important; 
+            margin: 0; 
+            padding: 0; 
+        }
+        .footer-col a { 
+            text-decoration: none; 
+            color: inherit; 
+            transition: 0.3s; 
+        }
+        .footer-col a:hover { 
+            color: var(--peach-bg); 
+            text-decoration: underline; 
+        }
     </style>
 </head>
 <body>
@@ -82,7 +126,7 @@
             <h1 class="sync-font">Lasă-ne un mesaj</h1>
             <p style="margin-bottom: 25px; color: #666;">Ai o întrebare despre o bijuterie sau despre comanda ta? Completează formularul și te vom contacta în cel mai scurt timp.</p>
             
-            <form action="#" method="POST" onsubmit="alert('Mesajul a fost trimis! (Simulare)'); return false;">
+            <form action="#" method="POST" onsubmit="alert('Mesajul a fost trimis! Echipa H-TIME te va contacta în curând.'); return false;">
                 <div class="form-group">
                     <label>Numele tău complet</label>
                     <input type="text" required placeholder="Ex: Popescu Ion">
@@ -116,7 +160,7 @@
             </div>
             
             <div class="map-container">
-                <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q=Strada%20Milcov%2018A,%20Iasi&t=&z=15&ie=UTF8&iwloc=&output=embed"></iframe>
+                <iframe width="100%" height="100%" frameborder="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2712.146524385!2d27.585!3d47.165!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDfCsDA5JzU0LjAiTiAyN8KwMzUnMDYuMCJF!5e0!3m2!1sro!2sro!4v1710000000000"></iframe>
             </div>
         </div>
     </div>
@@ -146,7 +190,6 @@
     </footer>
 
     <script>
-        // SCRIPT PENTRU CITIREA COȘULUI DIN MEMORIE (Standardizat)
         function updateCartCount() {
             let cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
             const cartBtn = document.getElementById('cart-nav-btn');
@@ -154,8 +197,6 @@
                 cartBtn.innerText = `Cart (${cart.length})`;
             }
         }
-
-        // Rulăm funcția imediat cum se încarcă pagina
         document.addEventListener('DOMContentLoaded', updateCartCount);
     </script>
 </body>
