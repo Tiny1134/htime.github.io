@@ -81,6 +81,55 @@
         footer { background-color: var(--footer-bg); padding: 60px 50px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; margin-top: auto; }
         
         @media (max-width: 1024px) { .products-grid { grid-template-columns: repeat(2, 1fr); } }
+
+                /* --- FOOTER CORECTAT --- */
+        footer { 
+            background-color: #efe8e4; 
+            padding: 60px 50px; 
+            display: flex; 
+            justify-content: space-between; 
+            flex-wrap: wrap; 
+            gap: 30px; 
+            margin-top: auto; 
+            border-top: none; 
+        }
+        .footer-col { flex: 1; min-width: 200px; }
+        .footer-col h2, .footer-col h3 { 
+            font-family: 'Syncopate', sans-serif; 
+            text-transform: uppercase; 
+            margin-bottom: 25px; 
+            font-size: 1.1rem; 
+            font-weight: 700; 
+            color: #000;
+        }
+        .footer-col p, .footer-col ul { 
+            font-family: 'Space Mono', monospace; 
+            font-size: 0.9rem; 
+            line-height: 1.8; 
+            color: #000; 
+        }
+        .footer-col ul { 
+            list-style: none !important; 
+            padding: 0; 
+            margin: 0; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 12px; 
+        }
+        .footer-col ul li { 
+            list-style-type: none !important; 
+            margin: 0; 
+            padding: 0; 
+        }
+        .footer-col a { 
+            text-decoration: none; 
+            color: inherit; 
+            transition: 0.3s; 
+        }
+        .footer-col a:hover { 
+            color: var(--peach-bg); 
+            text-decoration: underline; 
+        }
     </style>
 </head>
 <body>
@@ -151,14 +200,27 @@
         <div class="products-grid" id="products-container"></div>
     </div>
 
-    <footer>
+     <footer>
         <div class="footer-col">
-            <h3>H-TIME</h3>
-            <p>Copyright © 2026 H-TIME FE.</p>
+            <h2>H-TIME</h2>
+            <p style="margin-top: 10px;">Copyright © 2026 H-TIME FE.</p>
+        </div>
+        <div class="footer-col">
+            <h3>LINK-URI UTILE</h3>
+            <ul>
+                <li><a href="termeni.html">Termeni și condiții</a></li>
+                <li><a href="confidentialitate.html">Politica de confidențialitate</a></li>
+                <li><a href="https://anpc.ro/" target="_blank">ANPC</a></li>
+                <li><a href="https://ec.europa.eu/consumers/odr" target="_blank">ANPC-SAL</a></li>
+            </ul>
         </div>
         <div class="footer-col">
             <h3>LOCATION</h3>
-            <p>Strada Milcov 18A, Iași</p>
+            <p>Strada Milcov 18A, Iași<br>700259</p>
+        </div>
+        <div class="footer-col">
+            <h3>CONTACT</h3>
+            <p>h.time.business@gmail.com</p>
         </div>
     </footer>
 
