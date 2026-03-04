@@ -24,12 +24,44 @@
         .page-header h1 { font-size: 2.5rem; color: var(--dark-header); }
         .page-header p { margin-top: 15px; color: #555; max-width: 600px; margin-left: auto; margin-right: auto; }
 
-        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; max-width: 1200px; margin: 40px auto 80px; padding: 0 20px; }
-        .team-card { background: white; padding: 30px 20px; border-radius: 15px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s; border-bottom: 5px solid var(--peach-bg); }
-        .team-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+.team-grid { 
+            display: flex; 
+            flex-wrap: wrap; 
+            justify-content: center; /* Centrează perfect toate cardurile */
+            gap: 40px; 
+            max-width: 1200px; 
+            margin: 40px auto 80px; 
+            padding: 0 20px; 
+        }
         
-        /* Pozele membrilor - pune poze patrate sau vor fi taiate automat in cerc */
-        .team-img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; margin-bottom: 20px; border: 3px solid #eaddd7; }
+        .team-card { 
+            background: white; 
+            padding: 40px 25px; /* Am mărit padding-ul pentru a respira mai bine */
+            border-radius: 15px; 
+            text-align: center; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05); 
+            transition: 0.3s; 
+            border-bottom: 5px solid var(--peach-bg); 
+            width: 340px; /* Am mărit lățimea cardului */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .team-card:hover { 
+            transform: translateY(-10px); 
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1); 
+        }
+        
+        /* Am mărit și pozele membrilor */
+        .team-img { 
+            width: 180px; 
+            height: 180px; 
+            border-radius: 50%; 
+            object-fit: cover; 
+            margin-bottom: 20px; 
+            border: 4px solid #eaddd7; 
+        }
         .team-name { font-size: 1.2rem; margin-bottom: 5px; }
         .team-role { color: var(--peach-bg); font-weight: bold; font-size: 0.9rem; margin-bottom: 15px; text-transform: uppercase; }
         .team-desc { font-size: 0.85rem; color: #666; line-height: 1.6; }
