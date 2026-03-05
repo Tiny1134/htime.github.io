@@ -188,25 +188,28 @@
 
 /* MODIFICĂ AICI: Fundalul trebuie să fie negru (#000) nu alb (#fff) */
 .quotes-section {
-    padding: 60px 0;
+    padding: 80px 0; /* Crește padding-ul pentru a respira textul */
     background: #000; 
-    overflow: hidden;
+    overflow: hidden; /* Aceasta este linia critică: taie tot ce iese afară */
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 30px;
     margin: 0;
-    border: none; /* Elimină orice bordură care ar putea lăsa linii albe */
+    border: none;
+    position: relative; /* Creează un context de poziționare */
+    width: 100%;
 }
 
 .quote-track {
     display: flex;
     white-space: nowrap;
-    gap: 100px;
+    gap: 80px;
     font-family: 'Syncopate', sans-serif;
-    font-size: 1.8rem;
+    font-size: 1.6rem; /* Redu puțin dimensiunea dacă textul e prea mare pentru ecrane mici */
     font-weight: 700;
-    color: #fff; /* Textul trebuie să fie ALB pentru a se vedea pe negru */
+    color: #fff;
     text-transform: uppercase;
+    padding: 10px 0;
 }
 /* Definirea animațiilor direct în CSS */
 .scroll-right-fast {
