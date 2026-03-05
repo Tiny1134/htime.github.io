@@ -56,7 +56,6 @@
 
         .logo img {
             height: 75px;
-            filter: brightness(0) invert(1); /* Face logoul alb ca sa se vada pe fundal */
         }
 
         .nav-links {
@@ -75,11 +74,7 @@
         }
 
         .nav-links a:hover {
-            background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink));
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: textGradientMove 3s linear infinite;
+            color: var(--peach); /* Am scos gradientul si am pus o culoare simpla, eleganta */
         }
 
         .nav-icons {
@@ -97,11 +92,22 @@
         }
 
         .nav-icons a:hover {
-            background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink));
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: textGradientMove 3s linear infinite;
+            color: var(--peach); /* Fara gradient animat */
+        }
+
+        /* Stil special pentru butonul de Cart (border oval) */
+        .cart-btn {
+            border: 1px solid white;
+            padding: 8px 18px;
+            border-radius: 30px; /* Creează forma ovală / de pastilă */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .cart-btn:hover {
+            border-color: var(--peach); /* Conturul se schimbă ușor la hover */
         }
 
         /* --- CLASE NOI PENTRU GRADIENTUL ANIMAT --- */
@@ -432,11 +438,7 @@
         .footer-col ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 12px; }
         .footer-col a { text-decoration: none; color: inherit; transition: 0.3s; }
         .footer-col a:hover { 
-            background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink));
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: textGradientMove 4s linear infinite;
+            color: var(--peach); /* Fara gradient animat in footer */
         }
         .anpc-img { max-width: 200px; width: 100%; height: auto; display: block; margin-top: 10px; transition: opacity 0.3s ease; }
         .anpc-img:hover { opacity: 0.7; }
