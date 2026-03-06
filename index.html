@@ -278,11 +278,10 @@
             display: flex;
             width: max-content;
             gap: 30px;
-            animation: scroll-left-marquee 30s linear infinite;
+            /* Am redus timpul la 20s și am pus ease-in-out pentru mișcări fluide */
+            animation: scroll-left-marquee 20s ease-in-out infinite;
             padding: 0 15px;
         }
-
-        .sale-track:hover { animation-play-state: paused; }
 
         .sale-card {
             width: 280px;
@@ -327,9 +326,13 @@
         .new-price { color: #000; font-weight: bold; font-size: 1.1rem; }
         .old-price { color: #999; text-decoration: line-through; font-size: 0.9rem; }
 
+        /* Animație în trepte: stă pe loc, se mișcă rapid, stă pe loc... */
         @keyframes scroll-left-marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(calc(-50% - 15px)); }
+            0%, 20%  { transform: translateX(0); } /* Stă pe loc */
+            25%, 45% { transform: translateX(calc(-16.66% - 5px)); } /* Se mută rapid și stă */
+            50%, 70% { transform: translateX(calc(-33.33% - 10px)); } /* Se mută rapid și stă */
+            75%, 95% { transform: translateX(calc(-50% - 15px)); } /* Se mută la final și stă */
+            100%     { transform: translateX(calc(-50% - 15px)); } /* Reia bucla invizibil */
         }
 
         /* --- 6. OBIECTIVELE NOASTRE --- */
@@ -354,22 +357,31 @@
 
         .quote-track {
             display: flex;
+            width: max-content; /* Esențial pentru a rula infinit fără întreruperi */
             white-space: nowrap;
             gap: 80px;
-            font-family: 'Syncopate', sans-serif;
-            font-size: 1.6rem;
-            font-weight: 700;
+            font-family: 'Playfair Display', serif; /* Font elegant și ușor de citit */
+            font-style: italic; /* Litere ușor înclinate pentru stilul de citat */
+            font-size: 1.8rem;
+            font-weight: 400; /* Scriere normală, nu îngroșată excesiv */
             color: #fff;
-            text-transform: uppercase;
+            /* Am eliminat uppercase-ul pentru o scriere naturală */
         }
 
-        .quote-item span { color: var(--peach); font-family: 'Space Mono', monospace; font-size: 1.2rem; margin-left: 20px; text-transform: none;}
+        .quote-item span { 
+            color: var(--peach); 
+            font-family: 'Space Mono', monospace; 
+            font-style: normal; /* Numele autorului rămâne drept, nu italic */
+            font-size: 1rem; 
+            margin-left: 20px; 
+        }
 
         .scroll-right-fast { animation: scroll-right 40s linear infinite; }
         .scroll-left-fast { animation: scroll-left 40s linear infinite; }
 
-        @keyframes scroll-right { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
-        @keyframes scroll-left { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        /* Ajustare cu "calc" pentru a compensa perfect spațiul (gap) și a elimina "lag spike-ul" */
+        @keyframes scroll-right { 0% { transform: translateX(calc(-50% - 40px)); } 100% { transform: translateX(0); } }
+        @keyframes scroll-left { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-50% - 40px)); } }
 
         /* --- 8. CONTACT TEASER & ZIGZAG --- */
         .contact-teaser { 
