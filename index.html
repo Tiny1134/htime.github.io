@@ -6,10 +6,10 @@
     <title>H-TIME | Luxury Experience</title>
     <!-- Adaugam iconita pentru tab (favicon) -->
     <link rel="icon" href="logo.png" type="image/png">
-    <!-- Adaugam fonturile premium -->
+    <!-- Am adăugat DM Serif Display pentru titlul mare, păstrând Montserrat și Playfair pentru restul -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,600&family=Space+Mono:wght@400;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     
     <style>
         /* --- 1. SETĂRI GLOBALE ȘI CULORI --- */
@@ -27,7 +27,8 @@
         }
 
         body {
-            font-family: 'Space Mono', monospace; /* Fontul de baza pentru texte mici */
+            font-family: 'Montserrat', sans-serif; /* Font stabil si lizibil, suporta perfect diacriticele */
+            font-weight: 300;
             background-color: var(--light-bg);
             color: var(--dark);
             overflow-x: hidden; /* Prevenim scroll-ul orizontal */
@@ -66,7 +67,8 @@
         .nav-links a {
             color: white;
             text-decoration: none;
-            font-family: 'Space Mono', monospace;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
             font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -148,13 +150,14 @@
         }
 
         .hero h1 { 
-            font-family: 'Playfair Display', serif; 
-            font-size: clamp(4rem, 14vw, 15rem); /* Dimensiune masiva, adaptabila */
-            font-weight: 400;
-            letter-spacing: -2px; 
+            font-family: 'DM Serif Display', serif; /* Font luxury rafinat, gros și elegant */
+            font-size: clamp(5rem, 16vw, 18rem); /* L-am făcut mult mai masiv */
+            font-weight: 400; /* "Bold fără bold" - fontul e gros din fabricație */
+            letter-spacing: 2px; 
             margin-bottom: 20px; 
             line-height: 1;
             z-index: 10;
+            text-shadow: 0px 10px 30px rgba(0,0,0,0.5); /* Un mic efect de umbră pentru a-l scoate în evidență pe fundal */
         }
         
         .hero h4 {
@@ -218,7 +221,8 @@
         .categories-section h2 { 
             margin-bottom: 50px; 
             font-size: 2.5rem; 
-            font-family: 'Syncopate', sans-serif;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
             letter-spacing: 2px;
         }
         .circles-container { display: flex; justify-content: center; gap: 60px; flex-wrap: wrap; margin-bottom: 40px; }
@@ -228,13 +232,13 @@
             transition: transform 0.4s ease, box-shadow 0.4s ease;
         }
         .circle-item:hover .circle-img { transform: scale(1.05); box-shadow: 0 15px 30px rgba(0,0,0,0.15); }
-        .circle-item h3 { font-size: 1.2rem; margin-bottom: 10px; font-family: 'Syncopate', sans-serif; letter-spacing: 1px;}
-        .circle-item p { font-size: 0.8rem; color: #555; }
+        .circle-item h3 { font-size: 1.2rem; margin-bottom: 10px; font-family: 'Montserrat', sans-serif; font-weight: 600; letter-spacing: 1px;}
+        .circle-item p { font-size: 0.85rem; font-weight: 400; color: #555; }
         
         .btn-descopera { 
             background: black; color: white; padding: 15px 35px; border-radius: 30px; 
-            border: none; cursor: pointer; font-family: 'Space Mono', monospace; 
-            text-transform: uppercase; font-size: 0.9rem; transition: 0.3s; margin-top: 20px;
+            border: none; cursor: pointer; font-family: 'Montserrat', sans-serif; 
+            font-weight: 600; text-transform: uppercase; font-size: 0.9rem; transition: 0.3s; margin-top: 20px;
         }
         .btn-descopera:hover { 
             background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink));
@@ -255,9 +259,9 @@
 
         .sale-marquee-section h2 {
             text-align: center; 
-            font-family: 'Syncopate', sans-serif; /* Font modern, drept, non-romantic */
-            font-size: clamp(3rem, 7vw, 5.5rem); /* Titlu mult mai mare (adaptabil pe telefon) */
-            font-weight: 700; /* Îngroșat la maximum (Bold) */
+            font-family: 'Montserrat', sans-serif; /* Font modern si stabil */
+            font-size: clamp(3rem, 7vw, 5.5rem); 
+            font-weight: 700; 
             margin-bottom: 50px; 
             letter-spacing: 4px;
             /* Combinăm culorile firmei: Roz, Peach și Alb pe fundalul Negru, cu animatie */
@@ -302,16 +306,16 @@
             background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink));
             background-size: 200% auto;
             animation: textGradientMove 4s linear infinite;
-            color: black; padding: 5px 10px; font-weight: bold; font-family: 'Space Mono', monospace; font-size: 0.8rem; z-index: 5; 
+            color: black; padding: 5px 10px; font-weight: 700; font-family: 'Montserrat', sans-serif; font-size: 0.8rem; z-index: 5; 
         }
         
         .sale-card h3 { 
             color: #000; 
-            font-family: 'Space Mono', monospace; 
-            font-size: 0.9rem; 
+            font-family: 'Montserrat', sans-serif; 
+            font-size: 0.95rem; 
             margin: 0 0 15px 0; 
             white-space: normal; 
-            font-weight: bold;
+            font-weight: 600;
             min-height: 40px;
         }
 
@@ -339,9 +343,9 @@
         .objectives-section { max-width: 1200px; margin: 80px auto; padding: 0 20px; text-align: center; }
         .objectives-header { display: flex; align-items: center; justify-content: center; margin-bottom: 60px; }
         .objectives-header::before, .objectives-header::after { content: ""; flex: 1; border-bottom: 2px solid black; margin: 0 20px; }
-        .objectives-header h2 { font-size: 2.5rem; letter-spacing: 2px; font-family: 'Syncopate', sans-serif;}
+        .objectives-header h2 { font-size: 2.5rem; letter-spacing: 2px; font-family: 'Montserrat', sans-serif; font-weight: 700;}
         .objectives-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; text-align: left; }
-        .obj-col h3 { font-size: 1.2rem; border-bottom: 2px solid black; padding-bottom: 10px; margin-bottom: 20px; font-family: 'Syncopate', sans-serif;}
+        .obj-col h3 { font-size: 1.2rem; border-bottom: 2px solid black; padding-bottom: 10px; margin-bottom: 20px; font-family: 'Montserrat', sans-serif; font-weight: 600;}
         .obj-col p { font-size: 0.95rem; line-height: 1.8; color: #333; }
 
         /* --- 7. CITATE --- */
@@ -370,7 +374,8 @@
 
         .quote-item span { 
             color: var(--peach); 
-            font-family: 'Space Mono', monospace; 
+            font-family: 'Montserrat', sans-serif; 
+            font-weight: 500;
             font-style: normal; /* Numele autorului rămâne drept, nu italic */
             font-size: 1rem; 
             margin-left: 20px; 
@@ -390,7 +395,7 @@
             animation: textGradientMove 4s linear infinite;
             padding: 80px 20px; text-align: center; color: black; 
         }
-        .contact-teaser h2 { font-size: 3rem; margin-bottom: 20px; font-family: 'Syncopate', sans-serif;}
+        .contact-teaser h2 { font-size: 3rem; margin-bottom: 20px; font-family: 'Montserrat', sans-serif; font-weight: 700;}
         .contact-teaser p { font-size: 1.1rem; max-width: 600px; margin: 0 auto; line-height: 1.6;}
 
         .zigzag-separator { 
@@ -404,12 +409,12 @@
         /* --- 9. FAQ SECTION --- */
         .faq-section { background: var(--dark); padding: 80px 20px 100px; color: white; }
         .faq-container { max-width: 900px; margin: 0 auto; }
-        .faq-container h2 { font-size: 3.5rem; margin-bottom: 50px; color: var(--peach); font-family: 'Syncopate', sans-serif;}
+        .faq-container h2 { font-size: 3.5rem; margin-bottom: 50px; color: var(--peach); font-family: 'Montserrat', sans-serif; font-weight: 700;}
         .faq-item { border-bottom: 1px solid #333; }
         .faq-question {
             width: 100%; padding: 25px 0; display: flex; justify-content: space-between; align-items: center;
             background: none; border: none; color: white; cursor: pointer; 
-            font-family: 'Syncopate', sans-serif; font-size: 1.2rem; text-align: left;
+            font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 1.2rem; text-align: left;
             transition: all 0.3s ease;
         }
         .faq-question:hover {
@@ -419,7 +424,7 @@
             -webkit-text-fill-color: transparent;
             animation: textGradientMove 4s linear infinite;
         }
-        .faq-icon { font-size: 2rem; color: var(--peach); font-family: 'Space Mono', monospace; font-weight: normal;}
+        .faq-icon { font-size: 2rem; color: var(--peach); font-family: 'Montserrat', sans-serif; font-weight: normal;}
         .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; color: #ccc; font-size: 0.95rem; line-height: 1.6; }
         .faq-answer-content { padding-bottom: 25px; padding-right: 40px; }
 
@@ -435,7 +440,7 @@
         }
         .footer-col { flex: 1; min-width: 200px; }
         .footer-col h2, .footer-col h3 { 
-            font-family: 'Syncopate', sans-serif; 
+            font-family: 'Montserrat', sans-serif; 
             text-transform: uppercase; 
             margin-bottom: 25px; 
             font-size: 1.1rem; 
@@ -512,7 +517,7 @@
                 <p>Prețuri începând de la 100 €</p>
             </div>
             <div class="circle-item" onclick="window.location.href='magazin.html'">
-                <img src="https://images.unsplash.com/photo-1605100804763-247f66126e28?q=80&w=400" alt="Inele" class="circle-img">
+                <img src="inel1.jpg" alt="Inele" class="circle-img">
                 <h3>INELE</h3>
                 <p>Prețuri începând de la 100 €</p>
             </div>
@@ -534,20 +539,20 @@
     
     <section class="objectives-section">
         <div class="objectives-header">
-            <h2 class="gradient-underline">OBIECTIVELE NOASTRE</h2>
+            <h2 class="gradient-underline">ESENȚA H-TIME</h2>
         </div>
         <div class="objectives-grid">
             <div class="obj-col">
-                <h3>CE NE DORIM</h3>
-                <p>Ne dorim să oferim clienților noștri o identitate care să inspire încredere, să reflecte atitudinea de profesionist a produselor și serviciilor noastre. Totodată, dorim să creăm o cultură de brand bazată pe loialitate și satisfacție, fiindcă interacțiunile contează.</p>
+                <h3>ENERGIE ȘI EMOȚIE</h3>
+                <p>Fiecare piatră spirituală pe care o alegem cu grijă poartă o vibrație și un destin. Ne dorim ca bijuteriile noastre să devină talismane personale, conectând frumusețea formelor cu energia ta interioară, pentru a aduce protecție, iubire și echilibru în viața de zi cu zi.</p>
             </div>
             <div class="obj-col">
-                <h3>MISIUNEA NOASTRA</h3>
-                <p>Misiunea noastră este de a aduce rafinament și eleganță în viața fiecărui client, prin crearea de bijuterii de înaltă calitate, cu un design inovativ.<br><br>Ne dedicăm pasiunii de a transforma momentele speciale în amintiri prețioase.</p>
+                <h3>MIT ȘI RAFINAMENT</h3>
+                <p>Inspirate din legende străvechi și mitologii fascinante, creațiile noastre împletesc misterul trecutului cu eleganța pură a prezentului. Modelăm metalele și pietrele prețioase în adevărate poezii vizuale, menite să trezească la viață grația și latura divină din fiecare persoană.</p>
             </div>
             <div class="obj-col">
-                <h3>VIZIUNEA NOASTRA</h3>
-                <p>Viziunea noastră este de a deveni un lider în industria bijuteriilor, recunoscuți pentru creativitate, excelență și responsabilitate socială. Ne propunem să fim un brand de referință care să redefinească standardele de frumusețe.</p>
+                <h3>O MOȘTENIRE ETERNĂ</h3>
+                <p>Dincolo de strălucirea efemeră, scopul nostru este să făurim amintiri care sfidează timpul. Fiecare piesă este creată pentru a deveni o comoară de suflet, menită să fie purtată cu pasiune și transmisă din generație în generație, păstrând mereu vie o poveste nemuritoare.</p>
             </div>
         </div>
     </section>
@@ -674,8 +679,9 @@
             
             let carduriHTML = '';
             produseSale.forEach(p => {
+                // Am adaugat onclick pentru a redirectiona catre pagina produsului si cursor: pointer
                 carduriHTML += `
-                    <div class="sale-card">
+                    <div class="sale-card" onclick="window.location.href='produs.html?nume=${encodeURIComponent(p.nume)}'" style="cursor: pointer;">
                         <div class="sale-badge">SALE</div>
                         <img src="${p.imagine}" alt="${p.nume}">
                         <h3>${p.nume}</h3>
