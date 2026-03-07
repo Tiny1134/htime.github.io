@@ -2,288 +2,274 @@
 <html lang="ro">
 <head>
     <meta charset="UTF-8">
-    <title data-i18n="title">H-TIME | Luxury Experience</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>H-TIME | Luxury Experience</title>
+    <!-- Adaugam iconita pentru tab (favicon) -->
     <link rel="icon" href="logo.png" type="image/png">
-
-    <!-- Fonts -->
+    <!-- Am adăugat DM Serif Display pentru titlul mare, păstrând Montserrat și Playfair pentru restul -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-
+    
     <style>
+        /* --- 1. SETĂRI GLOBALE ȘI CULORI --- */
         :root {
-            --dark: #000000;
-            --pink: #ff7aa2;
-            --peach: #ffbfa0;
-            --light-bg: #f7f4f2;
+            --peach: #fcbf88;
+            --pink: #ffb6c1; /* Am adăugat culoarea Roz pentru brand */
+            --dark: #111111;
+            --light-bg: #f8f5f2; /* O nuanta foarte fina de crem/alb cald */
         }
 
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: #000;
-            color: #fff;
-            line-height: 1.5;
+            font-family: 'Montserrat', sans-serif; /* Font stabil si lizibil, suporta perfect diacriticele */
+            font-weight: 300;
+            background-color: var(--light-bg);
+            color: var(--dark);
+            overflow-x: hidden; /* Prevenim scroll-ul orizontal */
         }
 
-        a {
-            color: inherit;
-            text-decoration: none;
+        h1, h2, h3, h4 {
+            font-weight: normal;
         }
 
-        img {
-            max-width: 100%;
-            display: block;
-        }
-
-        /* NAVBAR */
+        /* --- 2. BARA DE NAVIGARE (MENIUL) --- */
         nav {
-            position: sticky;
+            position: fixed; /* Fixează bara pe ecran (lock pe pagină) */
             top: 0;
-            z-index: 100;
+            left: 0;
+            width: 100%;
+            padding: 15px 50px;
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            padding: 20px 40px;
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(10px);
+            align-items: center;
+            z-index: 1000; /* Asigură-te că stă peste toate celelalte elemente */
+            background-color: rgba(0, 0, 0, 0.6); /* Fundal negru semi-transparent */
+            backdrop-filter: blur(10px); /* Efect de sticlă (sablare) pentru un aspect premium */
+            -webkit-backdrop-filter: blur(10px); /* Suport pentru Safari */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* O linie fină pentru delimitare */
         }
 
         .logo img {
-            height: 50px;
-            width: auto;
+            height: 75px;
         }
 
         .nav-links {
             display: flex;
-            gap: 25px;
-            align-items: center;
+            gap: 30px;
         }
 
         .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
             font-size: 0.9rem;
-            letter-spacing: 1px;
             text-transform: uppercase;
-            position: relative;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
         }
 
-        .nav-links a::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: -4px;
-            width: 0;
-            height: 1px;
-            background: linear-gradient(to right, var(--pink), var(--peach));
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
+        .nav-links a:hover {
+            color: var(--peach); /* Am scos gradientul si am pus o culoare simpla, eleganta */
         }
 
         .nav-icons {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
         }
 
         .nav-icons a {
+            color: white;
+            text-decoration: none;
             font-size: 0.9rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            transition: all 0.3s ease;
         }
 
+        .nav-icons a:hover {
+            color: var(--peach); /* Fara gradient animat */
+        }
+
+        /* Stil special pentru butonul de Cart (border oval) */
         .cart-btn {
-            padding: 8px 16px;
-            border-radius: 20px;
-            border: 1px solid #fff;
+            border: 1px solid white;
+            padding: 8px 18px;
+            border-radius: 30px; /* Creează forma ovală / de pastilă */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             transition: all 0.3s ease;
         }
 
         .cart-btn:hover {
-            background: linear-gradient(to right, var(--pink), var(--peach));
-            color: #000;
-            border-color: transparent;
+            border-color: var(--peach); /* Conturul se schimbă ușor la hover */
         }
 
-        #languageSwitcher {
-            padding: 6px 10px;
-            border-radius: 6px;
-            border: 1px solid #fff;
-            background: #000;
-            color: #fff;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-        }
-
-        /* HERO */
-        .hero {
+        /* --- CLASE NOI PENTRU GRADIENTUL ANIMAT --- */
+        .gradient-underline {
             position: relative;
-            min-height: 80vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .gradient-underline::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink));
+            background-size: 200% auto;
+            animation: textGradientMove 4s linear infinite;
+            border-radius: 2px;
+        }
+
+        /* --- 3. HERO SECTION (Stilul Squarespace) --- */
+        .hero {
+            height: 100vh; /* Ocupa tot ecranul */
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
             text-align: center;
-            color: #fff;
+            background-color: var(--dark);
+            color: white;
+            position: relative;
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            padding-bottom: 50px;
         }
 
-        .hero h1 {
-            font-family: 'DM Serif Display', serif;
-            font-size: clamp(4rem, 12vw, 7rem);
-            letter-spacing: 10px;
-            margin-bottom: 10px;
+        .hero h1 { 
+            font-family: 'DM Serif Display', serif; /* Font luxury rafinat, gros și elegant */
+            font-size: clamp(5rem, 16vw, 18rem); /* L-am făcut mult mai masiv */
+            font-weight: 400; /* "Bold fără bold" - fontul e gros din fabricație */
+            letter-spacing: 2px; 
+            margin-bottom: 20px; 
+            line-height: 1;
+            z-index: 10;
+            text-shadow: 0px 10px 30px rgba(0,0,0,0.5); /* Un mic efect de umbră pentru a-l scoate în evidență pe fundal */
         }
-
+        
         .hero h4 {
-            font-size: 1.1rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
+            font-family: 'Playfair Display', serif; 
+            font-size: clamp(1.2rem, 3vw, 2.5rem); 
+            font-weight: 400;
+            margin: 0;
+            z-index: 10;
         }
 
+        /* Markerul (highlight-ul) textului din subtitlu */
         .text-highlight {
+            position: relative;
+            display: inline-block;
+            color: #000; 
+            z-index: 1;
+            padding: 0 15px;
+            font-style: italic;
+            font-weight: 600;
+        }
+
+        .text-highlight::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1.1em;
+            /* Aplicăm gradientul animat cu Roz, Peach și Alb */
             background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink));
             background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
             animation: textGradientMove 4s linear infinite;
+            z-index: -1;
+            transform: translateY(-50%) rotate(-1deg);
+            border-radius: 3px;
         }
 
+        /* Curba de la baza sectiunii (Section Divider) */
         .hero-divider-bottom {
             position: absolute;
-            bottom: -1px;
+            bottom: -1px; 
             left: 0;
             width: 100%;
             overflow: hidden;
             line-height: 0;
+            z-index: 2;
         }
 
         .hero-divider-bottom svg {
             display: block;
             width: calc(100% + 1.3px);
-            height: 80px;
+            height: 6vw; /* Inaltimea curbei */
         }
 
         .hero-divider-bottom .shape-fill {
-            fill: #111111;
+            fill: var(--light-bg); /* Culoarea de sub Hero, leaga perfect sectiunile */
         }
 
-        /* CATEGORIES SECTION */
-        .categories-section {
-            background-color: #111111;
-            padding: 80px 20px 100px;
-            text-align: center;
-        }
-
-        .categories-section h2 {
+        /* --- 4. SECȚIUNE CATEGORII --- */
+        .categories-section { text-align: center; padding: 80px 20px 80px; }
+        .categories-section h2 { 
+            margin-bottom: 50px; 
+            font-size: 2.5rem; 
             font-family: 'Montserrat', sans-serif;
-            font-size: 2.5rem;
-            letter-spacing: 3px;
-            margin-bottom: 50px;
-            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 2px;
         }
-
-        .gradient-underline {
-            display: inline-block;
-            position: relative;
-        }
-
-        .gradient-underline::after {
-            content: "";
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            bottom: -10px;
-            width: 80px;
-            height: 3px;
-            background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink));
-        }
-
-        .circles-container {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            flex-wrap: wrap;
-            margin-bottom: 40px;
-        }
-
-        .circle-item {
-            width: 260px;
-            text-align: center;
-            cursor: pointer;
-        }
-
+        .circles-container { display: flex; justify-content: center; gap: 60px; flex-wrap: wrap; margin-bottom: 40px; }
+        .circle-item { text-align: center; cursor: pointer; }
         .circle-img {
-            width: 220px;
-            height: 220px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid #fff;
-            margin: 0 auto 20px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 250px; height: 250px; border-radius: 50%; object-fit: cover; margin-bottom: 20px;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
         }
-
-        .circle-item:hover .circle-img {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
+        .circle-item:hover .circle-img { transform: scale(1.05); box-shadow: 0 15px 30px rgba(0,0,0,0.15); }
+        .circle-item h3 { font-size: 1.2rem; margin-bottom: 10px; font-family: 'Montserrat', sans-serif; font-weight: 600; letter-spacing: 1px;}
+        .circle-item p { font-size: 0.85rem; font-weight: 400; color: #555; }
+        
+        .btn-descopera { 
+            background: black; color: white; padding: 15px 35px; border-radius: 30px; 
+            border: none; cursor: pointer; font-family: 'Montserrat', sans-serif; 
+            font-weight: 600; text-transform: uppercase; font-size: 0.9rem; transition: 0.3s; margin-top: 20px;
         }
-
-        .circle-item h3 {
-            font-size: 1rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-        }
-
-        .circle-item p {
-            font-size: 0.9rem;
-            color: #ccc;
-        }
-
-        .btn-descopera {
-            margin-top: 20px;
-            padding: 12px 30px;
-            border-radius: 30px;
-            border: none;
-            cursor: pointer;
-            font-size: 0.9rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+        .btn-descopera:hover { 
             background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink));
             background-size: 200% auto;
             animation: textGradientMove 4s linear infinite;
-            color: #000;
+            color: black; 
         }
 
-        /* SALE MARQUEE SECTION */
+        /* --- 5. SECȚIUNE OFERTE (MARQUEE) --- */
         .sale-marquee-section {
-            background-color: #000;
-            padding: 80px 20px;
-            overflow: hidden;
+            background: #000; 
+            padding: 80px 0; 
+            overflow: hidden; 
+            margin: 0;
+            width: 100%;
+            position: relative;
         }
 
         .sale-marquee-section h2 {
-            text-align: center;
-            font-family: 'Montserrat', sans-serif;
-            font-size: clamp(3rem, 7vw, 5.5rem);
-            font-weight: 700;
-            margin-bottom: 50px;
+            text-align: center; 
+            font-family: 'Montserrat', sans-serif; /* Font modern si stabil */
+            font-size: clamp(3rem, 7vw, 5.5rem); 
+            font-weight: 700; 
+            margin-bottom: 50px; 
             letter-spacing: 4px;
+            /* Combinăm culorile firmei: Roz, Peach și Alb pe fundalul Negru, cu animatie */
             background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink));
             background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0px 4px 15px rgba(255, 182, 193, 0.2);
+            text-shadow: 0px 4px 15px rgba(255, 182, 193, 0.2); /* O strălucire fină roz */
             animation: textGradientMove 4s linear infinite;
         }
 
@@ -296,13 +282,14 @@
             display: flex;
             width: max-content;
             gap: 30px;
+            /* Am redus timpul la 20s și am pus ease-in-out pentru mișcări fluide */
             animation: scroll-left-marquee 20s ease-in-out infinite;
             padding: 0 15px;
         }
 
         .sale-card {
             width: 280px;
-            background: #fff;
+            background: #fff; 
             padding: 15px;
             display: flex;
             flex-direction: column;
@@ -312,40 +299,22 @@
             position: relative;
         }
 
-        .sale-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
-        }
-
-        .sale-card img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            margin-bottom: 20px;
-            background: #000;
-        }
-
-        .sale-badge {
-            position: absolute;
-            top: 15px;
-            left: 15px;
+        .sale-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(255,255,255,0.1); }
+        .sale-card img { width: 100%; height: 250px; object-fit: cover; margin-bottom: 20px; background: #000; }
+        .sale-badge { 
+            position: absolute; top: 15px; left: 15px; 
             background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink));
             background-size: 200% auto;
             animation: textGradientMove 4s linear infinite;
-            color: black;
-            padding: 5px 10px;
-            font-weight: 700;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.8rem;
-            z-index: 5;
+            color: black; padding: 5px 10px; font-weight: 700; font-family: 'Montserrat', sans-serif; font-size: 0.8rem; z-index: 5; 
         }
-
-        .sale-card h3 {
-            color: #000;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.95rem;
-            margin: 0 0 15px 0;
-            white-space: normal;
+        
+        .sale-card h3 { 
+            color: #000; 
+            font-family: 'Montserrat', sans-serif; 
+            font-size: 0.95rem; 
+            margin: 0 0 15px 0; 
+            white-space: normal; 
             font-weight: 600;
             min-height: 40px;
         }
@@ -358,85 +327,32 @@
             gap: 15px;
         }
 
-        .new-price {
-            color: #000;
-            font-weight: bold;
-            font-size: 1.1rem;
-        }
+        .new-price { color: #000; font-weight: bold; font-size: 1.1rem; }
+        .old-price { color: #999; text-decoration: line-through; font-size: 0.9rem; }
 
-        .old-price {
-            color: #999;
-            text-decoration: line-through;
-            font-size: 0.9rem;
-        }
-
+        /* Animație în trepte: stă pe loc, se mișcă rapid, stă pe loc... */
         @keyframes scroll-left-marquee {
-            0%, 20%  { transform: translateX(0); }
-            25%, 45% { transform: translateX(calc(-16.66% - 5px)); }
-            50%, 70% { transform: translateX(calc(-33.33% - 10px)); }
-            75%, 95% { transform: translateX(calc(-50% - 15px)); }
-            100%     { transform: translateX(calc(-50% - 15px)); }
+            0%, 20%  { transform: translateX(0); } /* Stă pe loc */
+            25%, 45% { transform: translateX(calc(-16.66% - 5px)); } /* Se mută rapid și stă */
+            50%, 70% { transform: translateX(calc(-33.33% - 10px)); } /* Se mută rapid și stă */
+            75%, 95% { transform: translateX(calc(-50% - 15px)); } /* Se mută la final și stă */
+            100%     { transform: translateX(calc(-50% - 15px)); } /* Reia bucla invizibil */
         }
 
-        /* OBJECTIVES SECTION */
-        .objectives-section {
-            max-width: 1200px;
-            margin: 80px auto;
-            padding: 0 20px;
-            text-align: center;
-            background: #f7f4f2;
-            color: #000;
-        }
+        /* --- 6. OBIECTIVELE NOASTRE --- */
+        .objectives-section { max-width: 1200px; margin: 80px auto; padding: 0 20px; text-align: center; }
+        .objectives-header { display: flex; align-items: center; justify-content: center; margin-bottom: 60px; }
+        .objectives-header::before, .objectives-header::after { content: ""; flex: 1; border-bottom: 2px solid black; margin: 0 20px; }
+        .objectives-header h2 { font-size: 2.5rem; letter-spacing: 2px; font-family: 'Montserrat', sans-serif; font-weight: 700;}
+        .objectives-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; text-align: left; }
+        .obj-col h3 { font-size: 1.2rem; border-bottom: 2px solid black; padding-bottom: 10px; margin-bottom: 20px; font-family: 'Montserrat', sans-serif; font-weight: 600;}
+        .obj-col p { font-size: 0.95rem; line-height: 1.8; color: #333; }
 
-        .objectives-header {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 60px;
-        }
-
-        .objectives-header::before,
-        .objectives-header::after {
-            content: "";
-            flex: 1;
-            border-bottom: 2px solid black;
-            margin: 0 20px;
-        }
-
-        .objectives-header h2 {
-            font-size: 2.5rem;
-            letter-spacing: 2px;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-        }
-
-        .objectives-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            text-align: left;
-        }
-
-        .obj-col h3 {
-            font-size: 1.2rem;
-            border-bottom: 2px solid black;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-        }
-
-        .obj-col p {
-            font-size: 0.95rem;
-            line-height: 1.8;
-            color: #333;
-        }
-
-        /* QUOTES SECTION */
+        /* --- 7. CITATE --- */
         .quotes-section {
             padding: 80px 0;
-            background: #000;
-            overflow: hidden;
+            background: #000; 
+            overflow: hidden; 
             display: flex;
             flex-direction: column;
             gap: 40px;
@@ -445,118 +361,62 @@
 
         .quote-track {
             display: flex;
-            width: max-content;
+            width: max-content; /* Esențial pentru a rula infinit fără întreruperi */
             white-space: nowrap;
             gap: 80px;
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
+            font-family: 'Playfair Display', serif; /* Font elegant și ușor de citit */
+            font-style: italic; /* Litere ușor înclinate pentru stilul de citat */
             font-size: 1.8rem;
-            font-weight: 400;
+            font-weight: 400; /* Scriere normală, nu îngroșată excesiv */
             color: #fff;
+            /* Am eliminat uppercase-ul pentru o scriere naturală */
         }
 
-        .quote-item span {
-            color: var(--peach);
-            font-family: 'Montserrat', sans-serif;
+        .quote-item span { 
+            color: var(--peach); 
+            font-family: 'Montserrat', sans-serif; 
             font-weight: 500;
-            font-style: normal;
-            font-size: 1rem;
-            margin-left: 20px;
+            font-style: normal; /* Numele autorului rămâne drept, nu italic */
+            font-size: 1rem; 
+            margin-left: 20px; 
         }
 
-        .scroll-right-fast {
-            animation: scroll-right 40s linear infinite;
-        }
+        .scroll-right-fast { animation: scroll-right 40s linear infinite; }
+        .scroll-left-fast { animation: scroll-left 40s linear infinite; }
 
-        .scroll-left-fast {
-            animation: scroll-left 40s linear infinite;
-        }
+        /* Ajustare cu "calc" pentru a compensa perfect spațiul (gap) și a elimina "lag spike-ul" */
+        @keyframes scroll-right { 0% { transform: translateX(calc(-50% - 40px)); } 100% { transform: translateX(0); } }
+        @keyframes scroll-left { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-50% - 40px)); } }
 
-        @keyframes scroll-right {
-            0% { transform: translateX(calc(-50% - 40px)); }
-            100% { transform: translateX(0); }
-        }
-
-        @keyframes scroll-left {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(calc(-50% - 40px)); }
-        }
-
-        /* CONTACT TEASER & ZIGZAG */
-        .contact-teaser {
+        /* --- 8. CONTACT TEASER & ZIGZAG --- */
+        .contact-teaser { 
             background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink));
             background-size: 200% auto;
             animation: textGradientMove 4s linear infinite;
-            padding: 80px 20px;
-            text-align: center;
-            color: black;
+            padding: 80px 20px; text-align: center; color: black; 
         }
+        .contact-teaser h2 { font-size: 3rem; margin-bottom: 20px; font-family: 'Montserrat', sans-serif; font-weight: 700;}
+        .contact-teaser p { font-size: 1.1rem; max-width: 600px; margin: 0 auto; line-height: 1.6;}
 
-        .contact-teaser h2 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-        }
-
-        .contact-teaser p {
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
-
-        .zigzag-separator {
-            display: block;
-            width: 100%;
-            height: 40px;
+        .zigzag-separator { 
+            display: block; width: 100%; height: 40px; 
             background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink));
             background-size: 200% auto;
             animation: textGradientMove 4s linear infinite;
             margin-bottom: -1px;
         }
 
-        /* FAQ SECTION */
-        .faq-section {
-            background: var(--dark);
-            padding: 80px 20px 100px;
-            color: white;
-        }
-
-        .faq-container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .faq-container h2 {
-            font-size: 3.5rem;
-            margin-bottom: 50px;
-            color: var(--peach);
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-        }
-
-        .faq-item {
-            border-bottom: 1px solid #333;
-        }
-
+        /* --- 9. FAQ SECTION --- */
+        .faq-section { background: var(--dark); padding: 80px 20px 100px; color: white; }
+        .faq-container { max-width: 900px; margin: 0 auto; }
+        .faq-container h2 { font-size: 3.5rem; margin-bottom: 50px; color: var(--peach); font-family: 'Montserrat', sans-serif; font-weight: 700;}
+        .faq-item { border-bottom: 1px solid #333; }
         .faq-question {
-            width: 100%;
-            padding: 25px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: none;
-            border: none;
-            color: white;
-            cursor: pointer;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            font-size: 1.2rem;
-            text-align: left;
+            width: 100%; padding: 25px 0; display: flex; justify-content: space-between; align-items: center;
+            background: none; border: none; color: white; cursor: pointer; 
+            font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 1.2rem; text-align: left;
             transition: all 0.3s ease;
         }
-
         .faq-question:hover {
             background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink));
             background-size: 200% auto;
@@ -564,29 +424,11 @@
             -webkit-text-fill-color: transparent;
             animation: textGradientMove 4s linear infinite;
         }
+        .faq-icon { font-size: 2rem; color: var(--peach); font-family: 'Montserrat', sans-serif; font-weight: normal;}
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; color: #ccc; font-size: 0.95rem; line-height: 1.6; }
+        .faq-answer-content { padding-bottom: 25px; padding-right: 40px; }
 
-        .faq-icon {
-            font-size: 2rem;
-            color: var(--peach);
-            font-family: 'Montserrat', sans-serif;
-            font-weight: normal;
-        }
-
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease-out;
-            color: #ccc;
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        .faq-answer-content {
-            padding-bottom: 25px;
-            padding-right: 40px;
-        }
-
-        /* FEATURES SECTION (DUPĂ HERO) */
+        /* --- 10. SECȚIUNE BENEFICII (După Hero) --- */
         .features-section {
             background-color: var(--light-bg);
             padding: 60px 20px;
@@ -598,7 +440,6 @@
             flex-wrap: wrap;
             position: relative;
             z-index: 10;
-            color: #000;
         }
 
         .feature-item {
@@ -638,10 +479,10 @@
             line-height: 1.5;
         }
 
-        /* FOOTER PREMIUM DARK */
-        footer {
-            background-color: #0b0b0b;
-            padding: 80px 50px 30px;
+        /* --- 11. FOOTER PREMIUM DARK --- */
+        footer { 
+            background-color: #0b0b0b; 
+            padding: 80px 50px 30px; 
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 40px;
@@ -728,48 +569,24 @@
             margin-top: 20px;
         }
 
-        .anpc-img {
-            max-width: 180px;
-            width: 100%;
-            height: auto;
-            display: block;
-            margin-bottom: 15px;
-            transition: opacity 0.3s ease;
+        .anpc-img { 
+            max-width: 180px; 
+            width: 100%; 
+            height: auto; 
+            display: block; 
+            margin-bottom: 15px; 
+            transition: opacity 0.3s ease; 
         }
+        
+        .anpc-img:hover { opacity: 0.7; }
 
-        .anpc-img:hover {
-            opacity: 0.7;
-        }
-
-        /* RESPONSIVE */
+        /* REGLAJE PENTRU ECRANE MICI (Telefoane) */
         @media (max-width: 768px) {
-            nav {
-                flex-direction: column;
-                gap: 15px;
-                padding: 15px;
-                background: rgba(0, 0, 0, 0.8);
-            }
-
-            .nav-links {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 15px;
-            }
-
-            .hero h1 {
-                font-size: 20vw;
-            }
-
-            .categories-section h2,
-            .objectives-header h2 {
-                font-size: 1.8rem;
-            }
-
-            footer {
-                padding: 40px 20px;
-                display: flex;
-                flex-direction: column;
-            }
+            nav { flex-direction: column; gap: 15px; padding: 15px; background: rgba(0,0,0,0.8); }
+            .nav-links { flex-wrap: wrap; justify-content: center; gap: 15px; }
+            .hero h1 { font-size: 20vw; }
+            .categories-section h2, .objectives-header h2 { font-size: 1.8rem; }
+            footer { padding: 40px 20px; display: flex; flex-direction: column; }
         }
     </style>
 </head>
@@ -786,8 +603,9 @@
             <a href="echipa.html" data-i18n="nav_team">Echipa H-Time</a>
             <a href="contact.html" data-i18n="nav_contact">Contactează-ne</a>
         </div>
+        
         <div class="nav-icons">
-            <select id="languageSwitcher">
+            <select id="languageSwitcher" aria-label="Selectează limba" style="background:transparent;border:1px solid rgba(255,255,255,0.12);color:white;padding:6px 8px;border-radius:6px;font-size:0.85rem;text-transform:uppercase;">
                 <option value="ro">RO</option>
                 <option value="en">EN</option>
             </select>
@@ -795,9 +613,9 @@
         </div>
     </nav>
 
-    <header class="hero" id="hero-section">
+    <header class="hero" id="hero-section" style="background-image: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)), url('https://images.squarespace-cdn.com/content/v1/67a62d98ae27d6276a9f2db9/7e45fd3e-142e-4ac7-8a13-a699d78b6d75/m.jpg');">
         <h1>H-TIME</h1>
-        <h4><span class="text-highlight" data-i18n="hero_subtitle">Emoții sculptate în eleganță</span></h4>
+        <h4><span class="text-highlight" data-i18n="hero_subtitle">”Emoții sculptate în eleganță”</span></h4>
 
         <div class="hero-divider-bottom">
             <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
@@ -860,7 +678,7 @@
                 <p data-i18n="cat3_price">Prețuri începând de la 100 €</p>
             </div>
         </div>
-        <button class="btn-descopera" onclick="window.location.href='magazin.html'" data-i18n="cat_btn">Descoperă mai multe</button>
+        <button class="btn-descopera" data-i18n="cat_btn" onclick="window.location.href='magazin.html'">Descoperă mai multe</button>
     </section>
 
     <section class="sale-marquee-section">
@@ -869,7 +687,7 @@
             <!-- Produsele se vor genera automat aici prin Javascript -->
         </div>
     </section>
-
+    
     <section class="objectives-section">
         <div class="objectives-header">
             <h2 class="gradient-underline" data-i18n="obj_title">ESENȚA H-TIME</h2>
@@ -894,18 +712,18 @@
         <div class="quote-track scroll-right-fast">
             <div class="quote-item" data-i18n="quote1">"Bijuteriile sunt cele care fac femeia să se simtă unică" <span>- Coco Chanel</span></div>
             <div class="quote-item" data-i18n="quote2">"Stilul este o modalitate de a spune cine ești fără să vorbești" <span>- Rachel Zoe</span></div>
-            <div class="quote-item">"Bijuteriile sunt cele care fac femeia să se simtă unică" <span>- Coco Chanel</span></div>
-            <div class="quote-item">"Stilul este o modalitate de a spune cine ești fără să vorbești" <span>- Rachel Zoe</span></div>
+            <div class="quote-item" data-i18n="quote1">"Bijuteriile sunt cele care fac femeia să se simtă unică" <span>- Coco Chanel</span></div>
+            <div class="quote-item" data-i18n="quote2">"Stilul este o modalitate de a spune cine ești fără să vorbești" <span>- Rachel Zoe</span></div>
         </div>
-
+        
         <div class="quote-track scroll-left-fast">
             <div class="quote-item" data-i18n="quote3">"Diamantele sunt cele mai bune prietene ale unei fete" <span>- Marilyn Monroe</span></div>
             <div class="quote-item" data-i18n="quote4">"Fiecare bijuterie spune o poveste fără a folosi niciun cuvânt" <span>- H-TIME</span></div>
-            <div class="quote-item">"Diamantele sunt cele mai bune prietene ale unei fete" <span>- Marilyn Monroe</span></div>
-            <div class="quote-item">"Fiecare bijuterie spune o poveste fără a folosi niciun cuvânt" <span>- H-TIME</span></div>
+            <div class="quote-item" data-i18n="quote3">"Diamantele sunt cele mai bune prietene ale unei fete" <span>- Marilyn Monroe</span></div>
+            <div class="quote-item" data-i18n="quote4">"Fiecare bijuterie spune o poveste fără a folosi niciun cuvânt" <span>- H-TIME</span></div>
         </div>
     </section>
-
+    
     <section class="contact-teaser">
         <h2 data-i18n="contact_title">CONTACTEAZĂ-NE</h2>
         <p data-i18n="contact_text">Ai vrea să ne sugerezi o idee sau să colaborezi cu noi? Scrie-ne, abia așteptăm să auzim!</p>
@@ -920,23 +738,23 @@
             <div style="text-align: center; margin-bottom: 50px;">
                 <h2 class="gradient-underline" style="margin-bottom: 0;" data-i18n="faq_title">FAQS</h2>
             </div>
-
+            
             <div class="faq-item">
-                <button class="faq-question"><span data-i18n="faq1_q">CE NE FACE UNICI?</span> <span class="faq-icon">+</span></button>
+                <button class="faq-question" data-i18n="faq1_q">CE NE FACE UNICI? <span class="faq-icon">+</span></button>
                 <div class="faq-answer">
                     <div class="faq-answer-content" data-i18n="faq1_a">Bijuteriile H-Time sunt o operă de artă, nu doar un simplu accesoriu, ce exprimă rafinament, dedicare și calitate excepțională. Ne diferențiem prin atenția la detalii și experiența premium oferită fiecărui client.</div>
                 </div>
             </div>
 
             <div class="faq-item">
-                <button class="faq-question"><span data-i18n="faq2_q">CE REPREZINTĂ SIGLA NOASTRĂ?</span> <span class="faq-icon">+</span></button>
+                <button class="faq-question" data-i18n="faq2_q">CE REPREZINTĂ SIGLA NOASTRĂ? <span class="faq-icon">+</span></button>
                 <div class="faq-answer">
                     <div class="faq-answer-content" data-i18n="faq2_a">Sigla noastră îmbină elemente clasice cu accente moderne. Diamantul simbolizează eternitatea și rezistența în timp, în timp ce literele H și T conturează identitatea brandului.</div>
                 </div>
             </div>
 
             <div class="faq-item">
-                <button class="faq-question"><span data-i18n="faq3_q">DE CE ACEST SLOGAN?</span> <span class="faq-icon">+</span></button>
+                <button class="faq-question" data-i18n="faq3_q">DE CE ACEST SLOGAN? <span class="faq-icon">+</span></button>
                 <div class="faq-answer">
                     <div class="faq-answer-content" data-i18n="faq3_a">„Emoții sculptate în eleganță” reflectă credința noastră profundă că bijuteriile nu sunt doar obiecte materiale, ci purtătoare de amintiri și sentimente ce dăinuie generații întregi.</div>
                 </div>
@@ -1007,169 +825,6 @@
         </div>
     </footer>
 
-    <script>
-        const translations = {
-            ro: {
-                title: "H-TIME | Luxury Experience",
-                nav_home: "Acasă",
-                nav_shop: "Magazin",
-                nav_about: "Despre Noi",
-                nav_team: "Echipa H-Time",
-                nav_contact: "Contactează-ne",
-
-                hero_subtitle: "Emoții sculptate în eleganță",
-
-                feat1_title: "LIVRARE GRATUITĂ",
-                feat1_text: "Pentru toate comenzile de peste 500 RON, direct la tine la uşă.",
-                feat2_title: "GARANȚIE 24 LUNI",
-                feat2_text: "Toate piesele noastre vin cu certificat de autenticitate şi garanţie.",
-                feat3_title: "RETUR SIMPLIFICAT",
-                feat3_text: "Ai la dispoziție 14 zile calendaristice pentru a schimba produsul.",
-
-                cat_title: "CE PRODUSE OFERIM",
-                cat1_title: "CEASURI",
-                cat1_price: "Prețuri începând de la 100 €",
-                cat2_title: "INELE",
-                cat2_price: "Prețuri începând de la 100 €",
-                cat3_title: "CERCEI",
-                cat3_price: "Prețuri începând de la 100 €",
-                cat_btn: "Descoperă mai multe",
-
-                sale_title: "OFERTE EXCLUSIVE",
-
-                obj_title: "ESENȚA H-TIME",
-                obj1_title: "ENERGIE ȘI EMOȚIE",
-                obj1_text: "Fiecare piatră spirituală pe care o alegem cu grijă poartă o vibrație și un destin. Ne dorim ca bijuteriile noastre să devină talismane personale, conectând frumusețea formelor cu energia ta interioară, pentru a aduce protecție, iubire și echilibru în viața de zi cu zi.",
-                obj2_title: "MIT ȘI RAFINAMENT",
-                obj2_text: "Inspirate din legende străvechi și mitologii fascinante, creațiile noastre împletesc misterul trecutului cu eleganța pură a prezentului. Modelăm metalele și pietrele prețioase în adevărate poezii vizuale, menite să trezească la viață grația și latura divină din fiecare persoană.",
-                obj3_title: "O MOȘTENIRE ETERNĂ",
-                obj3_text: "Dincolo de strălucirea efemeră, scopul nostru este să făurim amintiri care sfidează timpul. Fiecare piesă este creată pentru a deveni o comoară de suflet, menită să fie purtată cu pasiune și transmisă din generație în generație, păstrând mereu vie o poveste nemuritoare.",
-
-                quote1: "\"Bijuteriile sunt cele care fac femeia să se simtă unică\" <span>- Coco Chanel</span>",
-                quote2: "\"Stilul este o modalitate de a spune cine ești fără să vorbești\" <span>- Rachel Zoe</span>",
-                quote3: "\"Diamantele sunt cele mai bune prietene ale unei fete\" <span>- Marilyn Monroe</span>",
-                quote4: "\"Fiecare bijuterie spune o poveste fără a folosi niciun cuvânt\" <span>- H-TIME</span>",
-
-                contact_title: "CONTACTEAZĂ-NE",
-                contact_text: "Ai vrea să ne sugerezi o idee sau să colaborezi cu noi? Scrie-ne, abia așteptăm să auzim!",
-
-                faq_title: "FAQS",
-                faq1_q: "CE NE FACE UNICI?",
-                faq1_a: "Bijuteriile H-Time sunt o operă de artă, nu doar un simplu accesoriu, ce exprimă rafinament, dedicare și calitate excepțională. Ne diferențiem prin atenția la detalii și experiența premium oferită fiecărui client.",
-                faq2_q: "CE REPREZINTĂ SIGLA NOASTRĂ?",
-                faq2_a: "Sigla noastră îmbină elemente clasice cu accente moderne. Diamantul simbolizează eternitatea și rezistența în timp, în timp ce literele H și T conturează identitatea brandului.",
-                faq3_q: "DE CE ACEST SLOGAN?",
-                faq3_a: "„Emoții sculptate în eleganță” reflectă credința noastră profundă că bijuteriile nu sunt doar obiecte materiale, ci purtătoare de amintiri și sentimente ce dăinuie generații întregi.",
-
-                footer_desc: "Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul, calitatea superioară și poveștile spuse prin intermediul bijuteriilor și ceasurilor unice.",
-                footer_nav: "NAVIGARE RAPIDĂ",
-                footer_home: "Acasă - Pagina principală",
-                footer_shop: "Magazin - Toate Colecțiile",
-                footer_about: "Povestea Noastră",
-                footer_contact: "Contact & Suport",
-                footer_info: "INFORMAȚII & POLITICI",
-                footer_terms: "Termeni și Condiții",
-                footer_privacy: "Politică de Confidențialitate",
-                footer_delivery: "Politică de Livrare",
-                footer_return: "Politică de Retur (14 zile)",
-                footer_care: "Îngrijirea Bijuteriilor",
-                footer_consumer: "PROTECȚIA CONSUMATORULUI"
-            },
-            en: {
-                title: "H-TIME | Luxury Experience",
-                nav_home: "Home",
-                nav_shop: "Shop",
-                nav_about: "About Us",
-                nav_team: "H-Time Team",
-                nav_contact: "Contact Us",
-
-                hero_subtitle: "Emotions sculpted in elegance",
-
-                feat1_title: "FREE SHIPPING",
-                feat1_text: "For all orders over 500 RON, delivered straight to your door.",
-                feat2_title: "24-MONTH WARRANTY",
-                feat2_text: "All our pieces come with an authenticity certificate and warranty.",
-                feat3_title: "EASY RETURNS",
-                feat3_text: "You have 14 calendar days available to exchange your product.",
-
-                cat_title: "WHAT WE OFFER",
-                cat1_title: "WATCHES",
-                cat1_price: "Prices starting from €100",
-                cat2_title: "RINGS",
-                cat2_price: "Prices starting from €100",
-                cat3_title: "EARRINGS",
-                cat3_price: "Prices starting from €100",
-                cat_btn: "Discover more",
-
-                sale_title: "EXCLUSIVE OFFERS",
-
-                obj_title: "THE ESSENCE OF H-TIME",
-                obj1_title: "ENERGY & EMOTION",
-                obj1_text: "Each spiritual stone we carefully choose carries a vibration and a destiny. We want our jewelry to become personal talismans, connecting the beauty of shapes with your inner energy, bringing protection, love and balance into your everyday life.",
-                obj2_title: "MYTH & REFINEMENT",
-                obj2_text: "Inspired by ancient legends and fascinating mythologies, our creations weave the mystery of the past with the pure elegance of the present. We shape metals and precious stones into true visual poetry, meant to awaken grace and the divine side in every person.",
-                obj3_title: "AN ETERNAL LEGACY",
-                obj3_text: "Beyond the ephemeral shine, our purpose is to forge memories that defy time. Each piece is created to become a treasure of the soul, meant to be worn with passion and passed down from generation to generation, keeping an immortal story alive.",
-
-                quote1: "\"Jewelry is what makes a woman feel unique\" <span>- Coco Chanel</span>",
-                quote2: "\"Style is a way to say who you are without having to speak\" <span>- Rachel Zoe</span>",
-                quote3: "\"Diamonds are a girl's best friend\" <span>- Marilyn Monroe</span>",
-                quote4: "\"Every piece of jewelry tells a story without using any words\" <span>- H-TIME</span>",
-
-                contact_title: "CONTACT US",
-                contact_text: "Would you like to suggest an idea or collaborate with us? Write to us, we can't wait to hear from you!",
-
-                faq_title: "FAQS",
-                faq1_q: "WHAT MAKES US UNIQUE?",
-                faq1_a: "H-Time jewelry is a work of art, not just a simple accessory, expressing refinement, dedication and exceptional quality. We stand out through attention to detail and the premium experience offered to every client.",
-                faq2_q: "WHAT DOES OUR LOGO REPRESENT?",
-                faq2_a: "Our logo blends classic elements with modern accents. The diamond symbolizes eternity and resistance over time, while the letters H and T shape the brand's identity.",
-                faq3_q: "WHY THIS SLOGAN?",
-                faq3_a: "\"Emotions sculpted in elegance\" reflects our deep belief that jewelry is not just material objects, but carriers of memories and feelings that last for generations.",
-
-                footer_desc: "Emotions sculpted in elegance. A luxury boutique dedicated to people who appreciate refinement, superior quality and stories told through unique jewelry and watches.",
-                footer_nav: "QUICK NAVIGATION",
-                footer_home: "Home - Main Page",
-                footer_shop: "Shop - All Collections",
-                footer_about: "Our Story",
-                footer_contact: "Contact & Support",
-                footer_info: "INFORMATION & POLICIES",
-                footer_terms: "Terms and Conditions",
-                footer_privacy: "Privacy Policy",
-                footer_delivery: "Delivery Policy",
-                footer_return: "Return Policy (14 days)",
-                footer_care: "Jewelry Care",
-                footer_consumer: "CONSUMER PROTECTION"
-            }
-        };
-
-        function applyTranslations(lang) {
-            const dict = translations[lang] || translations.ro;
-            document.querySelectorAll("[data-i18n]").forEach(el => {
-                const key = el.getAttribute("data-i18n");
-                if (dict[key]) {
-                    el.innerHTML = dict[key];
-                }
-            });
-            if (dict.title) {
-                document.title = dict.title;
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const switcher = document.getElementById('languageSwitcher');
-            const savedLang = localStorage.getItem('htime_lang') || 'ro';
-            switcher.value = savedLang;
-            applyTranslations(savedLang);
-
-            switcher.addEventListener('change', () => {
-                const lang = switcher.value;
-                localStorage.setItem('htime_lang', lang);
-                applyTranslations(lang);
-            });
-        });
-    </script>
-
     <script src="produse.js"></script>
 
     <script>
@@ -1185,7 +840,7 @@
             ];
 
             const randomImgUrl = heroImages[Math.floor(Math.random() * heroImages.length)];
-            heroSection.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)), url('${randomImgUrl}')`;
+            if (heroSection) heroSection.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)), url('${randomImgUrl}')`;
 
             // --- LOGICA PRODUSE SALE ---
             const trackContainer = document.getElementById('sale-track-container');
@@ -1208,13 +863,14 @@
 
             let carduriHTML = '';
             produseSale.forEach(p => {
+                // Am adaugat onclick pentru a redirectiona catre pagina produsului si cursor: pointer
                 carduriHTML += `
                     <div class="sale-card" onclick="window.location.href='produs.html?nume=${encodeURIComponent(p.nume)}'" style="cursor: pointer;">
                         <div class="sale-badge">SALE</div>
                         <img src="${p.imagine}" alt="${p.nume}">
                         <h3>${p.nume}</h3>
                         <div class="price-container">
-                            <span class="old-price">€${p.pretVechi}</span>
+                            <span class="old-price">€${p.pretVechi}</span> 
                             <span class="new-price">€${p.pret}</span>
                         </div>
                     </div>
@@ -1222,7 +878,7 @@
             });
 
             if (trackContainer) {
-                trackContainer.innerHTML = carduriHTML + carduriHTML;
+                trackContainer.innerHTML = carduriHTML + carduriHTML; // Dublam pentru efectul de infinit
             }
 
             // --- LOGICA FAQ ---
@@ -1231,20 +887,21 @@
                     const item = button.parentElement;
                     const answer = item.querySelector('.faq-answer');
                     const icon = item.querySelector('.faq-icon');
-
+                    
                     if (item.classList.contains('active')) {
                         item.classList.remove('active');
                         answer.style.maxHeight = null;
-                        icon.innerText = '+';
+                        if (icon) icon.innerText = '+';
                     } else {
                         document.querySelectorAll('.faq-item.active').forEach(activeItem => {
                             activeItem.classList.remove('active');
                             activeItem.querySelector('.faq-answer').style.maxHeight = null;
-                            activeItem.querySelector('.faq-icon').innerText = '+';
+                            const ai = activeItem.querySelector('.faq-icon');
+                            if (ai) ai.innerText = '+';
                         });
                         item.classList.add('active');
                         answer.style.maxHeight = answer.scrollHeight + "px";
-                        icon.innerText = '-';
+                        if (icon) icon.innerText = '-';
                     }
                 });
             });
@@ -1256,6 +913,151 @@
                 cartBtn.innerText = `Cart (${cart.length})`;
             }
         });
+    </script>
+
+    <!-- Script traduceri (aplică doar elementelor cu data-i18n) -->
+    <script>
+    /* Traduce doar elementele marcate cu data-i18n */
+    const translations = {
+      ro: {
+        title: "H-TIME | Luxury Experience",
+        nav_home: "Acasă",
+        nav_shop: "Magazin",
+        nav_about: "Despre Noi",
+        nav_team: "Echipa H-Time",
+        nav_contact: "Contactează-ne",
+        hero_subtitle: "Emoții sculptate în eleganță",
+        feat1_title: "LIVRARE GRATUITĂ",
+        feat1_text: "Pentru toate comenzile de peste 500 RON, direct la tine la uşă.",
+        feat2_title: "GARANȚIE 24 LUNI",
+        feat2_text: "Toate piesele noastre vin cu certificat de autenticitate şi garanţie.",
+        feat3_title: "RETUR SIMPLIFICAT",
+        feat3_text: "Ai la dispoziție 14 zile calendaristice pentru a schimba produsul.",
+        cat_title: "CE PRODUSE OFERIM",
+        cat1_title: "CEASURI",
+        cat1_price: "Prețuri începând de la 100 €",
+        cat2_title: "INELE",
+        cat2_price: "Prețuri începând de la 100 €",
+        cat3_title: "CERCEI",
+        cat3_price: "Prețuri începând de la 100 €",
+        cat_btn: "Descoperă mai multe",
+        sale_title: "OFERTE EXCLUSIVE",
+        obj_title: "ESENȚA H-TIME",
+        obj1_title: "ENERGIE ȘI EMOȚIE",
+        obj1_text: "Fiecare piatră spirituală pe care o alegem cu grijă poartă o vibrație și un destin. Ne dorim ca bijuteriile noastre să devină talismane personale, conectând frumusețea formelor cu energia ta interioară, pentru a aduce protecție, iubire și echilibru în viața de zi cu zi.",
+        obj2_title: "MIT ȘI RAFINAMENT",
+        obj2_text: "Inspirate din legende străvechi și mitologii fascinante, creațiile noastre împletesc misterul trecutului cu eleganța pură a prezentului.",
+        obj3_title: "O MOȘTENIRE ETERNĂ",
+        obj3_text: "Dincolo de strălucirea efemeră, scopul nostru este să făurim amintiri care sfidează timpul.",
+        quote1: "\"Bijuteriile sunt cele care fac femeia să se simtă unică\" <span>- Coco Chanel</span>",
+        quote2: "\"Stilul este o modalitate de a spune cine ești fără să vorbești\" <span>- Rachel Zoe</span>",
+        quote3: "\"Diamantele sunt cele mai bune prietene ale unei fete\" <span>- Marilyn Monroe</span>",
+        quote4: "\"Fiecare bijuterie spune o poveste fără a folosi niciun cuvânt\" <span>- H-TIME</span>",
+        contact_title: "CONTACTEAZĂ-NE",
+        contact_text: "Ai vrea să ne sugerezi o idee sau să colaborezi cu noi? Scrie-ne, abia așteptăm să auzim!",
+        faq_title: "FAQS",
+        faq1_q: "CE NE FACE UNICI?",
+        faq1_a: "Bijuteriile H-Time sunt o operă de artă, nu doar un simplu accesoriu, ce exprimă rafinament, dedicare și calitate excepțională.",
+        faq2_q: "CE REPREZINTĂ SIGLA NOASTRĂ?",
+        faq2_a: "Sigla noastră îmbină elemente clasice cu accente moderne. Diamantul simbolizează eternitatea și rezistența în timp.",
+        faq3_q: "DE CE ACEST SLOGAN?",
+        faq3_a: "„Emoții sculptate în eleganță” reflectă credința noastră profundă că bijuteriile nu sunt doar obiecte materiale.",
+        footer_desc: "Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul.",
+        footer_nav: "NAVIGARE RAPIDĂ",
+        footer_home: "Acasă - Pagina principală",
+        footer_shop: "Magazin - Toate Colecțiile",
+        footer_about: "Povestea Noastră",
+        footer_contact: "Contact & Suport",
+        footer_info: "INFORMAȚII & POLITICI",
+        footer_terms: "Termeni și Condiții",
+        footer_privacy: "Politică de Confidențialitate",
+        footer_delivery: "Politică de Livrare",
+        footer_return: "Politică de Retur (14 zile)",
+        footer_care: "Îngrijirea Bijuteriilor",
+        footer_consumer: "PROTECȚIA CONSUMATORULUI"
+      },
+      en: {
+        title: "H-TIME | Luxury Experience",
+        nav_home: "Home",
+        nav_shop: "Shop",
+        nav_about: "About Us",
+        nav_team: "H-Time Team",
+        nav_contact: "Contact Us",
+        hero_subtitle: "Emotions sculpted in elegance",
+        feat1_title: "FREE SHIPPING",
+        feat1_text: "For all orders over 500 RON, delivered straight to your door.",
+        feat2_title: "24-MONTH WARRANTY",
+        feat2_text: "All our pieces come with an authenticity certificate and warranty.",
+        feat3_title: "EASY RETURNS",
+        feat3_text: "You have 14 calendar days available to exchange your product.",
+        cat_title: "WHAT WE OFFER",
+        cat1_title: "WATCHES",
+        cat1_price: "Prices starting from €100",
+        cat2_title: "RINGS",
+        cat2_price: "Prices starting from €100",
+        cat3_title: "EARRINGS",
+        cat3_price: "Prices starting from €100",
+        cat_btn: "Discover more",
+        sale_title: "EXCLUSIVE OFFERS",
+        obj_title: "THE ESSENCE OF H-TIME",
+        obj1_title: "ENERGY & EMOTION",
+        obj1_text: "Each spiritual stone we carefully choose carries a vibration and a destiny.",
+        obj2_title: "MYTH & REFINEMENT",
+        obj2_text: "Inspired by ancient legends and fascinating mythologies, our creations weave the mystery of the past with the pure elegance of the present.",
+        obj3_title: "AN ETERNAL LEGACY",
+        obj3_text: "Beyond the ephemeral shine, our purpose is to forge memories that defy time.",
+        quote1: "\"Jewelry is what makes a woman feel unique\" <span>- Coco Chanel</span>",
+        quote2: "\"Style is a way to say who you are without having to speak\" <span>- Rachel Zoe</span>",
+        quote3: "\"Diamonds are a girl's best friend\" <span>- Marilyn Monroe</span>",
+        quote4: "\"Every piece of jewelry tells a story without using any words\" <span>- H-TIME</span>",
+        contact_title: "CONTACT US",
+        contact_text: "Would you like to suggest an idea or collaborate with us? Write to us, we can't wait to hear from you!",
+        faq_title: "FAQS",
+        faq1_q: "WHAT MAKES US UNIQUE?",
+        faq1_a: "H-Time jewelry is a work of art, not just a simple accessory, expressing refinement and exceptional quality.",
+        faq2_q: "WHAT DOES OUR LOGO REPRESENT?",
+        faq2_a: "Our logo blends classic elements with modern accents. The diamond symbolizes eternity.",
+        faq3_q: "WHY THIS SLOGAN?",
+        faq3_a: "\"Emotions sculpted in elegance\" reflects our belief that jewelry carries memories and feelings.",
+        footer_desc: "Emotions sculpted in elegance. A luxury boutique dedicated to people who appreciate refinement.",
+        footer_nav: "QUICK NAVIGATION",
+        footer_home: "Home - Main Page",
+        footer_shop: "Shop - All Collections",
+        footer_about: "Our Story",
+        footer_contact: "Contact & Support",
+        footer_info: "INFORMATION & POLICIES",
+        footer_terms: "Terms and Conditions",
+        footer_privacy: "Privacy Policy",
+        footer_delivery: "Delivery Policy",
+        footer_return: "Return Policy (14 days)",
+        footer_care: "Jewelry Care",
+        footer_consumer: "CONSUMER PROTECTION"
+      }
+    };
+
+    function applyTranslations(lang) {
+      const dict = translations[lang] || translations.ro;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (!key) return;
+        if (dict[key]) el.innerHTML = dict[key];
+      });
+      if (dict.title) document.title = dict.title;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const switcher = document.getElementById('languageSwitcher');
+      const saved = localStorage.getItem('htime_lang') || 'ro';
+      applyTranslations(saved);
+      if (switcher) {
+        switcher.value = saved;
+        switcher.addEventListener('change', () => {
+          const lang = switcher.value;
+          localStorage.setItem('htime_lang', lang);
+          applyTranslations(lang);
+        });
+      }
+    });
     </script>
 </body>
 </html>
