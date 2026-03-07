@@ -1,154 +1,306 @@
 <!DOCTYPE html>
 <html lang="ro">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Echipa | H-TIME</title>
-  <link rel="icon" href="logo.png" type="image/png">
+  <link rel="icon" type="image/png" href="logo.png">
 
-  <!-- Fonturi (aceleași ca pe pagina principală) -->
+  <!-- Fonturi identice cu pagina principală -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Montserrat:wght@300;400;500;600;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
 
-  <!-- CSS consolidat (inclus direct pentru simplitate) -->
+  <!-- CSS GLOBAL + CSS SPECIFIC PAGINII -->
   <style>
     :root{
-  --peach:#fcbf88;
-  --pink:#ffb6c1;
-  --dark:#111111;
-  --light-bg:#f8f5f2;
-  --nav-bg: rgba(0,0,0,0.6);
-  --nav-solid: #0b0b0b;
-  --nav-height: 75px;
-}
+      --peach:#fcbf88;
+      --pink:#ffb6c1;
+      --dark:#111111;
+      --light-bg:#f8f5f2;
+      --nav-solid:#0b0b0b;
+      --nav-height:75px;
+    }
 
-/* HEADER: fix, aliniere și consistență cu pagina principală */
-.header{
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-  height: var(--nav-height);
-  padding: 0 40px;                 /* padding orizontal constant */
-  display: flex;
-  align-items: center;             /* aliniere verticală perfectă */
-  justify-content: space-between;
-  background-color: var(--nav-solid); /* fundal solid pentru pagina internă */
-  border-bottom: 1px solid rgba(255,255,255,0.04);
-  box-sizing: border-box;
-}
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html,body{height:100%;}
 
-/* Logo: păstrează înălțimea exactă */
-.logo img{
-  height: calc(var(--nav-height) - 18px); /* mică margine internă pentru echilibru */
-  display: block;
-}
+    body{
+      font-family:'Montserrat',sans-serif;
+      background:var(--light-bg);
+      color:var(--dark);
+      padding-top:calc(var(--nav-height) + 20px);
+      -webkit-font-smoothing:antialiased;
+    }
 
-/* Nav links: spațiere și linie de bază identică cu pagina principală */
-.nav-links{
-  display: flex;
-  gap: 28px;
-  align-items: center;
-  height: 100%;
-}
-.nav-links a{
-  color: #fff;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 0.92rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  line-height: 1;            /* evită salturi verticale */
-  display: inline-flex;
-  align-items: center;
-  height: 100%;
-  padding: 0 6px;
-}
-.nav-links a:hover{ color: var(--peach); }
+    /* HEADER — FIX, SOLID, PERFECT ALINIAT */
+    .header{
+      position:fixed;
+      top:0; left:0;
+      width:100%;
+      height:var(--nav-height);
+      padding:0 40px;
+      background:var(--nav-solid);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      border-bottom:1px solid rgba(255,255,255,0.08);
+      z-index:1000;
+    }
 
-/* Nav icons (dreapta): aliniere, gap și stiluri consistente */
-.nav-icons{
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  height: 100%;
-}
+    .logo img{
+      height:calc(var(--nav-height) - 18px);
+      display:block;
+    }
 
-/* Language selector: fundal transparent / subtil ca pe pagina principală */
-.lang-selector{
-  background: transparent;            /* nu mai e negru */
-  color: #fff;
-  padding: 6px 10px;
-  border-radius: 6px;
-  border: 1px solid rgba(255,255,255,0.06); /* contur fin pentru vizibilitate */
-  display: inline-flex;
-  align-items: center;
-  font-size: 0.85rem;
-}
-.lang-selector select{
-  background: transparent;
-  color: inherit;
-  border: none;
-  outline: none;
-  font-weight: 600;
-  cursor: pointer;
-}
+    .nav-links{
+      display:flex;
+      gap:28px;
+      align-items:center;
+      height:100%;
+    }
+    .nav-links a{
+      color:#fff;
+      text-decoration:none;
+      font-weight:600;
+      font-size:.92rem;
+      text-transform:uppercase;
+      letter-spacing:1px;
+      display:flex;
+      align-items:center;
+      height:100%;
+      padding:0 6px;
+    }
+    .nav-links a:hover{color:var(--peach);}
 
-/* Login link: stil uniform cu celelalte linkuri (fără schimbare de înălțime) */
-.login-link{
-  color: #fff;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 0.92rem;
-  padding: 6px 8px;
-  display: inline-flex;
-  align-items: center;
-}
-.login-link:hover{ color: var(--peach); }
+    .nav-icons{
+      display:flex;
+      align-items:center;
+      gap:18px;
+      height:100%;
+    }
 
-/* Cart button: păstrează forma ovală, aliniere verticală */
-.cart-btn{
-  border: 1px solid #fff;
-  padding: 8px 18px;
-  border-radius: 30px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  color: #fff;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background .2s, color .2s, border-color .2s;
-  height: calc(var(--nav-height) - 26px); /* asigură aliniere verticală */
-}
-.cart-btn:hover{
-  background: #fff;
-  color: var(--nav-solid);
-  border-color: #fff;
-}
+    .lang-selector{
+      background:transparent;
+      border:1px solid rgba(255,255,255,0.15);
+      padding:6px 10px;
+      border-radius:6px;
+      color:#fff;
+    }
+    .lang-selector select{
+      background:transparent;
+      border:none;
+      color:#fff;
+      font-weight:600;
+      cursor:pointer;
+    }
 
-/* Mic reglaj pentru mobile: păstrează consistența */
-@media (max-width: 768px){
-  .header{ padding: 8px 18px; height: auto; flex-wrap: wrap; gap: 8px; }
-  .logo img{ height: 60px; }
-  .nav-links{ width: 100%; justify-content: center; gap: 12px; }
-  .nav-icons{ gap: 12px; }
-  .lang-selector{ border: 1px solid rgba(255,255,255,0.08); }
-  body{ padding-top: calc(var(--nav-height) + 18px); }
-}
+    .login-link{
+      color:#fff;
+      text-decoration:none;
+      font-weight:600;
+      font-size:.92rem;
+      padding:6px 8px;
+      display:flex;
+      align-items:center;
+    }
+    .login-link:hover{color:var(--peach);}
+
+    .cart-btn{
+      border:1px solid #fff;
+      padding:8px 18px;
+      border-radius:30px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:transparent;
+      color:#fff;
+      font-weight:600;
+      cursor:pointer;
+      transition:.25s;
+      height:calc(var(--nav-height) - 26px);
+    }
+    .cart-btn:hover{
+      background:#fff;
+      color:var(--nav-solid);
+      border-color:#fff;
+    }
+
+    /* HEADER RESPONSIVE */
+    @media (max-width:768px){
+      .header{padding:8px 18px;height:auto;flex-wrap:wrap;gap:8px;}
+      .logo img{height:60px;}
+      .nav-links{gap:12px;flex-wrap:wrap;justify-content:center;}
+      .nav-icons{gap:12px;}
+      body{padding-top:calc(var(--nav-height) + 18px);}
+    }
+
+    /* PAGINA ECHIPA */
+    .page-header{
+      text-align:center;
+      padding:40px 20px 10px;
+    }
+    .page-header h1{
+      font-family:'Syncopate',sans-serif;
+      font-size:2.4rem;
+      text-transform:uppercase;
+      color:#2f2b29;
+      letter-spacing:1px;
+    }
+    .page-header p{
+      margin-top:10px;
+      color:#555;
+      max-width:720px;
+      margin-inline:auto;
+      font-size:1rem;
+    }
+
+    .team-grid{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:36px;
+      max-width:1200px;
+      margin:36px auto 80px;
+      padding:0 20px;
+    }
+
+    .team-card{
+      background:#fff;
+      padding:34px 22px;
+      border-radius:12px;
+      text-align:center;
+      box-shadow:0 8px 20px rgba(0,0,0,0.06);
+      transition:.28s;
+      border-bottom:4px solid var(--peach);
+      width:320px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+    }
+    .team-card:hover{
+      transform:translateY(-8px);
+      box-shadow:0 18px 40px rgba(0,0,0,0.10);
+    }
+
+    .team-img{
+      width:170px;
+      height:170px;
+      border-radius:50%;
+      object-fit:cover;
+      margin-bottom:16px;
+      border:4px solid #eaddd7;
+    }
+
+    .team-name{
+      font-family:'Syncopate',sans-serif;
+      font-size:1.05rem;
+      text-transform:uppercase;
+      margin-bottom:6px;
+      color:#222;
+    }
+    .team-role{
+      color:var(--peach);
+      font-weight:700;
+      font-size:.88rem;
+      margin-bottom:12px;
+      text-transform:uppercase;
+      letter-spacing:.6px;
+    }
+    .team-desc{
+      font-size:.95rem;
+      color:#555;
+      line-height:1.6;
+    }
+
+    /* FOOTER IDENTIC CU PAGINA PRINCIPALĂ */
+    footer{
+      background:#0b0b0b;
+      padding:60px 40px;
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:30px;
+      color:#fff;
+      border-top:1px solid #222;
+      margin-top:40px;
+    }
+    .footer-col h2{
+      font-family:'DM Serif Display',serif;
+      color:var(--peach);
+      font-size:1.9rem;
+      margin-bottom:18px;
+    }
+    .footer-col h3{
+      font-family:'Montserrat',sans-serif;
+      font-size:.95rem;
+      font-weight:700;
+      margin-bottom:20px;
+      text-transform:uppercase;
+      letter-spacing:1px;
+    }
+    .footer-desc{
+      font-size:.9rem;
+      color:#999;
+      line-height:1.8;
+      margin-bottom:20px;
+    }
+    .social-links{
+      display:flex;
+      gap:12px;
+    }
+    .social-icon-circle{
+      width:40px;
+      height:40px;
+      background:#222;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#fff;
+      transition:.25s;
+    }
+    .social-icon-circle:hover{
+      background:linear-gradient(to right,var(--pink),var(--peach));
+      color:#000;
+      transform:translateY(-3px);
+    }
+    .footer-col ul{
+      list-style:none;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .footer-col ul a{
+      color:#999;
+      text-decoration:none;
+      font-size:.9rem;
+      transition:.25s;
+    }
+    .footer-col ul a:hover{
+      color:var(--peach);
+      transform:translateX(4px);
+    }
+    .footer-bottom{
+      grid-column:1/-1;
+      text-align:center;
+      padding-top:30px;
+      border-top:1px solid #222;
+      color:#777;
+      font-size:.85rem;
+      margin-top:10px;
+    }
   </style>
 </head>
+
 <body>
 
-  <!-- HEADER (fundal solid, fara transparenta) -->
-  <header class="header" role="banner" aria-label="Main header">
-    <a href="index.html" class="logo" aria-label="H-TIME">
+  <!-- HEADER -->
+  <header class="header">
+    <a href="index.html" class="logo">
       <img src="logo.png" alt="H-TIME Logo">
     </a>
 
-    <nav class="nav-links" aria-label="Main navigation">
+    <nav class="nav-links">
       <a href="index.html">Acasă</a>
       <a href="magazin.html">Magazin</a>
       <a href="despre-noi.html">Despre Noi</a>
@@ -156,61 +308,61 @@
       <a href="contact.html">Contactează-ne</a>
     </nav>
 
-    <div class="nav-icons" role="navigation" aria-label="User actions">
-      <div class="lang-selector" aria-hidden="false">
-        <select name="lang" id="lang-select" aria-label="Selectează limba">
-          <option value="ro">RO</option>
-          <option value="en">EN</option>
+    <div class="nav-icons">
+      <div class="lang-selector">
+        <select>
+          <option>RO</option>
+          <option>EN</option>
         </select>
       </div>
 
       <a href="#" class="login-link">Login</a>
-      <a href="checkout.html" id="cart-nav-btn" class="cart-btn" aria-label="Coș de cumpărături">Cart (0)</a>
+      <a href="checkout.html" id="cart-nav-btn" class="cart-btn">Cart (0)</a>
     </div>
   </header>
 
-  <!-- MAIN CONTENT -->
+  <!-- CONTENT -->
   <main>
-    <section class="page-header" aria-labelledby="team-title">
-      <h1 id="team-title">Oamenii din spatele timpului</h1>
+    <section class="page-header">
+      <h1>Oamenii din spatele timpului</h1>
       <p>Faceți cunoștință cu mințile creative și pasionate care au dat viață brandului H-TIME.</p>
     </section>
 
-    <section class="team-grid" aria-label="Echipa H-TIME">
-      <article class="team-card" role="article" aria-label="Mija Valeria - Director General">
-        <img src="valeria.png" alt="Mija Valeria" class="team-img">
+    <section class="team-grid">
+      <div class="team-card">
+        <img src="valeria.png" class="team-img">
         <h2 class="team-name">Mija Valeria</h2>
         <div class="team-role">Director General / CEO</div>
         <p class="team-desc">Viziunea din spatele H-TIME. Coordonează întreaga activitate a firmei și se asigură că estetica noastră premium prinde viață.</p>
-      </article>
+      </div>
 
-      <article class="team-card" role="article" aria-label="Bujor Alexandru Emanuel - Financiar">
-        <img src="alexandru.png" alt="Bujor Alexandru Emanuel" class="team-img">
+      <div class="team-card">
+        <img src="alexandru.png" class="team-img">
         <h2 class="team-name">Bujor Alexandru Emanuel</h2>
         <div class="team-role">Departament Financiar și HR</div>
         <p class="team-desc">Inima echipei noastre și omul cifrelor. Gestionează bugetele firmei și se asigură de menținerea unui mediu de lucru excelent.</p>
-      </article>
+      </div>
 
-      <article class="team-card" role="article" aria-label="Ifrim Andreea Claudia - Achiziții">
-        <img src="andreea.png" alt="Ifrim Andreea Claudia" class="team-img">
+      <div class="team-card">
+        <img src="andreea.png" class="team-img">
         <h2 class="team-name">Ifrim Andreea Claudia</h2>
         <div class="team-role">Departament Achiziții și Logistică</div>
         <p class="team-desc">Responsabilă cu detaliile care fac diferența. Gestionează resursele pentru ca stocurile și calitatea să fie mereu la standarde înalte.</p>
-      </article>
+      </div>
 
-      <article class="team-card" role="article" aria-label="Agavriloaie Iustina - Vânzări">
-        <img src="iustina.png" alt="Agavriloaie Iustina" class="team-img">
+      <div class="team-card">
+        <img src="iustina.png" class="team-img">
         <h2 class="team-name">Agavriloaie Iustina</h2>
         <div class="team-role">Departament Vânzări și Relații cu Clienții</div>
-        <p class="team-desc">Ghidul tău în lumea bijuteriilor H-TIME. Se asigură că fiecare client are parte de o experiență de cumpărare impecabilă și comunicare eficientă.</p>
-      </article>
+        <p class="team-desc">Ghidul tău în lumea bijuteriilor H-TIME. Se asigură că fiecare client are parte de o experiență impecabilă.</p>
+      </div>
 
-      <article class="team-card" role="article" aria-label="Farțade Șerban Denisa Cristina - Marketing">
-        <img src="denisa.png" alt="Farțade Șerban Denisa Cristina" class="team-img">
+      <div class="team-card">
+        <img src="denisa.png" class="team-img">
         <h2 class="team-name">Farțade Șerban Denisa Cristina</h2>
         <div class="team-role">Departament Marketing și PR</div>
-        <p class="team-desc">Cea care dă voce brandului. Construiește campaniile, identitatea vizuală și imaginea publică a H-TIME pentru a captiva publicul.</p>
-      </article>
+        <p class="team-desc">Cea care dă voce brandului. Construiește campaniile și imaginea publică a H-TIME.</p>
+      </div>
     </section>
   </main>
 
@@ -218,67 +370,54 @@
   <footer>
     <div class="footer-col">
       <h2>H-TIME</h2>
-      <p class="footer-desc">Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul, calitatea superioară și poveștile spuse prin intermediul bijuteriilor și ceasurilor unice.</p>
+      <p class="footer-desc">Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul și calitatea.</p>
       <div class="social-links">
-        <a href="#" class="social-icon-circle" title="Facebook" aria-label="Facebook">F</a>
-        <a href="#" class="social-icon-circle" title="Instagram" aria-label="Instagram">I</a>
-        <a href="#" class="social-icon-circle" title="TikTok" aria-label="TikTok">T</a>
+        <a href="#" class="social-icon-circle">F</a>
+        <a href="#" class="social-icon-circle">I</a>
+        <a href="#" class="social-icon-circle">T</a>
       </div>
     </div>
 
     <div class="footer-col">
       <h3>NAVIGARE RAPIDĂ</h3>
       <ul>
-        <li><a href="index.html">Acasă - Pagina principală</a></li>
-        <li><a href="magazin.html">Magazin - Toate Colecțiile</a></li>
-        <li><a href="despre-noi.html">Povestea Noastră</a></li>
-        <li><a href="contact.html">Contact & Suport</a></li>
+        <li><a href="index.html">Acasă</a></li>
+        <li><a href="magazin.html">Magazin</a></li>
+        <li><a href="despre-noi.html">Despre Noi</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
     </div>
 
     <div class="footer-col">
-      <h3>INFORMAȚII & POLITICI</h3>
+      <h3>INFORMAȚII</h3>
       <ul>
         <li><a href="#">Termeni și Condiții</a></li>
         <li><a href="#">Politică de Confidențialitate</a></li>
         <li><a href="#">Politică de Livrare</a></li>
-        <li><a href="#">Politică de Retur (14 zile)</a></li>
-        <li><a href="#">Îngrijirea Bijuteriilor</a></li>
+        <li><a href="#">Politică de Retur</a></li>
       </ul>
     </div>
 
     <div class="footer-col">
       <h3>PROTECȚIA CONSUMATORULUI</h3>
       <div>
-        <a href="https://anpc.ro/ce-este-sal/" target="_blank" rel="noopener noreferrer">
-          <img src="https://ro.pandora.net/mobify/bundle/1108/static/img/SAL-PICTOGRAMA.png?app=pdp" alt="ANPC SAL" class="anpc-img">
-        </a>
-        <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener noreferrer">
-          <img src="https://ro.pandora.net/mobify/bundle/1108/static/img/pictogramaSOL.png?app=pdp" alt="ANPC SOL" class="anpc-img">
-        </a>
+        <img src="https://ro.pandora.net/mobify/bundle/1108/static/img/SAL-PICTOGRAMA.png?app=pdp" class="anpc-img">
+        <img src="https://ro.pandora.net/mobify/bundle/1108/static/img/pictogramaSOL.png?app=pdp" class="anpc-img">
       </div>
     </div>
 
-    <div class="footer-bottom">© <span id="year"></span> H-TIME Luxury Experience. Toate drepturile sunt rezervate.</div>
+    <div class="footer-bottom">© <span id="year"></span> H-TIME Luxury Experience. Toate drepturile rezervate.</div>
   </footer>
 
-  <!-- Script utilitar -->
+  <!-- SCRIPT -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // Set current year
-      const yearEl = document.getElementById('year');
-      if (yearEl) yearEl.textContent = new Date().getFullYear();
+      document.getElementById('year').textContent = new Date().getFullYear();
 
-      // Update cart count from localStorage
-      try {
-        const cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
-        const cartBtn = document.getElementById('cart-nav-btn');
-        if (cartBtn) cartBtn.innerText = `Cart (${cart.length})`;
-      } catch (e) {
-        const cartBtn = document.getElementById('cart-nav-btn');
-        if (cartBtn) cartBtn.innerText = 'Cart (0)';
-      }
+      const cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
+      document.getElementById('cart-nav-btn').textContent = `Cart (${cart.length})`;
     });
   </script>
+
 </body>
 </html>
