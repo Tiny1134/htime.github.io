@@ -2,7 +2,7 @@
 <html lang="ro">
 <head>
     <meta charset="UTF-8">
-    <title>H-TIME | Luxury Experience</title>
+    <title data-i18n="title">H-TIME | Luxury Experience</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="logo.png" type="image/png">
 
@@ -111,6 +111,16 @@
             background: linear-gradient(to right, var(--pink), var(--peach));
             color: #000;
             border-color: transparent;
+        }
+
+        #languageSwitcher {
+            padding: 6px 10px;
+            border-radius: 6px;
+            border: 1px solid #fff;
+            background: #000;
+            color: #fff;
+            font-size: 0.8rem;
+            text-transform: uppercase;
         }
 
         /* HERO */
@@ -374,6 +384,8 @@
             margin: 80px auto;
             padding: 0 20px;
             text-align: center;
+            background: #f7f4f2;
+            color: #000;
         }
 
         .objectives-header {
@@ -586,6 +598,7 @@
             flex-wrap: wrap;
             position: relative;
             z-index: 10;
+            color: #000;
         }
 
         .feature-item {
@@ -767,20 +780,24 @@
             <img src="logo.png" alt="H-TIME Logo">
         </a>
         <div class="nav-links">
-            <a href="index.html">Acasă</a>
-            <a href="magazin.html">Magazin</a>
-            <a href="despre-noi.html">Despre Noi</a>
-            <a href="echipa.html">Echipa H-Time</a>
-            <a href="contact.html">Contactează-ne</a>
+            <a href="index.html" data-i18n="nav_home">Acasă</a>
+            <a href="magazin.html" data-i18n="nav_shop">Magazin</a>
+            <a href="despre-noi.html" data-i18n="nav_about">Despre Noi</a>
+            <a href="echipa.html" data-i18n="nav_team">Echipa H-Time</a>
+            <a href="contact.html" data-i18n="nav_contact">Contactează-ne</a>
         </div>
         <div class="nav-icons">
+            <select id="languageSwitcher">
+                <option value="ro">RO</option>
+                <option value="en">EN</option>
+            </select>
             <a href="checkout.html" id="cart-nav-btn" class="cart-btn">Cart (0)</a>
         </div>
     </nav>
 
-    <header class="hero" id="hero-section" style="background-image: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)), url('https://images.squarespace-cdn.com/content/v1/67a62d98ae27d6276a9f2db9/7e45fd3e-142e-4ac7-8a13-a699d78b6d75/m.jpg');">
+    <header class="hero" id="hero-section">
         <h1>H-TIME</h1>
-        <h4><span class="text-highlight">”Emoții sculptate în eleganță”</span></h4>
+        <h4><span class="text-highlight" data-i18n="hero_subtitle">Emoții sculptate în eleganță</span></h4>
 
         <div class="hero-divider-bottom">
             <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
@@ -799,8 +816,8 @@
                     <circle cx="18.5" cy="18.5" r="2.5"></circle>
                 </svg>
             </span>
-            <h3>LIVRARE GRATUITĂ</h3>
-            <p>Pentru toate comenzile de peste 500 RON, direct la tine la uşă.</p>
+            <h3 data-i18n="feat1_title">LIVRARE GRATUITĂ</h3>
+            <p data-i18n="feat1_text">Pentru toate comenzile de peste 500 RON, direct la tine la uşă.</p>
         </div>
         <div class="feature-item">
             <span class="feature-icon">
@@ -809,8 +826,8 @@
                     <path d="M9 12l2 2 4-4"></path>
                 </svg>
             </span>
-            <h3>GARANȚIE 24 LUNI</h3>
-            <p>Toate piesele noastre vin cu certificat de autenticitate şi garanţie.</p>
+            <h3 data-i18n="feat2_title">GARANȚIE 24 LUNI</h3>
+            <p data-i18n="feat2_text">Toate piesele noastre vin cu certificat de autenticitate şi garanţie.</p>
         </div>
         <div class="feature-item">
             <span class="feature-icon">
@@ -819,35 +836,35 @@
                     <path d="M3 3v5h5"></path>
                 </svg>
             </span>
-            <h3>RETUR SIMPLIFICAT</h3>
-            <p>Ai la dispoziție 14 zile calendaristice pentru a schimba produsul.</p>
+            <h3 data-i18n="feat3_title">RETUR SIMPLIFICAT</h3>
+            <p data-i18n="feat3_text">Ai la dispoziție 14 zile calendaristice pentru a schimba produsul.</p>
         </div>
     </section>
 
     <section class="categories-section">
-        <h2 class="gradient-underline">CE PRODUSE OFERIM</h2>
+        <h2 class="gradient-underline" data-i18n="cat_title">CE PRODUSE OFERIM</h2>
         <div class="circles-container">
             <div class="circle-item" onclick="window.location.href='magazin.html'">
                 <img src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?q=80&w=400" alt="Ceasuri" class="circle-img">
-                <h3>CEASURI</h3>
-                <p>Prețuri începând de la 100 €</p>
+                <h3 data-i18n="cat1_title">CEASURI</h3>
+                <p data-i18n="cat1_price">Prețuri începând de la 100 €</p>
             </div>
             <div class="circle-item" onclick="window.location.href='magazin.html'">
                 <img src="inel1.jpg" alt="Inele" class="circle-img">
-                <h3>INELE</h3>
-                <p>Prețuri începând de la 100 €</p>
+                <h3 data-i18n="cat2_title">INELE</h3>
+                <p data-i18n="cat2_price">Prețuri începând de la 100 €</p>
             </div>
             <div class="circle-item" onclick="window.location.href='magazin.html'">
                 <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=400" alt="Cercei" class="circle-img">
-                <h3>CERCEI</h3>
-                <p>Prețuri începând de la 100 €</p>
+                <h3 data-i18n="cat3_title">CERCEI</h3>
+                <p data-i18n="cat3_price">Prețuri începând de la 100 €</p>
             </div>
         </div>
-        <button class="btn-descopera" onclick="window.location.href='magazin.html'">Descoperă mai multe</button>
+        <button class="btn-descopera" onclick="window.location.href='magazin.html'" data-i18n="cat_btn">Descoperă mai multe</button>
     </section>
 
     <section class="sale-marquee-section">
-        <h2>OFERTE EXCLUSIVE</h2>
+        <h2 data-i18n="sale_title">OFERTE EXCLUSIVE</h2>
         <div class="sale-track" id="sale-track-container">
             <!-- Produsele se vor genera automat aici prin Javascript -->
         </div>
@@ -855,43 +872,43 @@
 
     <section class="objectives-section">
         <div class="objectives-header">
-            <h2 class="gradient-underline">ESENȚA H-TIME</h2>
+            <h2 class="gradient-underline" data-i18n="obj_title">ESENȚA H-TIME</h2>
         </div>
         <div class="objectives-grid">
             <div class="obj-col">
-                <h3>ENERGIE ȘI EMOȚIE</h3>
-                <p>Fiecare piatră spirituală pe care o alegem cu grijă poartă o vibrație și un destin. Ne dorim ca bijuteriile noastre să devină talismane personale, conectând frumusețea formelor cu energia ta interioară, pentru a aduce protecție, iubire și echilibru în viața de zi cu zi.</p>
+                <h3 data-i18n="obj1_title">ENERGIE ȘI EMOȚIE</h3>
+                <p data-i18n="obj1_text">Fiecare piatră spirituală pe care o alegem cu grijă poartă o vibrație și un destin. Ne dorim ca bijuteriile noastre să devină talismane personale, conectând frumusețea formelor cu energia ta interioară, pentru a aduce protecție, iubire și echilibru în viața de zi cu zi.</p>
             </div>
             <div class="obj-col">
-                <h3>MIT ȘI RAFINAMENT</h3>
-                <p>Inspirate din legende străvechi și mitologii fascinante, creațiile noastre împletesc misterul trecutului cu eleganța pură a prezentului. Modelăm metalele și pietrele prețioase în adevărate poezii vizuale, menite să trezească la viață grația și latura divină din fiecare persoană.</p>
+                <h3 data-i18n="obj2_title">MIT ȘI RAFINAMENT</h3>
+                <p data-i18n="obj2_text">Inspirate din legende străvechi și mitologii fascinante, creațiile noastre împletesc misterul trecutului cu eleganța pură a prezentului. Modelăm metalele și pietrele prețioase în adevărate poezii vizuale, menite să trezească la viață grația și latura divină din fiecare persoană.</p>
             </div>
             <div class="obj-col">
-                <h3>O MOȘTENIRE ETERNĂ</h3>
-                <p>Dincolo de strălucirea efemeră, scopul nostru este să făurim amintiri care sfidează timpul. Fiecare piesă este creată pentru a deveni o comoară de suflet, menită să fie purtată cu pasiune și transmisă din generație în generație, păstrând mereu vie o poveste nemuritoare.</p>
+                <h3 data-i18n="obj3_title">O MOȘTENIRE ETERNĂ</h3>
+                <p data-i18n="obj3_text">Dincolo de strălucirea efemeră, scopul nostru este să făurim amintiri care sfidează timpul. Fiecare piesă este creată pentru a deveni o comoară de suflet, menită să fie purtată cu pasiune și transmisă din generație în generație, păstrând mereu vie o poveste nemuritoare.</p>
             </div>
         </div>
     </section>
 
     <section class="quotes-section">
         <div class="quote-track scroll-right-fast">
-            <div class="quote-item">"Bijuteriile sunt cele care fac femeia să se simtă unică" <span>- Coco Chanel</span></div>
-            <div class="quote-item">"Stilul este o modalitate de a spune cine ești fără să vorbești" <span>- Rachel Zoe</span></div>
+            <div class="quote-item" data-i18n="quote1">"Bijuteriile sunt cele care fac femeia să se simtă unică" <span>- Coco Chanel</span></div>
+            <div class="quote-item" data-i18n="quote2">"Stilul este o modalitate de a spune cine ești fără să vorbești" <span>- Rachel Zoe</span></div>
             <div class="quote-item">"Bijuteriile sunt cele care fac femeia să se simtă unică" <span>- Coco Chanel</span></div>
             <div class="quote-item">"Stilul este o modalitate de a spune cine ești fără să vorbești" <span>- Rachel Zoe</span></div>
         </div>
 
         <div class="quote-track scroll-left-fast">
-            <div class="quote-item">"Diamantele sunt cele mai bune prietene ale unei fete" <span>- Marilyn Monroe</span></div>
-            <div class="quote-item">"Fiecare bijuterie spune o poveste fără a folosi niciun cuvânt" <span>- H-TIME</span></div>
+            <div class="quote-item" data-i18n="quote3">"Diamantele sunt cele mai bune prietene ale unei fete" <span>- Marilyn Monroe</span></div>
+            <div class="quote-item" data-i18n="quote4">"Fiecare bijuterie spune o poveste fără a folosi niciun cuvânt" <span>- H-TIME</span></div>
             <div class="quote-item">"Diamantele sunt cele mai bune prietene ale unei fete" <span>- Marilyn Monroe</span></div>
             <div class="quote-item">"Fiecare bijuterie spune o poveste fără a folosi niciun cuvânt" <span>- H-TIME</span></div>
         </div>
     </section>
 
     <section class="contact-teaser">
-        <h2>CONTACTEAZĂ-NE</h2>
-        <p>Ai vrea să ne sugerezi o idee sau să colaborezi cu noi? Scrie-ne, abia așteptăm să auzim!</p>
+        <h2 data-i18n="contact_title">CONTACTEAZĂ-NE</h2>
+        <p data-i18n="contact_text">Ai vrea să ne sugerezi o idee sau să colaborezi cu noi? Scrie-ne, abia așteptăm să auzim!</p>
     </section>
 
     <svg class="zigzag-separator" viewBox="0 0 100 10" preserveAspectRatio="none">
@@ -901,27 +918,27 @@
     <section class="faq-section">
         <div class="faq-container">
             <div style="text-align: center; margin-bottom: 50px;">
-                <h2 class="gradient-underline" style="margin-bottom: 0;">FAQS</h2>
+                <h2 class="gradient-underline" style="margin-bottom: 0;" data-i18n="faq_title">FAQS</h2>
             </div>
 
             <div class="faq-item">
-                <button class="faq-question">CE NE FACE UNICI? <span class="faq-icon">+</span></button>
+                <button class="faq-question"><span data-i18n="faq1_q">CE NE FACE UNICI?</span> <span class="faq-icon">+</span></button>
                 <div class="faq-answer">
-                    <div class="faq-answer-content">Bijuteriile H-Time sunt o operă de artă, nu doar un simplu accesoriu, ce exprimă rafinament, dedicare și calitate excepțională. Ne diferențiem prin atenția la detalii și experiența premium oferită fiecărui client.</div>
+                    <div class="faq-answer-content" data-i18n="faq1_a">Bijuteriile H-Time sunt o operă de artă, nu doar un simplu accesoriu, ce exprimă rafinament, dedicare și calitate excepțională. Ne diferențiem prin atenția la detalii și experiența premium oferită fiecărui client.</div>
                 </div>
             </div>
 
             <div class="faq-item">
-                <button class="faq-question">CE REPREZINTĂ SIGLA NOASTRĂ? <span class="faq-icon">+</span></button>
+                <button class="faq-question"><span data-i18n="faq2_q">CE REPREZINTĂ SIGLA NOASTRĂ?</span> <span class="faq-icon">+</span></button>
                 <div class="faq-answer">
-                    <div class="faq-answer-content">Sigla noastră îmbină elemente clasice cu accente moderne. Diamantul simbolizează eternitatea și rezistența în timp, în timp ce literele H și T conturează identitatea brandului.</div>
+                    <div class="faq-answer-content" data-i18n="faq2_a">Sigla noastră îmbină elemente clasice cu accente moderne. Diamantul simbolizează eternitatea și rezistența în timp, în timp ce literele H și T conturează identitatea brandului.</div>
                 </div>
             </div>
 
             <div class="faq-item">
-                <button class="faq-question">DE CE ACEST SLOGAN? <span class="faq-icon">+</span></button>
+                <button class="faq-question"><span data-i18n="faq3_q">DE CE ACEST SLOGAN?</span> <span class="faq-icon">+</span></button>
                 <div class="faq-answer">
-                    <div class="faq-answer-content">„Emoții sculptate în eleganță” reflectă credința noastră profundă că bijuteriile nu sunt doar obiecte materiale, ci purtătoare de amintiri și sentimente ce dăinuie generații întregi.</div>
+                    <div class="faq-answer-content" data-i18n="faq3_a">„Emoții sculptate în eleganță” reflectă credința noastră profundă că bijuteriile nu sunt doar obiecte materiale, ci purtătoare de amintiri și sentimente ce dăinuie generații întregi.</div>
                 </div>
             </div>
         </div>
@@ -930,7 +947,7 @@
     <footer>
         <div class="footer-col">
             <h2>H-TIME</h2>
-            <p class="footer-desc">Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul, calitatea superioară și poveștile spuse prin intermediul bijuteriilor și ceasurilor unice.</p>
+            <p class="footer-desc" data-i18n="footer_desc">Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul, calitatea superioară și poveștile spuse prin intermediul bijuteriilor și ceasurilor unice.</p>
             <div class="social-links">
                 <a href="#" class="social-icon-circle" title="Facebook">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -953,28 +970,28 @@
         </div>
 
         <div class="footer-col">
-            <h3>NAVIGARE RAPIDĂ</h3>
+            <h3 data-i18n="footer_nav">NAVIGARE RAPIDĂ</h3>
             <ul>
-                <li><a href="index.html">Acasă - Pagina principală</a></li>
-                <li><a href="magazin.html">Magazin - Toate Colecțiile</a></li>
-                <li><a href="despre-noi.html">Povestea Noastră</a></li>
-                <li><a href="contact.html">Contact & Suport</a></li>
+                <li><a href="index.html" data-i18n="footer_home">Acasă - Pagina principală</a></li>
+                <li><a href="magazin.html" data-i18n="footer_shop">Magazin - Toate Colecțiile</a></li>
+                <li><a href="despre-noi.html" data-i18n="footer_about">Povestea Noastră</a></li>
+                <li><a href="contact.html" data-i18n="footer_contact">Contact & Suport</a></li>
             </ul>
         </div>
 
         <div class="footer-col">
-            <h3>INFORMAȚII & POLITICI</h3>
+            <h3 data-i18n="footer_info">INFORMAȚII & POLITICI</h3>
             <ul>
-                <li><a href="#">Termeni și Condiții</a></li>
-                <li><a href="#">Politică de Confidențialitate</a></li>
-                <li><a href="#">Politică de Livrare</a></li>
-                <li><a href="#">Politică de Retur (14 zile)</a></li>
-                <li><a href="#">Îngrijirea Bijuteriilor</a></li>
+                <li><a href="#" data-i18n="footer_terms">Termeni și Condiții</a></li>
+                <li><a href="#" data-i18n="footer_privacy">Politică de Confidențialitate</a></li>
+                <li><a href="#" data-i18n="footer_delivery">Politică de Livrare</a></li>
+                <li><a href="#" data-i18n="footer_return">Politică de Retur (14 zile)</a></li>
+                <li><a href="#" data-i18n="footer_care">Îngrijirea Bijuteriilor</a></li>
             </ul>
         </div>
 
         <div class="footer-col">
-            <h3>PROTECȚIA CONSUMATORULUI</h3>
+            <h3 data-i18n="footer_consumer">PROTECȚIA CONSUMATORULUI</h3>
             <div>
                 <a href="https://anpc.ro/ce-este-sal/" target="_blank">
                     <img src="https://ro.pandora.net/mobify/bundle/1108/static/img/SAL-PICTOGRAMA.png?app=pdp" alt="ANPC SAL" class="anpc-img">
@@ -989,6 +1006,169 @@
             © 2024 - 2026 H-TIME Luxury Experience. Toate drepturile sunt rezervate.
         </div>
     </footer>
+
+    <script>
+        const translations = {
+            ro: {
+                title: "H-TIME | Luxury Experience",
+                nav_home: "Acasă",
+                nav_shop: "Magazin",
+                nav_about: "Despre Noi",
+                nav_team: "Echipa H-Time",
+                nav_contact: "Contactează-ne",
+
+                hero_subtitle: "Emoții sculptate în eleganță",
+
+                feat1_title: "LIVRARE GRATUITĂ",
+                feat1_text: "Pentru toate comenzile de peste 500 RON, direct la tine la uşă.",
+                feat2_title: "GARANȚIE 24 LUNI",
+                feat2_text: "Toate piesele noastre vin cu certificat de autenticitate şi garanţie.",
+                feat3_title: "RETUR SIMPLIFICAT",
+                feat3_text: "Ai la dispoziție 14 zile calendaristice pentru a schimba produsul.",
+
+                cat_title: "CE PRODUSE OFERIM",
+                cat1_title: "CEASURI",
+                cat1_price: "Prețuri începând de la 100 €",
+                cat2_title: "INELE",
+                cat2_price: "Prețuri începând de la 100 €",
+                cat3_title: "CERCEI",
+                cat3_price: "Prețuri începând de la 100 €",
+                cat_btn: "Descoperă mai multe",
+
+                sale_title: "OFERTE EXCLUSIVE",
+
+                obj_title: "ESENȚA H-TIME",
+                obj1_title: "ENERGIE ȘI EMOȚIE",
+                obj1_text: "Fiecare piatră spirituală pe care o alegem cu grijă poartă o vibrație și un destin. Ne dorim ca bijuteriile noastre să devină talismane personale, conectând frumusețea formelor cu energia ta interioară, pentru a aduce protecție, iubire și echilibru în viața de zi cu zi.",
+                obj2_title: "MIT ȘI RAFINAMENT",
+                obj2_text: "Inspirate din legende străvechi și mitologii fascinante, creațiile noastre împletesc misterul trecutului cu eleganța pură a prezentului. Modelăm metalele și pietrele prețioase în adevărate poezii vizuale, menite să trezească la viață grația și latura divină din fiecare persoană.",
+                obj3_title: "O MOȘTENIRE ETERNĂ",
+                obj3_text: "Dincolo de strălucirea efemeră, scopul nostru este să făurim amintiri care sfidează timpul. Fiecare piesă este creată pentru a deveni o comoară de suflet, menită să fie purtată cu pasiune și transmisă din generație în generație, păstrând mereu vie o poveste nemuritoare.",
+
+                quote1: "\"Bijuteriile sunt cele care fac femeia să se simtă unică\" <span>- Coco Chanel</span>",
+                quote2: "\"Stilul este o modalitate de a spune cine ești fără să vorbești\" <span>- Rachel Zoe</span>",
+                quote3: "\"Diamantele sunt cele mai bune prietene ale unei fete\" <span>- Marilyn Monroe</span>",
+                quote4: "\"Fiecare bijuterie spune o poveste fără a folosi niciun cuvânt\" <span>- H-TIME</span>",
+
+                contact_title: "CONTACTEAZĂ-NE",
+                contact_text: "Ai vrea să ne sugerezi o idee sau să colaborezi cu noi? Scrie-ne, abia așteptăm să auzim!",
+
+                faq_title: "FAQS",
+                faq1_q: "CE NE FACE UNICI?",
+                faq1_a: "Bijuteriile H-Time sunt o operă de artă, nu doar un simplu accesoriu, ce exprimă rafinament, dedicare și calitate excepțională. Ne diferențiem prin atenția la detalii și experiența premium oferită fiecărui client.",
+                faq2_q: "CE REPREZINTĂ SIGLA NOASTRĂ?",
+                faq2_a: "Sigla noastră îmbină elemente clasice cu accente moderne. Diamantul simbolizează eternitatea și rezistența în timp, în timp ce literele H și T conturează identitatea brandului.",
+                faq3_q: "DE CE ACEST SLOGAN?",
+                faq3_a: "„Emoții sculptate în eleganță” reflectă credința noastră profundă că bijuteriile nu sunt doar obiecte materiale, ci purtătoare de amintiri și sentimente ce dăinuie generații întregi.",
+
+                footer_desc: "Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul, calitatea superioară și poveștile spuse prin intermediul bijuteriilor și ceasurilor unice.",
+                footer_nav: "NAVIGARE RAPIDĂ",
+                footer_home: "Acasă - Pagina principală",
+                footer_shop: "Magazin - Toate Colecțiile",
+                footer_about: "Povestea Noastră",
+                footer_contact: "Contact & Suport",
+                footer_info: "INFORMAȚII & POLITICI",
+                footer_terms: "Termeni și Condiții",
+                footer_privacy: "Politică de Confidențialitate",
+                footer_delivery: "Politică de Livrare",
+                footer_return: "Politică de Retur (14 zile)",
+                footer_care: "Îngrijirea Bijuteriilor",
+                footer_consumer: "PROTECȚIA CONSUMATORULUI"
+            },
+            en: {
+                title: "H-TIME | Luxury Experience",
+                nav_home: "Home",
+                nav_shop: "Shop",
+                nav_about: "About Us",
+                nav_team: "H-Time Team",
+                nav_contact: "Contact Us",
+
+                hero_subtitle: "Emotions sculpted in elegance",
+
+                feat1_title: "FREE SHIPPING",
+                feat1_text: "For all orders over 500 RON, delivered straight to your door.",
+                feat2_title: "24-MONTH WARRANTY",
+                feat2_text: "All our pieces come with an authenticity certificate and warranty.",
+                feat3_title: "EASY RETURNS",
+                feat3_text: "You have 14 calendar days available to exchange your product.",
+
+                cat_title: "WHAT WE OFFER",
+                cat1_title: "WATCHES",
+                cat1_price: "Prices starting from €100",
+                cat2_title: "RINGS",
+                cat2_price: "Prices starting from €100",
+                cat3_title: "EARRINGS",
+                cat3_price: "Prices starting from €100",
+                cat_btn: "Discover more",
+
+                sale_title: "EXCLUSIVE OFFERS",
+
+                obj_title: "THE ESSENCE OF H-TIME",
+                obj1_title: "ENERGY & EMOTION",
+                obj1_text: "Each spiritual stone we carefully choose carries a vibration and a destiny. We want our jewelry to become personal talismans, connecting the beauty of shapes with your inner energy, bringing protection, love and balance into your everyday life.",
+                obj2_title: "MYTH & REFINEMENT",
+                obj2_text: "Inspired by ancient legends and fascinating mythologies, our creations weave the mystery of the past with the pure elegance of the present. We shape metals and precious stones into true visual poetry, meant to awaken grace and the divine side in every person.",
+                obj3_title: "AN ETERNAL LEGACY",
+                obj3_text: "Beyond the ephemeral shine, our purpose is to forge memories that defy time. Each piece is created to become a treasure of the soul, meant to be worn with passion and passed down from generation to generation, keeping an immortal story alive.",
+
+                quote1: "\"Jewelry is what makes a woman feel unique\" <span>- Coco Chanel</span>",
+                quote2: "\"Style is a way to say who you are without having to speak\" <span>- Rachel Zoe</span>",
+                quote3: "\"Diamonds are a girl's best friend\" <span>- Marilyn Monroe</span>",
+                quote4: "\"Every piece of jewelry tells a story without using any words\" <span>- H-TIME</span>",
+
+                contact_title: "CONTACT US",
+                contact_text: "Would you like to suggest an idea or collaborate with us? Write to us, we can't wait to hear from you!",
+
+                faq_title: "FAQS",
+                faq1_q: "WHAT MAKES US UNIQUE?",
+                faq1_a: "H-Time jewelry is a work of art, not just a simple accessory, expressing refinement, dedication and exceptional quality. We stand out through attention to detail and the premium experience offered to every client.",
+                faq2_q: "WHAT DOES OUR LOGO REPRESENT?",
+                faq2_a: "Our logo blends classic elements with modern accents. The diamond symbolizes eternity and resistance over time, while the letters H and T shape the brand's identity.",
+                faq3_q: "WHY THIS SLOGAN?",
+                faq3_a: "\"Emotions sculpted in elegance\" reflects our deep belief that jewelry is not just material objects, but carriers of memories and feelings that last for generations.",
+
+                footer_desc: "Emotions sculpted in elegance. A luxury boutique dedicated to people who appreciate refinement, superior quality and stories told through unique jewelry and watches.",
+                footer_nav: "QUICK NAVIGATION",
+                footer_home: "Home - Main Page",
+                footer_shop: "Shop - All Collections",
+                footer_about: "Our Story",
+                footer_contact: "Contact & Support",
+                footer_info: "INFORMATION & POLICIES",
+                footer_terms: "Terms and Conditions",
+                footer_privacy: "Privacy Policy",
+                footer_delivery: "Delivery Policy",
+                footer_return: "Return Policy (14 days)",
+                footer_care: "Jewelry Care",
+                footer_consumer: "CONSUMER PROTECTION"
+            }
+        };
+
+        function applyTranslations(lang) {
+            const dict = translations[lang] || translations.ro;
+            document.querySelectorAll("[data-i18n]").forEach(el => {
+                const key = el.getAttribute("data-i18n");
+                if (dict[key]) {
+                    el.innerHTML = dict[key];
+                }
+            });
+            if (dict.title) {
+                document.title = dict.title;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const switcher = document.getElementById('languageSwitcher');
+            const savedLang = localStorage.getItem('htime_lang') || 'ro';
+            switcher.value = savedLang;
+            applyTranslations(savedLang);
+
+            switcher.addEventListener('change', () => {
+                const lang = switcher.value;
+                localStorage.setItem('htime_lang', lang);
+                applyTranslations(lang);
+            });
+        });
+    </script>
 
     <script src="produse.js"></script>
 
