@@ -296,7 +296,15 @@
       background: linear-gradient(to right, var(--pink), var(--peach), var(--pink)); background-size: 200% auto; animation: textGradientMove 4s linear infinite;
       color: black !important; padding: 4px 10px; font-weight: 700; font-size: 0.75rem; border-radius: 4px;
       font-family: 'Space Grotesk', sans-serif;
+      cursor: default;
+      transition: transform 0.3s ease;
     }
+    .sale-badge:hover {
+      transform: scale(1.05);
+    }
+    .sale-badge .badge-hover { display: none; }
+    .sale-badge:hover .badge-default { display: none; }
+    .sale-badge:hover .badge-hover { display: inline; }
 
     .no-products-msg {
       grid-column: 1 / -1;
@@ -601,7 +609,22 @@
             ? `<div class="price-box"><span class="old-price">${pretVechi}</span> <span class="new-price">${pretNou}</span></div>`
             : `<div class="price-box"><span class="regular-price">${pretNou}</span></div>`;
           
-          let saleBadge = p.isSale ? `<div class="sale-badge">SALE</div>` : "";
+          let saleBadge = "";
+          if (p.isSale) {
+            let reducereText = "SALE";
+            // Calculam reducerea in procente
+            if (p.pretVechi && p.pretVechi > p.pret) {
+                const procent = Math.round(((p.pretVechi - p.pret) / p.pretVechi) * 100);
+                reducereText = "-" + procent + "%";
+            }
+            
+            saleBadge = `
+              <div class="sale-badge">
+                <span class="badge-default" data-i18n="badge_sale">SALE</span>
+                <span class="badge-hover">${reducereText}</span>
+              </div>
+            `;
+          }
           
           // Hover image logica. Daca exista imagini[1], aia va fi hover-ul, altfel imaginea de baza
           let hoverImage = (p.imagini && p.imagini.length > 1) ? p.imagini[1] : p.imagine;
