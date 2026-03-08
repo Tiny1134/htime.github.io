@@ -415,11 +415,11 @@
           <div class="item-actions">
             <span class="item-price">${formatPrice(item.pret * (item.qty || 1), currentLang)}</span>
             <div class="qty-controls">
-              <button class="qty-btn-small" onclick="schimbaCantitate(${idx}, -1)">-</button>
+              <button type="button" class="qty-btn-small" onclick="schimbaCantitate(${idx}, -1)">-</button>
               <span>${item.qty || 1}</span>
-              <button class="qty-btn-small" onclick="schimbaCantitate(${idx}, 1)">+</button>
+              <button type="button" class="qty-btn-small" onclick="schimbaCantitate(${idx}, 1)">+</button>
             </div>
-            <button onclick="eliminaDinCos(${idx})" class="btn-remove">Șterge</button>
+            <button type="button" onclick="eliminaDinCos(${idx})" class="btn-remove">Șterge</button>
           </div>
         </div>
       `).join('');
@@ -467,9 +467,11 @@
           </tr>
       `).join('');
 
-      // Golim coșul după ce am generat factura proformă
+      // --- NOU: Ștergem coșul din LocalStorage ---
       localStorage.removeItem('htimeCart');
+      // Actualizăm UI-ul ca să se facă vizibil 0 pe butonul de coș din dreapta sus
       updateCartUI();
+      // -------------------------------------------
 
       document.getElementById('main-checkout').style.display = 'none';
       document.getElementById('invoice-container').style.display = 'block';
@@ -477,6 +479,7 @@
           window.print();
       }, 500);
     }
+
     // MULTILANG DICTIONARY
     const translations = {
       ro: { nav_home: "Acasă", nav_shop: "Magazin", nav_about: "Despre Noi", nav_team: "Echipa H-Time", nav_contact: "Contactează-ne", checkout_cart_title: "Coșul de cumpărături", checkout_details_title: "Detalii Expediere", checkout_summary_title: "Sumar Comandă", summary_subtotal: "Subtotal", summary_shipping: "Livrare", summary_total: "Total", form_fname: "Nume", form_lname: "Prenume", form_address: "Adresă completă", form_phone: "Telefon", form_email: "Email", btn_place_order: "Plasează Comanda", footer_desc: "Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul." },
