@@ -7,7 +7,7 @@
   <link rel="icon" href="logo.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -27,7 +27,7 @@
       display: flex; 
       flex-direction: column; 
       min-height: 100vh;
-      padding-top: 100px; /* Spatiu pentru meniul fixed */
+      padding-top: 100px;
     }
     h1,h2,h3,h4 { font-weight: normal; }
 
@@ -55,7 +55,7 @@
     .cart-btn {
       border:1px solid white; padding:8px 18px; border-radius:30px;
       display:inline-flex; align-items:center; justify-content:center; transition: all .3s;
-      background: transparent; cursor: pointer; color: white;
+      color: white; cursor: pointer; text-decoration: none;
     }
     .cart-btn:hover { border-color: var(--peach); color: var(--peach); }
 
@@ -68,6 +68,7 @@
       gap: 40px;
       flex: 1;
       width: 100%;
+      font-family: 'Space Grotesk', sans-serif;
     }
 
     .checkout-main { flex: 2; }
@@ -82,12 +83,14 @@
     }
 
     .section-title {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.8rem;
+      font-family: 'Syncopate', sans-serif;
+      font-weight: 700;
+      font-size: 1.5rem;
       margin-bottom: 25px;
       color: var(--dark);
       border-bottom: 2px solid var(--peach);
       padding-bottom: 10px;
+      text-transform: uppercase;
     }
 
     /* Cart Items */
@@ -99,25 +102,25 @@
       border-bottom: 1px solid #eee;
     }
     .cart-item:last-child { border-bottom: none; }
-    .item-info { display: flex; align-items: center; gap: 15px; }
-    .item-info img { width: 60px; height: 60px; object-fit: cover; border-radius: 8px; }
-    .item-info h4 { font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 0.95rem; }
-    .item-info p { font-size: 0.85rem; color: #777; }
+    .item-info { display: flex; align-items: center; gap: 20px; }
+    .item-info img { width: 80px; height: 80px; object-fit: cover; border-radius: 8px; }
+    .item-info h4 { font-weight: 600; font-size: 1rem; color: var(--dark); }
+    .item-info p { font-size: 0.85rem; color: #777; margin-top: 4px; }
     
-    .item-qty-controls { display: flex; align-items: center; gap: 15px; }
-    .qty-btn { 
-      background: var(--light-bg); border: none; width: 28px; height: 28px; 
-      border-radius: 50%; cursor: pointer; transition: 0.2s; 
+    .item-actions { text-align: right; }
+    .item-price { font-weight: 700; font-size: 1rem; display: block; margin-bottom: 10px; }
+    .btn-remove { 
+      background: none; border: none; color: #ff4757; cursor: pointer; 
+      font-size: 0.75rem; text-transform: uppercase; font-weight: 700;
     }
-    .qty-btn:hover { background: var(--peach); }
 
     /* Formular */
     .billing-form { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     .form-group { display: flex; flex-direction: column; gap: 8px; }
     .form-group.full { grid-column: span 2; }
     .form-group label { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; color: #555; }
-    .form-group input, .form-group select {
-      padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-family: 'Montserrat'; outline: none;
+    .form-group input {
+      padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-family: 'Space Grotesk'; outline: none;
     }
     .form-group input:focus { border-color: var(--peach); }
 
@@ -125,7 +128,7 @@
     .summary-line { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 0.95rem; }
     .summary-line.total { 
       margin-top: 20px; padding-top: 20px; border-top: 2px solid var(--light-bg);
-      font-weight: 700; font-size: 1.2rem; color: var(--dark);
+      font-weight: 700; font-size: 1.3rem; color: var(--dark);
     }
 
     .btn-primary {
@@ -135,8 +138,8 @@
       border: none;
       padding: 18px;
       border-radius: 40px;
-      font-family: 'Montserrat';
-      font-weight: 600;
+      font-family: 'Space Grotesk';
+      font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 1px;
       cursor: pointer;
@@ -168,14 +171,12 @@
     .anpc-img { max-width:180px; width:100%; height:auto; display:block; margin-bottom:15px; transition:opacity .3s; }
     .anpc-img:hover { opacity:0.7; }
 
-    /* Invoice styles (hidden until generation) */
-    #invoice-container { display: none; background: white; padding: 40px; border: 1px solid #ddd; max-width: 800px; margin: 40px auto; color: black; }
+    /* Factura (Ascunsă) */
+    #invoice-container { display: none; background: white; padding: 40px; border: 1px solid #ddd; max-width: 800px; margin: 40px auto; color: black; font-family: 'Space Grotesk', sans-serif; }
 
     @media (max-width:900px) {
       .checkout-container { flex-direction: column; }
       nav { flex-direction:column; gap:15px; padding:15px; background:rgba(0,0,0,0.8); }
-      .nav-links { flex-wrap:wrap; justify-content:center; gap:15px; }
-      footer { padding:40px 20px; display:flex; flex-direction:column; }
       body { padding-top: 130px; }
     }
   </style>
@@ -185,7 +186,6 @@
   <!-- NAVBAR -->
   <nav>
     <a href="index.html" class="logo"><img src="logo.png" alt="H-TIME Logo"></a>
-
     <div class="nav-links">
       <a href="index.html" data-i18n="nav_home">Acasă</a>
       <a href="magazin.html" data-i18n="nav_shop">Magazin</a>
@@ -193,9 +193,8 @@
       <a href="echipa.html" data-i18n="nav_team">Echipa H-Time</a>
       <a href="contact.html" data-i18n="nav_contact">Contactează-ne</a>
     </div>
-
     <div class="nav-icons">
-      <select id="languageSwitcher" aria-label="Selectează limba" style="background:black;border:1px solid rgba(255,255,255,0.12);color:white;padding:6px 8px;border-radius:6px;font-size:0.85rem;text-transform:uppercase;">
+      <select id="languageSwitcher" style="background:black;border:1px solid rgba(255,255,255,0.12);color:white;padding:6px 8px;border-radius:6px;font-size:0.85rem;text-transform:uppercase;">
         <option value="ro">RO</option>
         <option value="en">EN</option>
         <option value="fr">FR</option>
@@ -207,40 +206,24 @@
     </div>
   </nav>
 
-  <!-- CONTINUT CHECKOUT -->
   <main id="main-checkout" class="checkout-container">
     <div class="checkout-main">
       <div class="white-card">
-        <h2 class="section-title">Coșul de cumpărături</h2>
+        <h2 class="section-title" data-i18n="checkout_cart_title">Coșul de cumpărături</h2>
         <div id="checkout-cart-list">
-          <!-- Produsele vin din JS -->
+          <!-- Injectat din JS -->
         </div>
       </div>
 
       <div class="white-card">
-        <h2 class="section-title">Detalii Expediere</h2>
+        <h2 class="section-title" data-i18n="checkout_details_title">Detalii Expediere</h2>
         <form id="order-form" onsubmit="handleOrder(event)">
           <div class="billing-form">
-            <div class="form-group">
-              <label>Nume</label>
-              <input type="text" id="fname" required placeholder="Popescu">
-            </div>
-            <div class="form-group">
-              <label>Prenume</label>
-              <input type="text" id="lname" required placeholder="Ion">
-            </div>
-            <div class="form-group full">
-              <label>Adresă completă</label>
-              <input type="text" id="address" required placeholder="Strada, Nr, Oraș, Județ">
-            </div>
-            <div class="form-group">
-              <label>Telefon</label>
-              <input type="tel" id="phone" required placeholder="07xx xxx xxx">
-            </div>
-            <div class="form-group">
-              <label>Email</label>
-              <input type="email" id="email" required placeholder="contact@exemplu.ro">
-            </div>
+            <div class="form-group"><label data-i18n="form_fname">Nume</label><input type="text" id="fname" required></div>
+            <div class="form-group"><label data-i18n="form_lname">Prenume</label><input type="text" id="lname" required></div>
+            <div class="form-group full"><label data-i18n="form_address">Adresă completă</label><input type="text" id="address" required></div>
+            <div class="form-group"><label data-i18n="form_phone">Telefon</label><input type="tel" id="phone" required></div>
+            <div class="form-group"><label data-i18n="form_email">Email</label><input type="email" id="email" required></div>
           </div>
         </form>
       </div>
@@ -248,34 +231,24 @@
 
     <aside class="checkout-side">
       <div class="white-card">
-        <h2 class="section-title" style="font-size: 1.4rem;">Sumar Comandă</h2>
+        <h2 class="section-title" data-i18n="checkout_summary_title">Sumar Comandă</h2>
         <div class="summary-line">
-          <span>Subtotal</span>
-          <span id="sum-subtotal">0.00 RON</span>
+          <span data-i18n="summary_subtotal">Subtotal</span>
+          <span id="sum-subtotal">0 Lei</span>
         </div>
         <div class="summary-line">
-          <span>Livrare</span>
-          <span id="sum-shipping">15.00 RON</span>
+          <span data-i18n="summary_shipping">Livrare</span>
+          <span id="sum-shipping">15 Lei</span>
         </div>
         <div class="summary-line total">
-          <span>Total</span>
-          <span id="sum-total">0.00 RON</span>
+          <span data-i18n="summary_total">Total</span>
+          <span id="sum-total">0 Lei</span>
         </div>
-
-        <div style="margin-top: 25px;">
-            <label style="font-size: 0.8rem; font-weight: 700; display: block; margin-bottom: 10px; text-transform: uppercase;">Metodă de plată</label>
-            <div style="display: flex; flex-direction: column; gap: 10px;">
-                <label style="font-size: 0.9rem;"><input type="radio" name="pay" value="Card" checked> Card Online</label>
-                <label style="font-size: 0.9rem;"><input type="radio" name="pay" value="Ramburs"> Ramburs la livrare</label>
-            </div>
-        </div>
-
-        <button type="submit" form="order-form" class="btn-primary">Plasează Comanda</button>
+        <button type="submit" form="order-form" class="btn-primary" data-i18n="btn_place_order">Plasează Comanda</button>
       </div>
     </aside>
   </main>
 
-  <!-- FACTURA (Hidden) -->
   <div id="invoice-container">
       <div style="display:flex; justify-content:space-between; border-bottom:2px solid black; padding-bottom:20px;">
           <div><h1 style="font-family:'DM Serif Display'; color:var(--peach);">H-TIME</h1><p>Luxury Experience F.E.</p></div>
@@ -292,12 +265,12 @@
           <tbody id="inv-body"></tbody>
       </table>
       <div style="text-align:right; margin-top:20px; font-size:1.2rem; font-weight:700;">
-          Total: <span id="inv-total"></span>
+          Total: <span id="inv-total-val"></span>
       </div>
       <p style="margin-top:50px; font-size:0.8rem; text-align:center; color:#888;">Acest document este generat automat de firma de exercițiu H-TIME.</p>
   </div>
 
-  <!-- FOOTER -->
+  <!-- FOOTER COMPLET -->
   <footer>
     <div class="footer-col">
       <h2>H-TIME</h2>
@@ -351,14 +324,27 @@
     <div class="footer-bottom">© 2024 - 2026 H-TIME Luxury Experience. Toate drepturile sunt rezervate.</div>
   </footer>
 
-  <!-- SCRIPTURI -->
   <script src="produse.js"></script>
   <script src="script.js"></script>
   <script>
-    // 1. Logica Traduceri
+    const STORAGE_KEY = 'htime_cos';
+
+    const currencyConfig = {
+      ro: { symbol: 'Lei', rate: 4.97, position: 'right' },
+      en: { symbol: '$', rate: 1.08, position: 'left' },
+      fr: { symbol: '€', rate: 1.0, position: 'right' },
+      de: { symbol: '€', rate: 1.0, position: 'right' },
+      es: { symbol: '€', rate: 1.0, position: 'right' },
+      it: { symbol: '€', rate: 1.0, position: 'right' }
+    };
+
     const translations = {
       ro: {
         nav_home: "Acasă", nav_shop: "Magazin", nav_about: "Despre Noi", nav_team: "Echipa H-Time", nav_contact: "Contactează-ne",
+        checkout_cart_title: "Coșul de cumpărături", checkout_details_title: "Detalii Expediere", checkout_summary_title: "Sumar Comandă",
+        summary_subtotal: "Subtotal", summary_shipping: "Livrare", summary_total: "Total",
+        form_fname: "Nume", form_lname: "Prenume", form_address: "Adresă completă", form_phone: "Telefon", form_email: "Email",
+        btn_place_order: "Plasează Comanda", cart_empty: "Coșul tău este gol.",
         footer_desc: "Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul.",
         footer_nav: "NAVIGARE RAPIDĂ", footer_home: "Acasă - Pagina principală", footer_shop: "Magazin - Toate Colecțiile",
         footer_about: "Povestea Noastră", footer_contact: "Contact & Suport", footer_info: "INFORMAȚII & POLITICI",
@@ -367,6 +353,10 @@
       },
       en: {
         nav_home: "Home", nav_shop: "Shop", nav_about: "About Us", nav_team: "H-Time Team", nav_contact: "Contact Us",
+        checkout_cart_title: "Shopping Cart", checkout_details_title: "Shipping Details", checkout_summary_title: "Order Summary",
+        summary_subtotal: "Subtotal", summary_shipping: "Shipping", summary_total: "Total",
+        form_fname: "First Name", form_lname: "Last Name", form_address: "Full Address", form_phone: "Phone", form_email: "Email",
+        btn_place_order: "Place Order", cart_empty: "Your cart is empty.",
         footer_desc: "Emotions sculpted in elegance. A luxury boutique dedicated to people who appreciate refinement.",
         footer_nav: "QUICK NAVIGATION", footer_home: "Home - Main Page", footer_shop: "Shop - All Collections",
         footer_about: "Our Story", footer_contact: "Contact & Support", footer_info: "INFORMATION & POLICIES",
@@ -375,118 +365,109 @@
       }
     };
 
+    function formatPrice(priceEur, lang) {
+      const config = currencyConfig[lang] || currencyConfig.ro;
+      const converted = Math.round(priceEur * config.rate);
+      return config.position === 'left' ? `${config.symbol}${converted}` : `${converted} ${config.symbol}`;
+    }
+
+    function updateCartUI() {
+      const currentLang = localStorage.getItem('htime_lang') || 'ro';
+      const cos = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+      const listContainer = document.getElementById('checkout-cart-list');
+      
+      const totalItems = cos.reduce((acc, item) => acc + (item.cantitate || 1), 0);
+      document.getElementById('cart-nav-btn').innerText = `Cart (${totalItems})`;
+
+      if (cos.length === 0) {
+        listContainer.innerHTML = `<p style="text-align:center; padding:40px;" data-i18n="cart_empty">Coșul tău este gol.</p>`;
+        document.getElementById('sum-subtotal').innerText = formatPrice(0, currentLang);
+        document.getElementById('sum-total').innerText = formatPrice(0, currentLang);
+        return;
+      }
+
+      listContainer.innerHTML = cos.map((item, idx) => `
+        <div class="cart-item">
+          <div class="item-info">
+            <img src="${item.imagine || 'ceas.jpg'}" alt="${item.nume}">
+            <div>
+              <h4>${item.nume}</h4>
+              <p>ID: #${item.id}</p>
+            </div>
+          </div>
+          <div class="item-actions">
+            <span class="item-price">${formatPrice(item.pret * item.cantitate, currentLang)}</span>
+            <span style="font-size:0.8rem; color:#888; display:block; margin-bottom:5px;">x ${item.cantitate}</span>
+            <button onclick="removeFromCart(${idx})" class="btn-remove">Șterge</button>
+          </div>
+        </div>
+      `).join('');
+
+      const subtotalEur = cos.reduce((acc, item) => acc + (item.pret * item.cantitate), 0);
+      const shippingEur = 15; 
+      const totalEur = subtotalEur + shippingEur;
+
+      document.getElementById('sum-subtotal').innerText = formatPrice(subtotalEur, currentLang);
+      document.getElementById('sum-shipping').innerText = formatPrice(shippingEur, currentLang);
+      document.getElementById('sum-total').innerText = formatPrice(totalEur, currentLang);
+    }
+
+    function removeFromCart(index) {
+      let cos = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+      cos.splice(index, 1);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(cos));
+      updateCartUI();
+    }
+
     function applyTranslations(lang) {
       const dict = translations[lang] || translations.ro;
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
-        if (dict[key]) el.innerHTML = dict[key];
+        if (dict[key]) el.innerText = dict[key];
       });
     }
 
-    // 2. Logica Coș & Checkout (Sincronizată cu script.js)
-    const KEY = 'htime_cos'; // Folosim aceeasi cheie ca in script.js
-
-    function updateCartUI() {
-      // Preluăm coșul din localStorage folosind cheia corectă
-      const cos = JSON.parse(localStorage.getItem(KEY)) || [];
-
-      // Actualizăm numărul de produse în navigație
-      const navBtn = document.getElementById('cart-nav-btn');
-      const totalProduse = cos.reduce((acc, item) => acc + (item.cantitate || 1), 0);
-      if(navBtn) navBtn.innerText = `Cart (${totalProduse})`;
-
-      // Randăm lista de produse
-      const list = document.getElementById('checkout-cart-list');
-      if(!list) return;
-
-      if(cos.length === 0) {
-        list.innerHTML = "<p style='text-align:center; padding:20px;'>Coșul tău este gol.</p>";
-      } else {
-        list.innerHTML = cos.map((item, idx) => `
-          <div class="cart-item">
-            <div class="item-info">
-              <img src="${item.imagine || 'ceas.jpg'}" alt="${item.nume}">
-              <div>
-                <h4>${item.nume || 'Produs'}</h4>
-                <p>${item.variant || 'Mărime Standard'}</p>
-                <strong>${item.pret} RON</strong>
-              </div>
-            </div>
-            <div class="item-qty-controls">
-              <span>x ${item.cantitate || 1}</span>
-              <button onclick="removeFromCart(${idx})" style="background:none; border:none; color:red; cursor:pointer; font-size:0.7rem; text-transform:uppercase; font-weight:700;">Șterge</button>
-            </div>
-          </div>
-        `).join('');
-      }
-
-      // Calculăm totalurile (Subtotal + Livrare 15 RON)
-      const subtotal = cos.reduce((acc, item) => acc + (Number(item.pret) * (item.cantitate || 1)), 0);
-      const shipping = subtotal > 0 ? 15 : 0;
-      const total = subtotal + shipping;
-
-      document.getElementById('sum-subtotal').innerText = `${subtotal.toFixed(2)} RON`;
-      document.getElementById('sum-shipping').innerText = `${shipping.toFixed(2)} RON`;
-      document.getElementById('sum-total').innerText = `${total.toFixed(2)} RON`;
-    }
-
-    function removeFromCart(index) {
-        let cos = JSON.parse(localStorage.getItem(KEY)) || [];
-        cos.splice(index, 1);
-        localStorage.setItem(KEY, JSON.stringify(cos));
-        updateCartUI();
-        // Sincronizăm și funcția globală dacă există
-        if(typeof actualizeazaNumarCos === 'function') actualizeazaNumarCos();
-    }
-
     function handleOrder(e) {
-        e.preventDefault();
-        const cos = JSON.parse(localStorage.getItem(KEY)) || [];
-        if(cos.length === 0) {
-            alert("Coșul este gol!");
-            return;
-        }
+      e.preventDefault();
+      const cos = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+      if(cos.length === 0) return;
 
-        // Completare Factură Proformă
-        const numeClient = document.getElementById('fname').value + " " + document.getElementById('lname').value;
-        document.getElementById('inv-name').innerText = numeClient;
-        document.getElementById('inv-addr').innerText = document.getElementById('address').value;
-        document.getElementById('inv-date').innerText = new Date().toLocaleDateString();
-        document.getElementById('inv-total').innerText = document.getElementById('sum-total').innerText;
-        
-        document.getElementById('inv-body').innerHTML = cos.map(i => `
-            <tr>
-                <td style="padding:10px; border:1px solid #ddd;">${i.nume}</td>
-                <td style="text-align:center; border:1px solid #ddd;">${i.cantitate || 1}</td>
-                <td style="text-align:center; border:1px solid #ddd;">${(i.pret * (i.cantitate || 1)).toFixed(2)} RON</td>
-            </tr>
-        `).join('');
+      const currentLang = localStorage.getItem('htime_lang') || 'ro';
+      
+      document.getElementById('inv-name').innerText = document.getElementById('fname').value + " " + document.getElementById('lname').value;
+      document.getElementById('inv-addr').innerText = document.getElementById('address').value;
+      document.getElementById('inv-date').innerText = new Date().toLocaleDateString();
+      document.getElementById('inv-total-val').innerText = document.getElementById('sum-total').innerText;
+      
+      document.getElementById('inv-body').innerHTML = cos.map(i => `
+          <tr>
+              <td style="padding:10px; border:1px solid #ddd;">${i.nume}</td>
+              <td style="text-align:center; border:1px solid #ddd;">${i.cantitate}</td>
+              <td style="text-align:center; border:1px solid #ddd;">${formatPrice(i.pret * i.cantitate, currentLang)}</td>
+          </tr>
+      `).join('');
 
-        // Ascundem interfața de checkout și afișăm factura pentru printare
-        document.getElementById('main-checkout').style.display = 'none';
-        document.getElementById('invoice-container').style.display = 'block';
-        
-        // Deschidem fereastra de printare
-        setTimeout(() => {
-            window.print();
-        }, 500);
+      document.getElementById('main-checkout').style.display = 'none';
+      document.getElementById('invoice-container').style.display = 'block';
+      
+      setTimeout(() => {
+          window.print();
+      }, 500);
     }
 
-    // Inițializare la încărcarea paginii
     document.addEventListener('DOMContentLoaded', () => {
       const switcher = document.getElementById('languageSwitcher');
       const savedLang = localStorage.getItem('htime_lang') || 'ro';
-      
-      if(switcher) {
-          switcher.value = savedLang;
-          switcher.addEventListener('change', (e) => {
-              localStorage.setItem('htime_lang', e.target.value);
-              applyTranslations(e.target.value);
-          });
-      }
+      if(switcher) switcher.value = savedLang;
       
       applyTranslations(savedLang);
       updateCartUI();
+
+      switcher.addEventListener('change', () => {
+        localStorage.setItem('htime_lang', switcher.value);
+        applyTranslations(switcher.value);
+        updateCartUI();
+      });
     });
   </script>
 </body>
