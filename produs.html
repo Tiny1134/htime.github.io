@@ -95,6 +95,7 @@
       display: block;
       object-fit: cover;
       aspect-ratio: 1/1;
+      transition: opacity 0.3s ease;
     }
     .sale-badge-large {
       position: absolute; top: 20px; left: 20px; z-index: 10;
@@ -102,6 +103,34 @@
       background-size: 200% auto; animation: textGradientMove 4s linear infinite;
       color: black; padding: 6px 14px; font-weight: 700; font-size: 0.9rem; 
       border-radius: 6px; font-family: 'Space Grotesk', sans-serif;
+    }
+
+    /* Miniaturi (Thumbnails) */
+    .thumbnails-container {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+      overflow-x: auto;
+      padding-bottom: 10px; /* pentru scrollbar daca apare */
+    }
+    .thumbnail-img {
+      width: 85px;
+      height: 85px;
+      object-fit: cover;
+      border-radius: 8px;
+      cursor: pointer;
+      border: 3px solid transparent;
+      opacity: 0.6;
+      transition: all 0.3s ease;
+      background: white;
+    }
+    .thumbnail-img:hover {
+      opacity: 1;
+      transform: translateY(-2px);
+    }
+    .thumbnail-img.active {
+      opacity: 1;
+      border-color: var(--peach);
     }
 
     /* Detalii Produs (Dreapta) */
@@ -270,6 +299,7 @@
       body { padding-top: 130px; }
       footer { padding: 40px 20px; }
       .action-group { flex-direction: column; align-items: stretch; }
+      .thumbnails-container { justify-content: center; }
     }
   </style>
 </head>
@@ -383,6 +413,23 @@
       return parseInt(urlParams.get('id')) || 1; // Default 1 daca lipseste
     }
 
+    // --- Schimbare Imagine din Miniaturi ---
+    function schimbaImagine(element, nouaImagineUrl) {
+      // 1. Schimbăm sursa imaginii mari
+      const imgPrincipala = document.getElementById('main-product-image');
+      imgPrincipala.style.opacity = '0.5'; // Mic efect vizual
+      setTimeout(() => {
+        imgPrincipala.src = nouaImagineUrl;
+        imgPrincipala.style.opacity = '1';
+      }, 150);
+
+      // 2. Scoatem clasa 'active' de pe toate miniaturile
+      document.querySelectorAll('.thumbnail-img').forEach(el => el.classList.remove('active'));
+
+      // 3. O adăugăm pe cea curentă
+      element.classList.add('active');
+    }
+
     // --- Randare Produs pe Baza limbii curente ---
     function renderProduct() {
       const lang = localStorage.getItem('htime_lang') || 'ro';
@@ -412,13 +459,34 @@
       
       let saleBadge = currentProduct.isSale ? `<div class="sale-badge-large" data-i18n="badge_sale">SALE</div>` : "";
 
+      // Extragem imaginile - daca are un array `imagini`, le folosim pe acelea, daca nu, folosim `imagine`
+      let pozeProdus = (currentProduct.imagini && currentProduct.imagini.length > 0) 
+                       ? currentProduct.imagini 
+                       : [currentProduct.imagine];
+
+      // Construim HTML-ul pentru miniaturi doar dacă avem mai mult de o poză
+      let thumbnailsHTML = '';
+      if (pozeProdus.length > 1) {
+        thumbnailsHTML = `
+          <div class="thumbnails-container">
+            ${pozeProdus.map((imgUrl, index) => `
+              <img src="${imgUrl}" 
+                   class="thumbnail-img ${index === 0 ? 'active' : ''}" 
+                   onclick="schimbaImagine(this, '${imgUrl}')" 
+                   onerror="this.src='poza1.png'">
+            `).join('')}
+          </div>
+        `;
+      }
+
       const root = document.getElementById('product-root');
       root.innerHTML = `
         <div class="product-gallery">
           <div class="main-image-wrapper">
             ${saleBadge}
-            <img src="${currentProduct.imagine}" alt="${numeProdus}" onerror="this.src='poza1.png'">
+            <img id="main-product-image" src="${pozeProdus[0]}" alt="${numeProdus}" onerror="this.src='poza1.png'">
           </div>
+          ${thumbnailsHTML}
         </div>
         
         <div class="product-details">
@@ -548,7 +616,45 @@
         badge_sale: "SALE", btn_add_cart: "Add to Cart", toast_added: "Product added to cart!",
         acc_delivery: "Delivery and Returns", acc_delivery_text: "Free delivery for orders over 500 RON. Returns are accepted within 14 days.",
         acc_warranty: "Warranty", acc_warranty_text: "All products come with an authenticity certificate and a 24-month warranty.",
-        footer_desc: "Emotions sculpted in elegance. A luxury boutique dedicated to people who appreciate refinement."
+        footer_desc: "Emotions sculpted in elegance. A luxury boutique dedicated to people who appreciate refinement.",
+        footer_nav: "QUICK NAVIGATION", footer_home: "Home - Main Page", footer_shop: "Shop - All Collections", footer_about: "Our Story", footer_contact: "Contact & Support",
+        footer_info: "INFORMATION & POLICIES", footer_terms: "Terms and Conditions", footer_privacy: "Privacy Policy", footer_delivery: "Delivery Policy", footer_return: "Return Policy (14 days)", footer_care: "Jewelry Care", footer_consumer: "CONSUMER PROTECTION"
+      },
+      fr: {
+        nav_home: "Accueil", nav_shop: "Boutique", nav_about: "À propos", nav_team: "Équipe H-Time", nav_contact: "Contactez-nous",
+        badge_sale: "SOLDES", btn_add_cart: "Ajouter au panier", toast_added: "Produit ajouté au panier !",
+        acc_delivery: "Livraison et Retours", acc_delivery_text: "Livraison gratuite pour les commandes de plus de 500 RON. Les retours sont acceptés dans les 14 jours.",
+        acc_warranty: "Garantie", acc_warranty_text: "Tous les produits sont accompagnés d'un certificat d'authenticité et d'une garantie de 24 mois.",
+        footer_desc: "Émotions sculptées dans l'élégance. Une boutique de luxe dédiée à ceux qui apprécient le raffinement.",
+        footer_nav: "NAVIGATION RAPIDE", footer_home: "Accueil - Page principale", footer_shop: "Boutique - Toutes les collections", footer_about: "Notre histoire", footer_contact: "Contact & Support",
+        footer_info: "INFORMATIONS & POLITIQUES", footer_terms: "Conditions générales", footer_privacy: "Politique de confidentialité", footer_delivery: "Politique de livraison", footer_return: "Politique de retour (14 jours)", footer_care: "Entretien des bijoux", footer_consumer: "PROTECTION DU CONSOMMATEUR"
+      },
+      de: {
+        nav_home: "Startseite", nav_shop: "Shop", nav_about: "Über uns", nav_team: "H-Time Team", nav_contact: "Kontakt",
+        badge_sale: "ANGEBOT", btn_add_cart: "In den Warenkorb", toast_added: "Produkt in den Warenkorb gelegt!",
+        acc_delivery: "Lieferung und Rückgabe", acc_delivery_text: "Kostenlose Lieferung für Bestellungen über 500 RON. Rückgaben werden innerhalb von 14 Tagen akzeptiert.",
+        acc_warranty: "Garantie", acc_warranty_text: "Alle Produkte haben ein Echtheitszertifikat und eine 24-monatige Garantie.",
+        footer_desc: "Emotionen in Eleganz gemeißelt. Eine Luxus-Boutique für Liebhaber von Raffinesse.",
+        footer_nav: "SCHNELLNAVIGATION", footer_home: "Startseite - Hauptseite", footer_shop: "Shop - Alle Kollektionen", footer_about: "Unsere Geschichte", footer_contact: "Kontakt & Support",
+        footer_info: "INFORMATIONEN & RICHTLINIEN", footer_terms: "Allgemeine Geschäftsbedingungen", footer_privacy: "Datenschutzrichtlinie", footer_delivery: "Lieferbedingungen", footer_return: "Rückgaberecht (14 Tage)", footer_care: "Schmuckpflege", footer_consumer: "VERBRAUCHERSCHUTZ"
+      },
+      es: {
+        nav_home: "Inicio", nav_shop: "Tienda", nav_about: "Sobre Nosotros", nav_team: "Equipo H-Time", nav_contact: "Contáctanos",
+        badge_sale: "OFERTA", btn_add_cart: "Añadir al carrito", toast_added: "¡Producto añadido al carrito!",
+        acc_delivery: "Envío y Devoluciones", acc_delivery_text: "Envío gratuito para pedidos superiores a 500 RON. Se aceptan devoluciones en un plazo de 14 días.",
+        acc_warranty: "Garantía", acc_warranty_text: "Todos los productos incluyen un certificado de autenticidad y una garantía de 24 meses.",
+        footer_desc: "Emociones esculpidas en elegancia. Una boutique de lujo dedicada a quienes aprecian el refinamiento.",
+        footer_nav: "NAVEGACIÓN RÁPIDA", footer_home: "Inicio - Página principal", footer_shop: "Tienda - Todas las colecciones", footer_about: "Nuestra historia", footer_contact: "Contacto & Soporte",
+        footer_info: "INFORMACIÓN & POLÍTICAS", footer_terms: "Términos y condiciones", footer_privacy: "Política de privacidad", footer_delivery: "Política de entrega", footer_return: "Política de devolución (14 días)", footer_care: "Cuidado de las joyas", footer_consumer: "PROTECCIÓN AL CONSUMIDOR"
+      },
+      it: {
+        nav_home: "Home", nav_shop: "Negozio", nav_about: "Chi Siamo", nav_team: "Team H-Time", nav_contact: "Contattaci",
+        badge_sale: "SALDI", btn_add_cart: "Aggiungi al carrello", toast_added: "Prodotto aggiunto al carrello!",
+        acc_delivery: "Spedizione e Resi", acc_delivery_text: "Spedizione gratuita per ordini superiori a 500 RON. I resi sono accettati entro 14 giorni.",
+        acc_warranty: "Garanzia", acc_warranty_text: "Tutti i prodotti sono dotati di certificato di autenticità e garanzia di 24 mesi.",
+        footer_desc: "Emozioni scolpite nell'eleganza. Una boutique di lusso dedicata a chi apprezza la raffinatezza.",
+        footer_nav: "NAVIGAZIONE RAPIDA", footer_home: "Home - Pagina principale", footer_shop: "Negozio - Tutte le collezioni", footer_about: "La nostra storia", footer_contact: "Contatto & Supporto",
+        footer_info: "INFORMAZIONI & POLITICHE", footer_terms: "Termini e condizioni", footer_privacy: "Informativa sulla privacy", footer_delivery: "Politica di consegna", footer_return: "Politica di reso (14 giorni)", footer_care: "Cura dei gioielli", footer_consumer: "PROTEZIONE DEL CONSUMATORE"
       }
     };
 
