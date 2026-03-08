@@ -1,115 +1,107 @@
 /**
- * Cheia sub care salvăm datele în memoria browserului (localStorage).
- * Trebuie să fie aceeași și în checkout.html pentru ca paginile să comunice între ele.
+ * Folosim cheia 'htimeCart' pentru a fi in sincron cu magazin.html 
+ * si celelalte pagini care au scripturi interne.
  */
-const COS_KEY = 'htime_cos';
+const COS_KEY = 'htimeCart';
 
 /**
- * Adaugă un produs în coș pe baza ID-ului primit din magazin.html
- * @param {number|string} id - ID-ul unic al produsului
+ * Adauga un produs in cos.
+ * Aceasta functie este apelata de butoanele din magazin.html.
  */
 function adaugaInCos(id) {
     const produsId = parseInt(id);
     
-    // Verificăm dacă baza de date de produse este încărcată (din produse.js)
     if (typeof produse === 'undefined') {
-        console.error("Fișierul produse.js nu a fost găsit sau încărcat.");
+        console.error("Eroare: produse.js nu este incarcat.");
         return;
     }
 
-    // Căutăm produsul în lista globală
     const produsGasit = produse.find(p => p.id === produsId);
     
     if (!produsGasit) {
-        console.error("Produsul cu ID-ul " + produsId + " nu există în baza de date.");
+        console.error("Produsul cu ID-ul " + produsId + " nu a fost gasit.");
         return;
     }
 
-    // Preluăm coșul actual din memoria browserului
+    // Citim cosul actual
     let cos = JSON.parse(localStorage.getItem(COS_KEY)) || [];
     
-    // Verificăm dacă produsul este deja în coș
+    // Verificam daca produsul exista deja
     const indexExistent = cos.findIndex(p => p.id === produsId);
     
     if (indexExistent !== -1) {
-        // Dacă există deja, îi creștem doar cantitatea
-        cos[indexExistent].cantitate = (cos[indexExistent].cantitate || 1) + 1;
+        // Daca exista, incrementam cantitatea (folosim campul 'qty' sau 'cantitate' - ramanem la qty pentru consistenta)
+        cos[indexExistent].qty = (cos[indexExistent].qty || 1) + 1;
     } else {
-        // Dacă este nou, îl adăugăm cu toate detaliile necesare (nume, preț, imagine)
-        // pentru ca checkout.html să le poată afișa direct.
+        // Salvam obiectul folosind aceleasi campuri ca in produse.js: nume, pret, imagine
         cos.push({
             id: produsGasit.id,
             nume: produsGasit.nume,
             pret: produsGasit.pret,
             imagine: produsGasit.imagine,
-            cantitate: 1
+            qty: 1
         });
     }
 
-    // Salvăm lista actualizată în localStorage
+    // Salvam inapoi in localStorage sub cheia folosita de magazin.html
     localStorage.setItem(COS_KEY, JSON.stringify(cos));
     
-    // Actualizăm numărul afișat în meniu (ex: Cart (3))
+    // Actualizam cifra din meniu
     actualizeazaNumarCos();
     
-    // Afișăm o notificare vizuală rapidă
+    // Notificare vizuala
     afiseazaNotificare(`"${produsGasit.nume}" a fost adăugat în coș!`);
 }
 
 /**
- * Găsește elementul de cart din navigare și îi actualizează textul.
- * Folosește id-ul "cart-nav-btn" specificat în magazin.html.
+ * Actualizeaza textul din butonul de Cart (X)
  */
 function actualizeazaNumarCos() {
     const cos = JSON.parse(localStorage.getItem(COS_KEY)) || [];
-    const totalProduse = cos.reduce((suma, item) => suma + (item.cantitate || 1), 0);
+    // Pentru consistenta cu magazin.html, afisam numarul de intrari unice (cart.length)
+    // sau suma cantitatilor. Aici folosim cart.length pentru a se potrivi cu restul paginilor tale.
+    const total = cos.length;
     
-    const navCartBtn = document.getElementById('cart-nav-btn');
-    if (navCartBtn) {
-        navCartBtn.innerText = `Cart (${totalProduse})`;
+    const navBtn = document.getElementById('cart-nav-btn');
+    if (navBtn) {
+        navBtn.innerText = `Cart (${total})`;
     }
 }
 
 /**
- * Creează o notificare stilizată care dispare automat.
- * @param {string} mesaj - Textul de afișat
+ * Notificare eleganta folosind culorile tale
  */
 function afiseazaNotificare(mesaj) {
     const notif = document.createElement('div');
     notif.textContent = mesaj;
     notif.style.cssText = `
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-        background: #111;
-        color: #fcbf88;
-        padding: 15px 25px;
-        border-radius: 30px;
-        font-family: 'Montserrat', sans-serif;
-        font-size: 0.9rem;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        z-index: 2000;
-        animation: slideIn 0.3s ease-out;
+        position: fixed; bottom: 30px; right: 30px;
+        background: #111; color: #fcbf88; padding: 15px 25px;
+        border-radius: 30px; z-index: 10000; font-family: 'Montserrat', sans-serif;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3); font-weight: 600;
+        animation: slideInNotif 0.3s ease-out;
     `;
-    
     document.body.appendChild(notif);
     
     setTimeout(() => {
         notif.style.opacity = '0';
         notif.style.transition = 'opacity 0.5s ease';
         setTimeout(() => notif.remove(), 500);
-    }, 2000);
+    }, 2500);
 }
 
-// La încărcarea oricărei pagini, verificăm numărul curent de produse din coș
-document.addEventListener('DOMContentLoaded', actualizeazaNumarCos);
+// Stiluri pentru animatia notificarii
+if (!document.getElementById('notif-styles')) {
+    const style = document.createElement('style');
+    style.id = 'notif-styles';
+    style.textContent = `
+        @keyframes slideInNotif {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    `;
+    document.head.appendChild(style);
+}
 
-// Adăugăm animația CSS pentru notificare direct în document
-const styleSheet = document.createElement('style');
-styleSheet.textContent = `
-    @keyframes slideIn {
-        from { transform: translateY(20px); opacity: 0; }
-        to { transform: translateY(0); opacity: 1; }
-    }
-`;
-document.head.appendChild(styleSheet);
+// Rulam actualizarea la incarcarea paginii
+document.addEventListener('DOMContentLoaded', actualizeazaNumarCos);
