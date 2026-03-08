@@ -287,7 +287,7 @@
       </div>
       <table style="width:100%; border-collapse:collapse; margin-top:20px;">
           <thead style="background:#f5f5f5;">
-              <tr><th style="padding:10px; border:1px solid #ddd; text-align:left;">Produs</th><th style="border:1px solid #ddd;">Cantitate</th><th style="border:1px solid #ddd;">Preț Total</th></tr>
+              <tr><th style="padding:10px; border:1px solid #ddd; text-align:left;">Produs</th><th style="border:1px solid #ddd;">Cantitate</th><th style="border:1px solid #ddd;">Preț</th></tr>
           </thead>
           <tbody id="inv-body"></tbody>
       </table>
@@ -351,11 +351,11 @@
     <div class="footer-bottom">© 2024 - 2026 H-TIME Luxury Experience. Toate drepturile sunt rezervate.</div>
   </footer>
 
-  <!-- SCRIPTURI (LOGICA REPARATA) -->
+  <!-- SCRIPTURI -->
   <script src="produse.js"></script>
   <script src="script.js"></script>
   <script>
-    // 1. Logica Traduceri Completa (exact cum ai trimis-o)
+    // 1. Logica Traduceri
     const translations = {
       ro: {
         nav_home: "Acasă", nav_shop: "Magazin", nav_about: "Despre Noi", nav_team: "Echipa H-Time", nav_contact: "Contactează-ne",
@@ -373,7 +373,6 @@
         footer_terms: "Terms and Conditions", footer_privacy: "Privacy Policy", footer_delivery: "Delivery Policy",
         footer_return: "Return Policy (14 days)", footer_care: "Jewelry Care", footer_consumer: "CONSUMER PROTECTION"
       }
-      // Poti adauga restul limbilor aici similar
     };
 
     function applyTranslations(lang) {
@@ -384,18 +383,19 @@
       });
     }
 
-    // 2. Logica Coș & Checkout (Corectata pentru a citi din htime_cos)
-    const KEY = 'htime_cos'; // Aceasta cheie trebuie sa fie identica cu cea din script.js
+    // 2. Logica Coș & Checkout (Sincronizată cu script.js)
+    const KEY = 'htime_cos'; // Folosim aceeasi cheie ca in script.js
 
     function updateCartUI() {
+      // Preluăm coșul din localStorage folosind cheia corectă
       const cos = JSON.parse(localStorage.getItem(KEY)) || [];
-      
-      // Update buton nav
+
+      // Actualizăm numărul de produse în navigație
       const navBtn = document.getElementById('cart-nav-btn');
       const totalProduse = cos.reduce((acc, item) => acc + (item.cantitate || 1), 0);
       if(navBtn) navBtn.innerText = `Cart (${totalProduse})`;
 
-      // Randare lista produse in checkout
+      // Randăm lista de produse
       const list = document.getElementById('checkout-cart-list');
       if(!list) return;
 
@@ -409,18 +409,18 @@
               <div>
                 <h4>${item.nume || 'Produs'}</h4>
                 <p>${item.variant || 'Mărime Standard'}</p>
-                <strong>${Number(item.pret).toFixed(2)} RON</strong>
+                <strong>${item.pret} RON</strong>
               </div>
             </div>
             <div class="item-qty-controls">
               <span>x ${item.cantitate || 1}</span>
-              <button onclick="removeFromCart(${idx})" style="background:none; border:none; color:red; cursor:pointer; font-size:0.7rem; text-transform:uppercase;">Șterge</button>
+              <button onclick="removeFromCart(${idx})" style="background:none; border:none; color:red; cursor:pointer; font-size:0.7rem; text-transform:uppercase; font-weight:700;">Șterge</button>
             </div>
           </div>
         `).join('');
       }
 
-      // Calcul totaluri (subtotal + livrare 15 RON)
+      // Calculăm totalurile (Subtotal + Livrare 15 RON)
       const subtotal = cos.reduce((acc, item) => acc + (Number(item.pret) * (item.cantitate || 1)), 0);
       const shipping = subtotal > 0 ? 15 : 0;
       const total = subtotal + shipping;
@@ -435,6 +435,7 @@
         cos.splice(index, 1);
         localStorage.setItem(KEY, JSON.stringify(cos));
         updateCartUI();
+        // Sincronizăm și funcția globală dacă există
         if(typeof actualizeazaNumarCos === 'function') actualizeazaNumarCos();
     }
 
@@ -446,8 +447,9 @@
             return;
         }
 
-        // Completare Factura
-        document.getElementById('inv-name').innerText = document.getElementById('fname').value + " " + document.getElementById('lname').value;
+        // Completare Factură Proformă
+        const numeClient = document.getElementById('fname').value + " " + document.getElementById('lname').value;
+        document.getElementById('inv-name').innerText = numeClient;
         document.getElementById('inv-addr').innerText = document.getElementById('address').value;
         document.getElementById('inv-date').innerText = new Date().toLocaleDateString();
         document.getElementById('inv-total').innerText = document.getElementById('sum-total').innerText;
@@ -460,20 +462,21 @@
             </tr>
         `).join('');
 
-        // Ascundem checkout, afisam factura
+        // Ascundem interfața de checkout și afișăm factura pentru printare
         document.getElementById('main-checkout').style.display = 'none';
         document.getElementById('invoice-container').style.display = 'block';
         
-        // Printare
+        // Deschidem fereastra de printare
         setTimeout(() => {
             window.print();
         }, 500);
     }
 
-    // Initializare
+    // Inițializare la încărcarea paginii
     document.addEventListener('DOMContentLoaded', () => {
       const switcher = document.getElementById('languageSwitcher');
       const savedLang = localStorage.getItem('htime_lang') || 'ro';
+      
       if(switcher) {
           switcher.value = savedLang;
           switcher.addEventListener('change', (e) => {
@@ -481,6 +484,7 @@
               applyTranslations(e.target.value);
           });
       }
+      
       applyTranslations(savedLang);
       updateCartUI();
     });
