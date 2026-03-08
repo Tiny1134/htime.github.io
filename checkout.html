@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout | H-TIME</title>
     <link rel="icon" type="image/png" href="logo.png">
+    <!-- Fonturi și Iconițe -->
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Stilul global al site-ului -->
+    <link rel="stylesheet" href="style.css">
     
     <style>
         :root {
@@ -14,30 +18,31 @@
             --peach-bg: #fcbf88;
             --border-color: #ddd;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Space Mono', monospace; background-color: var(--light-bg); color: black; padding-top: 80px; display: flex; flex-direction: column; min-height: 100vh; }
-        h1, h2, h3, .sync-font { font-family: 'Syncopate', sans-serif; text-transform: uppercase; }
-        a { text-decoration: none; color: inherit; }
-        ul { list-style: none; }
 
-        /* --- Navigația (Standardizată) --- */
-        nav { background-color: var(--dark-header); color: white; display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: fixed; width: 100%; top: 0; z-index: 1000; }
-        .logo { font-size: 24px; font-weight: bold; color: #d4af37; font-family: 'Syncopate', sans-serif;}
-        .nav-links { display: flex; gap: 20px; }
-        .nav-links a:hover { text-decoration: underline; color: var(--peach-bg); }
-        
-        /* Zona din dreapta: Login, Social, Cart */
-        .nav-icons { display: flex; align-items: center; gap: 25px; }
-        .nav-icons a { font-family: 'Space Mono', monospace; font-size: 0.9rem; text-transform: uppercase; transition: 0.3s; color: white; }
-        .nav-icons a:hover { color: var(--peach-bg); }
-        .social-icon { display: flex; align-items: center; }
-        .cart-btn { border: 1px solid white; padding: 8px 20px; border-radius: 30px; display: inline-block; }
-        .cart-btn:hover { background-color: white; color: var(--dark-header); border-color: white; }
+        /* Ajustări pentru corpul paginii de checkout */
+        body { 
+            font-family: 'Space Mono', monospace; 
+            background-color: var(--light-bg); 
+            color: black; 
+            display: flex; 
+            flex-direction: column; 
+            min-height: 100vh; 
+        }
+
+        h1, h2, h3, .sync-font { font-family: 'Syncopate', sans-serif; text-transform: uppercase; }
 
         /* --- Layout Checkout --- */
-        .checkout-container { max-width: 1200px; margin: 40px auto; padding: 0 20px; display: flex; gap: 40px; flex-grow: 1; width: 100%; }
+        .checkout-container { 
+            max-width: 1200px; 
+            margin: 40px auto; 
+            padding: 0 20px; 
+            display: flex; 
+            gap: 40px; 
+            flex-grow: 1; 
+            width: 100%; 
+        }
         .cart-section { flex: 2; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        .summary-section { flex: 1; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); height: fit-content; position: sticky; top: 100px; }
+        .summary-section { flex: 1; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); height: fit-content; position: sticky; top: 140px; }
 
         .checkout-title { margin-bottom: 20px; font-size: 1.5rem; border-bottom: 2px solid var(--peach-bg); padding-bottom: 10px; }
 
@@ -80,7 +85,7 @@
         .checkout-btn:hover { background: var(--peach-bg); color: black; }
 
         /* --- Factura --- */
-        #invoice-section { display: none; padding: 40px; background: white; }
+        #invoice-section { display: none; padding: 40px; background: white; border: 1px solid #000; max-width: 800px; margin: 20px auto; }
         .invoice-header { display: flex; justify-content: space-between; border-bottom: 2px solid black; padding-bottom: 20px; margin-bottom: 20px; }
         .invoice-details { margin-bottom: 30px; }
         .invoice-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
@@ -88,92 +93,54 @@
         .invoice-table th { background-color: #eee; }
         .invoice-stamp { text-align: right; margin-top: 50px; font-style: italic; color: #555; }
 
-        /* --- FOOTER CORECTAT --- */
-        footer { 
-            background-color: #efe8e4; 
-            padding: 60px 50px; 
-            display: flex; 
-            justify-content: space-between; 
-            flex-wrap: wrap; 
-            gap: 30px; 
-            margin-top: auto; 
-            border-top: none; /* Am scos bordura pentru un look mai clean ca in poza */
-        }
-        .footer-col { flex: 1; min-width: 200px; }
-        .footer-col h2, .footer-col h3 { 
-            font-family: 'Syncopate', sans-serif; 
-            text-transform: uppercase; 
-            margin-bottom: 25px; 
-            font-size: 1.1rem; 
-            font-weight: 700; 
-            color: #000;
-        }
-        .footer-col p, .footer-col ul { 
-            font-family: 'Space Mono', monospace; 
-            font-size: 0.9rem; 
-            line-height: 1.8; 
-            color: #000; 
-        }
-        /* Fortam stergerea bullet-urilor direct in ul si li */
-        .footer-col ul { 
-            list-style: none !important; 
-            padding: 0; 
-            margin: 0; 
-            display: flex; 
-            flex-direction: column; 
-            gap: 12px; 
-        }
-        .footer-col ul li { 
-            list-style-type: none !important; 
-            margin: 0; 
-            padding: 0; 
-        }
-        .footer-col a { 
-            text-decoration: none; 
-            color: inherit; 
-            transition: 0.3s; 
-        }
-        .footer-col a:hover { 
-            color: var(--peach-bg); 
-            text-decoration: underline; 
-        }
-
         @media print {
             body * { visibility: hidden; }
             #invoice-section, #invoice-section * { visibility: visible; }
             #invoice-section { position: absolute; left: 0; top: 0; width: 100%; }
-            nav, footer { display: none !important; }
+            header, footer { display: none !important; }
         }
         @media (max-width: 900px) { .checkout-container { flex-direction: column; } .billing-form { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
-    <nav>
-        <a href="index.html" class="logo">
-            <img src="logo.png" alt="Logo H-Time" style="height: 75px; width: auto; object-fit: contain; margin-top: 3px;">
-        </a>
-        <div class="nav-links">
-            <a href="index.html">Acasă</a>
-            <a href="magazin.html">Magazin</a>
-            <a href="despre-noi.html">Despre Noi</a>
-            <a href="echipa.html">Echipa H-Time</a>
-            <a href="contact.html">Contactează-ne</a>
+    <!-- Header preluat din index.html -->
+    <header>
+        <div class="header-top">
+            <div class="logo">
+                <a href="index.html"><img src="logo.png" alt="H-Time Logo"></a>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Caută produse..." id="search-input">
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </div>
+            <div class="user-actions">
+                <div class="language-selector">
+                    <select id="language-select">
+                        <option value="ro">RO</option>
+                        <option value="en">EN</option>
+                    </select>
+                </div>
+                <a href="contact.html" title="Contact"><i class="fas fa-envelope"></i></a>
+                <a href="magazin.html" title="Magazin"><i class="fas fa-store"></i></a>
+                <div class="cart-icon">
+                    <a href="checkout.html"><i class="fas fa-shopping-cart"></i></a>
+                    <span id="cart-count">0</span>
+                </div>
+            </div>
         </div>
-        
-        <div class="nav-icons">
-            <a href="#">Login</a>
-            <a href="#" class="social-icon" title="Instagram">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                </svg>
-            </a>
-            <a href="checkout.html" id="cart-nav-btn" class="cart-btn">Cart (0)</a>
-        </div>
-    </nav>
+        <nav>
+            <ul>
+                <li><a href="index.html">Acasă</a></li>
+                <li><a href="magazin.html">Colecții</a></li>
+                <li><a href="echipa.html">Echipa Noastră</a></li>
+                <li><a href="despre-noi.html">Despre Noi</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
+    <!-- Conținut Checkout -->
     <div id="checkout-section" class="checkout-container">
         <div class="cart-section">
             <h2 class="checkout-title sync-font">Coșul Tău</h2>
@@ -227,6 +194,7 @@
         </div>
     </div>
 
+    <!-- Secțiune Factură (Ascunsă inițial) -->
     <div id="invoice-section">
         <div class="invoice-header">
             <div><h1 class="sync-font" style="font-size: 2rem;">H-TIME F.E.</h1><p>Str. Milcov 18A, Iași</p><p>CUI: RO12345678 (Simulat)</p><p>Email: h.time.business@gmail.com</p></div>
@@ -248,235 +216,245 @@
         <div class="invoice-stamp"><p>Această factură a fost generată electronic și circulă fără ștampilă și semnătură conform Legii 227/2015.</p><p><strong>Proiect Firmă de Exercițiu - Document Fictiv</strong></p></div>
     </div>
 
+    <!-- Footer preluat din index.html -->
     <footer>
-        <div class="footer-col">
-            <h2>H-TIME</h2>
-            <p>Copyright © 2026 H-TIME FE.</p>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Despre H-Time</h3>
+                <p>H-Time este destinația ta pentru ceasuri și bijuterii de lux care transcend timpul.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Link-uri Utile</h3>
+                <ul>
+                    <li><a href="termeni.html">Termeni și Condiții</a></li>
+                    <li><a href="confidentialitate.html">Politică de Confidențialitate</a></li>
+                    <li><a href="contact.html">Asistență Clienți</a></li>
+                    <li><a href="magazin.html">Ghid de Mărimi</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Newsletter</h3>
+                <p>Abonează-te pentru a primi ultimele noutăți și oferte.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Adresa ta de email">
+                    <button type="submit">Trimite</button>
+                </form>
+            </div>
         </div>
-        <div class="footer-col">
-            <h3>LINK-URI UTILE</h3>
-            <ul>
-                <li><a href="termeni.html">Termeni și condiții</a></li>
-                <li><a href="confidentialitate.html">Politica de confidențialitate</a></li>
-                <li><a href="https://anpc.ro/" target="_blank">ANPC</a></li>
-                <li><a href="https://ec.europa.eu/consumers/odr" target="_blank">ANPC-SAL</a></li>
-            </ul>
-        </div>
-        <div class="footer-col">
-            <h3>LOCATION</h3>
-            <p>Strada Milcov 18A, Iași<br>700259</p>
-        </div>
-        <div class="footer-col">
-            <h3>CONTACT</h3>
-            <p>h.time.business@gmail.com</p>
+        <div class="footer-bottom">
+            <p>&copy; 2024 H-Time. Toate drepturile rezervate.</p>
         </div>
     </footer>
 
-<script>
-    // Citim coșul care conține obiecte de tip {name, price, variant}
-    let rawCart = JSON.parse(localStorage.getItem('htimeCart')) || [];
-    let groupedCart = [];
-    let currentDiscount = 0; 
-    let isFreeShipping = false; 
-    const shippingCost = 15.00;
-    let finalCalculatedTotal = 0;
-    let rateMessage = "";
+    <script src="produse.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // Logica coșului de cumpărături
+        let rawCart = JSON.parse(localStorage.getItem('htimeCart')) || JSON.parse(localStorage.getItem('cart')) || [];
+        let groupedCart = [];
+        let currentDiscount = 0; 
+        let isFreeShipping = false; 
+        const shippingCost = 15.00;
+        let finalCalculatedTotal = 0;
+        let rateMessage = "";
 
-    function updateNavCartCount() {
-        let currentRawCart = JSON.parse(localStorage.getItem('htimeCart')) || [];
-        const cartBtn = document.getElementById('cart-nav-btn');
-        if (cartBtn) {
-            cartBtn.innerText = `Cart (${currentRawCart.length})`;
-        }
-    }
-
-    function initCart() {
-        let tempObj = {};
-        rawCart.forEach(item => {
-            // Creăm o cheie unică formată din Nume + Variantă
-            let uniqueKey = item.name + (item.variant ? "-" + item.variant : "");
-            
-            if(tempObj[uniqueKey]) { 
-                tempObj[uniqueKey].quantity += 1; 
-            } else { 
-                tempObj[uniqueKey] = { 
-                    name: item.name, 
-                    price: Number(item.price), // Ne asigurăm că prețul e număr
-                    variant: item.variant || "Standard",
-                    quantity: 1 
-                }; 
+        function updateNavCartCount() {
+            let currentRawCart = JSON.parse(localStorage.getItem('htimeCart')) || JSON.parse(localStorage.getItem('cart')) || [];
+            const cartCountEl = document.getElementById('cart-count');
+            if (cartCountEl) {
+                cartCountEl.innerText = currentRawCart.length;
             }
-        });
-        groupedCart = Object.values(tempObj);
-        renderCart();
-        updateNavCartCount();
-    }
-
-    function renderCart() {
-        const container = document.getElementById('cart-items-container');
-        if (!container) return;
-        
-        container.innerHTML = '';
-        if(groupedCart.length === 0) {
-            container.innerHTML = '<div class="empty-cart">Coșul tău este gol.<br><a href="magazin.html" style="color:var(--peach-bg);text-decoration:underline;">Înapoi la magazin</a></div>';
-            document.querySelector('.checkout-btn').disabled = true;
-            updateSummary(); 
-            return;
         }
 
-        document.querySelector('.checkout-btn').disabled = false;
-        groupedCart.forEach((item, index) => {
-            container.innerHTML += `
-                <div class="cart-item">
-                    <div class="item-info">
-                        <div class="item-name">${item.name}</div>
-                        <div style="font-size: 0.8rem; color: #888;">Varianta: ${item.variant}</div>
-                        <div class="item-price">€${item.price.toFixed(2)}</div>
-                    </div>
-                    <div class="item-controls">
-                        <button class="qty-btn" type="button" onclick="changeQty(${index}, -1)">-</button>
-                        <span class="item-qty">${item.quantity}</span>
-                        <button class="qty-btn" type="button" onclick="changeQty(${index}, 1)">+</button>
-                        <button class="remove-btn" type="button" onclick="removeItem(${index})">Șterge</button>
-                    </div>
-                </div>`;
-        });
-        updateSummary();
-    }
-
-    // FUNCȚIA DE CALCUL (Cea care lipsea sau era incompletă)
-    function updateSummary() {
-        let subtotal = 0;
-        groupedCart.forEach(item => {
-            subtotal += item.price * item.quantity;
-        });
-
-        let currentShipping = (subtotal === 0 || isFreeShipping) ? 0 : shippingCost;
-        let discountValue = subtotal * currentDiscount;
-        finalCalculatedTotal = subtotal + currentShipping - discountValue;
-
-        // Actualizare afișaj
-        document.getElementById('subtotal-val').innerText = `€${subtotal.toFixed(2)}`;
-        document.getElementById('shipping-val').innerText = (currentShipping === 0 && subtotal > 0) ? "GRATUIT" : `€${currentShipping.toFixed(2)}`;
-        
-        const discountRow = document.getElementById('discount-row');
-        if (discountValue > 0) {
-            discountRow.style.display = "flex";
-            document.getElementById('discount-val').innerText = `-€${discountValue.toFixed(2)}`;
-        } else {
-            discountRow.style.display = "none";
+        function initCart() {
+            let tempObj = {};
+            rawCart.forEach(item => {
+                let uniqueKey = item.name + (item.variant ? "-" + item.variant : "");
+                if(tempObj[uniqueKey]) { 
+                    tempObj[uniqueKey].quantity += 1; 
+                } else { 
+                    tempObj[uniqueKey] = { 
+                        name: item.name, 
+                        price: Number(item.price),
+                        variant: item.variant || "Standard",
+                        quantity: 1 
+                    }; 
+                }
+            });
+            groupedCart = Object.values(tempObj);
+            renderCart();
+            updateNavCartCount();
         }
 
-        document.getElementById('total-val').innerText = `€${finalCalculatedTotal.toFixed(2)}`;
-        
-        if (typeof calculateInstallments === "function") calculateInstallments();
-    }
+        function renderCart() {
+            const container = document.getElementById('cart-items-container');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            if(groupedCart.length === 0) {
+                container.innerHTML = '<div class="empty-cart">Coșul tău este gol.<br><a href="magazin.html" style="color:var(--peach-bg);text-decoration:underline;">Înapoi la magazin</a></div>';
+                document.querySelector('.checkout-btn').disabled = true;
+                updateSummary(); 
+                return;
+            }
 
-    function changeQty(index, amount) {
-        groupedCart[index].quantity += amount;
-        if(groupedCart[index].quantity <= 0) {
+            document.querySelector('.checkout-btn').disabled = false;
+            groupedCart.forEach((item, index) => {
+                container.innerHTML += `
+                    <div class="cart-item">
+                        <div class="item-info">
+                            <div class="item-name">${item.name}</div>
+                            <div style="font-size: 0.8rem; color: #888;">Varianta: ${item.variant}</div>
+                            <div class="item-price">€${item.price.toFixed(2)}</div>
+                        </div>
+                        <div class="item-controls">
+                            <button class="qty-btn" type="button" onclick="changeQty(${index}, -1)">-</button>
+                            <span class="item-qty">${item.quantity}</span>
+                            <button class="qty-btn" type="button" onclick="changeQty(${index}, 1)">+</button>
+                            <button class="remove-btn" type="button" onclick="removeItem(${index})">Șterge</button>
+                        </div>
+                    </div>`;
+            });
+            updateSummary();
+        }
+
+        function updateSummary() {
+            let subtotal = 0;
+            groupedCart.forEach(item => {
+                subtotal += item.price * item.quantity;
+            });
+
+            let currentShipping = (subtotal === 0 || isFreeShipping) ? 0 : shippingCost;
+            let discountValue = subtotal * currentDiscount;
+            finalCalculatedTotal = subtotal + currentShipping - discountValue;
+
+            document.getElementById('subtotal-val').innerText = `€${subtotal.toFixed(2)}`;
+            document.getElementById('shipping-val').innerText = (currentShipping === 0 && subtotal > 0) ? "GRATUIT" : `€${currentShipping.toFixed(2)}`;
+            
+            const discountRow = document.getElementById('discount-row');
+            if (discountValue > 0) {
+                discountRow.style.display = "flex";
+                document.getElementById('discount-val').innerText = `-€${discountValue.toFixed(2)}`;
+            } else {
+                discountRow.style.display = "none";
+            }
+
+            document.getElementById('total-val').innerText = `€${finalCalculatedTotal.toFixed(2)}`;
+            calculateInstallments();
+        }
+
+        function changeQty(index, amount) {
+            groupedCart[index].quantity += amount;
+            if(groupedCart[index].quantity <= 0) {
+                groupedCart.splice(index, 1);
+            }
+            saveCart();
+            renderCart();
+        }
+
+        function removeItem(index) {
             groupedCart.splice(index, 1);
-        }
-        saveCart();
-        renderCart();
-    }
-
-    function removeItem(index) {
-        groupedCart.splice(index, 1);
-        saveCart();
-        renderCart();
-    }
-
-    function saveCart() {
-        let newRawCart = [];
-        groupedCart.forEach(item => { 
-            for(let i=0; i<item.quantity; i++) 
-                newRawCart.push({name: item.name, price: item.price, variant: item.variant}); 
-        });
-        localStorage.setItem('htimeCart', JSON.stringify(newRawCart));
-        updateNavCartCount();
-    }
-
-    function applyVoucher() {
-        const code = document.getElementById('voucher-input').value.trim().toUpperCase();
-        const msg = document.getElementById('voucher-msg');
-        currentDiscount = 0; isFreeShipping = false;
-
-        if (code === 'HTIME10') { currentDiscount = 0.10; msg.innerText = "-10% aplicat!"; msg.style.color = "green"; } 
-        else if (code === 'HTIMEFREE') { isFreeShipping = true; msg.innerText = "Transport gratuit!"; msg.style.color = "green"; } 
-        else { msg.innerText = "Cod invalid."; msg.style.color = "red"; }
-        updateSummary();
-    }
-
-    function toggleInstallments() {
-        const isRate = document.querySelector('input[name="payment"]:checked').value === 'Rate';
-        document.getElementById('installments-box').style.display = isRate ? 'block' : 'none';
-        calculateInstallments();
-    }
-
-    function calculateInstallments() {
-        const select = document.getElementById('installments-select');
-        const months = parseInt(select.value);
-        const paymentVal = document.querySelector('input[name="payment"]:checked').value;
-
-        if (paymentVal !== 'Rate') { rateMessage = ""; return; }
-
-        let totalInRate = finalCalculatedTotal;
-        if (months === 6) totalInRate *= 1.05;
-        if (months === 12) totalInRate *= 1.10;
-
-        let rataLunara = totalInRate / months;
-        rateMessage = `(${months} rate x €${rataLunara.toFixed(2)})`;
-        document.getElementById('rate-details').innerText = `Total: €${totalInRate.toFixed(2)} ${rateMessage}`;
-    }
-
-    function generateInvoice(event) {
-        event.preventDefault();
-        if(groupedCart.length === 0) return;
-
-        document.getElementById('inv-client-name').innerText = document.getElementById('b-name').value;
-        document.getElementById('inv-client-address').innerText = document.getElementById('b-address').value;
-        
-        let paymentMethod = document.querySelector('input[name="payment"]:checked').value;
-        document.getElementById('inv-payment-method').innerText = paymentMethod === 'Rate' ? `Rate ${rateMessage}` : paymentMethod;
-
-        document.getElementById('inv-number').innerText = Math.floor(Math.random() * 90000) + 10000;
-        document.getElementById('inv-date').innerText = new Date().toLocaleDateString('ro-RO');
-
-        const invTbody = document.getElementById('inv-items');
-        invTbody.innerHTML = '';
-        
-        groupedCart.forEach(item => {
-            let rowTotal = item.price * item.quantity;
-            invTbody.innerHTML += `
-                <tr>
-                    <td>${item.name} <br><small>(Varianta: ${item.variant})</small></td>
-                    <td>${item.quantity}</td>
-                    <td>€${item.price.toFixed(2)}</td>
-                    <td>€${rowTotal.toFixed(2)}</td>
-                </tr>`;
-        });
-
-        let currentShipping = isFreeShipping ? 0 : shippingCost;
-        invTbody.innerHTML += `<tr><td colspan="3">Transport prin curier</td><td>€${currentShipping.toFixed(2)}</td></tr>`;
-
-        let subtotalCalculat = groupedCart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        let discountValue = subtotalCalculat * currentDiscount;
-        if(discountValue > 0) {
-            invTbody.innerHTML += `<tr><td colspan="3">Reducere Voucher</td><td style="color:red;">-€${discountValue.toFixed(2)}</td></tr>`;
+            saveCart();
+            renderCart();
         }
 
-        document.getElementById('inv-total').innerText = '€' + finalCalculatedTotal.toFixed(2);
+        function saveCart() {
+            let newRawCart = [];
+            groupedCart.forEach(item => { 
+                for(let i=0; i<item.quantity; i++) 
+                    newRawCart.push({name: item.name, price: item.price, variant: item.variant}); 
+            });
+            localStorage.setItem('htimeCart', JSON.stringify(newRawCart));
+            localStorage.setItem('cart', JSON.stringify(newRawCart));
+            updateNavCartCount();
+        }
 
-        document.getElementById('checkout-section').style.display = 'none';
-        document.getElementById('invoice-section').style.display = 'block';
-        
-        localStorage.removeItem('htimeCart');
-        updateNavCartCount();
-        setTimeout(() => { window.print(); }, 500);
-    }
+        function applyVoucher() {
+            const code = document.getElementById('voucher-input').value.trim().toUpperCase();
+            const msg = document.getElementById('voucher-msg');
+            currentDiscount = 0; isFreeShipping = false;
 
-    initCart();
-</script>
+            if (code === 'HTIME10') { currentDiscount = 0.10; msg.innerText = "-10% aplicat!"; msg.style.color = "green"; } 
+            else if (code === 'HTIMEFREE') { isFreeShipping = true; msg.innerText = "Transport gratuit!"; msg.style.color = "green"; } 
+            else { msg.innerText = "Cod invalid."; msg.style.color = "red"; }
+            updateSummary();
+        }
+
+        function toggleInstallments() {
+            const isRate = document.querySelector('input[name="payment"]:checked').value === 'Rate';
+            document.getElementById('installments-box').style.display = isRate ? 'block' : 'none';
+            calculateInstallments();
+        }
+
+        function calculateInstallments() {
+            const select = document.getElementById('installments-select');
+            const months = parseInt(select.value);
+            const paymentVal = document.querySelector('input[name="payment"]:checked').value;
+
+            if (paymentVal !== 'Rate') { rateMessage = ""; return; }
+
+            let totalInRate = finalCalculatedTotal;
+            if (months === 6) totalInRate *= 1.05;
+            if (months === 12) totalInRate *= 1.10;
+
+            let rataLunara = totalInRate / months;
+            rateMessage = `(${months} rate x €${rataLunara.toFixed(2)})`;
+            document.getElementById('rate-details').innerText = `Total: €${totalInRate.toFixed(2)} ${rateMessage}`;
+        }
+
+        function generateInvoice(event) {
+            event.preventDefault();
+            if(groupedCart.length === 0) return;
+
+            document.getElementById('inv-client-name').innerText = document.getElementById('b-name').value;
+            document.getElementById('inv-client-address').innerText = document.getElementById('b-address').value;
+            
+            let paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+            document.getElementById('inv-payment-method').innerText = paymentMethod === 'Rate' ? `Rate ${rateMessage}` : paymentMethod;
+
+            document.getElementById('inv-number').innerText = Math.floor(Math.random() * 90000) + 10000;
+            document.getElementById('inv-date').innerText = new Date().toLocaleDateString('ro-RO');
+
+            const invTbody = document.getElementById('inv-items');
+            invTbody.innerHTML = '';
+            
+            groupedCart.forEach(item => {
+                let rowTotal = item.price * item.quantity;
+                invTbody.innerHTML += `
+                    <tr>
+                        <td>${item.name} <br><small>(Varianta: ${item.variant})</small></td>
+                        <td>${item.quantity}</td>
+                        <td>€${item.price.toFixed(2)}</td>
+                        <td>€${rowTotal.toFixed(2)}</td>
+                    </tr>`;
+            });
+
+            let currentShipping = isFreeShipping ? 0 : shippingCost;
+            invTbody.innerHTML += `<tr><td colspan="3">Transport prin curier</td><td>€${currentShipping.toFixed(2)}</td></tr>`;
+
+            let subtotalCalculat = groupedCart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            let discountValue = subtotalCalculat * currentDiscount;
+            if(discountValue > 0) {
+                invTbody.innerHTML += `<tr><td colspan="3">Reducere Voucher</td><td style="color:red;">-€${discountValue.toFixed(2)}</td></tr>`;
+            }
+
+            document.getElementById('inv-total').innerText = '€' + finalCalculatedTotal.toFixed(2);
+
+            document.getElementById('checkout-section').style.display = 'none';
+            document.getElementById('invoice-section').style.display = 'block';
+            
+            localStorage.removeItem('htimeCart');
+            localStorage.removeItem('cart');
+            updateNavCartCount();
+            setTimeout(() => { window.print(); }, 500);
+        }
+
+        initCart();
+    </script>
 </body>
 </html>
