@@ -99,12 +99,17 @@
       border-bottom: 1px solid #eee;
     }
     .cart-item:last-child { border-bottom: none; }
-    .item-info { display: flex; align-items: center; gap: 20px; }
+    .item-info { display: flex; align-items: center; gap: 15px; }
     .item-info img { width: 60px; height: 60px; object-fit: cover; border-radius: 8px; }
     .item-info h4 { font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 0.95rem; }
     .item-info p { font-size: 0.85rem; color: #777; }
     
     .item-qty-controls { display: flex; align-items: center; gap: 15px; }
+    .qty-btn { 
+      background: var(--light-bg); border: none; width: 28px; height: 28px; 
+      border-radius: 50%; cursor: pointer; transition: 0.2s; 
+    }
+    .qty-btn:hover { background: var(--peach); }
 
     /* Formular */
     .billing-form { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
@@ -163,7 +168,7 @@
     .anpc-img { max-width:180px; width:100%; height:auto; display:block; margin-bottom:15px; transition:opacity .3s; }
     .anpc-img:hover { opacity:0.7; }
 
-    /* Invoice styles */
+    /* Invoice styles (hidden until generation) */
     #invoice-container { display: none; background: white; padding: 40px; border: 1px solid #ddd; max-width: 800px; margin: 40px auto; color: black; }
 
     @media (max-width:900px) {
@@ -177,7 +182,7 @@
 </head>
 <body>
 
-  <!-- NAVBAR IDENTIC -->
+  <!-- NAVBAR -->
   <nav>
     <a href="index.html" class="logo"><img src="logo.png" alt="H-TIME Logo"></a>
 
@@ -292,7 +297,7 @@
       <p style="margin-top:50px; font-size:0.8rem; text-align:center; color:#888;">Acest document este generat automat de firma de exercițiu H-TIME.</p>
   </div>
 
-  <!-- FOOTER IDENTIC -->
+  <!-- FOOTER -->
   <footer>
     <div class="footer-col">
       <h2>H-TIME</h2>
@@ -346,11 +351,11 @@
     <div class="footer-bottom">© 2024 - 2026 H-TIME Luxury Experience. Toate drepturile sunt rezervate.</div>
   </footer>
 
-  <!-- SCRIPTURI (LOGICA CHECKOUT REPARATA) -->
+  <!-- SCRIPTURI (LOGICA REPARATA) -->
   <script src="produse.js"></script>
   <script src="script.js"></script>
   <script>
-    // 1. Logica Traduceri
+    // 1. Logica Traduceri Completa (exact cum ai trimis-o)
     const translations = {
       ro: {
         nav_home: "Acasă", nav_shop: "Magazin", nav_about: "Despre Noi", nav_team: "Echipa H-Time", nav_contact: "Contactează-ne",
@@ -368,6 +373,7 @@
         footer_terms: "Terms and Conditions", footer_privacy: "Privacy Policy", footer_delivery: "Delivery Policy",
         footer_return: "Return Policy (14 days)", footer_care: "Jewelry Care", footer_consumer: "CONSUMER PROTECTION"
       }
+      // Poti adauga restul limbilor aici similar
     };
 
     function applyTranslations(lang) {
@@ -378,18 +384,16 @@
       });
     }
 
-    // 2. Logica Coș & Checkout (Corectata pentru a nu mai da undefined)
+    // 2. Logica Coș & Checkout (Corectata pentru a citi din htime_cos)
+    const KEY = 'htime_cos'; // Aceasta cheie trebuie sa fie identica cu cea din script.js
+
     function updateCartUI() {
-      // Citim cosul folosind cheia 'cos' (aceeasi din script.js)
-      const cos = JSON.parse(localStorage.getItem('cos')) || [];
+      const cos = JSON.parse(localStorage.getItem(KEY)) || [];
       
-      // Update buton nav (folosind ID-ul tau cart-count daca exista in nav, altfel cart-nav-btn)
+      // Update buton nav
       const navBtn = document.getElementById('cart-nav-btn');
-      const cartCount = document.getElementById('cart-count');
       const totalProduse = cos.reduce((acc, item) => acc + (item.cantitate || 1), 0);
-      
       if(navBtn) navBtn.innerText = `Cart (${totalProduse})`;
-      if(cartCount) cartCount.innerText = totalProduse;
 
       // Randare lista produse in checkout
       const list = document.getElementById('checkout-cart-list');
@@ -404,18 +408,19 @@
               <img src="${item.imagine || 'ceas.jpg'}" alt="${item.nume}">
               <div>
                 <h4>${item.nume || 'Produs'}</h4>
-                <p>${item.pret} RON</p>
+                <p>${item.variant || 'Mărime Standard'}</p>
+                <strong>${Number(item.pret).toFixed(2)} RON</strong>
               </div>
             </div>
             <div class="item-qty-controls">
-              <span>Cantitate: ${item.cantitate || 1}</span>
-              <button onclick="removeFromCart(${idx})" style="background:none; border:none; color:red; cursor:pointer; font-size:0.75rem; text-transform:uppercase; font-weight:600;">Elimină</button>
+              <span>x ${item.cantitate || 1}</span>
+              <button onclick="removeFromCart(${idx})" style="background:none; border:none; color:red; cursor:pointer; font-size:0.7rem; text-transform:uppercase;">Șterge</button>
             </div>
           </div>
         `).join('');
       }
 
-      // Calcul totaluri (folosind item.pret)
+      // Calcul totaluri (subtotal + livrare 15 RON)
       const subtotal = cos.reduce((acc, item) => acc + (Number(item.pret) * (item.cantitate || 1)), 0);
       const shipping = subtotal > 0 ? 15 : 0;
       const total = subtotal + shipping;
@@ -426,24 +431,23 @@
     }
 
     function removeFromCart(index) {
-        let cos = JSON.parse(localStorage.getItem('cos')) || [];
+        let cos = JSON.parse(localStorage.getItem(KEY)) || [];
         cos.splice(index, 1);
-        localStorage.setItem('cos', JSON.stringify(cos));
+        localStorage.setItem(KEY, JSON.stringify(cos));
         updateCartUI();
         if(typeof actualizeazaNumarCos === 'function') actualizeazaNumarCos();
     }
 
     function handleOrder(e) {
         e.preventDefault();
-        const cos = JSON.parse(localStorage.getItem('cos')) || [];
+        const cos = JSON.parse(localStorage.getItem(KEY)) || [];
         if(cos.length === 0) {
             alert("Coșul este gol!");
             return;
         }
 
         // Completare Factura
-        const numeComplet = document.getElementById('fname').value + " " + document.getElementById('lname').value;
-        document.getElementById('inv-name').innerText = numeComplet;
+        document.getElementById('inv-name').innerText = document.getElementById('fname').value + " " + document.getElementById('lname').value;
         document.getElementById('inv-addr').innerText = document.getElementById('address').value;
         document.getElementById('inv-date').innerText = new Date().toLocaleDateString();
         document.getElementById('inv-total').innerText = document.getElementById('sum-total').innerText;
@@ -460,10 +464,9 @@
         document.getElementById('main-checkout').style.display = 'none';
         document.getElementById('invoice-container').style.display = 'block';
         
-        // Printare automata
+        // Printare
         setTimeout(() => {
             window.print();
-            // localStorage.removeItem('cos'); // Optional: curata cosul dupa printare
         }, 500);
     }
 
