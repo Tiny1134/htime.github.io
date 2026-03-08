@@ -7,7 +7,6 @@
   <link rel="icon" href="logo.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Am adăugat Space Grotesk pentru text și am readus Syncopate pentru titluri -->
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
@@ -77,7 +76,6 @@
       padding: 0 40px; 
       flex-grow: 1; 
       gap: 50px;
-      /* Folosim Space Grotesk: modern, cu personalitate, diacritice perfecte */
       font-family: 'Space Grotesk', sans-serif;
     }
 
@@ -96,7 +94,6 @@
     }
     
     .sidebar h2 { 
-      /* Readucem Syncopate pentru titlul categoriei */
       font-family: 'Syncopate', sans-serif;
       font-weight: 700;
       font-size: 1.8rem; 
@@ -140,7 +137,6 @@
     .category-list li.active { color: var(--dark); }
     .category-list li.active::before { opacity: 1; transform: translateX(0); }
 
-    /* Evidențiere categorie Oferte tip Badge/Chenar */
     .category-list li.sale-category-badge {
       background: linear-gradient(to right, var(--pink), var(--peach), var(--pink), var(--peach), var(--pink));
       background-size: 200% auto;
@@ -153,7 +149,7 @@
       margin-bottom: 15px;
     }
     .category-list li.sale-category-badge::before {
-      display: none; /* Ascundem bulina pentru acest buton special */
+      display: none; 
     }
     .category-list li.sale-category-badge:hover, .category-list li.sale-category-badge.active {
       transform: scale(1.05);
@@ -164,7 +160,6 @@
     /* FILTRE */
     .filter-group { margin-bottom: 40px; }
     .filter-group h4 { 
-      /* Syncopate pentru titlurile filtrelor */
       font-family: 'Syncopate', sans-serif;
       font-size: 0.85rem; 
       color: var(--dark); 
@@ -253,7 +248,6 @@
     .product-card:hover .main-img { opacity: 0; }
 
     .product-card-title { 
-      /* Readucem Syncopate la titlurile produselor */
       font-family: 'Syncopate', sans-serif;
       font-size: 1.1rem; 
       font-weight: 700;
@@ -267,7 +261,8 @@
     .new-price { color: var(--dark) !important; }
     .regular-price { color: var(--dark) !important; }
 
-    .add-to-cart-btn { 
+    /* FIX: Culoare alba explicita pentru buton cu prioritate maxima */
+    a.add-to-cart-btn, a.add-to-cart-btn:visited, a.add-to-cart-btn:active { 
       font-family: 'Space Grotesk', sans-serif;
       background: var(--dark); 
       color: white !important; 
@@ -282,9 +277,10 @@
       text-align: center; 
       transition: 0.3s;
       letter-spacing: 1px;
+      display: inline-block;
     }
     
-    .add-to-cart-btn:hover { 
+    a.add-to-cart-btn:hover { 
       background: linear-gradient(to right, var(--pink), var(--peach), var(--pink), var(--peach), var(--pink));
       background-size: 200% auto; 
       animation: textGradientMove 4s linear infinite; 
@@ -387,9 +383,7 @@
       <h2 id="category-title" data-i18n="shop_cat_all_title">TOATE</h2>
       
       <ul class="category-list">
-        <!-- Categoria Oferte mutată prima, evidențiată cu clasa specială -->
         <li class="sale-category-badge" onclick="updateFilters({cat: 'oferte'}, event)" data-i18n="shop_cat_sale">Oferte</li>
-        <!-- Categoria 'Toate' rămâne a doua, dar este selectată (active) by default -->
         <li class="active" onclick="updateFilters({cat: 'all'}, event)" data-i18n="shop_cat_all">Toate</li>
         <li onclick="updateFilters({cat: 'ceasuri'}, event)" data-i18n="shop_cat_watches">Ceasuri</li>
         <li onclick="updateFilters({cat: 'inele'}, event)" data-i18n="shop_cat_rings">Inele</li>
@@ -471,10 +465,8 @@
     <div class="footer-bottom">© 2024 - 2026 H-TIME Luxury Experience. Toate drepturile sunt rezervate.</div>
   </footer>
 
-  <!-- SCRIPTURI: Produse, Baza de Date, Filtrari, Cart, Limbi -->
   <script src="produse.js"></script>
   <script>
-    // State-ul filtrelor
     let state = {
       category: 'all',
       sortType: 'default',
@@ -484,9 +476,8 @@
 
     const container = document.getElementById('products-container');
 
-    // Setări pentru curs valutar și simboluri (Baza este EURO)
     const currencyConfig = {
-      ro: { symbol: 'Lei', rate: 4.97, position: 'right' }, // Modificat în Lei
+      ro: { symbol: 'Lei', rate: 4.97, position: 'right' },
       en: { symbol: '$', rate: 1.08, position: 'left' },
       fr: { symbol: '€', rate: 1.0, position: 'right' },
       de: { symbol: '€', rate: 1.0, position: 'right' },
@@ -494,31 +485,26 @@
       it: { symbol: '€', rate: 1.0, position: 'right' }
     };
 
-    // Funcție de formatare preț
     function formatPrice(priceEur, lang) {
       const config = currencyConfig[lang] || currencyConfig.ro;
       const convertedPrice = Math.round(priceEur * config.rate);
       return config.position === 'left' ? `${config.symbol}${convertedPrice}` : `${convertedPrice} ${config.symbol}`;
     }
 
-    // Funcție pentru preluarea numelui tradus din produse.js
     function getLocalizedProductName(product, lang) {
       if (lang === 'ro') return product.nume;
-      // Caută proprietatea nume_en, nume_fr, etc. Dacă nu există, fallback pe română
       return product[`nume_${lang}`] || product.nume; 
     }
 
-    // Mapeaza categoriile pentru a prelua numele corect din dicționar atunci când schimbăm titlul
     const catDictKeys = {
       'all': 'shop_cat_all_title',
       'ceasuri': 'shop_cat_watches',
       'inele': 'shop_cat_rings',
       'cercei': 'shop_cat_earrings',
       'bratari': 'shop_cat_bracelets',
-      'oferte': 'shop_cat_sale_title' // Legătura pentru titlul ofertelor
+      'oferte': 'shop_cat_sale_title' 
     };
 
-    // Logica Slider Dual
     function handlePriceSlider() {
       const minInput = document.getElementById('min-price');
       const maxInput = document.getElementById('max-price');
@@ -538,7 +524,6 @@
       innerTrack.style.left = minPercent + "%";
       innerTrack.style.width = (maxPercent - minPercent) + "%";
 
-      // Actualizăm și label-urile sliderului vizual (cu conversie valutară)
       const currentLang = localStorage.getItem('htime_lang') || 'ro';
       const config = currencyConfig[currentLang] || currencyConfig.ro;
       
@@ -551,12 +536,10 @@
       updateFilters({minP: minVal, maxP: maxVal});
     }
 
-    // Funcția de actualizare filtre
     function updateFilters(params, event) {
       if (params && params.cat) {
         state.category = params.cat;
         
-        // Setează noul atribut i18n pentru titlul categoriei
         const catTitleEl = document.getElementById('category-title');
         catTitleEl.setAttribute('data-i18n', catDictKeys[params.cat]);
         
@@ -567,13 +550,11 @@
       if (params && params.minP !== undefined) state.minP = params.minP;
       if (params && params.maxP !== undefined) state.maxP = params.maxP;
 
-      // Verificăm dacă variabila 'produse' există (adusă din produse.js)
       let srcProduse = typeof produse !== 'undefined' ? produse : [];
       
       let filtered = srcProduse.filter(p => {
         let matchCat = false;
         
-        // Logică specială pentru categoria Oferte
         if (state.category === 'all') {
           matchCat = true;
         } else if (state.category === 'oferte') {
@@ -592,7 +573,6 @@
       renderProducts(filtered);
     }
 
-    // Randare Carduri Produse (Modificată pentru a suporta curs valutar și traducere nume)
     function renderProducts(lista) {
       const currentLang = localStorage.getItem('htime_lang') || 'ro';
 
@@ -601,7 +581,6 @@
       } else {
         container.innerHTML = "";
         lista.forEach(p => {
-          // Calcul prețuri pe baza limbii
           const pretNou = formatPrice(p.pret, currentLang);
           const pretVechi = p.pretVechi ? formatPrice(p.pretVechi, currentLang) : "";
           
@@ -625,10 +604,7 @@
             `;
           }
           
-          // Hover image logica. Daca exista imagini[1], aia va fi hover-ul, altfel imaginea de baza
           let hoverImage = (p.imagini && p.imagini.length > 1) ? p.imagini[1] : p.imagine;
-          
-          // Nume localizat
           let numeProdus = getLocalizedProductName(p, currentLang);
 
           container.innerHTML += `
@@ -648,7 +624,6 @@
         });
       }
       
-      // După ce au fost generate noile elemente în DOM, aplicăm din nou traducerile (pentru butoanele statice)
       applyTranslations(currentLang);
     }
 
@@ -658,7 +633,6 @@
       if(cartBtn) cartBtn.innerText = `Cart (${cart.length})`;
     }
 
-    // ================= DICȚIONAR TRADUCERI =================
     const translations = {
       ro: {
         nav_home: "Acasă", nav_shop: "Magazin", nav_about: "Despre Noi", nav_team: "Echipa H-Time", nav_contact: "Contactează-ne",
@@ -835,9 +809,8 @@
       if (dict.title) document.title = dict.title;
     }
 
-    // Funcția care rulează la încărcarea paginii
     window.onload = () => {
-      handlePriceSlider(); // Inițiază și randează produsele implicit
+      handlePriceSlider(); 
       updateCartCounter();
       
       const switcher = document.getElementById('languageSwitcher');
@@ -845,7 +818,6 @@
       
       if (switcher) { switcher.value = saved; }
       
-      // Aplicăm traducerile pentru interfață
       applyTranslations(saved);
       
       if (switcher) {
@@ -854,7 +826,6 @@
           localStorage.setItem('htime_lang', lang);
           applyTranslations(lang);
           
-          // Re-randăm produsele și slider-ul pentru a actualiza prețurile în noua limbă
           handlePriceSlider();
         });
       }
