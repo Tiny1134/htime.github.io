@@ -31,7 +31,7 @@
     }
     h1,h2,h3,h4 { font-weight: normal; }
 
-    /* ================= NAVIGAȚIE (IDENTIC) ================= */
+    /* ================= NAVIGAȚIE ================= */
     nav {
       position: fixed;
       top:0; left:0; width:100%;
@@ -59,7 +59,7 @@
     }
     .cart-btn:hover { border-color: var(--peach); color: var(--peach); }
 
-    /* ================= SECȚIUNE CHECKOUT (INTEGRATĂ) ================= */
+    /* ================= SECȚIUNE CHECKOUT ================= */
     .checkout-container {
       max-width: 1200px;
       margin: 40px auto 80px;
@@ -99,15 +99,12 @@
       border-bottom: 1px solid #eee;
     }
     .cart-item:last-child { border-bottom: none; }
+    .item-info { display: flex; align-items: center; gap: 20px; }
+    .item-info img { width: 60px; height: 60px; object-fit: cover; border-radius: 8px; }
     .item-info h4 { font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 0.95rem; }
     .item-info p { font-size: 0.85rem; color: #777; }
     
     .item-qty-controls { display: flex; align-items: center; gap: 15px; }
-    .qty-btn { 
-      background: var(--light-bg); border: none; width: 28px; height: 28px; 
-      border-radius: 50%; cursor: pointer; transition: 0.2s; 
-    }
-    .qty-btn:hover { background: var(--peach); }
 
     /* Formular */
     .billing-form { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
@@ -143,7 +140,7 @@
     }
     .btn-primary:hover { background: var(--peach); color: var(--dark); transform: translateY(-2px); }
 
-    /* ================= FOOTER (IDENTIC) ================= */
+    /* ================= FOOTER ================= */
     footer { 
       background-color:#0b0b0b; 
       padding:80px 50px 30px; 
@@ -166,7 +163,7 @@
     .anpc-img { max-width:180px; width:100%; height:auto; display:block; margin-bottom:15px; transition:opacity .3s; }
     .anpc-img:hover { opacity:0.7; }
 
-    /* Invoice styles (hidden until generation) */
+    /* Invoice styles */
     #invoice-container { display: none; background: white; padding: 40px; border: 1px solid #ddd; max-width: 800px; margin: 40px auto; color: black; }
 
     @media (max-width:900px) {
@@ -249,15 +246,15 @@
         <h2 class="section-title" style="font-size: 1.4rem;">Sumar Comandă</h2>
         <div class="summary-line">
           <span>Subtotal</span>
-          <span id="sum-subtotal">€0.00</span>
+          <span id="sum-subtotal">0.00 RON</span>
         </div>
         <div class="summary-line">
           <span>Livrare</span>
-          <span id="sum-shipping">€15.00</span>
+          <span id="sum-shipping">15.00 RON</span>
         </div>
         <div class="summary-line total">
           <span>Total</span>
-          <span id="sum-total">€0.00</span>
+          <span id="sum-total">0.00 RON</span>
         </div>
 
         <div style="margin-top: 25px;">
@@ -285,7 +282,7 @@
       </div>
       <table style="width:100%; border-collapse:collapse; margin-top:20px;">
           <thead style="background:#f5f5f5;">
-              <tr><th style="padding:10px; border:1px solid #ddd; text-align:left;">Produs</th><th style="border:1px solid #ddd;">Cantitate</th><th style="border:1px solid #ddd;">Preț</th></tr>
+              <tr><th style="padding:10px; border:1px solid #ddd; text-align:left;">Produs</th><th style="border:1px solid #ddd;">Cantitate</th><th style="border:1px solid #ddd;">Preț Total</th></tr>
           </thead>
           <tbody id="inv-body"></tbody>
       </table>
@@ -326,8 +323,8 @@
     <div class="footer-col">
       <h3 data-i18n="footer_info">INFORMAȚII & POLITICI</h3>
       <ul>
-        <li><a href="#" data-i18n="footer_terms">Termeni și Condiții</a></li>
-        <li><a href="#" data-i18n="footer_privacy">Politică de Confidențialitate</a></li>
+        <li><a href="termeni.html" data-i18n="footer_terms">Termeni și Condiții</a></li>
+        <li><a href="confidentialitate.html" data-i18n="footer_privacy">Politică de Confidențialitate</a></li>
         <li><a href="#" data-i18n="footer_delivery">Politică de Livrare</a></li>
         <li><a href="#" data-i18n="footer_return">Politică de Retur (14 zile)</a></li>
         <li><a href="#" data-i18n="footer_care">Îngrijirea Bijuteriilor</a></li>
@@ -349,9 +346,11 @@
     <div class="footer-bottom">© 2024 - 2026 H-TIME Luxury Experience. Toate drepturile sunt rezervate.</div>
   </footer>
 
-  <!-- SCRIPTURI (IDENTIC + LOGICA CHECKOUT) -->
+  <!-- SCRIPTURI (LOGICA CHECKOUT REPARATA) -->
+  <script src="produse.js"></script>
+  <script src="script.js"></script>
   <script>
-    // 1. Logica Traduceri (Păstrată din echipa.html)
+    // 1. Logica Traduceri
     const translations = {
       ro: {
         nav_home: "Acasă", nav_shop: "Magazin", nav_about: "Despre Noi", nav_team: "Echipa H-Time", nav_contact: "Contactează-ne",
@@ -379,99 +378,96 @@
       });
     }
 
-    // 2. Logica Coș & Checkout
-    let cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
-
+    // 2. Logica Coș & Checkout (Corectata pentru a nu mai da undefined)
     function updateCartUI() {
-      // Update nav button
+      // Citim cosul folosind cheia 'cos' (aceeasi din script.js)
+      const cos = JSON.parse(localStorage.getItem('cos')) || [];
+      
+      // Update buton nav (folosind ID-ul tau cart-count daca exista in nav, altfel cart-nav-btn)
       const navBtn = document.getElementById('cart-nav-btn');
-      if(navBtn) navBtn.innerText = `Cart (${cart.length})`;
+      const cartCount = document.getElementById('cart-count');
+      const totalProduse = cos.reduce((acc, item) => acc + (item.cantitate || 1), 0);
+      
+      if(navBtn) navBtn.innerText = `Cart (${totalProduse})`;
+      if(cartCount) cartCount.innerText = totalProduse;
 
-      // Render checkout list
+      // Randare lista produse in checkout
       const list = document.getElementById('checkout-cart-list');
-      if(cart.length === 0) {
+      if(!list) return;
+
+      if(cos.length === 0) {
         list.innerHTML = "<p style='text-align:center; padding:20px;'>Coșul tău este gol.</p>";
       } else {
-        // Group items
-        const grouped = cart.reduce((acc, item) => {
-            const key = item.name + (item.variant || "");
-            if(!acc[key]) acc[key] = {...item, qty: 1};
-            else acc[key].qty++;
-            return acc;
-        }, {});
-
-        list.innerHTML = Object.values(grouped).map((item, idx) => `
+        list.innerHTML = cos.map((item, idx) => `
           <div class="cart-item">
             <div class="item-info">
-              <h4>${item.name}</h4>
-              <p>${item.variant || 'Mărime Standard'}</p>
-              <strong>€${Number(item.price).toFixed(2)}</strong>
+              <img src="${item.imagine || 'ceas.jpg'}" alt="${item.nume}">
+              <div>
+                <h4>${item.nume || 'Produs'}</h4>
+                <p>${item.pret} RON</p>
+              </div>
             </div>
             <div class="item-qty-controls">
-              <span>x ${item.qty}</span>
-              <button onclick="removeFromCart('${item.name}')" style="background:none; border:none; color:red; cursor:pointer; font-size:0.7rem; text-transform:uppercase;">Șterge</button>
+              <span>Cantitate: ${item.cantitate || 1}</span>
+              <button onclick="removeFromCart(${idx})" style="background:none; border:none; color:red; cursor:pointer; font-size:0.75rem; text-transform:uppercase; font-weight:600;">Elimină</button>
             </div>
           </div>
         `).join('');
       }
 
-      // Calculate totals
-      const subtotal = cart.reduce((acc, item) => acc + Number(item.price), 0);
+      // Calcul totaluri (folosind item.pret)
+      const subtotal = cos.reduce((acc, item) => acc + (Number(item.pret) * (item.cantitate || 1)), 0);
       const shipping = subtotal > 0 ? 15 : 0;
       const total = subtotal + shipping;
 
-      document.getElementById('sum-subtotal').innerText = `€${subtotal.toFixed(2)}`;
-      document.getElementById('sum-shipping').innerText = `€${shipping.toFixed(2)}`;
-      document.getElementById('sum-total').innerText = `€${total.toFixed(2)}`;
+      document.getElementById('sum-subtotal').innerText = `${subtotal.toFixed(2)} RON`;
+      document.getElementById('sum-shipping').innerText = `${shipping.toFixed(2)} RON`;
+      document.getElementById('sum-total').innerText = `${total.toFixed(2)} RON`;
     }
 
-    function removeFromCart(name) {
-        cart = cart.filter(item => item.name !== name);
-        localStorage.setItem('htimeCart', JSON.stringify(cart));
+    function removeFromCart(index) {
+        let cos = JSON.parse(localStorage.getItem('cos')) || [];
+        cos.splice(index, 1);
+        localStorage.setItem('cos', JSON.stringify(cos));
         updateCartUI();
+        if(typeof actualizeazaNumarCos === 'function') actualizeazaNumarCos();
     }
 
     function handleOrder(e) {
         e.preventDefault();
-        if(cart.length === 0) {
+        const cos = JSON.parse(localStorage.getItem('cos')) || [];
+        if(cos.length === 0) {
             alert("Coșul este gol!");
             return;
         }
 
-        // Fill Invoice
-        document.getElementById('inv-name').innerText = document.getElementById('fname').value + " " + document.getElementById('lname').value;
+        // Completare Factura
+        const numeComplet = document.getElementById('fname').value + " " + document.getElementById('lname').value;
+        document.getElementById('inv-name').innerText = numeComplet;
         document.getElementById('inv-addr').innerText = document.getElementById('address').value;
         document.getElementById('inv-date').innerText = new Date().toLocaleDateString();
         document.getElementById('inv-total').innerText = document.getElementById('sum-total').innerText;
         
-        const grouped = cart.reduce((acc, item) => {
-            const key = item.name;
-            if(!acc[key]) acc[key] = {...item, qty: 1};
-            else acc[key].qty++;
-            return acc;
-        }, {});
-
-        document.getElementById('inv-body').innerHTML = Object.values(grouped).map(i => `
+        document.getElementById('inv-body').innerHTML = cos.map(i => `
             <tr>
-                <td style="padding:10px; border:1px solid #ddd;">${i.name}</td>
-                <td style="text-align:center; border:1px solid #ddd;">${i.qty}</td>
-                <td style="text-align:center; border:1px solid #ddd;">€${(i.price * i.qty).toFixed(2)}</td>
+                <td style="padding:10px; border:1px solid #ddd;">${i.nume}</td>
+                <td style="text-align:center; border:1px solid #ddd;">${i.cantitate || 1}</td>
+                <td style="text-align:center; border:1px solid #ddd;">${(i.pret * (i.cantitate || 1)).toFixed(2)} RON</td>
             </tr>
         `).join('');
 
-        // Hide checkout, show invoice
+        // Ascundem checkout, afisam factura
         document.getElementById('main-checkout').style.display = 'none';
         document.getElementById('invoice-container').style.display = 'block';
         
-        // Print
+        // Printare automata
         setTimeout(() => {
             window.print();
-            // Optional: clear cart
-            // localStorage.removeItem('htimeCart');
+            // localStorage.removeItem('cos'); // Optional: curata cosul dupa printare
         }, 500);
     }
 
-    // Initialize
+    // Initializare
     document.addEventListener('DOMContentLoaded', () => {
       const switcher = document.getElementById('languageSwitcher');
       const savedLang = localStorage.getItem('htime_lang') || 'ro';
