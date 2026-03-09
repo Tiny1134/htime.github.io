@@ -384,6 +384,7 @@
       if (rawCart.length === 0) {
         listContainer.innerHTML = `<p style="text-align:center; padding:40px; font-weight: 500;">${dict.cart_empty}</p>`;
         document.getElementById('sum-subtotal').innerText = formatPrice(0, currentLang);
+        document.getElementById('sum-shipping').innerText = formatPrice(0, currentLang);
         document.getElementById('sum-total').innerText = formatPrice(0, currentLang);
         return;
       }
@@ -428,15 +429,22 @@
 
       // CALCULATIONS
       const subtotalEur = groupedCart.reduce((acc, item) => acc + (item.pret * (item.qty || 1)), 0);
-      const deliveryFeeLei = 5;
-      const deliveryFeeEur = deliveryFeeLei / 4.97;
+      
+      // Logica pentru transport: 25 Lei sub pragul de 500 Lei, 0 Lei peste prag
+      const subtotalRon = subtotalEur * 4.97;
+      let deliveryFeeEur = 0;
+      
+      if (subtotalEur > 0 && subtotalRon < 500) {
+        // Costul de 25 Lei transformat în valuta de bază a site-ului (care funcționează ca un EUR)
+        deliveryFeeEur = 25 / 4.97; 
+      }
       
       const subtotalFormatted = formatPrice(subtotalEur, currentLang);
-      const deliveryFormatted = currentLang === 'ro' ? '5 Lei' : formatPrice(deliveryFeeEur, currentLang);
-      const totalFormatted = formatPrice(subtotalEur + (subtotalEur > 0 ? deliveryFeeEur : 0), currentLang);
+      const deliveryFormatted = formatPrice(deliveryFeeEur, currentLang);
+      const totalFormatted = formatPrice(subtotalEur + deliveryFeeEur, currentLang);
 
       document.getElementById('sum-subtotal').innerText = subtotalFormatted;
-      document.getElementById('sum-shipping').innerText = subtotalEur > 0 ? deliveryFormatted : formatPrice(0, currentLang);
+      document.getElementById('sum-shipping').innerText = deliveryFormatted;
       document.getElementById('sum-total').innerText = totalFormatted;
     }
 
