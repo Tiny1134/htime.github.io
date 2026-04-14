@@ -344,7 +344,6 @@
 
   <header class="hero" id="hero-section" style="background-image: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)), url('poza1.webp');">
     
-    <!-- Animatia noua adaugata corect pe textul vechi -->
     <h1 class="hero-title-container" data-text="H-TIME">
       <span class="hero-text-base">H-TIME</span>
       <span class="hero-title-stroke">H-TIME</span>
@@ -400,24 +399,23 @@
     <h2 class="gradient-underline" data-i18n="cat_title">CE PRODUSE OFERIM</h2>
     
     <div class="circles-container">
-      <!-- Navigare si filtrare via funcția goToMagazin() -->
       <div class="circle-item" onclick="goToMagazin('ceasuri')">
-        <img src="produs2-2.webp" alt="Ceasuri" class="circle-img">
+        <img src="produs2-2.webp" alt="Ceasuri" class="circle-img" onerror="this.src='poza1.webp'">
         <h3 data-i18n="cat1_title">CEASURI</h3>
         <p><span data-i18n="cat_starts">Prețuri începând de la</span> <span class="dynamic-price" data-base="100">100 €</span></p>
       </div>
       <div class="circle-item" onclick="goToMagazin('inele')">
-        <img src="produs7-1.webp" alt="Inele" class="circle-img">
+        <img src="produs7-1.webp" alt="Inele" class="circle-img" onerror="this.src='poza1.webp'">
         <h3 data-i18n="cat2_title">INELE</h3>
         <p><span data-i18n="cat_starts">Prețuri începând de la</span> <span class="dynamic-price" data-base="100">100 €</span></p>
       </div>
       <div class="circle-item" onclick="goToMagazin('cercei')">
-        <img src="produs15-2.webp" alt="Cercei" class="circle-img">
+        <img src="produs15-2.webp" alt="Cercei" class="circle-img" onerror="this.src='poza1.webp'">
         <h3 data-i18n="cat3_title">CERCEI</h3>
         <p><span data-i18n="cat_starts">Prețuri începând de la</span> <span class="dynamic-price" data-base="100">100 €</span></p>
       </div>
       <div class="circle-item" onclick="goToMagazin('bratari')">
-        <img src="produs19-2.webp" alt="Brățări" class="circle-img">
+        <img src="produs19-2.webp" alt="Brățări" class="circle-img" onerror="this.src='poza1.webp'">
         <h3 data-i18n="cat4_title">BRĂȚĂRI</h3>
         <p><span data-i18n="cat_starts">Prețuri începând de la</span> <span class="dynamic-price" data-base="100">100 €</span></p>
       </div>
@@ -428,10 +426,9 @@
 
   <section class="sale-marquee-section">
     <h2 data-i18n="sale_title">OFERTE EXCLUSIVE</h2>
-    <div class="sale-track" id="sale-track-container"><!-- produse generate JS --></div>
+    <div class="sale-track" id="sale-track-container"></div>
   </section>
 
-  <!-- OBJECTIVES / ESENȚA H-TIME -->
   <section class="objectives-section">
     <div class="objectives-header">
       <h2 class="gradient-underline" data-i18n="obj_title">ESENȚA H-TIME</h2>
@@ -451,7 +448,7 @@
 
       <div class="obj-col">
         <h3 data-i18n="obj3_title">O MOȘTENIRE ETERNĂ</h3>
-        <p data-i18n="obj3_text">Dincolo de strălucirea efemeră, scopul nostru este să făurim amintiri care sfidează timpul. Fiecare piesă este creată pentru a deveni o comoară de suflet, menită să fie purtată cu pasiune și transmisă din generație în generație, păstrând mereu vie o poveste nemuritoare.</p>
+        <p data-i18n="obj3_text">Dincolo de strălucirea efemeră, scopul nostru este să făurim amintiri care sfidează timpul. Fiecare piesă este creată pentru a deveni o comoară de suflet, menită să be purtată cu pasiune și transmisă din generație în generație, păstrând mereu vie o poveste nemuritoare.</p>
         <p data-i18n="obj3_extra">Ne asumăm responsabilitatea calității: materiale atent selecționate, finisaje durabile și servicii care susțin longevitatea pieselor. H‑TIME nu vinde doar obiecte — cultivăm o moștenire.</p>
       </div>
     </div>
@@ -648,10 +645,13 @@
           const pretVechi = p.pretVechi ? formatPrice(p.pretVechi, lang) : "";
           const numeProdus = getLocalizedProductName(p, lang);
 
+          // Ne asigurăm că imaginile externe sau fallback-ul sunt prelucrate corect cu webp
+          const imageSrc = p.imagine ? p.imagine.replace(/\.(png|jpe?g)$/i, '.webp') : 'poza1.webp';
+
           carduriHTML += `
             <div class="sale-card" onclick="window.location.href='produs.html?id=${p.id}'" style="cursor:pointer;">
               <div class="sale-badge" data-i18n="badge_sale">SALE</div>
-              <img src="${p.imagine}" alt="${numeProdus}" onerror="this.src='https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=400'">
+              <img src="${imageSrc}" alt="${numeProdus}" onerror="this.src='poza1.webp'">
               <h3>${numeProdus}</h3>
               <div class="price-container">
                 <span class="old-price">${pretVechi}</span>
@@ -660,6 +660,8 @@
             </div>
           `;
         });
+        
+        // Aici se dublează HTML-ul pentru efectul de derulare infinită (marquee)
         trackContainer.innerHTML = carduriHTML + carduriHTML;
       }
 
