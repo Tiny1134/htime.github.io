@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Produs | H-TIME</title>
-  <link rel="icon" href="logo.png" type="image/png">
+  <link rel="icon" href="logo.webp" type="image/webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
@@ -305,9 +305,8 @@
 </head>
 <body>
 
-  <!-- NAVBAR -->
   <nav>
-    <a href="index.html" class="logo"><img src="logo.png" alt="H-TIME Logo"></a>
+    <a href="index.html" class="logo"><img src="logo.webp" alt="H-TIME Logo"></a>
     <div class="nav-links">
       <a href="index.html" data-i18n="nav_home">Acasă</a>
       <a href="magazin.html" data-i18n="nav_shop">Magazin</a>
@@ -328,12 +327,9 @@
     </div>
   </nav>
 
-  <!-- CONTAINER PRODUS -->
   <main class="product-container" id="product-root">
-      <!-- Se va injecta prin JS in functie de ID -->
-  </main>
+      </main>
 
-  <!-- TOAST NOTIFICATION (POP-UP) -->
   <div id="toast-wrapper">
     <div id="toast-content">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--peach)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -343,7 +339,6 @@
     </div>
   </div>
 
-  <!-- FOOTER -->
   <footer>
     <div class="footer-col">
       <h2>H-TIME</h2>
@@ -442,7 +437,7 @@
       
       // Fallback de siguranță dacă nu e găsit
       if (!currentProduct) {
-          currentProduct = { id: 1, nume: "Produs indisponibil", pret: 0, imagine: "logo.png", descriere: "Ne cerem scuze, acest produs nu a fost găsit." };
+          currentProduct = { id: 1, nume: "Produs indisponibil", pret: 0, imagine: "logo.webp", descriere: "Ne cerem scuze, acest produs nu a fost găsit." };
       }
 
       // Nume localizat
@@ -470,10 +465,10 @@
         thumbnailsHTML = `
           <div class="thumbnails-container">
             ${pozeProdus.map((imgUrl, index) => `
-              <img src="${imgUrl}" 
+              <img src="${imgUrl ? imgUrl.replace(/\.(png|jpe?g)$/i, '.webp') : ''}" 
                    class="thumbnail-img ${index === 0 ? 'active' : ''}" 
-                   onclick="schimbaImagine(this, '${imgUrl}')" 
-                   onerror="this.src='poza1.png'">
+                   onclick="schimbaImagine(this, '${imgUrl ? imgUrl.replace(/\.(png|jpe?g)$/i, '.webp') : ''}')" 
+                   onerror="this.src='poza1.webp'">
             `).join('')}
           </div>
         `;
@@ -484,7 +479,7 @@
         <div class="product-gallery">
           <div class="main-image-wrapper">
             ${saleBadge}
-            <img id="main-product-image" src="${pozeProdus[0]}" alt="${numeProdus}" onerror="this.src='poza1.png'">
+            <img id="main-product-image" src="${pozeProdus[0] ? pozeProdus[0].replace(/\.(png|jpe?g)$/i, '.webp') : ''}" alt="${numeProdus}" onerror="this.src='poza1.webp'">
           </div>
           ${thumbnailsHTML}
         </div>
@@ -507,7 +502,6 @@
             </button>
           </div>
 
-          <!-- Acordeoane -->
           <div class="extra-info-item">
             <button class="extra-info-btn" onclick="toggleAccordion(this)">
               <span data-i18n="acc_delivery">Livrare și Retur</span>
