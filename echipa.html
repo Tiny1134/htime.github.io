@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Echipa | H-TIME</title>
-  <link rel="icon" href="logo.png" type="image/png">
+  <link rel="icon" href="logo.webp" type="image/webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -61,7 +61,8 @@
     /* ================= SECȚIUNE ECHIPĂ ================= */
     .page-header { text-align: center; padding: 40px 20px 20px; }
     .page-header h1 { 
-      font-family: 'DM Serif Display', serif; 
+      font-family: 'Montserrat', sans-serif; 
+      font-weight: 700;
       font-size: clamp(2.5rem, 5vw, 4rem); 
       color: var(--dark); 
       margin-bottom: 15px;
@@ -175,7 +176,7 @@
 
   <!-- NAVBAR IDENTIC -->
   <nav>
-    <a href="index.html" class="logo"><img src="logo.png" alt="H-TIME Logo"></a>
+    <a href="index.html" class="logo"><img src="logo.webp" alt="H-TIME Logo"></a>
 
     <div class="nav-links">
       <a href="index.html" data-i18n="nav_home">Acasă</a>
@@ -186,7 +187,7 @@
     </div>
 
     <div class="nav-icons">
-      <select id="languageSwitcher" aria-label="Selectează limba" style="background:black;border:1px solid rgba(255,255,255,0.12);color:white;padding:6px 8px;border-radius:6px;font-size:0.85rem;text-transform:uppercase;">
+      <select id="languageSwitcher" aria-label="Selectează limba" style="background:black;border:1px solid rgba(255,255,255,0.12);color:white;padding:6px 8px;border-radius:6px;font-size:0.85rem;text-transform:uppercase; font-family: 'Montserrat', sans-serif;">
         <option value="ro">RO</option>
         <option value="en">EN</option>
         <option value="fr">FR</option>
@@ -194,7 +195,7 @@
         <option value="es">ES</option>
         <option value="it">IT</option>
       </select>
-      <a href="checkout.html" id="cart-nav-btn" class="cart-btn">Cart (0)</a>
+      <a href="checkout.html" id="cart-nav-btn" class="cart-btn" style="font-family: 'Montserrat', sans-serif;">Cart (0)</a>
     </div>
   </nav>
 
@@ -215,8 +216,8 @@
     <div class="team-card">
       <img src="alexandru.webp" alt="Bujor Alexandru Emanuel" class="team-img">
       <h2 class="team-name">Bujor Alexandru</h2>
-      <div class="team-role" data-i18n="role_hr">Departament Financiar și HR</div>
-      <p class="team-desc" data-i18n="desc_alex">Inima echipei noastre și omul cifrelor. Gestionează bugetele firmei și se asigură de menținerea unui mediu de lucru excelent.</p>
+      <div class="team-role" data-i18n="role_fin">Departament Financiar</div>
+      <p class="team-desc" data-i18n="desc_alex">Omul cifrelor. Gestionează bugetele firmei și se asigură de o dezvoltare stabilă și durabilă pe termen lung.</p>
     </div>
 
     <div class="team-card">
@@ -322,8 +323,8 @@
         team_page_desc: "Faceți cunoștință cu mințile creative și pasionate care au dat viață brandului H-TIME.",
         role_ceo: "Director General / CEO",
         desc_valeria: "Viziunea din spatele H-TIME. Coordonează întreaga activitate a firmei de exercițiu și se asigură că estetica noastră premium prinde viață.",
-        role_hr: "Departament Financiar și HR",
-        desc_alex: "Inima echipei noastre și omul cifrelor. Gestionează bugetele firmei și se asigură de menținerea unui mediu de lucru excelent.",
+        role_fin: "Departament Financiar",
+        desc_alex: "Omul cifrelor. Gestionează bugetele firmei și se asigură de o dezvoltare stabilă și durabilă pe termen lung.",
         role_logistics: "Dep. Achiziții și Logistică",
         desc_andreea: "Responsabilă cu detaliile care fac diferența. Gestionează resursele pentru ca stocurile și calitatea să fie mereu la standarde înalte.",
         role_sales: "Dep. Vânzări & Relații Clienți",
@@ -345,8 +346,8 @@
         team_page_desc: "Meet the creative and passionate minds that brought the H-TIME brand to life.",
         role_ceo: "General Manager / CEO",
         desc_valeria: "The vision behind H-TIME. She coordinates the entire activity of the practice firm and ensures our premium aesthetic comes to life.",
-        role_hr: "Finance & HR Department",
-        desc_alex: "The heart of our team and the numbers guy. Manages the firm's budgets and ensures an excellent working environment.",
+        role_fin: "Finance Department",
+        desc_alex: "The numbers guy. Manages the firm's budgets and ensures stable and sustainable long-term development.",
         role_logistics: "Purchasing & Logistics",
         desc_andreea: "Responsible for the details that make a difference. Manages resources so that stock and quality are always at high standards.",
         role_sales: "Sales & Customer Relations",
@@ -367,8 +368,8 @@
         team_page_desc: "Rencontrez les esprits créatifs et passionnés qui ont donné vie à la marque H-TIME.",
         role_ceo: "Directeur Général / PDG",
         desc_valeria: "La vision derrière H-TIME. Elle coordonne toute l'activité et veille à ce que notre esthétique premium prenne vie.",
-        role_hr: "Département Finances et RH",
-        desc_alex: "Le cœur de notre équipe et l'homme des chiffres. Gère les budgets de l'entreprise et assure un excellent environnement de travail.",
+        role_fin: "Département des Finances",
+        desc_alex: "L'homme des chiffres. Gère les budgets de l'entreprise et assure un développement stable à long terme.",
         role_logistics: "Achats et Logistique",
         desc_andreea: "Responsable des détails qui font la différence. Gère les ressources pour que la qualité soit toujours au rendez-vous.",
         role_sales: "Ventes et Relations Clients",
@@ -388,8 +389,8 @@
         team_page_desc: "Lernen Sie die kreativen und leidenschaftlichen Köpfe kennen, die H-TIME zum Leben erweckt haben.",
         role_ceo: "Geschäftsführer / CEO",
         desc_valeria: "Die Vision hinter H-TIME. Sie koordiniert die gesamte Aktivität und sorgt dafür, dass unsere Premium-Ästhetik lebendig wird.",
-        role_hr: "Finanzen & HR-Abteilung",
-        desc_alex: "Das Herz unseres Teams und der Zahlenmensch. Verwaltet die Budgets und sorgt für ein hervorragendes Arbeitsumfeld.",
+        role_fin: "Finanzabteilung",
+        desc_alex: "Der Zahlenmensch. Verwaltet die Budgets und sorgt für eine stabile und nachhaltige Entwicklung.",
         role_logistics: "Einkauf & Logistik",
         desc_andreea: "Verantwortlich für die Details. Verwaltet Ressourcen, damit Qualität und Bestand immer auf hohem Niveau sind.",
         role_sales: "Verkauf & Kundenbeziehungen",
@@ -409,8 +410,8 @@
         team_page_desc: "Conoce a las mentes creativas y apasionadas que dieron vida a la marca H-TIME.",
         role_ceo: "Director General / CEO",
         desc_valeria: "La visión detrás de H-TIME. Coordina toda la actividad y asegura que nuestra estética premium cobre vida.",
-        role_hr: "Departamento de Finanzas y RRHH",
-        desc_alex: "El corazón de nuestro equipo y el hombre de los números. Gestiona los presupuestos y garantiza un excelente ambiente.",
+        role_fin: "Departamento Financiero",
+        desc_alex: "El hombre de los números. Gestiona los presupuestos y garantiza un desarrollo estable a largo plazo.",
         role_logistics: "Compras y Logística",
         desc_andreea: "Responsable de los detalles que marcan la diferencia. Gestiona los recursos para asegurar altos estándares.",
         role_sales: "Ventas y Relaciones con Clientes",
@@ -430,8 +431,8 @@
         team_page_desc: "Incontra le menti creative e appassionate che hanno dato vita al marchio H-TIME.",
         role_ceo: "Direttore Generale / CEO",
         desc_valeria: "La visione dietro H-TIME. Coordina l'intera attività e fa in modo che la nostra estetica premium prenda vita.",
-        role_hr: "Dipartimento Finanze e HR",
-        desc_alex: "Il cuore del nostro team e l'uomo dei numeri. Gestisce i budget e garantisce un ambiente di lavoro eccellente.",
+        role_fin: "Dipartimento Finanziario",
+        desc_alex: "L'uomo dei numeri. Gestisce i budget e garantisce uno sviluppo stabile e sostenibile.",
         role_logistics: "Acquisti e Logistica",
         desc_andreea: "Responsabile dei dettagli che fanno la differenza. Gestisce le risorse affinché la qualità sia sempre al top.",
         role_sales: "Vendite e Relazioni con i Clienti",
