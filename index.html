@@ -72,6 +72,32 @@
       background-size:cover; background-position:center; background-repeat:no-repeat; padding-bottom:50px;
     }
     
+    /* ================= ANIMAȚIE MORPH LOGO -> TEXT ================= */
+    .hero-morph-wrapper {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+
+    .hero-logo-morph {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: clamp(140px, 20vw, 300px);
+      z-index: 20;
+      pointer-events: none; /* Să nu blocheze hover-ul textului după ce dispare */
+      animation: morphLogo 4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    @keyframes morphLogo {
+      0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); filter: blur(10px); }
+      10% { opacity: 1; transform: translate(-50%, -50%) scale(1); filter: blur(0) brightness(1); }
+      40% { opacity: 1; transform: translate(-50%, -50%) scale(1.05); filter: blur(0) brightness(1.2); }
+      55% { opacity: 0; transform: translate(-50%, -50%) scale(1.5); filter: blur(20px) brightness(3); visibility: hidden; }
+      100% { opacity: 0; transform: translate(-50%, -50%) scale(1.5); filter: blur(20px); visibility: hidden; }
+    }
+
     /* Titlul Mare - DM Serif Display */
     .hero-title-container {
       position: relative;
@@ -79,12 +105,19 @@
       font-family: 'DM Serif Display', serif; 
       font-size: clamp(5rem, 16vw, 18rem);
       font-weight: 400;
-      letter-spacing: 2px;
-      margin-bottom: 20px;
       line-height: 1;
       z-index: 10;
       cursor: pointer;
       transition: transform 0.3s ease;
+      /* Textul este invizibil la început și apare din blur */
+      opacity: 0;
+      animation: morphText 4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+
+    @keyframes morphText {
+      0%, 40% { opacity: 0; transform: scale(0.6); letter-spacing: -30px; filter: blur(20px); }
+      60% { opacity: 1; transform: scale(1.02); letter-spacing: 5px; filter: blur(0); }
+      100% { opacity: 1; transform: scale(1); letter-spacing: 2px; filter: blur(0); }
     }
 
     .hero-text-base {
@@ -108,9 +141,9 @@
       animation: textGradientMove 4s linear infinite; 
     }
 
-    /* Clasa pentru animația inițială de la deschiderea paginii */
+    /* Clasa pentru animația inițială de la deschiderea paginii (pornește după morph) */
     .hero-title-stroke.play-initial {
-      animation: textGradientMove 4s linear infinite, fadeStrokeOnce 3.5s ease-in-out 0.5s forwards;
+      animation: textGradientMove 4s linear infinite, fadeStrokeOnce 3s ease-in-out 2.5s forwards;
     }
 
     /* Clasa pentru animația de hover (controlată prin JS) */
@@ -137,6 +170,14 @@
       font-weight: 400; 
       margin: 0; 
       z-index: 10; 
+      /* Apare lin după terminarea morphing-ului */
+      opacity: 0;
+      animation: revealSubtitle 1.5s ease-out 3s forwards;
+    }
+
+    @keyframes revealSubtitle {
+      0% { opacity: 0; transform: translateY(15px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
 
     .text-highlight { position:relative; display:inline-block; color:#000; z-index:1; padding:0 15px; font-style:italic; font-weight:600; }
@@ -362,10 +403,13 @@
 
   <header class="hero" id="hero-section" style="background-image: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)), url('poza1.webp');">
     
-    <h1 class="hero-title-container" id="main-title" data-text="H-TIME">
-      <span class="hero-text-base">H-TIME</span>
-      <span class="hero-title-stroke play-initial" id="main-title-stroke">H-TIME</span>
-    </h1>
+    <div class="hero-morph-wrapper">
+      <img src="logo.webp" alt="H-TIME Logo" class="hero-logo-morph" onerror="this.src='logo.jpg'">
+      <h1 class="hero-title-container" id="main-title" data-text="H-TIME">
+        <span class="hero-text-base">H-TIME</span>
+        <span class="hero-title-stroke play-initial" id="main-title-stroke">H-TIME</span>
+      </h1>
+    </div>
     
     <h4><span class="text-highlight" data-i18n="hero_subtitle">”Emoții sculptate în eleganță”</span></h4>
 

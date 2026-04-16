@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Contact | H-TIME</title>
-  <link rel="icon" href="logo.png" type="image/png">
+  <link rel="icon" href="logo.webp" type="image/webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
 
   <style>
     :root { --peach: #fcbf88; --pink: #ffb6c1; --dark: #111111; --light-bg: #f8f5f2; }
@@ -25,7 +25,7 @@
     .cart-btn:hover { border-color: var(--peach); color: var(--peach); }
 
     /* Contact Layout */
-    .contact-container { max-width: 1200px; margin: 40px auto 80px; padding: 0 40px; display: flex; gap: 50px; font-family: 'Space Grotesk', sans-serif; flex: 1; width: 100%; }
+    .contact-container { max-width: 1200px; margin: 40px auto 80px; padding: 0 40px; display: flex; gap: 50px; flex: 1; width: 100%; }
     
     /* Gap-ul negru general pentru sectiuni (actioneaza ca border) */
     .black-gap {
@@ -45,7 +45,15 @@
       flex: 1;
     }
 
-    .section-title { font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: 1.6rem; margin-bottom: 25px; color: var(--dark); border-bottom: 2px solid var(--peach); padding-bottom: 10px; text-transform: uppercase; }
+    .section-title { 
+      font-family: 'Montserrat', sans-serif; 
+      font-weight: 700; 
+      font-size: 2.2rem; 
+      margin-bottom: 25px; 
+      color: var(--dark); 
+      border-bottom: 2px solid var(--peach); 
+      padding-bottom: 10px; 
+    }
     
     /* Info Details */
     .info-block { margin-bottom: 25px; }
@@ -77,11 +85,11 @@
     /* Form Styles */
     .form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
     .form-group label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: #555; }
-    .form-group input, .form-group textarea { padding: 14px; border: 1px solid #ddd; border-radius: 10px; font-family: 'Space Grotesk'; outline: none; font-size: 0.95rem; }
+    .form-group input, .form-group textarea { padding: 14px; border: 1px solid #ddd; border-radius: 10px; font-family: 'Montserrat', sans-serif; outline: none; font-size: 0.95rem; }
     .form-group input:focus, .form-group textarea:focus { border-color: var(--peach); box-shadow: 0 0 10px rgba(252, 191, 136, 0.1); }
     .form-group textarea { resize: vertical; min-height: 120px; }
     
-    .btn-primary { width: 100%; background: var(--dark); color: white; border: none; padding: 18px; border-radius: 40px; font-family: 'Space Grotesk'; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.3s; }
+    .btn-primary { width: 100%; background: var(--dark); color: white; border: none; padding: 18px; border-radius: 40px; font-family: 'Montserrat', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.3s; }
     .btn-primary:hover { background: linear-gradient(to right, var(--pink), var(--peach)); color: black; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
 
     /* Footer */
@@ -106,7 +114,7 @@
 
   <!-- NAVBAR -->
   <nav>
-    <a href="index.html" class="logo"><img src="logo.png" alt="H-TIME Logo"></a>
+    <a href="index.html" class="logo"><img src="logo.webp" alt="H-TIME Logo"></a>
     <div class="nav-links">
       <a href="index.html" data-i18n="nav_home">Acasă</a>
       <a href="magazin.html" data-i18n="nav_shop">Magazin</a>
@@ -115,7 +123,7 @@
       <a href="contact.html" data-i18n="nav_contact">Contactează-ne</a>
     </div>
     <div class="nav-icons">
-      <select id="languageSwitcher" style="background:black;border:1px solid rgba(255,255,255,0.12);color:white;padding:6px 8px;border-radius:6px;font-size:0.85rem;text-transform:uppercase; font-family:'Montserrat';">
+      <select id="languageSwitcher" aria-label="Selectează limba" style="background:black;border:1px solid rgba(255,255,255,0.12);color:white;padding:6px 8px;border-radius:6px;font-size:0.85rem;text-transform:uppercase; font-family:'Montserrat', sans-serif;">
         <option value="ro">RO</option>
         <option value="en">EN</option>
         <option value="fr">FR</option>
@@ -123,7 +131,7 @@
         <option value="es">ES</option>
         <option value="it">IT</option>
       </select>
-      <a href="checkout.html" id="cart-nav-btn" class="cart-btn">Cart (0)</a>
+      <a href="checkout.html" id="cart-nav-btn" class="cart-btn" style="font-family:'Montserrat', sans-serif;">Cart (0)</a>
     </div>
   </nav>
 
@@ -228,13 +236,88 @@
 
   <script src="script.js"></script>
   <script>
+    function updateCartCount() {
+      // Prioritizeaza functia globala pentru consistenta
+      if (typeof actualizeazaNumarCos === 'function') {
+        actualizeazaNumarCos();
+      } else {
+        let cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
+        // Numaram cantitatea (qty), nu doar lungimea array-ului
+        let count = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
+        const cartBtn = document.getElementById('cart-nav-btn');
+        if (cartBtn) {
+          cartBtn.innerText = `Cart (${count})`;
+        }
+      }
+    }
+
     const translations = {
-      ro: { nav_home: "Acasă", nav_shop: "Magazin", nav_about: "Despre Noi", nav_team: "Echipa H-Time", nav_contact: "Contactează-ne", footer_desc: "Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul.", footer_nav: "NAVIGARE RAPIDĂ", footer_home: "Acasă - Pagina principală", footer_shop: "Magazin - Toate Colecțiile", footer_about: "Povestea Noastră", footer_contact: "Contact & Suport", footer_info: "INFORMAȚII & POLITICI", footer_terms: "Termeni și Condiții", footer_privacy: "Politică de Confidențialitate", footer_delivery: "Politică de Livrare", footer_return: "Politică de Retur (14 zile)", footer_care: "Îngrijirea Bijuteriilor", footer_consumer: "PROTECȚIA CONSUMATORULUI", contact_title: "Contactează-ne", contact_desc: "Suntem aici pentru a vă oferi o experiență de neuitat. Echipa noastră de experți vă stă la dispoziție pentru orice întrebare sau consultanță privind colecțiile noastre.", contact_address_title: "Adresă", contact_phone_title: "Telefon", contact_email_title: "E-mail", contact_program_title: "Program", contact_program_val: "Luni - Vineri: 10:00 - 18:00", contact_form_title: "Trimite un mesaj", form_name: "Nume complet", form_email: "Adresa de E-mail", form_message: "Mesaj", btn_send: "Trimite Mesajul", ph_fname: "Popescu Ion", ph_email: "contact@exemplu.ro", ph_message: "Scrieți mesajul aici..." },
-      en: { nav_home: "Home", nav_shop: "Shop", nav_about: "About Us", nav_team: "H-Time Team", nav_contact: "Contact Us", footer_desc: "Emotions sculpted in elegance. A luxury boutique dedicated to people who appreciate refinement.", footer_nav: "QUICK NAVIGATION", footer_home: "Home - Main Page", footer_shop: "Shop - All Collections", footer_about: "Our Story", footer_contact: "Contact & Support", footer_info: "INFORMATION & POLICIES", footer_terms: "Terms and Conditions", footer_privacy: "Privacy Policy", footer_delivery: "Delivery Policy", footer_return: "Return Policy (14 days)", footer_care: "Jewelry Care", footer_consumer: "CONSUMER PROTECTION", contact_title: "Contact Us", contact_desc: "We are here to offer you an unforgettable experience. Our team of experts is at your disposal for any questions or advice regarding our collections.", contact_address_title: "Address", contact_phone_title: "Phone", contact_email_title: "E-mail", contact_program_title: "Schedule", contact_program_val: "Monday - Friday: 10:00 - 18:00", contact_form_title: "Send a message", form_name: "Full Name", form_email: "Email Address", form_message: "Message", btn_send: "Send Message", ph_fname: "John Doe", ph_email: "contact@example.com", ph_message: "Write your message here..." },
-      fr: { nav_home: "Accueil", nav_shop: "Boutique", nav_about: "À propos", nav_team: "Équipe H-Time", nav_contact: "Contactez-nous", footer_desc: "Émotions sculptées dans l'élégance. Une boutique de luxe.", footer_nav: "NAVIGATION RAPIDE", footer_home: "Accueil - Page principale", footer_shop: "Boutique - Toutes les collections", footer_about: "Notre histoire", footer_contact: "Contact & Support", footer_info: "INFORMATIONS & POLITIQUES", footer_terms: "Conditions générales", footer_privacy: "Politique de confidentialité", footer_delivery: "Politique de livraison", footer_return: "Politique de retour (14 jours)", footer_care: "Entretien des bijoux", footer_consumer: "PROTECTION DU CONSOMMATEUR", contact_title: "Contactez-nous", contact_desc: "Notre équipe d'experts est à votre disposition.", contact_address_title: "Adresse", contact_phone_title: "Téléphone", contact_email_title: "E-mail", contact_program_title: "Horaires", contact_program_val: "Lundi - Vendredi: 10:00 - 18:00", contact_form_title: "Envoyer un message", form_name: "Nom complet", form_email: "Adresse Email", form_message: "Message", btn_send: "Envoyer", ph_fname: "Jean Dupont", ph_email: "contact@exemple.fr", ph_message: "Écrivez votre message ici..." },
-      de: { nav_home: "Startseite", nav_shop: "Shop", nav_about: "Über uns", nav_team: "H-Time Team", nav_contact: "Kontakt", footer_desc: "Emotionen in Eleganz gemeißelt. Eine Luxus-Boutique.", footer_nav: "SCHNELLNAVIGATION", footer_home: "Startseite - Hauptseite", footer_shop: "Shop - Alle Kollektionen", footer_about: "Unsere Geschichte", footer_contact: "Kontakt & Support", footer_info: "INFORMATIONEN & RICHTLINIEN", footer_terms: "Allgemeine Geschäftsbedingungen", footer_privacy: "Datenschutzrichtlinie", footer_delivery: "Lieferbedingungen", footer_return: "Rückgaberecht (14 Tage)", footer_care: "Schmuckpflege", footer_consumer: "VERBRAUCHERSCHUTZ", contact_title: "Kontaktiere uns", contact_desc: "Unser Expertenteam steht Ihnen zur Verfügung.", contact_address_title: "Adresse", contact_phone_title: "Telefon", contact_email_title: "E-Mail", contact_program_title: "Öffnungszeiten", contact_program_val: "Montag - Freitag: 10:00 - 18:00", contact_form_title: "Nachricht senden", form_name: "Vollständiger Name", form_email: "E-Mail Adresse", form_message: "Nachricht", btn_send: "Senden", ph_fname: "Hans Müller", ph_email: "kontakt@beispiel.de", ph_message: "Schreiben Sie hier Ihre Nachricht..." },
-      es: { nav_home: "Inicio", nav_shop: "Tienda", nav_about: "Sobre Nosotros", nav_team: "Equipo H-Time", nav_contact: "Contáctanos", footer_desc: "Emociones esculpidas en elegancia. Una boutique de lujo.", footer_nav: "NAVEGACIÓN RÁPIDA", footer_home: "Inicio - Página principal", footer_shop: "Tienda - Todas las colecciones", footer_about: "Nuestra historia", footer_contact: "Contacto & Soporte", footer_info: "INFORMACIÓN & POLÍTICAS", footer_terms: "Términos y condiciones", footer_privacy: "Política de privacidad", footer_delivery: "Política de entrega", footer_return: "Política de devolución (14 días)", footer_care: "Cuidado de las joyas", footer_consumer: "PROTECCIÓN AL CONSUMIDOR", contact_title: "Contáctanos", contact_desc: "Nuestro equipo de expertos está a su disposición.", contact_address_title: "Dirección", contact_phone_title: "Teléfono", contact_email_title: "Correo", contact_program_title: "Horario", contact_program_val: "Lunes - Viernes: 10:00 - 18:00", contact_form_title: "Enviar un mensaje", form_name: "Nombre completo", form_email: "Correo Electrónico", form_message: "Mensaje", btn_send: "Enviar Mensaje", ph_fname: "Carlos García", ph_email: "contacto@ejemplo.es", ph_message: "Escribe tu mensaje aquí..." },
-      it: { nav_home: "Home", nav_shop: "Negozio", nav_about: "Chi Siamo", nav_team: "Team H-Time", nav_contact: "Contattaci", footer_desc: "Emozioni scolpite nell'eleganza. Una boutique di lusso.", footer_nav: "NAVIGAZIONE RAPIDA", footer_home: "Home - Pagina principale", footer_shop: "Negozio - Tutte le collezioni", footer_about: "La nostra storia", footer_contact: "Contatto & Supporto", footer_info: "INFORMAZIONI & POLITICHE", footer_terms: "Termini e condizioni", footer_privacy: "Informativa sulla privacy", footer_delivery: "Politica di consegna", footer_return: "Politica di reso (14 giorni)", footer_care: "Cura dei gioielli", footer_consumer: "PROTEZIONE DEL CONSUMATORE", contact_title: "Contattaci", contact_desc: "Il nostro team di esperti è a tua disposizione.", contact_address_title: "Indirizzo", contact_phone_title: "Telefono", contact_email_title: "E-mail", contact_program_title: "Orari", contact_program_val: "Lunedì - Venerdì: 10:00 - 18:00", contact_form_title: "Invia un messaggio", form_name: "Nome completo", form_email: "Indirizzo Email", form_message: "Messaggio", btn_send: "Invia Messaggio", ph_fname: "Mario Rossi", ph_email: "contatto@esempio.it", ph_message: "Scrivi qui il tuo messaggio..." }
+      ro: { 
+        nav_home: "Acasă", nav_shop: "Magazin", nav_about: "Despre Noi", nav_team: "Echipa H-Time", nav_contact: "Contactează-ne", 
+        footer_desc: "Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul.", 
+        footer_nav: "NAVIGARE RAPIDĂ", footer_home: "Acasă - Pagina principală", footer_shop: "Magazin - Toate Colecțiile", footer_about: "Povestea Noastră", footer_contact: "Contact & Suport", 
+        footer_info: "INFORMAȚII & POLITICI", footer_terms: "Termeni și Condiții", footer_privacy: "Politică de Confidențialitate", footer_delivery: "Politică de Livrare", footer_return: "Politică de Retur (14 zile)", footer_care: "Îngrijirea Bijuteriilor", 
+        footer_consumer: "PROTECȚIA CONSUMATORULUI", 
+        contact_title: "Contactează-ne", contact_desc: "Suntem aici pentru a vă oferi o experiență de neuitat. Echipa noastră de experți vă stă la dispoziție pentru orice întrebare sau consultanță privind colecțiile noastre.", 
+        contact_address_title: "Adresă", contact_phone_title: "Telefon", contact_email_title: "E-mail", contact_program_title: "Program", contact_program_val: "Luni - Vineri: 10:00 - 18:00", 
+        contact_form_title: "Trimite un mesaj", form_name: "Nume complet", form_email: "Adresa de E-mail", form_message: "Mesaj", btn_send: "Trimite Mesajul", 
+        ph_fname: "Popescu Ion", ph_email: "contact@exemplu.ro", ph_message: "Scrieți mesajul aici..." 
+      },
+      en: { 
+        nav_home: "Home", nav_shop: "Shop", nav_about: "About Us", nav_team: "H-Time Team", nav_contact: "Contact Us", 
+        footer_desc: "Emotions sculpted in elegance. A luxury boutique dedicated to people who appreciate refinement.", 
+        footer_nav: "QUICK NAVIGATION", footer_home: "Home - Main Page", footer_shop: "Shop - All Collections", footer_about: "Our Story", footer_contact: "Contact & Support", 
+        footer_info: "INFORMATION & POLICIES", footer_terms: "Terms and Conditions", footer_privacy: "Privacy Policy", footer_delivery: "Delivery Policy", footer_return: "Return Policy (14 days)", footer_care: "Jewelry Care", 
+        footer_consumer: "CONSUMER PROTECTION", 
+        contact_title: "Contact Us", contact_desc: "We are here to offer you an unforgettable experience. Our team of experts is at your disposal for any questions or advice regarding our collections.", 
+        contact_address_title: "Address", contact_phone_title: "Phone", contact_email_title: "E-mail", contact_program_title: "Schedule", contact_program_val: "Monday - Friday: 10:00 - 18:00", 
+        contact_form_title: "Send a message", form_name: "Full Name", form_email: "Email Address", form_message: "Message", btn_send: "Send Message", 
+        ph_fname: "John Doe", ph_email: "contact@example.com", ph_message: "Write your message here..." 
+      },
+      fr: { 
+        nav_home: "Accueil", nav_shop: "Boutique", nav_about: "À propos", nav_team: "Équipe H-Time", nav_contact: "Contactez-nous", 
+        footer_desc: "Émotions sculptées dans l'élégance. Une boutique de luxe.", 
+        footer_nav: "NAVIGATION RAPIDE", footer_home: "Accueil - Page principale", footer_shop: "Boutique - Toutes les collections", footer_about: "Notre histoire", footer_contact: "Contact & Support", 
+        footer_info: "INFORMATIONS & POLITIQUES", footer_terms: "Conditions générales", footer_privacy: "Politique de confidentialité", footer_delivery: "Politique de livraison", footer_return: "Politique de retour (14 jours)", footer_care: "Entretien des bijoux", 
+        footer_consumer: "PROTECTION DU CONSOMMATEUR", 
+        contact_title: "Contactez-nous", contact_desc: "Notre équipe d'experts est à votre disposition.", 
+        contact_address_title: "Adresse", contact_phone_title: "Téléphone", contact_email_title: "E-mail", contact_program_title: "Horaires", contact_program_val: "Lundi - Vendredi: 10:00 - 18:00", 
+        contact_form_title: "Envoyer un message", form_name: "Nom complet", form_email: "Adresse Email", form_message: "Message", btn_send: "Envoyer", 
+        ph_fname: "Jean Dupont", ph_email: "contact@exemple.fr", ph_message: "Écrivez votre message ici..." 
+      },
+      de: { 
+        nav_home: "Startseite", nav_shop: "Shop", nav_about: "Über uns", nav_team: "H-Time Team", nav_contact: "Kontakt", 
+        footer_desc: "Emotionen in Eleganz gemeißelt. Eine Luxus-Boutique.", 
+        footer_nav: "SCHNELLNAVIGATION", footer_home: "Startseite - Hauptseite", footer_shop: "Shop - Alle Kollektionen", footer_about: "Unsere Geschichte", footer_contact: "Kontakt & Support", 
+        footer_info: "INFORMATIONEN & RICHTLINIEN", footer_terms: "Allgemeine Geschäftsbedingungen", footer_privacy: "Datenschutzrichtlinie", footer_delivery: "Lieferbedingungen", footer_return: "Rückgaberecht (14 Tage)", footer_care: "Schmuckpflege", 
+        footer_consumer: "VERBRAUCHERSCHUTZ", 
+        contact_title: "Kontaktiere uns", contact_desc: "Unser Expertenteam steht Ihnen zur Verfügung.", 
+        contact_address_title: "Adresse", contact_phone_title: "Telefon", contact_email_title: "E-Mail", contact_program_title: "Öffnungszeiten", contact_program_val: "Montag - Freitag: 10:00 - 18:00", 
+        contact_form_title: "Nachricht senden", form_name: "Vollständiger Name", form_email: "E-Mail Adresse", form_message: "Nachricht", btn_send: "Senden", 
+        ph_fname: "Hans Müller", ph_email: "kontakt@beispiel.de", ph_message: "Schreiben Sie hier Ihre Nachricht..." 
+      },
+      es: { 
+        nav_home: "Inicio", nav_shop: "Tienda", nav_about: "Sobre Nosotros", nav_team: "Equipo H-Time", nav_contact: "Contáctanos", 
+        footer_desc: "Emociones esculpidas en elegancia. Una boutique de lujo.", 
+        footer_nav: "NAVEGACIÓN RÁPIDA", footer_home: "Inicio - Página principal", footer_shop: "Tienda - Todas las colecciones", footer_about: "Nuestra historia", footer_contact: "Contacto & Soporte", 
+        footer_info: "INFORMACIÓN & POLÍTICAS", footer_terms: "Términos y condiciones", footer_privacy: "Política de privacidad", footer_delivery: "Política de entrega", footer_return: "Política de devolución (14 días)", footer_care: "Cuidado de las joyas", 
+        footer_consumer: "PROTECCIÓN AL CONSUMIDOR", 
+        contact_title: "Contáctanos", contact_desc: "Nuestro equipo de expertos está a su disposición.", 
+        contact_address_title: "Dirección", contact_phone_title: "Teléfono", contact_email_title: "Correo", contact_program_title: "Horario", contact_program_val: "Lunes - Viernes: 10:00 - 18:00", 
+        contact_form_title: "Enviar un mensaje", form_name: "Nombre completo", form_email: "Correo Electrónico", form_message: "Mensaje", btn_send: "Enviar Mensaje", 
+        ph_fname: "Carlos García", ph_email: "contacto@ejemplo.es", ph_message: "Escribe tu mensaje aquí..." 
+      },
+      it: { 
+        nav_home: "Home", nav_shop: "Negozio", nav_about: "Chi Siamo", nav_team: "Team H-Time", nav_contact: "Contattaci", 
+        footer_desc: "Emozioni scolpite nell'eleganza. Una boutique di lusso.", 
+        footer_nav: "NAVIGAZIONE RAPIDA", footer_home: "Home - Pagina principale", footer_shop: "Negozio - Tutte le collezioni", footer_about: "La nostra storia", footer_contact: "Contatto & Supporto", 
+        footer_info: "INFORMAZIONI & POLITICHE", footer_terms: "Termini e condizioni", footer_privacy: "Informativa sulla privacy", footer_delivery: "Politica di consegna", footer_return: "Politica di reso (14 giorni)", footer_care: "Cura dei gioielli", 
+        footer_consumer: "PROTEZIONE DEL CONSUMATORE", 
+        contact_title: "Contattaci", contact_desc: "Il nostro team di esperti è a tua disposizione.", 
+        contact_address_title: "Indirizzo", contact_phone_title: "Telefono", contact_email_title: "E-mail", contact_program_title: "Orari", contact_program_val: "Lunedì - Venerdì: 10:00 - 18:00", 
+        contact_form_title: "Invia un messaggio", form_name: "Nome completo", form_email: "Indirizzo Email", form_message: "Messaggio", btn_send: "Invia Messaggio", 
+        ph_fname: "Mario Rossi", ph_email: "contatto@esempio.it", ph_message: "Scrivi qui il tuo messaggio..." 
+      }
     };
     function applyTranslations(lang) { 
       const dict = translations[lang] || translations.ro; 
@@ -242,11 +325,16 @@
       document.querySelectorAll('[data-i18n-placeholder]').forEach(el => { const key = el.getAttribute('data-i18n-placeholder'); if (dict[key]) el.placeholder = dict[key]; });
     }
     document.addEventListener('DOMContentLoaded', () => {
+      updateCartCount();
       const switcher = document.getElementById('languageSwitcher');
-      if(switcher) { switcher.value = localStorage.getItem('htime_lang') || 'ro'; switcher.addEventListener('change', () => { localStorage.setItem('htime_lang', switcher.value); applyTranslations(switcher.value); }); }
+      if(switcher) { 
+        switcher.value = localStorage.getItem('htime_lang') || 'ro'; 
+        switcher.addEventListener('change', () => { 
+          localStorage.setItem('htime_lang', switcher.value); 
+          applyTranslations(switcher.value); 
+        }); 
+      }
       applyTranslations(localStorage.getItem('htime_lang') || 'ro');
-      // Sincronizare cos din script.js global
-      if (typeof actualizeazaNumarCos === 'function') actualizeazaNumarCos();
     });
   </script>
 </body>
