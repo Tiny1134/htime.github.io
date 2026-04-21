@@ -256,42 +256,6 @@
     .obj-col h3 { font-size:1.2rem; border-bottom:2px solid black; padding-bottom:10px; margin-bottom:20px; font-weight:600; }
     .obj-col p { font-size:0.95rem; line-height:1.8; color:#333; margin-bottom: 15px;}
 
-    /* ================= SECȚIUNE VIDEO ================= */
-    .video-section {
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto 80px auto;
-      padding: 0 20px;
-    }
-    
-    /* Noua bordură animată elegantă */
-    .video-wrapper {
-      padding: 4px; /* Grosimea bordurii */
-      border-radius: 16px;
-      background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink));
-      background-size: 200% auto;
-      animation: textGradientMove 4s linear infinite;
-      box-shadow: 0 25px 50px rgba(0,0,0,0.25);
-      position: relative;
-    }
-
-    .video-container {
-      position: relative;
-      width: 100%;
-      border-radius: 12px;
-      overflow: hidden;
-      aspect-ratio: 16 / 9; /* Menține proporția pentru ecrane de toate dimensiunile */
-      background: #000;
-      /* Box shadow mutat pe wrapper pentru a nu dubla umbrele */
-    }
-    
-    .video-container video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
     /* QUOTES - Textul care se mișcă (Marquee) */
     .quotes-section { padding:80px 0; background:#000; overflow:hidden; display:flex; flex-direction:column; gap:40px; width:100%; }
     .quote-track { display:flex; width:max-content; white-space:nowrap; gap:80px; font-family: 'Playfair Display', serif; font-style:italic; font-size:1.8rem; color:#fff; }
@@ -377,10 +341,11 @@
     
     .cookie-actions { display: flex; flex-direction: column; gap: 12px; min-width: 280px; width: 100%; }
     .cookie-buttons-row { display: flex; gap: 10px; width: 100%; }
-    .cookie-actions button {
-      flex: 1; padding: 12px 15px; border-radius: 30px; font-family: 'Montserrat', sans-serif;
+    .cookie-actions button, .cookie-pref-footer button {
+      padding: 12px 15px; border-radius: 30px; font-family: 'Montserrat', sans-serif;
       font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: 0.3s; text-transform: uppercase;
     }
+    .cookie-actions button { flex: 1; }
     .btn-accept-c { background: linear-gradient(to right, var(--pink), var(--peach)); color: black; border: none; box-shadow: 0 4px 15px rgba(252, 191, 136, 0.2); }
     .btn-accept-c:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(252, 191, 136, 0.4); }
     .btn-reject-c { background: transparent; color: white; border: 1px solid rgba(255,255,255,0.3); }
@@ -392,6 +357,33 @@
       padding: 5px !important; box-shadow: none !important;
     }
     .btn-manage-c:hover { color: white !important; transform: none !important;}
+
+    /* COOKIE PREFERENCES MODAL CSS */
+    .cookie-pref-modal {
+      position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.95);
+      background: rgba(17, 17, 17, 0.98); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px; width: 90%; max-width: 500px; z-index: 2001; color: white;
+      opacity: 0; visibility: hidden; transition: all 0.3s ease; box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+    .cookie-pref-modal.show { opacity: 1; visibility: visible; transform: translate(-50%, -50%) scale(1); }
+    .cookie-pref-header { display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .cookie-pref-header h3 { font-size: 1.2rem; color: var(--peach); margin: 0; font-weight: 600; }
+    .close-pref { background: none; border: none; color: white; font-size: 1.8rem; cursor: pointer; transition: color 0.3s; line-height: 1; }
+    .close-pref:hover { color: var(--pink); }
+    .cookie-pref-body { padding: 20px; max-height: 60vh; overflow-y: auto; }
+    .pref-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; gap: 15px; }
+    .pref-item:last-child { margin-bottom: 0; }
+    .pref-info h4 { font-size: 1rem; margin-bottom: 5px; font-weight: 600; font-family: 'Montserrat', sans-serif; }
+    .pref-info p { font-size: 0.8rem; color: #aaa; line-height: 1.4; margin: 0; }
+    .cookie-pref-footer { padding: 20px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: flex-end; }
+    
+    .switch { position: relative; display: inline-block; width: 46px; height: 24px; flex-shrink: 0; }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(255,255,255,0.2); transition: .4s; border-radius: 24px; }
+    .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
+    .switch input:checked + .slider { background: linear-gradient(to right, var(--pink), var(--peach)); }
+    .switch input:checked + .slider:before { transform: translateX(22px); }
+    .switch input:disabled + .slider { opacity: 0.5; cursor: not-allowed; }
 
     @media (min-width: 992px) {
       .cookie-banner { flex-direction: row; justify-content: center; padding: 40px 50px; gap: 50px; }
@@ -569,17 +561,6 @@
     </div>
   </section>
 
-  <!-- VIDEO SECTION -->
-  <section class="video-section">
-    <!-- Wrapper cu bordura animata gradient adaugat -->
-    <div class="video-wrapper">
-      <div class="video-container">
-        <!-- Se recomandă formatul clip.mp4 (H.264/AAC) pentru suport web universal -->
-        <video src="clip.mp4" autoplay loop muted playsinline poster="poza1.webp"></video>
-      </div>
-    </div>
-  </section>
-
   <section class="quotes-section">
     <div class="quote-track scroll-right-fast">
       <div class="quote-item" data-i18n="quote1">"Bijuteriile sunt cele care fac femeia să se simtă unică" <span>- Coco Chanel</span></div>
@@ -682,6 +663,7 @@
       </div>
       <div class="company-info">
         <p><strong>CUI:</strong> 83241620</p>
+        <p><strong>Reg. Com.:</strong> J22/4620/2024</p>
         <p><strong>Sediu:</strong> Strada Milcov 18A, Iași 70025</p>
       </div>
     </div>
@@ -705,6 +687,7 @@
         <li><a href="politica_livrare.html" data-i18n="footer_delivery">Politică de Livrare</a></li>
         <li><a href="politici_retur.html" data-i18n="footer_return">Politică de Retur (14 zile)</a></li>
         <li><a href="ingrijirea_bijuteriilor.html" data-i18n="footer_care">Îngrijirea Bijuteriilor</a></li>
+        <li><a href="date_identificare.html" data-i18n="footer_id_data">Date de identificare ale societății</a></li>
       </ul>
     </div>
 
@@ -738,6 +721,49 @@
         <button id="accept-cookies" class="btn-accept-c" data-i18n="cookie_accept">Accept toate</button>
       </div>
       <button id="manage-cookies" class="btn-manage-c" data-i18n="cookie_manage">Administrează preferințele</button>
+    </div>
+  </div>
+
+  <!-- COOKIE PREFERENCES MODAL -->
+  <div id="cookie-preferences-modal" class="cookie-pref-modal">
+    <div class="cookie-pref-header">
+      <h3 data-i18n="pref_title">Preferințe Cookies</h3>
+      <button class="close-pref" id="close-pref">&times;</button>
+    </div>
+    <div class="cookie-pref-body">
+      <div class="pref-item">
+        <div class="pref-info">
+          <h4 data-i18n="pref_necessary">Strict Necesare</h4>
+          <p data-i18n="pref_necessary_desc">Aceste cookie-uri sunt esențiale pentru funcționarea site-ului și nu pot fi dezactivate.</p>
+        </div>
+        <label class="switch">
+          <input type="checkbox" checked disabled>
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="pref-item">
+        <div class="pref-info">
+          <h4 data-i18n="pref_analytics">Analitice</h4>
+          <p data-i18n="pref_analytics_desc">Ne ajută să înțelegem cum interacționează vizitatorii cu site-ul, colectând date anonime.</p>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="cookie-analytics" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="pref-item">
+        <div class="pref-info">
+          <h4 data-i18n="pref_marketing">Marketing</h4>
+          <p data-i18n="pref_marketing_desc">Sunt folosite pentru a afișa reclame relevante și atractive pentru utilizatorul individual.</p>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="cookie-marketing" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+    <div class="cookie-pref-footer">
+      <button id="save-preferences" class="btn-accept-c" style="width:100%;" data-i18n="pref_save">Salvează Preferințele</button>
     </div>
   </div>
 
@@ -853,10 +879,37 @@
           startHeroAnimations(); // Pornește animația abia acum
         });
       }
-      // Buton Administrează (Redirecționează către pagina de politică/preferințe)
+      
+      // Buton Administrează (Deschide modalul de preferințe)
+      const prefModal = document.getElementById('cookie-preferences-modal');
+      const closePrefBtn = document.getElementById('close-pref');
+      const savePrefBtn = document.getElementById('save-preferences');
+
       if (manageBtn) {
         manageBtn.addEventListener('click', () => {
-          window.location.href = 'politica_cookies.html';
+          if (cookieBanner) cookieBanner.classList.remove('show');
+          if (prefModal) prefModal.classList.add('show');
+        });
+      }
+
+      if (closePrefBtn) {
+        closePrefBtn.addEventListener('click', () => {
+          if (prefModal) prefModal.classList.remove('show');
+          if (cookieBanner) cookieBanner.classList.add('show'); // Întoarcere la bannerul principal
+        });
+      }
+
+      if (savePrefBtn) {
+        savePrefBtn.addEventListener('click', () => {
+          localStorage.setItem('htime_cookies_accepted', 'custom');
+          const analytics = document.getElementById('cookie-analytics').checked;
+          const marketing = document.getElementById('cookie-marketing').checked;
+          localStorage.setItem('htime_cookies_analytics', analytics);
+          localStorage.setItem('htime_cookies_marketing', marketing);
+          
+          if (prefModal) prefModal.classList.remove('show');
+          hideCookies();
+          startHeroAnimations();
         });
       }
       // -----------------------------
@@ -988,11 +1041,20 @@
         footer_about: "Povestea Noastră", footer_contact: "Contact & Suport", footer_info: "INFORMAȚII & POLITICI",
         footer_terms: "Termeni și Condiții", footer_privacy: "Politică de Confidențialitate", footer_cookies: "Politică de Cookies", footer_delivery: "Politică de Livrare",
         footer_return: "Politică de Retur (14 zile)", footer_care: "Îngrijirea Bijuteriilor", footer_consumer: "PROTECȚIA CONSUMATORULUI",
+        footer_id_data: "Date de identificare ale societății",
         cookie_title: "Salut!",
         cookie_text_detailed: "Dorim să îți oferim o experiență cât mai plăcută. Folosim cookie-uri pentru a asigura funcționarea corectă a site-ului, a analiza performanța și a personaliza conținutul. Prin apăsarea butonului \"Accept toate\", ești de acord cu utilizarea acestora. Poți afla mai multe detalii citind <a href='politica_cookies.html'>Politica de Cookies</a> și <a href='confidentialitate.html'>Politica de Confidențialitate</a>.",
         cookie_accept: "Accept toate",
         cookie_reject: "Refuză toate",
-        cookie_manage: "Administrează preferințele"
+        cookie_manage: "Administrează preferințele",
+        pref_title: "Preferințe Cookies",
+        pref_necessary: "Strict Necesare",
+        pref_necessary_desc: "Aceste cookie-uri sunt esențiale pentru funcționarea site-ului și nu pot fi dezactivate.",
+        pref_analytics: "Analitice",
+        pref_analytics_desc: "Ne ajută să înțelegem cum interacționează vizitatorii cu site-ul, colectând date anonime.",
+        pref_marketing: "Marketing",
+        pref_marketing_desc: "Sunt folosite pentru a afișa reclame relevante și atractive pentru utilizatorul individual.",
+        pref_save: "Salvează Preferințele"
       },
 
       en: {
@@ -1028,11 +1090,20 @@
         footer_about: "Our Story", footer_contact: "Contact & Support", footer_info: "INFORMATION & POLICIES",
         footer_terms: "Terms and Conditions", footer_privacy: "Privacy Policy", footer_cookies: "Cookie Policy", footer_delivery: "Delivery Policy",
         footer_return: "Return Policy (14 days)", footer_care: "Jewelry Care", footer_consumer: "CONSUMER PROTECTION",
+        footer_id_data: "Company Identification Data",
         cookie_title: "Hello!",
         cookie_text_detailed: "We want to offer you the best experience. We use cookies to ensure the correct functioning of the site, analyze performance, and personalize content. By clicking \"Accept all\", you agree to their use. You can find out more by reading our <a href='politica_cookies.html'>Cookie Policy</a> and <a href='confidentialitate.html'>Privacy Policy</a>.",
         cookie_accept: "Accept all",
         cookie_reject: "Reject all",
-        cookie_manage: "Manage preferences"
+        cookie_manage: "Manage preferences",
+        pref_title: "Cookie Preferences",
+        pref_necessary: "Strictly Necessary",
+        pref_necessary_desc: "These cookies are essential for the website to function properly and cannot be disabled.",
+        pref_analytics: "Analytics",
+        pref_analytics_desc: "Help us understand how visitors interact with the website by collecting anonymous data.",
+        pref_marketing: "Marketing",
+        pref_marketing_desc: "Used to track visitors across websites to display relevant and engaging advertisements.",
+        pref_save: "Save Preferences"
       },
 
       fr: {
@@ -1068,11 +1139,20 @@
         footer_about: "Notre histoire", footer_contact: "Contact & Support", footer_info: "INFORMATIONS & POLITIQUES",
         footer_terms: "Conditions générales", footer_privacy: "Politique de confidentialité", footer_cookies: "Politique de cookies", footer_delivery: "Politique de livraison",
         footer_return: "Politique de retour (14 jours)", footer_care: "Entretien des bijoux", footer_consumer: "PROTECTION DU CONSOMMATEUR",
+        footer_id_data: "Données d'identification de l'entreprise",
         cookie_title: "Bonjour!",
         cookie_text_detailed: "Nous souhaitons vous offrir la meilleure expérience. Nous utilisons des cookies pour assurer le bon fonctionnement du site, analyser les performances et personnaliser le contenu. En cliquant sur \"Tout accepter\", vous acceptez leur utilisation. Pour en savoir plus, consultez notre <a href='politica_cookies.html'>Politique relative aux cookies</a> et notre <a href='confidentialitate.html'>Politique de confidentialité</a>.",
         cookie_accept: "Tout accepter",
         cookie_reject: "Tout refuser",
-        cookie_manage: "Gérer les préférences"
+        cookie_manage: "Gérer les préférences",
+        pref_title: "Préférences de Cookies",
+        pref_necessary: "Strictement Nécessaires",
+        pref_necessary_desc: "Ces cookies sont essentiels au fonctionnement du site et ne peuvent pas être désactivés.",
+        pref_analytics: "Analytiques",
+        pref_analytics_desc: "Nous aident à comprendre comment les visiteurs interagissent avec le site en collectant des données anonymes.",
+        pref_marketing: "Marketing",
+        pref_marketing_desc: "Utilisés pour suivre les visiteurs sur les sites Web afin d'afficher des publicités pertinentes.",
+        pref_save: "Enregistrer les Préférences"
       },
 
       de: {
@@ -1108,11 +1188,20 @@
         footer_about: "Unsere Geschichte", footer_contact: "Kontakt & Support", footer_info: "INFORMATIONEN & RICHTLINIEN",
         footer_terms: "Allgemeine Geschäftsbedingungen", footer_privacy: "Datenschutzrichtlinie", footer_cookies: "Cookie-Richtlinie", footer_delivery: "Lieferbedingungen",
         footer_return: "Rückgaberecht (14 Tage)", footer_care: "Schmuckpflege", footer_consumer: "VERBRAUCHERSCHUTZ",
+        footer_id_data: "Unternehmensidentifikationsdaten",
         cookie_title: "Hallo!",
         cookie_text_detailed: "Wir möchten Ihnen das beste Erlebnis bieten. Wir verwenden Cookies, um das korrekte Funktionieren der Website sicherzustellen, die Leistung zu analysieren und Inhalte zu personalisieren. Wenn Sie auf \"Alle akzeptieren\" klicken, stimmen Sie der Verwendung zu. Weitere Informationen finden Sie in unserer <a href='politica_cookies.html'>Cookie-Richtlinie</a> und <a href='confidentialitate.html'>Datenschutzrichtlinie</a>.",
         cookie_accept: "Alle akzeptieren",
         cookie_reject: "Alle ablehnen",
-        cookie_manage: "Einstellungen verwalten"
+        cookie_manage: "Einstellungen verwalten",
+        pref_title: "Cookie-Einstellungen",
+        pref_necessary: "Unbedingt Erforderlich",
+        pref_necessary_desc: "Diese Cookies sind für die Funktion der Website unerlässlich und können nicht deaktiviert werden.",
+        pref_analytics: "Analysen",
+        pref_analytics_desc: "Helfen uns zu verstehen, wie Besucher mit der Website interagieren, indem anonyme Daten gesammelt werden.",
+        pref_marketing: "Marketing",
+        pref_marketing_desc: "Werden verwendet, um Besuchern auf Websites zu folgen, um relevante Anzeigen zu schalten.",
+        pref_save: "Einstellungen Speichern"
       },
 
       es: {
@@ -1148,11 +1237,20 @@
         footer_about: "Nuestra historia", footer_contact: "Contacto & Soporte", footer_info: "INFORMACIÓN & POLÍTICAS",
         footer_terms: "Términos y condiciones", footer_privacy: "Política de privacidad", footer_cookies: "Política de Cookies", footer_delivery: "Política de entrega",
         footer_return: "Política de devolución (14 días)", footer_care: "Cuidado de las joyas", footer_consumer: "PROTECCIÓN AL CONSUMIDOR",
+        footer_id_data: "Datos de identificación de la empresa",
         cookie_title: "¡Hola!",
         cookie_text_detailed: "Queremos ofrecerle la mejor experiencia. Utilizamos cookies para garantizar el correcto funcionamiento del sitio, analizar el rendimiento y personalizar el contenido. Al hacer clic en \"Aceptar todo\", acepta su uso. Puede obtener más información leyendo nuestra <a href='politica_cookies.html'>Política de Cookies</a> y <a href='confidentialitate.html'>Política de Privacidad</a>.",
         cookie_accept: "Aceptar todo",
         cookie_reject: "Rechazar todo",
-        cookie_manage: "Gestionar preferencias"
+        cookie_manage: "Gestionar preferencias",
+        pref_title: "Preferencias de Cookies",
+        pref_necessary: "Estrictamente Necesarias",
+        pref_necessary_desc: "Estas cookies son esenciales para el funcionamiento del sitio y no se pueden desactivar.",
+        pref_analytics: "Analíticas",
+        pref_analytics_desc: "Nos ayudan a comprender cómo interactúan los visitantes con el sitio web al recopilar datos anónimos.",
+        pref_marketing: "Marketing",
+        pref_marketing_desc: "Se utilizan para rastrear a los visitantes en los sitios web para mostrar anuncios relevantes.",
+        pref_save: "Guardar Preferencias"
       },
 
       it: {
@@ -1188,11 +1286,20 @@
         footer_about: "La nostra storia", footer_contact: "Contatto & Supporto", footer_info: "INFORMAZIONI & POLITICHE",
         footer_terms: "Termini e condizioni", footer_privacy: "Privacy", footer_cookies: "Informativa sui cookie", footer_delivery: "Consegna",
         footer_return: "Reso (14 giorni)", footer_care: "Cura dei gioielli", footer_consumer: "PROTEZIONE DEL CONSUMATORE",
+        footer_id_data: "Dati identificativi dell'azienda",
         cookie_title: "Ciao!",
         cookie_text_detailed: "Vogliamo offrirti la migliore esperienza. Utilizziamo i cookie per garantire il corretto funzionamento del sito, analizzare le prestazioni e personalizzare i contenuti. Cliccando su \"Accetta tutto\", acconsenti al loro utilizzo. Puoi saperne di più leggendo la nostra <a href='politica_cookies.html'>Informativa sui cookie</a> e <a href='confidentialitate.html'>Informativa sulla privacy</a>.",
         cookie_accept: "Accetta tutto",
         cookie_reject: "Rifiuta tutto",
-        cookie_manage: "Gestisci preferenze"
+        cookie_manage: "Gestisci preferenze",
+        pref_title: "Preferenze sui Cookie",
+        pref_necessary: "Strettamente Necessari",
+        pref_necessary_desc: "Questi cookie sono essenziali per il funzionamento del sito e non possono essere disattivati.",
+        pref_analytics: "Analitici",
+        pref_analytics_desc: "Ci aiutano a capire come i visitatori interagiscono con il sito raccogliendo dati anonimi.",
+        pref_marketing: "Marketing",
+        pref_marketing_desc: "Vengono utilizzati per tracciare i visitatori sui siti web per visualizzare annunci pertinenti.",
+        pref_save: "Salva Preferenze"
       }
     };
 
