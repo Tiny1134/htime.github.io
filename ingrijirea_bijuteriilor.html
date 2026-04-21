@@ -4,76 +4,138 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Îngrijirea Bijuteriilor | H-TIME</title>
-  <link rel="icon" href="logo.png" type="image/png">
+  <link rel="icon" href="logo.webp" type="image/webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
 
   <style>
-    :root { --peach: #fcbf88; --pink: #ffb6c1; --dark: #111111; --light-bg: #f8f5f2; }
+    :root {
+      --peach: #fcbf88;
+      --pink: #ffb6c1;
+      --dark: #111111;
+      --light-bg: #f8f5f2;
+    }
+
     * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family: 'Montserrat', sans-serif; font-weight: 300; background-color: var(--light-bg); color: var(--dark); overflow-x: hidden; display: flex; flex-direction: column; min-height: 100vh; padding-top: 100px; }
-    
-    /* Navbar */
-    nav { position: fixed; top:0; left:0; width:100%; padding:15px 50px; display:flex; justify-content:space-between; align-items:center; z-index:1000; background-color: var(--dark); border-bottom: 1px solid rgba(255,255,255,0.1); }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      background-color: var(--light-bg);
+      color: var(--dark);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    h1,h2,h3,h4 { font-weight: normal; }
+    a { color: inherit; text-decoration: none; }
+
+    /* NAVBAR */
+    nav {
+      position: fixed;
+      top:0; left:0; width:100%;
+      padding:15px 50px;
+      display:flex; justify-content:space-between; align-items:center;
+      z-index:1000;
+      background-color: rgba(0,0,0,0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
     .logo img { height:75px; }
     .nav-links { display:flex; gap:30px; }
-    .nav-links a { color:white; text-decoration:none; font-weight:500; font-size:0.9rem; text-transform:uppercase; letter-spacing:1px; transition: color .3s; }
+    .nav-links a {
+      color:white; font-weight:500; font-size:0.9rem;
+      text-transform:uppercase; letter-spacing:1px; transition: color .3s;
+    }
     .nav-links a:hover { color: var(--peach); }
     .nav-icons { display:flex; align-items:center; gap:20px; }
-    .cart-btn { border:1px solid white; padding:8px 18px; border-radius:30px; display:inline-flex; align-items:center; justify-content:center; transition: all .3s; color: white; text-decoration: none; cursor: pointer; }
-    .cart-btn:hover { border-color: var(--peach); color: var(--peach); }
+    .nav-icons a { color:white; font-size:0.9rem; text-transform:uppercase; transition: all .3s; }
+    .nav-icons a:hover { color: var(--peach); }
+    .cart-btn {
+      border:1px solid white; padding:8px 18px; border-radius:30px;
+      display:inline-flex; align-items:center; justify-content:center; transition: all .3s;
+    }
+    .cart-btn:hover { border-color: var(--peach); }
 
-    /* Content Layout */
-    .policy-container { max-width: 1000px; margin: 40px auto 80px; padding: 0 40px; font-family: 'Space Grotesk', sans-serif; flex: 1; width: 100%; }
-    
-    /* Gap-ul negru general pentru sectiuni (actioneaza ca border) */
-    .black-gap {
-      background-color: var(--dark);
-      padding: 8px; /* Grosimea border-ului negru */
-      border-radius: 16px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+    /* PAGE HEADER */
+    .page-header {
+      background: var(--dark);
+      color: white;
+      padding: 180px 20px 80px;
+      text-align: center;
+    }
+    .page-header h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      margin-bottom: 15px;
+      background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink));
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: textGradientMove 4s linear infinite;
+    }
+    .page-header p {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.2rem;
+      color: #ccc;
     }
 
-    .white-card {
-      background-color: white;
-      padding: 40px;
+    @keyframes textGradientMove { 0%{background-position:0% 50%} 100%{background-position:200% 50%} }
+
+    /* POLICY CONTAINER */
+    .policy-container {
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 50px;
+      background: white;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.05);
       border-radius: 12px;
-      flex: 1;
     }
+    .policy-container h2 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-top: 40px;
+      margin-bottom: 15px;
+      color: var(--dark);
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+    }
+    .policy-container h2:first-child { margin-top: 0; }
+    .policy-container p { font-size: 1rem; line-height: 1.8; color: #555; margin-bottom: 15px; text-align: justify; }
+    .policy-container ul { margin-left: 20px; margin-bottom: 20px; color: #555; }
+    .policy-container li { margin-bottom: 10px; line-height: 1.6; text-align: justify;}
+    .policy-container strong { color: var(--dark); font-weight: 600; }
 
-    .section-title { font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: 1.8rem; margin-bottom: 30px; color: var(--dark); border-bottom: 2px solid var(--peach); padding-bottom: 10px; text-transform: uppercase; }
-    
-    .policy-content h3 { font-weight: 700; margin: 25px 0 15px; font-size: 1.2rem; color: var(--dark); }
-    .policy-content p { line-height: 1.8; color: #555; margin-bottom: 15px; font-size: 0.95rem; }
-    .policy-content ul { margin-left: 20px; margin-bottom: 15px; color: #555; }
-    .policy-content li { margin-bottom: 8px; line-height: 1.6; font-size: 0.95rem; }
-
-    /* Footer */
+    /* FOOTER */
     footer { background-color:#0b0b0b; padding:80px 50px 30px; display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:40px; color:#fff; border-top:1px solid #222; }
-    .footer-col h2 { font-family:'DM Serif Display',serif; color:var(--peach); font-size:2.2rem; margin-bottom:20px; }
+    .footer-col h2 { color:var(--peach); font-size:2.2rem; margin-bottom:20px; font-weight:700; }
     .footer-col h3 { font-size:1rem; font-weight:700; margin-bottom:30px; letter-spacing:1px; text-transform:uppercase; color:#fff; }
     .footer-desc { font-size:0.9rem; color:#999; line-height:1.8; margin-bottom:30px; }
     .social-links { display:flex; gap:15px; }
-    .social-icon-circle { width:40px; height:40px; background:#222; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; text-decoration:none; transition:.3s; }
+    .social-icon-circle { width:40px; height:40px; background:#222; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; transition:.3s; }
     .social-icon-circle:hover { background: linear-gradient(to right, var(--pink), var(--peach)); color:black; transform:translateY(-3px); }
-    .footer-col ul { list-style:none; padding:0; display:flex; flex-direction:column; gap:15px; }
-    .footer-col ul a { text-decoration:none; color:#999; font-size:0.9rem; transition:.3s; display:inline-block; }
+    .footer-col ul { list-style:none; display:flex; flex-direction:column; gap:15px; padding:0; margin:0;}
+    .footer-col ul a { color:#999; font-size:0.9rem; transition:.3s; display:inline-block; }
     .footer-col ul a:hover { color:var(--peach); transform:translateX(5px); }
     .footer-bottom { grid-column:1 / -1; text-align:center; padding-top:40px; border-top:1px solid #222; color:#555; font-size:0.8rem; margin-top:20px; }
     .anpc-img { max-width:180px; width:100%; height:auto; display:block; margin-bottom:15px; transition:opacity .3s; }
     .anpc-img:hover { opacity:0.7; }
+    .company-info { margin-top: 25px; font-size: 0.85rem; color: #888; line-height: 1.6; }
 
-    @media (max-width:900px) { nav { flex-direction:column; gap:15px; padding:15px; } body { padding-top: 130px; } .policy-container { padding: 0 20px; } .white-card { padding: 25px; } footer { padding: 40px 20px; } }
+    @media (max-width:768px) {
+      nav { flex-direction:column; gap:15px; padding:15px; }
+      .nav-links { flex-wrap:wrap; justify-content:center; gap:15px; }
+      .policy-container { margin: 30px 15px; padding: 25px 15px; }
+      footer { padding:40px 20px; }
+    }
   </style>
 </head>
 <body>
 
+  <!-- NAVBAR -->
   <nav>
-    <a href="index.html" class="logo"><img src="logo.png" alt="H-TIME Logo"></a>
+    <a href="index.html" class="logo"><img src="logo.webp" alt="H-TIME Logo" onerror="this.src='logo.png'"></a>
     <div class="nav-links">
       <a href="index.html" data-i18n="nav_home">Acasă</a>
       <a href="magazin.html" data-i18n="nav_shop">Magazin</a>
@@ -82,7 +144,7 @@
       <a href="contact.html" data-i18n="nav_contact">Contactează-ne</a>
     </div>
     <div class="nav-icons">
-      <select id="languageSwitcher" style="background:black;border:1px solid rgba(255,255,255,0.12);color:white;padding:6px 8px;border-radius:6px;font-size:0.85rem;text-transform:uppercase; font-family:'Montserrat';">
+      <select id="languageSwitcher" aria-label="Selectează limba" style="background:black;border:1px solid rgba(255,255,255,0.12);color:white;padding:6px 8px;border-radius:6px;font-size:0.85rem;text-transform:uppercase;font-family:'Montserrat', sans-serif;">
         <option value="ro">RO</option>
         <option value="en">EN</option>
         <option value="fr">FR</option>
@@ -90,44 +152,65 @@
         <option value="es">ES</option>
         <option value="it">IT</option>
       </select>
-      <a href="checkout.html" id="cart-nav-btn" class="cart-btn">Cart (0)</a>
+      <a href="checkout.html" id="cart-nav-btn" class="cart-btn" style="font-family:'Montserrat', sans-serif;">Cart (0)</a>
     </div>
   </nav>
 
+  <!-- HEADER PAGINĂ -->
+  <header class="page-header">
+    <h1 data-i18n="care_title">Îngrijirea Bijuteriilor</h1>
+    <p data-i18n="care_subtitle">Păstrează strălucirea și rafinamentul pieselor tale preferate pentru generațiile viitoare.</p>
+  </header>
+
+  <!-- CONȚINUT POLITICĂ -->
   <main class="policy-container">
-    <div class="black-gap">
-      <div class="white-card">
-        <h1 class="section-title" data-i18n="care_title">Îngrijirea Bijuteriilor</h1>
-        
-        <div class="policy-content">
-          <p data-i18n="care_p1">Pentru a păstra strălucirea și frumusețea de-a lungul timpului, vă recomandăm să urmați câteva reguli simple de îngrijire.</p>
+    <p data-i18n="care_intro">Pentru a menține integritatea, strălucirea și frumusețea bijuteriilor și ceasurilor H-TIME de-a lungul timpului, este esențial să le acordați atenția cuvenită. Vă rugăm să respectați următoarele recomandări detaliate de îngrijire și întreținere.</p>
           
-          <h3 data-i18n="care_h1">1. Evitarea expunerii la substanțe chimice</h3>
-          <p data-i18n="care_p2">Parfumurile și produsele cosmetice pot afecta suprafața. Puneți-vă bijuteriile doar după ce ați folosit aceste produse.</p>
+    <h2 data-i18n="care_h1">1. Protejarea împotriva substanțelor chimice</h2>
+    <p data-i18n="care_p1">Contactul direct cu parfumuri, loțiuni de corp, fixativ de păr sau produse de curățenie (în special cele pe bază de clor sau înălbitor) poate deteriora ireversibil metalele prețioase și pietrele naturale. Regula de aur este: bijuteriile sunt ultimele pe care le puneți înainte de a ieși din casă și primele pe care le scoateți la întoarcere.</p>
 
-          <h3 data-i18n="care_h2">2. Protecția împotriva apei</h3>
-          <p data-i18n="care_p3">Recomandăm scoaterea bijuteriilor înainte de a face duș sau de a înota.</p>
+    <h2 data-i18n="care_h2">2. Interacțiunea cu apa și umiditatea</h2>
+    <p data-i18n="care_p2">Sarea din apa de mare și clorul din piscine pot eroda și decolora metalele. Vă recomandăm ferm să îndepărtați bijuteriile înainte de a înota, de a face duș sau de a intra în saune/izvoare termale. De asemenea, umiditatea excesivă poate accelera procesul natural de oxidare (înnegrire) a argintului și aurului de carataj mic.</p>
 
-          <h3 data-i18n="care_h3">3. Curățarea corectă</h3>
-          <p data-i18n="care_p4">Folosiți doar o lavetă moale, specială pentru bijuterii.</p>
+    <h2 data-i18n="care_h3">3. Curățarea corectă și delicată</h2>
+    <p data-i18n="care_p3">După fiecare purtare, ștergeți ușor bijuteriile cu o lavetă din microfibră sau din bumbac moale pentru a îndepărta urmele de transpirație și uleiurile naturale ale pielii. Pentru o curățare mai profundă acasă, folosiți apă călduță și un săpun cu pH neutru, împreună cu o perie foarte moale, dar evitați absolut această metodă pentru pietrele poroase (ex: perle, opale, smaralde).</p>
 
-          <h3 data-i18n="care_h4">4. Depozitarea</h3>
-          <p data-i18n="care_p5">Păstrați-le în cutia originală H-TIME sau într-un săculeț moale.</p>
-        </div>
-      </div>
-    </div>
+    <h2 data-i18n="care_h4">4. Depozitarea individuală</h2>
+    <p data-i18n="care_p4">Pietrele prețioase, în special diamantele (care sunt extrem de dure), pot zgâria alte metale sau pietre mai moi dacă sunt ținute laolaltă. Depozitați fiecare piesă separat, în cutia originală H-TIME sau în săculeți individuali din catifea. Păstrați lanțurile și colierele închise și întinse pentru a preveni înnodarea lor.</p>
+    
+    <h2 data-i18n="care_h5">5. Purtarea în timpul activităților fizice</h2>
+    <p data-i18n="care_p5">Aurul și argintul sunt metale maleabile. Pentru a preveni deformarea structurală, zgârieturile adânci sau spargerea/slăbirea pietrelor din montură, scoateți absolut toate bijuteriile și ceasurile în timpul antrenamentelor la sală, ridicării de greutăți, grădinăritului sau curățeniei casnice riguroase.</p>
+
+    <h2 data-i18n="care_h6">6. Îngrijirea ceasurilor de lux</h2>
+    <p data-i18n="care_p6">Feriți ceasurile de schimbări bruște de temperatură și de câmpuri magnetice puternice (boxe audio, frigidere, dispozitive electronice mari) care pot magnetiza și deregla mecanismul. Dacă ceasul este rezistent la apă, asigurați-vă întotdeauna că remontoarul (coroana) este perfect înfiletat/închis înainte de contactul cu apa. Recomandăm o revizie completă a mecanismului la fiecare 3-5 ani.</p>
+
+    <h2 data-i18n="care_h7">7. Inspecția profesională anuală</h2>
+    <p data-i18n="care_p7">Vă recomandăm ca cel puțin o dată pe an să aduceți bijuteriile cu diamante sau pietre prețioase la un bijutier profesionist. Acesta va verifica integritatea gheruțelor (monturii) pentru a se asigura că pietrele sunt fixate perfect și le va supune unei curățări profesionale cu ultrasunete, redându-le strălucirea inițială.</p>
   </main>
 
+  <!-- FOOTER -->
   <footer>
     <div class="footer-col">
       <h2>H-TIME</h2>
       <p class="footer-desc" data-i18n="footer_desc">Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul, calitatea superioară și poveștile spuse prin intermediul bijuteriilor și ceasurilor unice.</p>
       <div class="social-links">
-        <a href="#" class="social-icon-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
-        <a href="#" class="social-icon-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
-        <a href="#" class="social-icon-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg></a>
+        <a href="#" class="social-icon-circle" title="Facebook">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+        </a>
+        <a href="https://www.instagram.com/bijuterii.h_time/" class="social-icon-circle" title="Instagram">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+        </a>
+        <a href="#" class="social-icon-circle" title="TikTok">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
+        </a>
+      </div>
+      <div class="company-info">
+        <p><strong>CUI:</strong> 83241620</p>
+        <p><strong>Reg. Com.:</strong> J22/4620/2024</p>
+        <p><strong>Sediu:</strong> Strada Milcov 18A, Iași 70025</p>
       </div>
     </div>
+
     <div class="footer-col">
       <h3 data-i18n="footer_nav">NAVIGARE RAPIDĂ</h3>
       <ul>
@@ -137,21 +220,29 @@
         <li><a href="contact.html" data-i18n="footer_contact">Contact & Suport</a></li>
       </ul>
     </div>
+
     <div class="footer-col">
       <h3 data-i18n="footer_info">INFORMAȚII & POLITICI</h3>
       <ul>
         <li><a href="termeni.html" data-i18n="footer_terms">Termeni și Condiții</a></li>
         <li><a href="confidentialitate.html" data-i18n="footer_privacy">Politică de Confidențialitate</a></li>
+        <li><a href="politica_cookies.html" data-i18n="footer_cookies">Politică de Cookies</a></li>
         <li><a href="politica_livrare.html" data-i18n="footer_delivery">Politică de Livrare</a></li>
         <li><a href="politici_retur.html" data-i18n="footer_return">Politică de Retur (14 zile)</a></li>
-        <li><a href="ingrijirea_bijuteriilor.html" data-i18n="footer_care">Îngrijirea Bijuteriilor</a></li>
+        <li><a href="ingrijirea_bijuteriilor.html" style="color:var(--peach);" data-i18n="footer_care">Îngrijirea Bijuteriilor</a></li>
+        <li><a href="date_identificare.html" data-i18n="footer_id_data">Date de identificare ale societății</a></li>
       </ul>
     </div>
+
     <div class="footer-col">
       <h3 data-i18n="footer_consumer">PROTECȚIA CONSUMATORULUI</h3>
       <div>
-        <a href="https://anpc.ro/ce-este-sal/" target="_blank"><img src="https://ro.pandora.net/mobify/bundle/1108/static/img/SAL-PICTOGRAMA.png?app=pdp" alt="ANPC SAL" class="anpc-img"></a>
-        <a href="https://ec.europa.eu/consumers/odr" target="_blank"><img src="https://ro.pandora.net/mobify/bundle/1108/static/img/pictogramaSOL.png?app=pdp" alt="ANPC SOL" class="anpc-img"></a>
+        <a href="https://anpc.ro/ce-este-sal/" target="_blank">
+          <img src="https://ro.pandora.net/mobify/bundle/1108/static/img/SAL-PICTOGRAMA.png?app=pdp" alt="ANPC SAL" class="anpc-img">
+        </a>
+        <a href="https://ec.europa.eu/consumers/odr" target="_blank">
+          <img src="https://ro.pandora.net/mobify/bundle/1108/static/img/pictogramaSOL.png?app=pdp" alt="ANPC SOL" class="anpc-img">
+        </a>
       </div>
     </div>
     <div class="footer-bottom">© 2024 - 2026 H-TIME Luxury Experience. Toate drepturile sunt rezervate.</div>
@@ -159,22 +250,219 @@
 
   <script src="script.js"></script>
   <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      let cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
+      const cartBtn = document.getElementById('cart-nav-btn');
+      if (cartBtn) cartBtn.innerText = `Cart (${cart.length})`;
+
+      const switcher = document.getElementById('languageSwitcher');
+      const savedLang = localStorage.getItem('htime_lang') || 'ro';
+      if (switcher) switcher.value = savedLang;
+      applyTranslations(savedLang);
+
+      if (switcher) {
+        switcher.addEventListener('change', () => {
+          const lang = switcher.value;
+          localStorage.setItem('htime_lang', lang);
+          applyTranslations(lang);
+        });
+      }
+    });
+
     const translations = {
-      ro: { nav_home: "Acasă", nav_shop: "Magazin", nav_about: "Despre Noi", nav_team: "Echipa H-Time", nav_contact: "Contactează-ne", footer_desc: "Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul.", footer_nav: "NAVIGARE RAPIDĂ", footer_home: "Acasă - Pagina principală", footer_shop: "Magazin - Toate Colecțiile", footer_about: "Povestea Noastră", footer_contact: "Contact & Suport", footer_info: "INFORMAȚII & POLITICI", footer_terms: "Termeni și Condiții", footer_privacy: "Politică de Confidențialitate", footer_delivery: "Politică de Livrare", footer_return: "Politică de Retur (14 zile)", footer_care: "Îngrijirea Bijuteriilor", footer_consumer: "PROTECȚIA CONSUMATORULUI",
-            care_title: "Îngrijirea Bijuteriilor", care_p1: "Pentru a păstra strălucirea și frumusețea de-a lungul timpului, vă recomandăm să urmați câteva reguli simple.", care_h1: "1. Evitarea expunerii la substanțe chimice", care_p2: "Parfumurile și produsele cosmetice pot afecta suprafața.", care_h2: "2. Protecția împotriva apei", care_p3: "Recomandăm scoaterea bijuteriilor înainte de a face duș sau înota.", care_h3: "3. Curățarea corectă", care_p4: "Folosiți doar o lavetă moale.", care_h4: "4. Depozitarea", care_p5: "Păstrați-le în cutia originală." },
-      en: { nav_home: "Home", nav_shop: "Shop", nav_about: "About Us", nav_team: "H-Time Team", nav_contact: "Contact Us", footer_desc: "Emotions sculpted in elegance. A luxury boutique dedicated to people who appreciate refinement.", footer_nav: "QUICK NAVIGATION", footer_home: "Home - Main Page", footer_shop: "Shop - All Collections", footer_about: "Our Story", footer_contact: "Contact & Support", footer_info: "INFORMATION & POLICIES", footer_terms: "Terms and Conditions", footer_privacy: "Privacy Policy", footer_delivery: "Delivery Policy", footer_return: "Return Policy (14 days)", footer_care: "Jewelry Care", footer_consumer: "CONSUMER PROTECTION",
-            care_title: "Jewelry Care", care_p1: "To maintain their shine and beauty over time, follow these simple rules.", care_h1: "1. Avoid chemicals", care_p2: "Perfumes and cosmetics can affect the surface.", care_h2: "2. Water protection", care_p3: "Remove jewelry before showering or swimming.", care_h3: "3. Proper cleaning", care_p4: "Use only a soft cloth.", care_h4: "4. Storage", care_p5: "Store in the original box." },
-      fr: { nav_home: "Accueil", nav_shop: "Boutique", nav_about: "À propos", nav_team: "Équipe H-Time", nav_contact: "Contactez-nous", footer_desc: "Émotions sculptées dans l'élégance.", footer_nav: "NAVIGATION RAPIDE", footer_home: "Accueil - Page principale", footer_shop: "Boutique - Collections", footer_about: "Notre histoire", footer_contact: "Contact & Support", footer_info: "INFORMATIONS & POLITIQUES", footer_terms: "Conditions générales", footer_privacy: "Politique de confidentialité", footer_delivery: "Politique de livraison", footer_return: "Politique de retour", footer_care: "Entretien des bijoux", footer_consumer: "PROTECTION", care_title: "Entretien des bijoux", care_p1: "Suivez ces règles pour garder leur éclat.", care_h1: "1. Éviter les produits chimiques", care_p2: "Parfums et cosmétiques peuvent altérer la surface.", care_h2: "2. Protection contre l'eau", care_p3: "Retirez les bijoux avant la douche ou la natation.", care_h3: "3. Nettoyage", care_p4: "Utilisez un chiffon doux.", care_h4: "4. Rangement", care_p5: "Rangez dans la boîte d'origine." },
-      de: { nav_home: "Startseite", nav_shop: "Shop", nav_about: "Über uns", nav_team: "H-Time Team", nav_contact: "Kontakt", footer_desc: "Emotionen in Eleganz gemeißelt.", footer_nav: "SCHNELLNAVIGATION", footer_home: "Startseite - Hauptseite", footer_shop: "Shop - Kollektionen", footer_about: "Unsere Geschichte", footer_contact: "Kontakt & Support", footer_info: "INFORMATIONEN", footer_terms: "AGB", footer_privacy: "Datenschutz", footer_delivery: "Lieferung", footer_return: "Rückgabe", footer_care: "Schmuckpflege", footer_consumer: "VERBRAUCHERSCHUTZ", care_title: "Schmuckpflege", care_p1: "Befolgen Sie diese Regeln, um den Glanz zu erhalten.", care_h1: "1. Chemikalien vermeiden", care_p2: "Parfüm und Kosmetika können die Oberfläche angreifen.", care_h2: "2. Wasserschutz", care_p3: "Vor dem Duschen abnehmen.", care_h3: "3. Reinigung", care_p4: "Nur weiches Tuch verwenden.", care_h4: "4. Lagerung", care_p5: "In der Originalbox aufbewahren." },
-      es: { nav_home: "Inicio", nav_shop: "Tienda", nav_about: "Sobre Nosotros", nav_team: "Equipo H-Time", nav_contact: "Contáctanos", footer_desc: "Emociones esculpidas en elegancia.", footer_nav: "NAVEGACIÓN RÁPIDA", footer_home: "Inicio - Página principal", footer_shop: "Tienda - Colecciones", footer_about: "Nuestra historia", footer_contact: "Contacto", footer_info: "INFORMACIÓN", footer_terms: "Términos y condiciones", footer_privacy: "Política de privacidad", footer_delivery: "Política de entrega", footer_return: "Política de devolución", footer_care: "Cuidado de joyas", footer_consumer: "PROTECCIÓN", care_title: "Cuidado de Joyas", care_p1: "Siga estas reglas para mantener el brillo.", care_h1: "1. Evitar productos químicos", care_p2: "Los perfumes pueden afectar la superficie.", care_h2: "2. Protección contra agua", care_p3: "Quitar antes de ducharse.", care_h3: "3. Limpieza", care_p4: "Utilice solo un paño suave.", care_h4: "4. Almacenamiento", care_p5: "Guarde en la caja original." },
-      it: { nav_home: "Home", nav_shop: "Negozio", nav_about: "Chi Siamo", nav_team: "Team H-Time", nav_contact: "Contattaci", footer_desc: "Emozioni scolpite nell'eleganza.", footer_nav: "NAVIGAZIONE RAPIDA", footer_home: "Home - Pagina principale", footer_shop: "Negozio - Collezioni", footer_about: "La nostra storia", footer_contact: "Contatto", footer_info: "INFORMAZIONI", footer_terms: "Termini e condizioni", footer_privacy: "Privacy", footer_delivery: "Consegna", footer_return: "Reso", footer_care: "Cura dei gioielli", footer_consumer: "PROTEZIONE", care_title: "Cura dei Gioielli", care_p1: "Segui queste regole per mantenere la brillantezza.", care_h1: "1. Evitare prodotti chimici", care_p2: "Profumi e cosmetici possono danneggiare.", care_h2: "2. Protezione dall'acqua", care_p3: "Rimuovere prima di fare la doccia.", care_h3: "3. Pulizia", care_p4: "Usa un panno morbido.", care_h4: "4. Conservazione", care_p5: "Conserva nella scatola originale." }
+      ro: { 
+        title: "Îngrijirea Bijuteriilor | H-TIME",
+        nav_home: "Acasă", nav_shop: "Magazin", nav_about: "Despre Noi", nav_team: "Echipa H-Time", nav_contact: "Contactează-ne", 
+        footer_desc: "Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul, calitatea superioară și poveștile spuse prin intermediul bijuteriilor și ceasurilor unice.", 
+        footer_nav: "NAVIGARE RAPIDĂ", footer_home: "Acasă - Pagina principală", footer_shop: "Magazin - Toate Colecțiile", 
+        footer_about: "Povestea Noastră", footer_contact: "Contact & Suport", footer_info: "INFORMAȚII & POLITICI", 
+        footer_terms: "Termeni și Condiții", footer_privacy: "Politică de Confidențialitate", footer_cookies: "Politică de Cookies", footer_delivery: "Politica de Livrare", 
+        footer_return: "Politică de Retur (14 zile)", footer_care: "Îngrijirea Bijuteriilor", footer_consumer: "PROTECȚIA CONSUMATORULUI", 
+        footer_id_data: "Date de identificare ale societății",
+        
+        care_title: "Îngrijirea Bijuteriilor",
+        care_subtitle: "Păstrează strălucirea și rafinamentul pieselor tale preferate pentru generațiile viitoare.",
+        care_intro: "Pentru a menține integritatea, strălucirea și frumusețea bijuteriilor și ceasurilor H-TIME de-a lungul timpului, este esențial să le acordați atenția cuvenită. Vă rugăm să respectați următoarele recomandări detaliate de îngrijire și întreținere.",
+        care_h1: "1. Protejarea împotriva substanțelor chimice",
+        care_p1: "Contactul direct cu parfumuri, loțiuni de corp, fixativ de păr sau produse de curățenie (în special cele pe bază de clor sau înălbitor) poate deteriora ireversibil metalele prețioase și pietrele naturale. Regula de aur este: bijuteriile sunt ultimele pe care le puneți înainte de a ieși din casă și primele pe care le scoateți la întoarcere.",
+        care_h2: "2. Interacțiunea cu apa și umiditatea",
+        care_p2: "Sarea din apa de mare și clorul din piscine pot eroda și decolora metalele. Vă recomandăm ferm să îndepărtați bijuteriile înainte de a înota, de a face duș sau de a intra în saune/izvoare termale. De asemenea, umiditatea excesivă poate accelera procesul natural de oxidare (înnegrire) a argintului și aurului de carataj mic.",
+        care_h3: "3. Curățarea corectă și delicată",
+        care_p3: "După fiecare purtare, ștergeți ușor bijuteriile cu o lavetă din microfibră sau din bumbac moale pentru a îndepărta urmele de transpirație și uleiurile naturale ale pielii. Pentru o curățare mai profundă acasă, folosiți apă călduță și un săpun cu pH neutru, împreună cu o perie foarte moale, dar evitați absolut această metodă pentru pietrele poroase (ex: perle, opale, smaralde).",
+        care_h4: "4. Depozitarea individuală",
+        care_p4: "Pietrele prețioase, în special diamantele (care sunt extrem de dure), pot zgâria alte metale sau pietre mai moi dacă sunt ținute laolaltă. Depozitați fiecare piesă separat, în cutia originală H-TIME sau în săculeți individuali din catifea. Păstrați lanțurile și colierele închise și întinse pentru a preveni înnodarea lor.",
+        care_h5: "5. Purtarea în timpul activităților fizice",
+        care_p5: "Aurul și argintul sunt metale maleabile. Pentru a preveni deformarea structurală, zgârieturile adânci sau spargerea/slăbirea pietrelor din montură, scoateți absolut toate bijuteriile și ceasurile în timpul antrenamentelor la sală, ridicării de greutăți, grădinăritului sau curățeniei casnice riguroase.",
+        care_h6: "6. Îngrijirea ceasurilor de lux",
+        care_p6: "Feriți ceasurile de schimbări bruște de temperatură și de câmpuri magnetice puternice (boxe audio, frigidere, dispozitive electronice mari) care pot magnetiza și deregla mecanismul. Dacă ceasul este rezistent la apă, asigurați-vă întotdeauna că remontoarul (coroana) este perfect înfiletat/închis înainte de contactul cu apa. Recomandăm o revizie completă a mecanismului la fiecare 3-5 ani.",
+        care_h7: "7. Inspecția profesională anuală",
+        care_p7: "Vă recomandăm ca cel puțin o dată pe an să aduceți bijuteriile cu diamante sau pietre prețioase la un bijutier profesionist. Acesta va verifica integritatea gheruțelor (monturii) pentru a se asigura că pietrele sunt fixate perfect și le va supune unei curățări profesionale cu ultrasunete, redându-le strălucirea inițială."
+      },
+      en: { 
+        title: "Jewelry Care | H-TIME",
+        nav_home: "Home", nav_shop: "Shop", nav_about: "About Us", nav_team: "H-Time Team", nav_contact: "Contact Us", 
+        footer_desc: "Emotions sculpted in elegance. A luxury boutique dedicated to people who appreciate refinement, premium quality, and stories told through unique jewelry and watches.", 
+        footer_nav: "QUICK NAVIGATION", footer_home: "Home - Main Page", footer_shop: "Shop - All Collections", 
+        footer_about: "Our Story", footer_contact: "Contact & Support", footer_info: "INFORMATION & POLICIES", 
+        footer_terms: "Terms and Conditions", footer_privacy: "Privacy Policy", footer_cookies: "Cookie Policy", footer_delivery: "Delivery Policy", 
+        footer_return: "Return Policy (14 days)", footer_care: "Jewelry Care", footer_consumer: "CONSUMER PROTECTION", 
+        footer_id_data: "Company Identification Data",
+        
+        care_title: "Jewelry Care",
+        care_subtitle: "Preserve the shine and refinement of your favorite pieces for future generations.",
+        care_intro: "To maintain the integrity, shine, and beauty of H-TIME jewelry and watches over time, it is essential to give them the proper attention. Please observe the following detailed care and maintenance recommendations.",
+        care_h1: "1. Protection against chemicals",
+        care_p1: "Direct contact with perfumes, body lotions, hairspray, or cleaning products (especially those based on chlorine or bleach) can irreversibly damage precious metals and natural stones. The golden rule is: jewelry is the last thing you put on before leaving the house and the first thing you take off upon returning.",
+        care_h2: "2. Interaction with water and humidity",
+        care_p2: "Salt from seawater and chlorine from swimming pools can erode and discolor metals. We strongly recommend removing your jewelry before swimming, showering, or entering saunas/hot springs. Also, excessive humidity can accelerate the natural oxidation (tarnishing) process of silver and lower karat gold.",
+        care_h3: "3. Correct and gentle cleaning",
+        care_p3: "After each wear, gently wipe your jewelry with a microfiber or soft cotton cloth to remove sweat and natural skin oils. For a deeper cleaning at home, use warm water and a pH-neutral soap, along with a very soft brush, but absolutely avoid this method for porous stones (e.g., pearls, opals, emeralds).",
+        care_h4: "4. Individual storage",
+        care_p4: "Precious stones, especially diamonds (which are extremely hard), can scratch other metals or softer stones if kept together. Store each piece separately, in its original H-TIME box or in individual velvet pouches. Keep chains and necklaces closed and laid flat to prevent knotting.",
+        care_h5: "5. Wearing during physical activities",
+        care_p5: "Gold and silver are malleable metals. To prevent structural deformation, deep scratches, or breaking/loosening of stones from their setting, remove absolutely all jewelry and watches during gym workouts, heavy lifting, gardening, or rigorous house cleaning.",
+        care_h6: "6. Luxury watch care",
+        care_p6: "Keep watches away from sudden temperature changes and strong magnetic fields (audio speakers, refrigerators, large electronic devices) that can magnetize and disrupt the mechanism. If the watch is water-resistant, always ensure the crown is perfectly screwed down/closed before contact with water. We recommend a complete mechanism service every 3-5 years.",
+        care_h7: "7. Annual professional inspection",
+        care_p7: "We recommend bringing your diamond or gemstone jewelry to a professional jeweler at least once a year. They will check the integrity of the prongs (settings) to ensure the stones are perfectly secured and will subject them to a professional ultrasonic cleaning, restoring their original brilliance."
+      },
+      fr: { 
+        title: "Entretien des Bijoux | H-TIME",
+        nav_home: "Accueil", nav_shop: "Boutique", nav_about: "À propos", nav_team: "Équipe H-Time", nav_contact: "Contactez-nous", 
+        footer_desc: "Émotions sculptées dans l'élégance. Une boutique de luxe dédiée aux personnes qui apprécient le raffinement, la qualité supérieure et les histoires racontées à travers des bijoux et des montres uniques.", 
+        footer_nav: "NAVIGATION RAPIDE", footer_home: "Accueil - Page principale", footer_shop: "Boutique - Toutes les collections", 
+        footer_about: "Notre histoire", footer_contact: "Contact & Support", footer_info: "INFORMATIONS & POLITIQUES", 
+        footer_terms: "Conditions générales", footer_privacy: "Politique de confidentialité", footer_cookies: "Politique de cookies", footer_delivery: "Politique de livraison", 
+        footer_return: "Politique de retour (14 jours)", footer_care: "Entretien des bijoux", footer_consumer: "PROTECTION DU CONSOMMATEUR", 
+        footer_id_data: "Données d'identification de l'entreprise",
+        
+        care_title: "Entretien des Bijoux",
+        care_subtitle: "Préservez l'éclat et le raffinement de vos pièces préférées pour les générations futures.",
+        care_intro: "Afin de maintenir l'intégrité, l'éclat et la beauté des bijoux et des montres H-TIME au fil du temps, il est essentiel de leur accorder l'attention appropriée. Veuillez respecter les recommandations d'entretien et de soin détaillées suivantes.",
+        care_h1: "1. Protection contre les produits chimiques",
+        care_p1: "Le contact direct avec des parfums, des lotions pour le corps, de la laque ou des produits de nettoyage (en particulier ceux à base de chlore ou d'eau de Javel) peut endommager de manière irréversible les métaux précieux et les pierres naturelles. La règle d'or est la suivante : les bijoux sont la dernière chose que vous mettez avant de quitter la maison et la première chose que vous retirez en rentrant.",
+        care_h2: "2. Interaction avec l'eau et l'humidité",
+        care_p2: "Le sel de l'eau de mer et le chlore des piscines peuvent éroder et décolorer les métaux. Nous vous recommandons vivement de retirer vos bijoux avant de nager, de prendre une douche ou d'entrer dans des saunas/sources chaudes. De plus, une humidité excessive peut accélérer le processus d'oxydation naturelle (ternissement) de l'argent et de l'or à faible carat.",
+        care_h3: "3. Nettoyage correct et en douceur",
+        care_p3: "Après chaque port, essuyez doucement vos bijoux avec un chiffon en microfibre ou en coton doux pour éliminer la sueur et les huiles naturelles de la peau. Pour un nettoyage plus en profondeur à la maison, utilisez de l'eau tiède et un savon au pH neutre, avec une brosse très douce, mais évitez absolument cette méthode pour les pierres poreuses (ex : perles, opales, émeraudes).",
+        care_h4: "4. Rangement individuel",
+        care_p4: "Les pierres précieuses, en particulier les diamants (qui sont extrêmement durs), peuvent rayer d'autres métaux ou des pierres plus tendres s'ils sont conservés ensemble. Rangez chaque pièce séparément, dans sa boîte H-TIME d'origine ou dans des pochettes en velours individuelles. Gardez les chaînes et les colliers fermés et étendus pour éviter qu'ils ne s'emmêlent.",
+        care_h5: "5. Port pendant les activités physiques",
+        care_p5: "L'or et l'argent sont des métaux malléables. Pour éviter toute déformation structurelle, rayures profondes ou bris/desserrage de pierres de leur sertissage, retirez absolument tous les bijoux et montres lors des entraînements sportifs, du soulèvement de charges lourdes, du jardinage ou du nettoyage rigoureux de la maison.",
+        care_h6: "6. Entretien des montres de luxe",
+        care_p6: "Gardez les montres à l'écart des changements brusques de température et des champs magnétiques puissants (haut-parleurs audio, réfrigérateurs, gros appareils électroniques) qui peuvent magnétiser et perturber le mécanisme. Si la montre est étanche, assurez-vous toujours que la couronne est parfaitement vissée/fermée avant tout contact avec l'eau. Nous recommandons une révision complète du mécanisme tous les 3 à 5 ans.",
+        care_h7: "7. Inspection professionnelle annuelle",
+        care_p7: "Nous vous recommandons de confier vos bijoux en diamants ou en pierres précieuses à un bijoutier professionnel au moins une fois par an. Il vérifiera l'intégrité des griffes (sertis) pour s'assurer que les pierres sont parfaitement fixées et les soumettra à un nettoyage professionnel aux ultrasons, leur redonnant leur éclat d'origine."
+      },
+      de: { 
+        title: "Schmuckpflege | H-TIME",
+        nav_home: "Startseite", nav_shop: "Shop", nav_about: "Über uns", nav_team: "H-Time Team", nav_contact: "Kontakt", 
+        footer_desc: "Emotionen in Eleganz gemeißelt. Eine Luxus-Boutique, die sich Personen widmet, die Raffinesse, erstklassige Qualität und Geschichten schätzen, die durch einzigartige Schmuckstücke und Uhren erzählt werden.", 
+        footer_nav: "SCHNELLNAVIGATION", footer_home: "Startseite - Hauptseite", footer_shop: "Shop - Alle Kollektionen", 
+        footer_about: "Unsere Geschichte", footer_contact: "Kontakt & Support", footer_info: "INFORMATIONEN & RICHTLINIEN", 
+        footer_terms: "Allgemeine Geschäftsbedingungen", footer_privacy: "Datenschutzrichtlinie", footer_cookies: "Cookie-Richtlinie", footer_delivery: "Lieferbedingungen", 
+        footer_return: "Rückgaberecht (14 Tage)", footer_care: "Schmuckpflege", footer_consumer: "VERBRAUCHERSCHUTZ", 
+        footer_id_data: "Unternehmensidentifikationsdaten",
+        
+        care_title: "Schmuckpflege",
+        care_subtitle: "Bewahren Sie den Glanz und die Raffinesse Ihrer Lieblingsstücke für zukünftige Generationen.",
+        care_intro: "Um die Integrität, den Glanz und die Schönheit von H-TIME Schmuck und Uhren im Laufe der Zeit zu erhalten, ist es wichtig, ihnen die richtige Aufmerksamkeit zu schenken. Bitte beachten Sie die folgenden detaillierten Pflege- und Wartungsempfehlungen.",
+        care_h1: "1. Schutz vor Chemikalien",
+        care_p1: "Direkter Kontakt mit Parfums, Körperlotionen, Haarspray oder Reinigungsmitteln (insbesondere solchen auf Chlor- oder Bleichmittelbasis) kann Edelmetalle und Natursteine irreversibel schädigen. Die goldene Regel lautet: Schmuck ist das Letzte, was Sie vor dem Verlassen des Hauses anlegen, und das Erste, was Sie bei Ihrer Rückkehr ablegen.",
+        care_h2: "2. Interaktion mit Wasser und Feuchtigkeit",
+        care_p2: "Salz aus Meerwasser und Chlor aus Schwimmbädern können Metalle erodieren und verfärben. Wir empfehlen dringend, Ihren Schmuck vor dem Schwimmen, Duschen oder dem Betreten von Saunen/heißen Quellen abzulegen. Außerdem kann übermäßige Feuchtigkeit den natürlichen Oxidationsprozess (Anlaufen) von Silber und Gold mit niedrigem Karatgehalt beschleunigen.",
+        care_h3: "3. Richtige und sanfte Reinigung",
+        care_p3: "Wischen Sie Ihren Schmuck nach jedem Tragen vorsichtig mit einem Mikrofaser- oder weichen Baumwolltuch ab, um Schweiß und natürliche Hautöle zu entfernen. Für eine gründlichere Reinigung zu Hause verwenden Sie warmes Wasser und eine pH-neutrale Seife sowie eine sehr weiche Bürste. Vermeiden Sie diese Methode jedoch absolut bei porösen Steinen (z. B. Perlen, Opalen, Smaragden).",
+        care_h4: "4. Individuelle Lagerung",
+        care_p4: "Edelsteine, insbesondere Diamanten (die extrem hart sind), können andere Metalle oder weichere Steine zerkratzen, wenn sie zusammen aufbewahrt werden. Bewahren Sie jedes Stück separat in der H-TIME-Originalverpackung oder in einzelnen Samtbeuteln auf. Halten Sie Ketten und Halsketten geschlossen und flach ausgelegt, um ein Verknoten zu verhindern.",
+        care_h5: "5. Tragen bei körperlichen Aktivitäten",
+        care_p5: "Gold und Silber sind formbare Metalle. Um strukturelle Verformungen, tiefe Kratzer oder das Brechen/Lösen von Steinen aus ihrer Fassung zu vermeiden, legen Sie bei sportlichen Aktivitäten, beim Heben schwerer Lasten, bei der Gartenarbeit oder bei strengen Hausarbeiten absolut alle Schmuckstücke und Uhren ab.",
+        care_h6: "6. Pflege von Luxusuhren",
+        care_p6: "Halten Sie Uhren von plötzlichen Temperaturschwankungen und starken Magnetfeldern (Audiolautsprecher, Kühlschränke, große elektronische Geräte) fern, die den Mechanismus magnetisieren und stören können. Wenn die Uhr wasserdicht ist, stellen Sie immer sicher, dass die Krone vor dem Kontakt mit Wasser perfekt verschraubt/geschlossen ist. Wir empfehlen alle 3-5 Jahre einen kompletten Mechanismus-Service.",
+        care_h7: "7. Jährliche professionelle Inspektion",
+        care_p7: "Wir empfehlen, Ihren Diamant- oder Edelsteinschmuck mindestens einmal im Jahr zu einem professionellen Juwelier zu bringen. Dieser überprüft die Unversehrtheit der Krappen (Fassungen), um sicherzustellen, dass die Steine perfekt gesichert sind, und unterzieht sie einer professionellen Ultraschallreinigung, um ihre ursprüngliche Brillanz wiederherzustellen."
+      },
+      es: { 
+        title: "Cuidado de Joyas | H-TIME",
+        nav_home: "Inicio", nav_shop: "Tienda", nav_about: "Sobre Nosotros", nav_team: "Equipo H-Time", nav_contact: "Contáctanos", 
+        footer_desc: "Emociones esculpidas en elegancia. Una boutique de lujo dedicada a personas que aprecian el refinamiento, la calidad superior y las historias contadas a través de joyas y relojes únicos.", 
+        footer_nav: "NAVEGACIÓN RÁPIDA", footer_home: "Inicio - Página principal", footer_shop: "Tienda - Todas las colecciones", 
+        footer_about: "Nuestra historia", footer_contact: "Contacto & Soporte", footer_info: "INFORMACIÓN & POLÍTICAS", 
+        footer_terms: "Términos y condiciones", footer_privacy: "Política de privacidad", footer_cookies: "Política de Cookies", footer_delivery: "Política de entrega", 
+        footer_return: "Política de devolución (14 días)", footer_care: "Cuidado de las joyas", footer_consumer: "PROTECCIÓN AL CONSUMIDOR", 
+        footer_id_data: "Datos de identificación de la empresa",
+        
+        care_title: "Cuidado de Joyas",
+        care_subtitle: "Preserve el brillo y el refinamiento de sus piezas favoritas para las generaciones futuras.",
+        care_intro: "Para mantener la integridad, el brillo y la belleza de las joyas y relojes H-TIME a lo largo del tiempo, es fundamental prestarles la atención adecuada. Tenga en cuenta las siguientes recomendaciones detalladas de cuidado y mantenimiento.",
+        care_h1: "1. Protección contra productos químicos",
+        care_p1: "El contacto directo con perfumes, lociones corporales, laca para el cabello o productos de limpieza (especialmente aquellos a base de cloro o lejía) puede dañar irreversiblemente los metales preciosos y las piedras naturales. La regla de oro es: las joyas son lo último que se pone antes de salir de casa y lo primero que se quita al regresar.",
+        care_h2: "2. Interacción con agua y humedad",
+        care_p2: "La sal del agua de mar y el cloro de las piscinas pueden erosionar y decolorar los metales. Recomendamos encarecidamente quitarse las joyas antes de nadar, ducharse o entrar en saunas/aguas termales. Además, la humedad excesiva puede acelerar el proceso natural de oxidación (deslustre) de la plata y el oro de menor quilate.",
+        care_h3: "3. Limpieza correcta y suave",
+        care_p3: "Después de cada uso, limpie suavemente sus joyas con un paño de microfibra o algodón suave para eliminar el sudor y los aceites naturales de la piel. Para una limpieza más profunda en el hogar, use agua tibia y un jabón de pH neutro, junto con un cepillo muy suave, pero evite absolutamente este método para piedras porosas (ej., perlas, ópalos, esmeraldas).",
+        care_h4: "4. Almacenamiento individual",
+        care_p4: "Las piedras preciosas, especialmente los diamantes (que son extremadamente duros), pueden rayar otros metales o piedras más blandas si se mantienen juntas. Guarde cada pieza por separado, en su caja original H-TIME o en bolsas de terciopelo individuales. Mantenga las cadenas y los collares cerrados y estirados para evitar que se enreden.",
+        care_h5: "5. Uso durante actividades físicas",
+        care_p5: "El oro y la plata son metales maleables. Para evitar deformaciones estructurales, arañazos profundos o rotura/aflojamiento de las piedras de su engaste, quítese absolutamente todas las joyas y relojes durante los entrenamientos en el gimnasio, el levantamiento de pesas, la jardinería o la limpieza rigurosa de la casa.",
+        care_h6: "6. Cuidado de relojes de lujo",
+        care_p6: "Mantenga los relojes alejados de cambios bruscos de temperatura y campos magnéticos fuertes (altavoces de audio, refrigeradores, dispositivos electrónicos grandes) que puedan magnetizar y alterar el mecanismo. Si el reloj es resistente al agua, asegúrese siempre de que la corona esté perfectamente enroscada/cerrada antes del contacto con el agua. Recomendamos un servicio completo del mecanismo cada 3-5 años.",
+        care_h7: "7. Inspección profesional anual",
+        care_p7: "Recomendamos llevar sus joyas de diamantes o piedras preciosas a un joyero profesional al menos una vez al año. Ellos comprobarán la integridad de las garras (engastes) para garantizar que las piedras estén perfectamente aseguradas y las someterán a una limpieza ultrasónica profesional, restaurando su brillo original."
+      },
+      it: { 
+        title: "Cura dei Gioielli | H-TIME",
+        nav_home: "Home", nav_shop: "Negozio", nav_about: "Chi Siamo", nav_team: "Team H-Time", nav_contact: "Contattaci", 
+        footer_desc: "Emozioni scolpite nell'eleganza. Una boutique di lusso dedicata alle persone che apprezzano la raffinatezza, la qualità superiore e le storie raccontate attraverso gioielli e orologi unici.", 
+        footer_nav: "NAVIGAZIONE RAPIDA", footer_home: "Home - Pagina principale", footer_shop: "Negozio - Tutte le collezioni", 
+        footer_about: "La nostra storia", footer_contact: "Contatto & Supporto", footer_info: "INFORMAZIONI & POLITICHE", 
+        footer_terms: "Termini e condizioni", footer_privacy: "Privacy", footer_cookies: "Informativa sui cookie", footer_delivery: "Politica di consegna", 
+        footer_return: "Politica di reso (14 giorni)", footer_care: "Cura dei gioielli", footer_consumer: "PROTEZIONE DEL CONSUMATORE", 
+        footer_id_data: "Dati identificativi dell'azienda",
+        
+        care_title: "Cura dei Gioielli",
+        care_subtitle: "Preserva la lucentezza e la raffinatezza dei tuoi pezzi preferiti per le generazioni future.",
+        care_intro: "Per mantenere nel tempo l'integrità, la lucentezza e la bellezza dei gioielli e degli orologi H-TIME, è fondamentale dedicare loro le giuste attenzioni. Si prega di osservare i seguenti consigli dettagliati per la cura e la manutenzione.",
+        care_h1: "1. Protezione contro le sostanze chimiche",
+        care_p1: "Il contatto diretto con profumi, lozioni per il corpo, lacca per capelli o prodotti per la pulizia (in particolare quelli a base di cloro o candeggina) può danneggiare in modo irreversibile i metalli preziosi e le pietre naturali. La regola d'oro è: i gioielli sono l'ultima cosa che metti prima di uscire di casa e la prima cosa che togli al ritorno.",
+        care_h2: "2. Interazione con acqua e umidità",
+        care_p2: "Il sale dell'acqua di mare e il cloro delle piscine possono erodere e scolorire i metalli. Consigliamo vivamente di rimuovere i gioielli prima di nuotare, fare la doccia o entrare in saune/sorgenti termali. Inoltre, un'umidità eccessiva può accelerare il naturale processo di ossidazione (appannamento) dell'argento e dell'oro a bassa caratura.",
+        care_h3: "3. Pulizia corretta e delicata",
+        care_p3: "Dopo ogni utilizzo, pulisci delicatamente i tuoi gioielli con un panno in microfibra o morbido cotone per rimuovere il sudore e gli oli naturali della pelle. Per una pulizia più profonda a casa, usa acqua tiepida e un sapone a pH neutro, insieme a una spazzola molto morbida, ma evita assolutamente questo metodo per le pietre porose (es. perle, opali, smeraldi).",
+        care_h4: "4. Conservazione individuale",
+        care_p4: "Le pietre preziose, in particolare i diamanti (che sono estremamente duri), possono graffiare altri metalli o pietre più morbide se tenute insieme. Conserva ogni pezzo separatamente, nella sua scatola originale H-TIME o in sacchetti di velluto individuali. Tieni le catene e le collane chiuse e stese per evitare che si annodino.",
+        care_h5: "5. Indossare durante le attività fisiche",
+        care_p5: "L'oro e l'argento sono metalli malleabili. Per prevenire deformazioni strutturali, graffi profondi o rotture/allentamenti delle pietre dalla loro incastonatura, rimuovi assolutamente tutti i gioielli e gli orologi durante gli allenamenti in palestra, il sollevamento pesi, il giardinaggio o le pulizie di casa rigorose.",
+        care_h6: "6. Cura degli orologi di lusso",
+        care_p6: "Tieni gli orologi lontani da sbalzi di temperatura e forti campi magnetici (altoparlanti, frigoriferi, grandi dispositivi elettronici) che possono magnetizzare e disturbare il meccanismo. Se l'orologio è impermeabile, assicurati sempre che la corona sia perfettamente avvitata/chiusa prima del contatto con l'acqua. Consigliamo un servizio completo del meccanismo ogni 3-5 anni.",
+        care_h7: "7. Ispezione professionale annuale",
+        care_p7: "Ti consigliamo di portare i tuoi gioielli con diamanti o pietre preziose da un gioielliere professionista almeno una volta all'anno. Controlleranno l'integrità delle griffe (incastonature) per assicurarsi che le pietre siano perfettamente fissate e le sottoporranno a una pulizia professionale ad ultrasuoni, ripristinando la loro brillantezza originale."
+      }
     };
-    function applyTranslations(lang) { const dict = translations[lang] || translations.ro; document.querySelectorAll('[data-i18n]').forEach(el => { const key = el.getAttribute('data-i18n'); if (dict[key]) el.innerText = dict[key]; }); }
+    
+    function applyTranslations(lang) { 
+      const dict = translations[lang] || translations.ro; 
+      document.querySelectorAll('[data-i18n]').forEach(el => { 
+        const key = el.getAttribute('data-i18n'); 
+        if (dict[key]) el.innerHTML = dict[key]; 
+      }); 
+      if (dict.title) document.title = dict.title;
+    }
+    
     document.addEventListener('DOMContentLoaded', () => {
       const switcher = document.getElementById('languageSwitcher');
-      if(switcher) { switcher.value = localStorage.getItem('htime_lang') || 'ro'; switcher.addEventListener('change', () => { localStorage.setItem('htime_lang', switcher.value); applyTranslations(switcher.value); }); }
+      if(switcher) { 
+        switcher.value = localStorage.getItem('htime_lang') || 'ro'; 
+        switcher.addEventListener('change', () => { 
+          localStorage.setItem('htime_lang', switcher.value); 
+          applyTranslations(switcher.value); 
+        }); 
+      }
       applyTranslations(localStorage.getItem('htime_lang') || 'ro');
-      if (typeof actualizeazaNumarCos === 'function') actualizeazaNumarCos();
+      
+      let cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
+      const cartBtn = document.getElementById('cart-nav-btn');
+      if (cartBtn) cartBtn.innerText = `Cart (${cart.length})`;
     });
   </script>
 </body>

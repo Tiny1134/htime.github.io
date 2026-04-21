@@ -106,6 +106,7 @@
     .footer-bottom { grid-column:1 / -1; text-align:center; padding-top:40px; border-top:1px solid #222; color:#555; font-size:0.8rem; margin-top:20px; }
     .anpc-img { max-width:180px; width:100%; height:auto; display:block; margin-bottom:15px; transition:opacity .3s; }
     .anpc-img:hover { opacity:0.7; }
+    .company-info { margin-top: 25px; font-size: 0.85rem; color: #888; line-height: 1.6; }
 
     @media (max-width:900px) { nav { flex-direction:column; gap:15px; padding:15px; } body { padding-top: 130px; } .contact-container { flex-direction: column; padding: 0 20px; } .white-card { padding: 25px; } footer { padding: 40px 20px; } }
   </style>
@@ -201,8 +202,13 @@
       <p class="footer-desc" data-i18n="footer_desc">Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul, calitatea superioară și poveștile spuse prin intermediul bijuteriilor și ceasurilor unice.</p>
       <div class="social-links">
         <a href="#" class="social-icon-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
-        <a href="#" class="social-icon-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+        <a href="https://www.instagram.com/bijuterii.h_time/" class="social-icon-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
         <a href="#" class="social-icon-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg></a>
+      </div>
+      <div class="company-info">
+        <p><strong>CUI:</strong> 83241620</p>
+        <p><strong>Reg. Com.:</strong> J22/4620/2024</p>
+        <p><strong>Sediu:</strong> Strada Milcov 18A, Iași 70025</p>
       </div>
     </div>
     <div class="footer-col">
@@ -211,7 +217,7 @@
         <li><a href="index.html" data-i18n="footer_home">Acasă - Pagina principală</a></li>
         <li><a href="magazin.html" data-i18n="footer_shop">Magazin - Toate Colecțiile</a></li>
         <li><a href="despre-noi.html" data-i18n="footer_about">Povestea Noastră</a></li>
-        <li><a href="contact.html" data-i18n="footer_contact">Contact & Suport</a></li>
+        <li><a href="contact.html" style="color:var(--peach);" data-i18n="footer_contact">Contact & Suport</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -219,9 +225,11 @@
       <ul>
         <li><a href="termeni.html" data-i18n="footer_terms">Termeni și Condiții</a></li>
         <li><a href="confidentialitate.html" data-i18n="footer_privacy">Politică de Confidențialitate</a></li>
+        <li><a href="politica_cookies.html" data-i18n="footer_cookies">Politică de Cookies</a></li>
         <li><a href="politica_livrare.html" data-i18n="footer_delivery">Politică de Livrare</a></li>
         <li><a href="politici_retur.html" data-i18n="footer_return">Politică de Retur (14 zile)</a></li>
         <li><a href="ingrijirea_bijuteriilor.html" data-i18n="footer_care">Îngrijirea Bijuteriilor</a></li>
+        <li><a href="date_identificare.html" data-i18n="footer_id_data">Date de identificare ale societății</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -254,9 +262,9 @@
     const translations = {
       ro: { 
         nav_home: "Acasă", nav_shop: "Magazin", nav_about: "Despre Noi", nav_team: "Echipa H-Time", nav_contact: "Contactează-ne", 
-        footer_desc: "Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul.", 
+        footer_desc: "Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul, calitatea superioară și poveștile spuse prin intermediul bijuteriilor și ceasurilor unice.", 
         footer_nav: "NAVIGARE RAPIDĂ", footer_home: "Acasă - Pagina principală", footer_shop: "Magazin - Toate Colecțiile", footer_about: "Povestea Noastră", footer_contact: "Contact & Suport", 
-        footer_info: "INFORMAȚII & POLITICI", footer_terms: "Termeni și Condiții", footer_privacy: "Politică de Confidențialitate", footer_delivery: "Politică de Livrare", footer_return: "Politică de Retur (14 zile)", footer_care: "Îngrijirea Bijuteriilor", 
+        footer_info: "INFORMAȚII & POLITICI", footer_terms: "Termeni și Condiții", footer_privacy: "Politică de Confidențialitate", footer_cookies: "Politică de Cookies", footer_delivery: "Politică de Livrare", footer_return: "Politică de Retur (14 zile)", footer_care: "Îngrijirea Bijuteriilor", footer_id_data: "Date de identificare ale societății",
         footer_consumer: "PROTECȚIA CONSUMATORULUI", 
         contact_title: "Contactează-ne", contact_desc: "Suntem aici pentru a vă oferi o experiență de neuitat. Echipa noastră de experți vă stă la dispoziție pentru orice întrebare sau consultanță privind colecțiile noastre.", 
         contact_address_title: "Adresă", contact_phone_title: "Telefon", contact_email_title: "E-mail", contact_program_title: "Program", contact_program_val: "Luni - Vineri: 10:00 - 18:00", 
@@ -265,9 +273,9 @@
       },
       en: { 
         nav_home: "Home", nav_shop: "Shop", nav_about: "About Us", nav_team: "H-Time Team", nav_contact: "Contact Us", 
-        footer_desc: "Emotions sculpted in elegance. A luxury boutique dedicated to people who appreciate refinement.", 
+        footer_desc: "Emotions sculpted in elegance. A luxury boutique dedicated to people who appreciate refinement, premium quality, and stories told through unique jewelry and watches.", 
         footer_nav: "QUICK NAVIGATION", footer_home: "Home - Main Page", footer_shop: "Shop - All Collections", footer_about: "Our Story", footer_contact: "Contact & Support", 
-        footer_info: "INFORMATION & POLICIES", footer_terms: "Terms and Conditions", footer_privacy: "Privacy Policy", footer_delivery: "Delivery Policy", footer_return: "Return Policy (14 days)", footer_care: "Jewelry Care", 
+        footer_info: "INFORMATION & POLICIES", footer_terms: "Terms and Conditions", footer_privacy: "Privacy Policy", footer_cookies: "Cookie Policy", footer_delivery: "Delivery Policy", footer_return: "Return Policy (14 days)", footer_care: "Jewelry Care", footer_id_data: "Company Identification Data",
         footer_consumer: "CONSUMER PROTECTION", 
         contact_title: "Contact Us", contact_desc: "We are here to offer you an unforgettable experience. Our team of experts is at your disposal for any questions or advice regarding our collections.", 
         contact_address_title: "Address", contact_phone_title: "Phone", contact_email_title: "E-mail", contact_program_title: "Schedule", contact_program_val: "Monday - Friday: 10:00 - 18:00", 
@@ -276,44 +284,44 @@
       },
       fr: { 
         nav_home: "Accueil", nav_shop: "Boutique", nav_about: "À propos", nav_team: "Équipe H-Time", nav_contact: "Contactez-nous", 
-        footer_desc: "Émotions sculptées dans l'élégance. Une boutique de luxe.", 
+        footer_desc: "Émotions sculptées dans l'élégance. Une boutique de luxe dédiée aux personnes qui apprécient le raffinement, la qualité supérieure et les histoires racontées à travers des bijoux et des montres uniques.", 
         footer_nav: "NAVIGATION RAPIDE", footer_home: "Accueil - Page principale", footer_shop: "Boutique - Toutes les collections", footer_about: "Notre histoire", footer_contact: "Contact & Support", 
-        footer_info: "INFORMATIONS & POLITIQUES", footer_terms: "Conditions générales", footer_privacy: "Politique de confidentialité", footer_delivery: "Politique de livraison", footer_return: "Politique de retour (14 jours)", footer_care: "Entretien des bijoux", 
+        footer_info: "INFORMATIONS & POLITIQUES", footer_terms: "Conditions générales", footer_privacy: "Politique de confidentialité", footer_cookies: "Politique de cookies", footer_delivery: "Politique de livraison", footer_return: "Politique de retour (14 jours)", footer_care: "Entretien des bijoux", footer_id_data: "Données d'identification de l'entreprise",
         footer_consumer: "PROTECTION DU CONSOMMATEUR", 
-        contact_title: "Contactez-nous", contact_desc: "Notre équipe d'experts est à votre disposition.", 
+        contact_title: "Contactez-nous", contact_desc: "Notre équipe d'experts est à votre disposition pour toute question ou conseil concernant nos collections.", 
         contact_address_title: "Adresse", contact_phone_title: "Téléphone", contact_email_title: "E-mail", contact_program_title: "Horaires", contact_program_val: "Lundi - Vendredi: 10:00 - 18:00", 
         contact_form_title: "Envoyer un message", form_name: "Nom complet", form_email: "Adresse Email", form_message: "Message", btn_send: "Envoyer", 
         ph_fname: "Jean Dupont", ph_email: "contact@exemple.fr", ph_message: "Écrivez votre message ici..." 
       },
       de: { 
         nav_home: "Startseite", nav_shop: "Shop", nav_about: "Über uns", nav_team: "H-Time Team", nav_contact: "Kontakt", 
-        footer_desc: "Emotionen in Eleganz gemeißelt. Eine Luxus-Boutique.", 
+        footer_desc: "Emotionen in Eleganz gemeißelt. Eine Luxus-Boutique, die sich Personen widmet, die Raffinesse, erstklassige Qualität und Geschichten schätzen, die durch einzigartige Schmuckstücke und Uhren erzählt werden.", 
         footer_nav: "SCHNELLNAVIGATION", footer_home: "Startseite - Hauptseite", footer_shop: "Shop - Alle Kollektionen", footer_about: "Unsere Geschichte", footer_contact: "Kontakt & Support", 
-        footer_info: "INFORMATIONEN & RICHTLINIEN", footer_terms: "Allgemeine Geschäftsbedingungen", footer_privacy: "Datenschutzrichtlinie", footer_delivery: "Lieferbedingungen", footer_return: "Rückgaberecht (14 Tage)", footer_care: "Schmuckpflege", 
+        footer_info: "INFORMATIONEN & RICHTLINIEN", footer_terms: "Allgemeine Geschäftsbedingungen", footer_privacy: "Datenschutzrichtlinie", footer_cookies: "Cookie-Richtlinie", footer_delivery: "Lieferbedingungen", footer_return: "Rückgaberecht (14 Tage)", footer_care: "Schmuckpflege", footer_id_data: "Unternehmensidentifikationsdaten",
         footer_consumer: "VERBRAUCHERSCHUTZ", 
-        contact_title: "Kontaktiere uns", contact_desc: "Unser Expertenteam steht Ihnen zur Verfügung.", 
+        contact_title: "Kontaktiere uns", contact_desc: "Unser Expertenteam steht Ihnen für Fragen oder Beratung zu unseren Kollektionen zur Verfügung.", 
         contact_address_title: "Adresse", contact_phone_title: "Telefon", contact_email_title: "E-Mail", contact_program_title: "Öffnungszeiten", contact_program_val: "Montag - Freitag: 10:00 - 18:00", 
         contact_form_title: "Nachricht senden", form_name: "Vollständiger Name", form_email: "E-Mail Adresse", form_message: "Nachricht", btn_send: "Senden", 
         ph_fname: "Hans Müller", ph_email: "kontakt@beispiel.de", ph_message: "Schreiben Sie hier Ihre Nachricht..." 
       },
       es: { 
         nav_home: "Inicio", nav_shop: "Tienda", nav_about: "Sobre Nosotros", nav_team: "Equipo H-Time", nav_contact: "Contáctanos", 
-        footer_desc: "Emociones esculpidas en elegancia. Una boutique de lujo.", 
+        footer_desc: "Emociones esculpidas en elegancia. Una boutique de lujo dedicada a personas que aprecian el refinamiento, la calidad superior y las historias contadas a través de joyas y relojes únicos.", 
         footer_nav: "NAVEGACIÓN RÁPIDA", footer_home: "Inicio - Página principal", footer_shop: "Tienda - Todas las colecciones", footer_about: "Nuestra historia", footer_contact: "Contacto & Soporte", 
-        footer_info: "INFORMACIÓN & POLÍTICAS", footer_terms: "Términos y condiciones", footer_privacy: "Política de privacidad", footer_delivery: "Política de entrega", footer_return: "Política de devolución (14 días)", footer_care: "Cuidado de las joyas", 
+        footer_info: "INFORMACIÓN & POLÍTICAS", footer_terms: "Términos y condiciones", footer_privacy: "Política de privacidad", footer_cookies: "Política de Cookies", footer_delivery: "Política de entrega", footer_return: "Política de devolución (14 días)", footer_care: "Cuidado de las joyas", footer_id_data: "Datos de identificación de la empresa",
         footer_consumer: "PROTECCIÓN AL CONSUMIDOR", 
-        contact_title: "Contáctanos", contact_desc: "Nuestro equipo de expertos está a su disposición.", 
+        contact_title: "Contáctanos", contact_desc: "Nuestro equipo de expertos está a su disposición para cualquier duda o asesoramiento sobre nuestras colecciones.", 
         contact_address_title: "Dirección", contact_phone_title: "Teléfono", contact_email_title: "Correo", contact_program_title: "Horario", contact_program_val: "Lunes - Viernes: 10:00 - 18:00", 
         contact_form_title: "Enviar un mensaje", form_name: "Nombre completo", form_email: "Correo Electrónico", form_message: "Mensaje", btn_send: "Enviar Mensaje", 
         ph_fname: "Carlos García", ph_email: "contacto@ejemplo.es", ph_message: "Escribe tu mensaje aquí..." 
       },
       it: { 
         nav_home: "Home", nav_shop: "Negozio", nav_about: "Chi Siamo", nav_team: "Team H-Time", nav_contact: "Contattaci", 
-        footer_desc: "Emozioni scolpite nell'eleganza. Una boutique di lusso.", 
+        footer_desc: "Emozioni scolpite nell'eleganza. Una boutique di lusso dedicata alle persone che apprezzano la raffinatezza, la qualità superiore e le storie raccontate attraverso gioielli e orologi unici.", 
         footer_nav: "NAVIGAZIONE RAPIDA", footer_home: "Home - Pagina principale", footer_shop: "Negozio - Tutte le collezioni", footer_about: "La nostra storia", footer_contact: "Contatto & Supporto", 
-        footer_info: "INFORMAZIONI & POLITICHE", footer_terms: "Termini e condizioni", footer_privacy: "Informativa sulla privacy", footer_delivery: "Politica di consegna", footer_return: "Politica di reso (14 giorni)", footer_care: "Cura dei gioielli", 
+        footer_info: "INFORMAZIONI & POLITICHE", footer_terms: "Termini e condizioni", footer_privacy: "Informativa sulla privacy", footer_cookies: "Informativa sui cookie", footer_delivery: "Politica di consegna", footer_return: "Politica di reso (14 giorni)", footer_care: "Cura dei gioielli", footer_id_data: "Dati identificativi dell'azienda",
         footer_consumer: "PROTEZIONE DEL CONSUMATORE", 
-        contact_title: "Contattaci", contact_desc: "Il nostro team di esperti è a tua disposizione.", 
+        contact_title: "Contattaci", contact_desc: "Il nostro team di esperti è a tua disposizione per qualsiasi domanda o consulenza riguardante le nostre collezioni.", 
         contact_address_title: "Indirizzo", contact_phone_title: "Telefono", contact_email_title: "E-mail", contact_program_title: "Orari", contact_program_val: "Lunedì - Venerdì: 10:00 - 18:00", 
         contact_form_title: "Invia un messaggio", form_name: "Nome completo", form_email: "Indirizzo Email", form_message: "Messaggio", btn_send: "Invia Messaggio", 
         ph_fname: "Mario Rossi", ph_email: "contatto@esempio.it", ph_message: "Scrivi qui il tuo messaggio..." 
