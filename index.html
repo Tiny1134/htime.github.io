@@ -180,6 +180,59 @@
     .hero-divider-bottom svg { display:block; width:calc(100% + 1.3px); height:6vw; }
     .hero-divider-bottom .shape-fill { fill: var(--light-bg); }
 
+    /* FEATURES */
+    .features-section { background-color:var(--light-bg); padding:60px 20px; display:flex; justify-content:center; align-items:flex-start; text-align:center; gap:40px; flex-wrap:wrap; position:relative; z-index:10; }
+    .feature-item { flex:1; min-width:250px; max-width:320px; }
+    .feature-icon { display:flex; justify-content:center; margin-bottom:20px; color:var(--dark); }
+    .feature-icon svg { transition: stroke .3s, transform .3s; }
+    .feature-item:hover .feature-icon svg { stroke:var(--peach); transform:translateY(-5px); }
+    .feature-item h3 { font-weight:700; font-size:1.1rem; text-transform:uppercase; margin-bottom:10px; letter-spacing:1px; }
+    .feature-item p { font-size:0.9rem; color:#666; line-height:1.5; }
+
+    /* ================= VIDEO BANNER SECTION ================= */
+    .video-banner-section {
+      width: 100%;
+      height: 75vh;
+      max-height: 800px;
+      min-height: 400px;
+      position: relative;
+      background-color: #000;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    }
+    .promo-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .mute-toggle-btn {
+      position: absolute;
+      bottom: 40px;
+      right: 40px;
+      background: rgba(17, 17, 17, 0.5);
+      backdrop-filter: blur(5px);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      width: 55px;
+      height: 55px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      transition: all 0.3s ease;
+      outline: none;
+    }
+    .mute-toggle-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--peach);
+      color: var(--peach);
+      transform: scale(1.05);
+    }
+
     /* ================= CATEGORII ================= */
     .categories-section { text-align:center; padding:80px 20px 80px; position: relative; z-index: 20; }
     .categories-section h2 { margin-bottom:25px; font-size:2.5rem; font-weight:700; letter-spacing:2px; position: relative; z-index: 1; }
@@ -256,7 +309,7 @@
     .obj-col h3 { font-size:1.2rem; border-bottom:2px solid black; padding-bottom:10px; margin-bottom:20px; font-weight:600; }
     .obj-col p { font-size:0.95rem; line-height:1.8; color:#333; margin-bottom: 15px;}
 
-    /* QUOTES - Textul care se mișcă (Marquee) */
+    /* QUOTES */
     .quotes-section { padding:80px 0; background:#000; overflow:hidden; display:flex; flex-direction:column; gap:40px; width:100%; }
     .quote-track { display:flex; width:max-content; white-space:nowrap; gap:80px; font-family: 'Playfair Display', serif; font-style:italic; font-size:1.8rem; color:#fff; }
     .quote-item span { color:var(--peach); font-family: 'Montserrat', sans-serif; font-weight:500; font-style:normal; font-size:1rem; margin-left:20px; }
@@ -292,15 +345,6 @@
     .faq-answer-content p { margin-bottom: 15px; }
     .faq-answer-content p:last-child { margin-bottom: 0; }
 
-    /* FEATURES */
-    .features-section { background-color:var(--light-bg); padding:60px 20px; display:flex; justify-content:center; align-items:flex-start; text-align:center; gap:40px; flex-wrap:wrap; position:relative; z-index:10; }
-    .feature-item { flex:1; min-width:250px; max-width:320px; }
-    .feature-icon { display:flex; justify-content:center; margin-bottom:20px; color:var(--dark); }
-    .feature-icon svg { transition: stroke .3s, transform .3s; }
-    .feature-item:hover .feature-icon svg { stroke:var(--peach); transform:translateY(-5px); }
-    .feature-item h3 { font-weight:700; font-size:1.1rem; text-transform:uppercase; margin-bottom:10px; letter-spacing:1px; }
-    .feature-item p { font-size:0.9rem; color:#666; line-height:1.5; }
-
     /* FOOTER */
     footer { background-color:#0b0b0b; padding:80px 50px 30px; display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:40px; color:#fff; border-top:1px solid #222; }
     .footer-col h2 { color:var(--peach); font-size:2.2rem; margin-bottom:20px; font-weight:700; }
@@ -317,7 +361,7 @@
     .anpc-img:hover { opacity:0.7; }
     .company-info { margin-top: 25px; font-size: 0.85rem; color: #888; line-height: 1.6; }
 
-    /* COOKIE BANNER OVERLAY - REDESIGN */
+    /* COOKIE BANNER OVERLAY */
     .cookie-overlay {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(5px);
@@ -397,6 +441,8 @@
       .categories-section h2, .objectives-header h2 { font-size:1.8rem; }
       footer { padding:40px 20px; display:flex; flex-direction:column; }
       .cookie-buttons-row { flex-direction: column; }
+      .video-banner-section { height: 60vh; }
+      .mute-toggle-btn { bottom: 20px; right: 20px; width: 45px; height: 45px; }
     }
 
     img { max-width: 100%; height: auto; object-fit: cover; }
@@ -430,7 +476,7 @@
         <option value="es">ES</option>
         <option value="it">IT</option>
       </select>
-      <a href="checkout.html" id="cart-nav-btn" class="cart-btn" style="font-family:'Montserrat', sans-serif;">Cart (0)</a>
+      <a href="checkout.html" id="cart-nav-btn" class="cart-btn" style="font-family:'Montserrat', sans-serif; text-transform: uppercase;">CART (0)</a>
     </div>
   </nav>
 
@@ -489,6 +535,29 @@
       <p data-i18n="feat3_text">Ai la dispoziție 14 zile calendaristice pentru a schimba produsul.</p>
     </div>
   </section>
+
+  <!-- ================= VIDEO BANNER ================= -->
+  <section class="video-banner-section">
+    <video id="promoVideo" class="promo-video" autoplay muted playsinline>
+      <source src="clip.mp4" type="video/mp4">
+      Browserul tău nu suportă elementul video.
+    </video>
+    
+    <button id="muteToggle" class="mute-toggle-btn" aria-label="Pornește/Oprește Sunet">
+      <!-- Icon Mute (default pt că video e muted la început) -->
+      <svg id="icon-muted" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+        <line x1="23" y1="9" x2="17" y2="15"></line>
+        <line x1="17" y1="9" x2="23" y2="15"></line>
+      </svg>
+      <!-- Icon Unmuted (ascuns la început) -->
+      <svg id="icon-unmuted" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+      </svg>
+    </button>
+  </section>
+  <!-- ================================================ -->
 
   <section class="categories-section">
     <h2 class="gradient-underline" data-i18n="cat_title">CE PRODUSE OFERIM</h2>
@@ -802,6 +871,46 @@
       const randomImgUrl = heroImages[Math.floor(Math.random()*heroImages.length)];
       if (heroSection) heroSection.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)), url('${randomImgUrl}')`;
 
+      // --- LOGICA VIDEO PROMO ---
+      const promoVideo = document.getElementById('promoVideo');
+      const muteToggle = document.getElementById('muteToggle');
+      const iconMuted = document.getElementById('icon-muted');
+      const iconUnmuted = document.getElementById('icon-unmuted');
+
+      if (promoVideo) {
+        // Asigurăm pornirea de la secunda 3 la încărcare
+        promoVideo.addEventListener('loadedmetadata', () => {
+          promoVideo.currentTime = 3;
+        });
+        
+        // Dacă e deja încărcat
+        if (promoVideo.readyState >= 1) {
+          promoVideo.currentTime = 3;
+        }
+
+        // Când se termină videoclipul, forțăm să revină la secunda 3
+        promoVideo.addEventListener('ended', () => {
+          promoVideo.currentTime = 3;
+          promoVideo.play();
+        });
+
+        // Logica butonului de mut/unmut
+        if (muteToggle) {
+          muteToggle.addEventListener('click', () => {
+            if (promoVideo.muted) {
+              promoVideo.muted = false;
+              iconMuted.style.display = 'none';
+              iconUnmuted.style.display = 'block';
+            } else {
+              promoVideo.muted = true;
+              iconMuted.style.display = 'block';
+              iconUnmuted.style.display = 'none';
+            }
+          });
+        }
+      }
+      // --------------------------
+
       // --- LOGICA PENTRU ANIMAȚIA TITLULUI H-TIME ---
       const mainTitle = document.getElementById('main-title');
       const titleStroke = document.getElementById('main-title-stroke');
@@ -986,7 +1095,7 @@
       } else {
         let cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
         const cartBtn = document.getElementById('cart-nav-btn');
-        if (cartBtn) cartBtn.innerText = `Cart (${cart.length})`;
+        if (cartBtn) cartBtn.innerText = `CART (${cart.length})`;
       }
 
       const switcher = document.getElementById('languageSwitcher');
