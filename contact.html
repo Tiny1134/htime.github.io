@@ -276,8 +276,8 @@
     <div class="contact-form-panel">
       <h2 data-i18n="contact_form_title">Trimite un mesaj</h2>
       
-      <!-- Am pus varianta CLASICĂ a formularului pentru a asigura primirea mailului de activare -->
-      <form action="https://formsubmit.co/h.time.business@gmail.com" method="POST">
+      <!-- Varianta modernă (AJAX) pentru a rămâne pe site și a evita redirecționarea -->
+      <form id="contactForm">
         
         <!-- Input-uri ascunse pentru funcțiile FormSubmit -->
         <input type="hidden" name="_subject" value="Mesaj nou de contact H-TIME">
@@ -297,9 +297,10 @@
           <label data-i18n="form_message">Mesaj</label>
           <textarea name="Mesaj" required data-i18n-placeholder="ph_message" placeholder="Scrieți mesajul aici..."></textarea>
         </div>
-        <button type="submit" class="btn-submit">
+        <button type="submit" class="btn-submit" id="submitBtn">
           <span data-i18n="btn_send">Trimite Mesajul</span>
         </button>
+        <div id="formMessage" style="display:none; margin-top:15px; font-weight:600; font-size:0.9rem; padding:12px; border-radius:8px; text-align:center;"></div>
       </form>
     </div>
 
@@ -373,7 +374,9 @@
         contact_info_heading: "Date de contact",
         contact_address_title: "Adresă", contact_phone_title: "Telefon", contact_email_title: "E-mail", contact_program_title: "Program", contact_program_val: "Luni - Vineri: 10:00 - 18:00", 
         contact_form_title: "Trimite un mesaj", form_name: "Nume complet", form_email: "Adresa de E-mail", form_message: "Mesaj", 
-        btn_send: "Trimite Mesajul",
+        btn_send: "Trimite Mesajul", btn_sending: "Se trimite...",
+        form_success_msg: "Mesajul tău a fost trimis cu succes! Te vom contacta în curând.",
+        form_error_msg: "Eroare la trimitere. Formularul ar putea fi blocat de rețea. Te rugăm să ne scrii direct pe email.",
         ph_fname: "Popescu Ion", ph_email: "contact@exemplu.ro", ph_message: "Scrieți mesajul aici...",
         footer_desc: "Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul, calitatea superioară și poveștile spuse prin intermediul bijuteriilor și ceasurilor unice.", 
         footer_nav: "NAVIGARE RAPIDĂ", footer_home: "Acasă - Pagina principală", footer_shop: "Magazin - Toate Colecțiile", footer_about: "Povestea Noastră", footer_contact: "Contact & Suport", 
@@ -385,7 +388,9 @@
         contact_info_heading: "Contact Info",
         contact_address_title: "Address", contact_phone_title: "Phone", contact_email_title: "E-mail", contact_program_title: "Schedule", contact_program_val: "Monday - Friday: 10:00 - 18:00", 
         contact_form_title: "Send a message", form_name: "Full Name", form_email: "Email Address", form_message: "Message", 
-        btn_send: "Send Message",
+        btn_send: "Send Message", btn_sending: "Sending...",
+        form_success_msg: "Your message has been sent successfully! We will contact you soon.",
+        form_error_msg: "Sending error. The form might be blocked by your network. Please email us directly.",
         ph_fname: "John Doe", ph_email: "contact@example.com", ph_message: "Write your message here...",
         footer_desc: "Emotions sculpted in elegance. A luxury boutique dedicated to people who appreciate refinement, premium quality, and stories told through unique jewelry and watches.", 
         footer_nav: "QUICK NAVIGATION", footer_home: "Home - Main Page", footer_shop: "Shop - All Collections", footer_about: "Our Story", footer_contact: "Contact & Support", 
@@ -397,7 +402,9 @@
         contact_info_heading: "Coordonnées",
         contact_address_title: "Adresse", contact_phone_title: "Téléphone", contact_email_title: "E-mail", contact_program_title: "Horaires", contact_program_val: "Lundi - Vendredi: 10:00 - 18:00", 
         contact_form_title: "Envoyer un message", form_name: "Nom complet", form_email: "Adresse Email", form_message: "Message", 
-        btn_send: "Envoyer",
+        btn_send: "Envoyer", btn_sending: "Envoi en cours...",
+        form_success_msg: "Votre message a été envoyé avec succès ! Nous vous contacterons bientôt.",
+        form_error_msg: "Erreur d'envoi. Veuillez nous envoyer un email directement.",
         ph_fname: "Jean Dupont", ph_email: "contact@exemple.fr", ph_message: "Écrivez votre message ici...",
         footer_desc: "Émotions sculptées dans l'élégance. Une boutique de luxe dédiée aux personnes qui apprécient le raffinement.", 
         footer_nav: "NAVIGATION RAPIDE", footer_home: "Accueil - Page principale", footer_shop: "Boutique - Toutes les collections", footer_about: "Notre histoire", footer_contact: "Contact & Support", 
@@ -409,7 +416,9 @@
         contact_info_heading: "Kontaktdaten",
         contact_address_title: "Adresse", contact_phone_title: "Telefon", contact_email_title: "E-Mail", contact_program_title: "Öffnungszeiten", contact_program_val: "Montag - Freitag: 10:00 - 18:00", 
         contact_form_title: "Nachricht senden", form_name: "Vollständiger Name", form_email: "E-Mail Adresse", form_message: "Nachricht", 
-        btn_send: "Senden",
+        btn_send: "Senden", btn_sending: "Wird gesendet...",
+        form_success_msg: "Ihre Nachricht wurde erfolgreich gesendet! Wir werden Sie bald kontaktieren.",
+        form_error_msg: "Fehler beim Senden. Bitte senden Sie uns direkt eine E-Mail.",
         ph_fname: "Hans Müller", ph_email: "kontakt@beispiel.de", ph_message: "Schreiben Sie hier Ihre Nachricht...",
         footer_desc: "Emotionen in Eleganz gemeißelt. Eine Luxus-Boutique für Liebhaber von Raffinesse.", 
         footer_nav: "SCHNELLNAVIGATION", footer_home: "Startseite - Hauptseite", footer_shop: "Shop - Alle Kollektionen", footer_about: "Unsere Geschichte", footer_contact: "Kontakt & Support", 
@@ -421,7 +430,9 @@
         contact_info_heading: "Datos de contacto",
         contact_address_title: "Dirección", contact_phone_title: "Teléfono", contact_email_title: "Correo", contact_program_title: "Horario", contact_program_val: "Lunes - Viernes: 10:00 - 18:00", 
         contact_form_title: "Enviar un mensaje", form_name: "Nombre completo", form_email: "Correo Electrónico", form_message: "Mensaje", 
-        btn_send: "Enviar Mensaje",
+        btn_send: "Enviar Mensaje", btn_sending: "Enviando...",
+        form_success_msg: "¡Tu mensaje ha sido enviado con éxito! Nos pondremos en contacto contigo pronto.",
+        form_error_msg: "Error de envío. Por favor envíenos un correo electrónico directamente.",
         ph_fname: "Carlos García", ph_email: "contacto@ejemplo.es", ph_message: "Escribe tu mensaje aquí...",
         footer_desc: "Emociones esculpidas en elegancia. Una boutique de lujo dedicada a quienes aprecian el refinamiento.", 
         footer_nav: "NAVEGACIÓN RÁPIDA", footer_home: "Inicio - Página principal", footer_shop: "Tienda - Todas las colecciones", footer_about: "Nuestra historia", footer_contact: "Contacto & Soporte", 
@@ -433,7 +444,9 @@
         contact_info_heading: "Info Contatti",
         contact_address_title: "Indirizzo", contact_phone_title: "Telefono", contact_email_title: "E-mail", contact_program_title: "Orari", contact_program_val: "Lunedì - Venerdì: 10:00 - 18:00", 
         contact_form_title: "Invia un messaggio", form_name: "Nome completo", form_email: "Indirizzo Email", form_message: "Messaggio", 
-        btn_send: "Invia Messaggio",
+        btn_send: "Invia Messaggio", btn_sending: "Invio in corso...",
+        form_success_msg: "Il tuo messaggio è stato inviato con successo! Ti contatteremo presto.",
+        form_error_msg: "Errore di invio. Vi preghiamo di inviarci un'e-mail direttamente.",
         ph_fname: "Mario Rossi", ph_email: "contatto@esempio.it", ph_message: "Scrivi qui il tuo messaggio...",
         footer_desc: "Emozioni scolpite nell'eleganza. Una boutique di lusso dedicata a chi apprezza la raffinatezza.", 
         footer_nav: "NAVIGAZIONE RAPIDA", footer_home: "Home - Pagina principale", footer_shop: "Negozio - Tutte le collezioni", footer_about: "La nostra storia", footer_contact: "Contatto & Supporto", 
@@ -464,6 +477,71 @@
         }); 
       }
       applyTranslations(localStorage.getItem('htime_lang') || 'ro');
+      
+      // LOGICA DE TRIMITERE FORMULAR PRIN AJAX
+      const form = document.getElementById('contactForm');
+      const formMessage = document.getElementById('formMessage');
+      const submitBtn = document.getElementById('submitBtn');
+
+      if (form) {
+        form.addEventListener('submit', function(e) {
+          e.preventDefault(); // Previne redirecționarea paginii
+          
+          const currentLang = localStorage.getItem('htime_lang') || 'ro';
+          const dict = translations[currentLang] || translations.ro;
+          
+          // Dezactivăm butonul și schimbăm textul pentru feedback vizual
+          const spanText = submitBtn.querySelector('span');
+          const originalText = spanText.innerText;
+          submitBtn.disabled = true;
+          spanText.innerText = dict.btn_sending || "Se trimite...";
+          formMessage.style.display = 'none';
+
+          const formData = new FormData(form);
+
+          fetch("https://formsubmit.co/ajax/h.time.business@gmail.com", {
+            method: "POST",
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+          })
+          .then(response => response.json())
+          .then(data => {
+            formMessage.style.display = 'block';
+            if (data.success) {
+              formMessage.style.color = '#155724';
+              formMessage.style.backgroundColor = '#d4edda';
+              formMessage.style.border = '1px solid #c3e6cb';
+              formMessage.innerText = dict.form_success_msg || "Mesajul a fost trimis cu succes!";
+              form.reset(); // Golim formularul
+            } else {
+              formMessage.style.color = '#721c24';
+              formMessage.style.backgroundColor = '#f8d7da';
+              formMessage.style.border = '1px solid #f5c6cb';
+              formMessage.innerText = dict.form_error_msg || "Eroare la trimitere.";
+            }
+          })
+          .catch(error => {
+            // Aici intră dacă Orange blochează request-ul de fetch
+            formMessage.style.display = 'block';
+            formMessage.style.color = '#721c24';
+            formMessage.style.backgroundColor = '#f8d7da';
+            formMessage.style.border = '1px solid #f5c6cb';
+            formMessage.innerText = dict.form_error_msg || "Eroare de rețea. Te rugăm să ne scrii pe email.";
+          })
+          .finally(() => {
+            // Resetăm butonul înapoi
+            submitBtn.disabled = false;
+            spanText.innerText = originalText;
+            
+            // Ascundem mesajul după 7 secunde
+            setTimeout(() => {
+              formMessage.style.display = 'none';
+            }, 7000);
+          });
+        });
+      }
     });
   </script>
 </body>
