@@ -10,246 +10,278 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
 
   <style>
-    :root {
-      --peach: #fcbf88;
-      --pink: #ffb6c1;
-      --dark: #111111;
-      --light-bg: #f8f5f2;
+    /* ================= VARIABILE & BAZĂ ================= */
+    :root { 
+      --peach: #fcbf88; 
+      --pink: #ffb6c1; 
+      --dark: #111111; 
+      --dark-gray: #1a1a1a;
+      --light-bg: #fdfbf9; 
+      --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     }
-
     * { margin:0; padding:0; box-sizing:border-box; }
-    body {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 300;
-      background-color: var(--light-bg);
-      color: var(--dark);
-      overflow-x: hidden;
-      display: flex; 
-      flex-direction: column; 
-      min-height: 100vh;
-      padding-top: 100px;
-    }
-    h1,h2,h3,h4 { font-weight: normal; }
+    body { font-family: 'Montserrat', sans-serif; font-weight: 300; background-color: var(--light-bg); color: var(--dark); overflow-x: hidden; display: flex; flex-direction: column; min-height: 100vh; padding-top: 100px; }
+    
+    a, a:hover, a:visited, a:active { text-decoration: none !important; color: inherit !important; }
 
-    /* ================= NAVIGAȚIE ================= */
+    /* ================= NAVIGAȚIE (Glassmorphism) ================= */
     nav {
       position: fixed;
       top:0; left:0; width:100%;
       padding:15px 50px;
       display:flex; justify-content:space-between; align-items:center;
       z-index:1000;
-      background-color: var(--dark);
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+      background-color: rgba(17, 17, 17, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      transition: var(--transition);
     }
-    .logo img { height:75px; }
-    .nav-links { display:flex; gap:30px; }
+    .logo img { height:75px; transition: transform 0.3s; }
+    .logo img:hover { transform: scale(1.02); }
+
+    .nav-links { display:flex; gap:35px; }
     .nav-links a {
-      color:white; text-decoration:none; font-weight:500; font-size:0.9rem;
-      text-transform:uppercase; letter-spacing:1px; transition: color .3s;
+      color:white !important; font-weight:500; font-size:0.85rem;
+      text-transform:uppercase; letter-spacing:1.5px; 
+      position: relative;
+      padding-bottom: 5px;
     }
-    .nav-links a:hover { color: var(--peach); }
-
-    .nav-icons { display:flex; align-items:center; gap:20px; }
-    .nav-icons a { color:white; text-decoration:none; font-size:0.9rem; text-transform:uppercase; transition: all .3s; }
-    .nav-icons a:hover { color: var(--peach); }
-    .cart-btn {
-      border:1px solid white; padding:8px 18px; border-radius:30px;
-      display:inline-flex; align-items:center; justify-content:center; transition: all .3s;
-      color: white; text-decoration: none; cursor: pointer;
+    .nav-links a::after {
+      content: ''; position: absolute; width: 0; height: 2px;
+      bottom: 0; left: 50%; background-color: var(--peach);
+      transition: width 0.3s ease, left 0.3s ease;
     }
-    .cart-btn:hover { border-color: var(--peach); color: var(--peach); }
+    .nav-links a:hover::after { width: 100%; left: 0; }
+    .nav-links a:hover { color: var(--peach) !important; }
 
-    /* ================= SECȚIUNE CHECKOUT ================= */
-    .checkout-container {
-      max-width: 1400px;
-      margin: 40px auto 80px;
-      padding: 0 40px;
+    .nav-icons { display:flex; align-items:center; gap:25px; }
+    
+    a.cart-btn, a.cart-btn:visited {
+      border: 1px solid rgba(255,255,255,0.3); padding: 10px 22px; border-radius: 30px;
+      font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; 
+      font-weight: 700 !important; 
+      display: inline-flex; align-items: center; justify-content: center; 
+      transition: var(--transition); background: transparent; 
+      color: white !important; 
+    }
+    a.cart-btn:hover { 
+      border-color: var(--peach); background: var(--peach);
+      color: var(--dark) !important; 
+      transform: translateY(-2px);
+    }
+
+    #languageSwitcher {
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2);
+      color: white; padding: 8px 12px; border-radius: 20px; font-size: 0.8rem;
+      text-transform: uppercase; font-family: 'Montserrat', sans-serif;
+      cursor: pointer; outline: none; transition: all 0.3s;
+    }
+    #languageSwitcher:hover { border-color: var(--peach); }
+    #languageSwitcher option { background: var(--dark); color: white; }
+
+    /* ================= CHECKOUT HERO ================= */
+    .checkout-hero {
+      background-color: var(--dark);
+      color: white;
+      text-align: center;
+      padding: 80px 20px 180px;
+      position: relative;
+    }
+    .checkout-hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+      background: linear-gradient(135deg, var(--peach), var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+    .checkout-hero p {
+      max-width: 650px;
+      margin: 0 auto;
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: #ccc;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+    }
+
+    /* ================= CHECKOUT LAYOUT ================= */
+    .checkout-wrapper {
+      max-width: 1300px;
+      margin: -100px auto 80px;
+      padding: 0 20px;
       display: flex;
-      gap: 50px;
+      gap: 40px;
+      position: relative;
+      z-index: 10;
       flex: 1;
       width: 100%;
+      align-items: flex-start;
     }
 
-    .checkout-main { flex: 2; }
-    .checkout-side { flex: 1; }
+    .checkout-main { flex: 1.5; display: flex; flex-direction: column; gap: 40px; }
+    .checkout-side { flex: 1; position: sticky; top: 120px; }
 
+    /* Carduri Albe (Coș + Formular) */
     .white-card {
       background: white;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-      margin-bottom: 30px;
+      padding: 50px;
+      border-radius: 20px;
+      box-shadow: 10px 20px 40px rgba(0,0,0,0.08);
     }
 
     .section-title {
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
-      font-size: 1.4rem;
-      margin-bottom: 25px;
+      font-size: 1.6rem;
+      margin-bottom: 35px;
       color: var(--dark);
-      border-bottom: 2px solid var(--peach);
-      padding-bottom: 10px;
       text-transform: uppercase;
+      letter-spacing: 1px;
+      position: relative;
+      display: inline-block;
+      padding-bottom: 10px;
     }
+    .section-title::after {
+      content: ''; position: absolute; left: 0; bottom: 0; width: 60px; height: 4px;
+      background: linear-gradient(to right, var(--pink), var(--peach)); border-radius: 2px;
+    }
+
+    /* Card Întunecat (Sumar Comandă) */
+    .dark-card {
+      background: var(--dark-gray);
+      color: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+    .dark-card .section-title { color: white; }
+    .dark-card .section-title::after { background: var(--peach); }
 
     /* Cart Items */
     .cart-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 0;
-      border-bottom: 1px solid #eee;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 25px 0; border-bottom: 1px solid #eee;
     }
-    .cart-item:last-child { border-bottom: none; }
+    .cart-item:last-child { border-bottom: none; padding-bottom: 0; }
     .item-info { display: flex; align-items: center; gap: 20px; }
-    .item-info img { width: 90px; height: 90px; object-fit: cover; border-radius: 10px; border: 1px solid #eee; }
-    .item-info h4 { font-weight: 700; font-size: 1.1rem; color: var(--dark); }
-    .item-info p { font-size: 0.85rem; color: #777; margin-top: 5px; }
+    .item-info img { width: 100px; height: 100px; object-fit: cover; border-radius: 12px; border: 1px solid #f0f0f0; }
+    .item-info h4 { font-weight: 700; font-size: 1.1rem; color: var(--dark); margin-bottom: 6px; }
+    .item-info p { font-size: 0.85rem; color: #777; }
     
     .item-actions { text-align: right; }
-    .qty-controls { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; justify-content: flex-end; }
-    .qty-btn-small { 
-      width: 28px; height: 28px; border: 1px solid #ddd; 
-      background: white; border-radius: 5px; cursor: pointer; font-weight: bold; 
-      display: flex; align-items: center; justify-content: center; transition: 0.2s;
-    }
-    .qty-btn-small:hover { background: var(--peach); border-color: var(--peach); }
+    .item-price { font-weight: 700; font-size: 1.2rem; display: block; margin-bottom: 10px; color: var(--peach); }
     
-    .item-price { font-weight: 700; font-size: 1.1rem; display: block; margin-bottom: 5px; }
+    .qty-controls { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; justify-content: flex-end; }
+    .qty-btn-small { 
+      width: 32px; height: 32px; border: 1px solid #ddd; background: white; border-radius: 8px; 
+      cursor: pointer; font-weight: bold; display: flex; align-items: center; justify-content: center; transition: 0.2s; color: var(--dark);
+    }
+    .qty-btn-small:hover { background: var(--peach); border-color: var(--peach); color: white; }
+    
     .btn-remove { 
       background: none; border: none; color: #ff4757; cursor: pointer; 
-      font-size: 0.75rem; text-transform: uppercase; font-weight: 700;
+      font-size: 0.75rem; text-transform: uppercase; font-weight: 700; transition: color 0.2s;
     }
-    .btn-remove:hover { text-decoration: underline; }
+    .btn-remove:hover { color: #d63031; text-decoration: underline; }
 
     /* Formular */
-    .billing-form { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .billing-form { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
     .form-group { display: flex; flex-direction: column; gap: 8px; }
     .form-group.full { grid-column: span 2; }
-    .form-group label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: #555; }
+    .form-group label { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: #555; }
     .form-group input {
-      padding: 14px; border: 1px solid #ddd; border-radius: 10px; font-family: 'Montserrat', sans-serif; outline: none;
+      width: 100%; padding: 16px 20px; background: #f9f9f9; border: 1px solid #eee; border-radius: 12px;
+      font-family: 'Montserrat', sans-serif; font-size: 0.95rem; outline: none; transition: all 0.3s; color: var(--dark);
     }
-    .form-group input:focus { border-color: var(--peach); box-shadow: 0 0 10px rgba(252, 191, 136, 0.1); }
+    .form-group input:focus { background: white; border-color: var(--peach); box-shadow: 0 0 0 4px rgba(252, 191, 136, 0.15); }
 
-    /* Sumar */
-    .summary-line { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 1rem; }
+    /* Sumar Intern (Dark Card) */
+    .summary-line { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 1rem; color: #ddd; }
     .summary-line.total { 
-      margin-top: 20px; padding-top: 20px; border-top: 2px solid var(--light-bg);
-      font-weight: 700; font-size: 1.4rem; color: var(--dark);
+      margin-top: 25px; padding-top: 25px; border-top: 1px solid rgba(255,255,255,0.1);
+      font-weight: 700; font-size: 1.5rem; color: white;
     }
 
-    .payment-methods, .delivery-methods { margin-top: 25px; border-top: 1px solid #eee; padding-top: 20px; }
-    .payment-option { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; cursor: pointer; }
-    .payment-option input { accent-color: var(--peach); cursor: pointer; width: 18px; height: 18px; }
-    .payment-option span { font-weight: 500; font-size: 0.95rem; }
+    .payment-methods, .delivery-methods { margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 25px; }
+    .dark-card h4 { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: var(--peach); margin-bottom: 20px; letter-spacing: 1px; }
+    .payment-option { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; cursor: pointer; }
+    .payment-option input { accent-color: var(--peach); cursor: pointer; width: 20px; height: 20px; }
+    .payment-option span { font-weight: 500; font-size: 0.95rem; color: #eee; }
 
+    /* Butoane */
     .btn-primary {
-      width: 100%;
-      background: var(--dark);
-      color: white;
-      border: none;
-      padding: 18px;
-      border-radius: 40px;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      cursor: pointer;
-      transition: 0.3s;
-      margin-top: 20px;
+      width: 100%; background: var(--peach); color: var(--dark); border: none; padding: 20px; border-radius: 40px;
+      font-family: 'Montserrat', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+      cursor: pointer; transition: 0.3s; margin-top: 30px; font-size: 1rem;
     }
     .btn-primary:hover { 
       background: linear-gradient(to right, var(--pink), var(--peach));
-      color: black;
-      transform: translateY(-2px); 
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.2);
     }
-    .btn-secondary {
-      background: white;
-      color: var(--dark);
-      border: 2px solid var(--dark);
-    }
-    .btn-secondary:hover {
-      background: var(--dark);
-      color: white;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    }
+    
+    .btn-secondary { background: transparent; color: var(--dark); border: 2px solid var(--dark); }
+    .btn-secondary:hover { background: var(--dark); color: white; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
 
     /* Success Screen */
     #success-container {
-      display: none;
-      text-align: center;
-      max-width: 600px;
-      margin: 80px auto 120px;
-      background: white;
-      padding: 60px 40px;
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-      flex: 1;
+      display: none; text-align: center; max-width: 700px; margin: 40px auto 120px;
+      background: white; padding: 70px 50px; border-radius: 20px;
+      box-shadow: 10px 20px 40px rgba(0,0,0,0.08); flex: 1; position: relative; z-index: 10;
     }
 
     /* Factura (Hidden initially) */
     #invoice-container { 
-      display: none; 
-      background: white; 
-      padding: 50px; 
-      border: 1px solid #ddd; 
-      max-width: 800px; 
-      margin: 40px auto; 
-      color: black; 
-      font-family: 'Montserrat', sans-serif; 
-      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      display: none; background: white; padding: 60px; border: 1px solid #eee; border-radius: 10px;
+      max-width: 850px; margin: 40px auto 100px; color: black; font-family: 'Montserrat', sans-serif; 
+      box-shadow: 10px 20px 40px rgba(0,0,0,0.08); position: relative; z-index: 10;
     }
 
-    /* ================= CSS PENTRU PRINTARE PDF ================= */
     @media print {
       body * { visibility: hidden; }
-      nav, footer, .checkout-container, #success-container { display: none !important; }
+      nav, footer, .checkout-hero, .checkout-wrapper, #success-container { display: none !important; }
       #invoice-container, #invoice-container * { visibility: visible; }
-      #invoice-container { 
-        position: absolute; 
-        left: 0; 
-        top: 0; 
-        width: 100%; 
-        border: none; 
-        padding: 0; 
-        margin: 0; 
-        box-shadow: none; 
-        display: block !important; 
-      }
+      #invoice-container { position: absolute; left: 0; top: 0; width: 100%; border: none; padding: 0; margin: 0; box-shadow: none; display: block !important; }
     }
 
     /* ================= FOOTER ================= */
-    footer { 
-      background-color:#0b0b0b; 
-      padding:80px 50px 30px; 
-      display:grid; 
-      grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); 
-      gap:40px; 
-      color:#fff; 
-      border-top:1px solid #222; 
-    }
-    .footer-col h2 { font-family:'DM Serif Display',serif; color:var(--peach); font-size:2.2rem; margin-bottom:20px; }
-    .footer-col h3 { font-size:1rem; font-weight:700; margin-bottom:30px; letter-spacing:1px; text-transform:uppercase; color:#fff; }
+    footer { background-color:#0b0b0b; padding:80px 50px 30px; display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:50px; color:#fff; border-top:1px solid #222; }
+    .footer-col h2 { font-family:'DM Serif Display',serif; color:var(--peach); font-size:2.2rem; margin-bottom:20px; font-weight: normal;}
+    .footer-col h3 { font-size:1rem; font-weight:700; margin-bottom:30px; letter-spacing:1.5px; text-transform:uppercase; color:#fff; }
     .footer-desc { font-size:0.9rem; color:#999; line-height:1.8; margin-bottom:30px; }
     .social-links { display:flex; gap:15px; }
-    .social-icon-circle { width:40px; height:40px; background:#222; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; text-decoration:none; transition:.3s; }
-    .social-icon-circle:hover { background: linear-gradient(to right, var(--pink), var(--peach)); color:black; transform:translateY(-3px); }
-    .footer-col ul { list-style:none; padding:0; display:flex; flex-direction:column; gap:15px; }
-    .footer-col ul a { text-decoration:none; color:#999; font-size:0.9rem; transition:.3s; display:inline-block; }
-    .footer-col ul a:hover { color:var(--peach); transform:translateX(5px); }
-    .footer-bottom { grid-column:1 / -1; text-align:center; padding-top:40px; border-top:1px solid #222; color:#555; font-size:0.8rem; margin-top:20px; }
-    .anpc-img { max-width:180px; width:100%; height:auto; display:block; margin-bottom:15px; transition:opacity .3s; }
-    .anpc-img:hover { opacity:0.7; }
-    .company-info { margin-top: 25px; font-size: 0.85rem; color: #888; line-height: 1.6; }
+    .social-icon-circle { width:42px; height:42px; background:rgba(255,255,255,0.05); border-radius:50%; display:flex; align-items:center; justify-content:center; color:white !important; transition: var(--transition); border: 1px solid rgba(255,255,255,0.1); }
+    .social-icon-circle:hover { background: var(--peach); color:var(--dark) !important; border-color: var(--peach); transform:translateY(-5px); }
+    .footer-col ul { list-style:none; padding:0; display:flex; flex-direction:column; gap:16px; }
+    .footer-col ul a { color:#999 !important; font-size:0.9rem; transition: var(--transition); display:inline-block; }
+    .footer-col ul a:hover { color:var(--peach) !important; transform:translateX(8px); }
+    .company-info { margin-top: 25px; font-size: 0.85rem; color: #888; line-height: 1.8; }
+    .anpc-img { max-width:180px; width:100%; height:auto; display:block; margin-bottom:15px; transition:opacity .3s; opacity: 0.7; }
+    .anpc-img:hover { opacity:1; }
+    .footer-bottom { grid-column:1 / -1; text-align:center; padding-top:40px; border-top:1px solid rgba(255,255,255,0.05); color:#666; font-size:0.85rem; margin-top:30px; letter-spacing: 0.5px; }
 
-    @media (max-width:900px) {
-      .checkout-container { flex-direction: column; padding: 0 20px; }
-      nav { flex-direction:column; gap:15px; padding:15px; background:rgba(0,0,0,0.8); }
+    /* ================= RESPONSIVE ================= */
+    @media (max-width:992px) {
+      .checkout-wrapper { flex-direction: column; margin-top: -60px; gap: 30px; }
+      .checkout-side { position: relative; top: 0; width: 100%; }
+      .billing-form { grid-template-columns: 1fr; }
+      .form-group.full { grid-column: span 1; }
+      .white-card, .dark-card { padding: 40px 30px; }
+    }
+    @media (max-width:768px) {
+      nav { flex-direction:column; gap:15px; padding:15px; background:rgba(17,17,17,0.98); }
+      .nav-links { flex-wrap:wrap; justify-content:center; gap:20px; }
       body { padding-top: 130px; }
-      footer { padding: 40px 20px; }
-      #success-container { margin: 40px 20px; padding: 40px 20px; }
+      .checkout-hero { padding: 40px 20px 120px; }
+      footer { padding:60px 20px 30px; display:flex; flex-direction:column; gap: 40px; }
+      .item-info { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .item-info img { width: 80px; height: 80px; }
+      .cart-item { flex-direction: column; align-items: flex-start; gap: 20px; }
+      .item-actions { width: 100%; display: flex; flex-direction: row; justify-content: space-between; align-items: center; }
+      .qty-controls { margin-bottom: 0; }
     }
   </style>
 </head>
@@ -257,7 +289,7 @@
 
   <!-- NAVBAR -->
   <nav>
-    <a href="index.html" class="logo"><img src="logo.webp" alt="H-TIME Logo"></a>
+    <a href="index.html" class="logo"><img src="logo.webp" alt="H-TIME Logo" onerror="this.src='logo.png'"></a>
     <div class="nav-links">
       <a href="index.html" data-i18n="nav_home">Acasă</a>
       <a href="magazin.html" data-i18n="nav_shop">Magazin</a>
@@ -266,7 +298,7 @@
       <a href="contact.html" data-i18n="nav_contact">Contactează-ne</a>
     </div>
     <div class="nav-icons">
-      <select id="languageSwitcher" style="background:black;border:1px solid rgba(255,255,255,0.12);color:white;padding:6px 8px;border-radius:6px;font-size:0.85rem;text-transform:uppercase; font-family:'Montserrat';">
+      <select id="languageSwitcher" aria-label="Selectează limba">
         <option value="ro">RO</option>
         <option value="en">EN</option>
         <option value="fr">FR</option>
@@ -274,12 +306,19 @@
         <option value="es">ES</option>
         <option value="it">IT</option>
       </select>
-      <a href="checkout.html" id="cart-nav-btn" class="cart-btn">Cart (0)</a>
+      <a href="checkout.html" id="cart-nav-btn" class="cart-btn" style="color:var(--peach) !important; border-color:var(--peach);">Cart (0)</a>
     </div>
   </nav>
 
+  <!-- HERO SECTION -->
+  <header class="checkout-hero">
+    <h1 data-i18n="checkout_title">Finalizare Comandă</h1>
+    <p data-i18n="checkout_subtitle">Verifică produsele alese și completează detaliile pentru a finaliza achiziția.</p>
+  </header>
+
   <!-- ECRAN CHECKOUT (FORMULAR + COS) -->
-  <main id="main-checkout" class="checkout-container">
+  <main id="main-checkout" class="checkout-wrapper">
+    
     <div class="checkout-main">
       <div class="white-card">
         <h2 class="section-title" data-i18n="checkout_cart_title">Coșul de cumpărături</h2>
@@ -303,8 +342,9 @@
     </div>
 
     <aside class="checkout-side">
-      <div class="white-card">
-        <h2 class="section-title" data-i18n="checkout_summary_title" style="font-size: 1.2rem;">Sumar Comandă</h2>
+      <div class="dark-card">
+        <h2 class="section-title" data-i18n="checkout_summary_title">Sumar Comandă</h2>
+        
         <div class="summary-line">
           <span data-i18n="summary_subtotal">Subtotal</span>
           <span id="sum-subtotal">0 Lei</span>
@@ -315,12 +355,12 @@
         </div>
         <div class="summary-line total">
           <span data-i18n="summary_total">Total</span>
-          <span id="sum-total">0 Lei</span>
+          <span id="sum-total" style="color: var(--peach);">0 Lei</span>
         </div>
 
         <!-- Metode de Livrare -->
         <div class="delivery-methods">
-          <h4 data-i18n="delivery_method_title" style="margin-bottom: 15px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase;">Metodă de livrare</h4>
+          <h4 data-i18n="delivery_method_title">Metodă de livrare</h4>
           <label class="payment-option">
             <input type="radio" name="delivery" value="Curier" checked onchange="updateCartUI()">
             <span data-i18n="del_courier">Curier Rapid (FAN Courier / Cargus)</span>
@@ -333,7 +373,7 @@
 
         <!-- Metode de Plată -->
         <div class="payment-methods">
-          <h4 data-i18n="payment_method_title" style="margin-bottom: 15px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase;">Metodă de plată</h4>
+          <h4 data-i18n="payment_method_title">Metodă de plată</h4>
           <label class="payment-option">
             <input type="radio" name="payment" value="Card Online" checked>
             <span data-i18n="pay_card">Card Online</span>
@@ -355,66 +395,66 @@
 
   <!-- ECRAN MESAJ SUCCES -->
   <div id="success-container">
-    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--peach)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 20px;">
+    <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--peach)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 25px;">
       <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
       <polyline points="22 4 12 14.01 9 11.01"></polyline>
     </svg>
-    <h1 style="color: var(--dark); margin-bottom: 15px; font-family: 'DM Serif Display', serif; font-size: 2.5rem;" data-i18n="succ_title">Comandă Plasată!</h1>
-    <p style="font-size: 1.1rem; color: #555; margin-bottom: 30px;" data-i18n="succ_desc">Îți mulțumim pentru comanda plasată. Numărul comenzii tale este:</p>
-    <div id="succ-order-no" style="font-size: 1.8rem; font-weight: 700; color: var(--peach); margin-bottom: 40px; letter-spacing: 2px;"></div>
+    <h1 style="color: var(--dark); margin-bottom: 20px; font-family: 'DM Serif Display', serif; font-size: 2.8rem;" data-i18n="succ_title">Comandă Plasată!</h1>
+    <p style="font-size: 1.15rem; color: #555; margin-bottom: 30px; line-height: 1.6;" data-i18n="succ_desc">Îți mulțumim pentru comanda plasată. Numărul comenzii tale este:</p>
+    <div id="succ-order-no" style="font-size: 2rem; font-weight: 700; color: var(--peach); margin-bottom: 50px; letter-spacing: 2px;"></div>
     
     <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
-      <button class="btn-primary" onclick="showInvoice()" style="width: auto; padding: 15px 30px; margin-top: 0;" data-i18n="btn_view_invoice">Vezi Factura</button>
-      <button class="btn-primary btn-secondary" onclick="window.print()" style="width: auto; padding: 15px 30px; margin-top: 0;" data-i18n="btn_download_pdf">Descarcă Bon PDF</button>
+      <button class="btn-primary" onclick="showInvoice()" style="width: auto; padding: 18px 35px; margin-top: 0; background: var(--dark); color: white;" data-i18n="btn_view_invoice">Vezi Factura</button>
+      <button class="btn-primary btn-secondary" onclick="window.print()" style="width: auto; padding: 18px 35px; margin-top: 0;" data-i18n="btn_download_pdf">Descarcă Bon PDF</button>
     </div>
   </div>
 
   <!-- FACTURA (PENTRU VIZUALIZARE / PRINT) -->
   <div id="invoice-container">
-      <div style="display:flex; justify-content:space-between; border-bottom:2px solid black; padding-bottom:20px;">
+      <div style="display:flex; justify-content:space-between; border-bottom:2px solid black; padding-bottom:30px;">
           <div>
-            <h1 style="font-family:'DM Serif Display'; color:var(--peach); margin-bottom: 5px;">H-TIME</h1>
-            <p style="font-size: 0.85rem; color: #555;">CUI: 83241620 | J22/4620/2024</p>
-            <p style="font-size: 0.85rem; color: #555;">Str. Milcov 18A, Iași</p>
+            <h1 style="font-family:'DM Serif Display'; color:var(--peach); margin-bottom: 5px; font-size: 2.5rem;">H-TIME</h1>
+            <p style="font-size: 0.9rem; color: #555; margin-bottom: 4px;">CUI: 83241620 | J22/4620/2024</p>
+            <p style="font-size: 0.9rem; color: #555;">Str. Milcov 18A, Iași</p>
           </div>
           <div style="text-align:right;">
-            <p><strong data-i18n="inv_title" style="font-size: 1.2rem; text-transform: uppercase;">Factură Proformă</strong></p>
-            <p id="inv-order-id" style="font-weight: 600; margin-top: 5px;"></p>
-            <p id="inv-date"></p>
+            <p><strong data-i18n="inv_title" style="font-size: 1.4rem; text-transform: uppercase; color: var(--dark);">Factură Proformă</strong></p>
+            <p id="inv-order-id" style="font-weight: 600; margin-top: 10px; font-size: 1.1rem; color: #333;"></p>
+            <p id="inv-date" style="color: #666; margin-top: 5px;"></p>
           </div>
       </div>
-      <div style="margin:30px 0; display: flex; justify-content: space-between;">
+      <div style="margin:40px 0; display: flex; justify-content: space-between; background: #fafafa; padding: 20px; border-radius: 10px;">
           <div>
-            <p style="margin-bottom: 5px;"><strong data-i18n="inv_client">Client:</strong> <span id="inv-name"></span></p>
-            <p style="margin-bottom: 5px;"><strong data-i18n="inv_address">Adresă:</strong> <span id="inv-addr"></span></p>
-            <p style="margin-bottom: 5px;"><strong data-i18n="inv_phone">Telefon:</strong> <span id="inv-phone-val"></span></p>
+            <p style="margin-bottom: 8px;"><strong data-i18n="inv_client" style="color: #333;">Client:</strong> <span id="inv-name"></span></p>
+            <p style="margin-bottom: 8px;"><strong data-i18n="inv_address" style="color: #333;">Adresă:</strong> <span id="inv-addr"></span></p>
+            <p style="margin-bottom: 0;"><strong data-i18n="inv_phone" style="color: #333;">Telefon:</strong> <span id="inv-phone-val"></span></p>
           </div>
           <div style="text-align: right;">
-            <p style="margin-bottom: 5px;"><strong data-i18n="inv_pay_method">Metodă Plată:</strong> <span id="inv-payment"></span></p>
-            <p style="margin-bottom: 5px;"><strong data-i18n="inv_del_method">Metodă Livrare:</strong> <span id="inv-delivery"></span></p>
+            <p style="margin-bottom: 8px;"><strong data-i18n="inv_pay_method" style="color: #333;">Metodă Plată:</strong> <span id="inv-payment"></span></p>
+            <p style="margin-bottom: 0;"><strong data-i18n="inv_del_method" style="color: #333;">Metodă Livrare:</strong> <span id="inv-delivery"></span></p>
           </div>
       </div>
       <table style="width:100%; border-collapse:collapse; margin-top:20px;">
           <thead style="background:#f5f5f5;">
               <tr>
-                <th data-i18n="inv_product" style="padding:12px; border:1px solid #ddd; text-align:left;">Produs</th>
-                <th data-i18n="inv_qty" style="padding:12px; border:1px solid #ddd;">Cantitate</th>
-                <th data-i18n="inv_total_price" style="padding:12px; border:1px solid #ddd;">Preț Total</th>
+                <th data-i18n="inv_product" style="padding:15px; border:1px solid #ddd; text-align:left; font-weight: 700;">Produs</th>
+                <th data-i18n="inv_qty" style="padding:15px; border:1px solid #ddd; font-weight: 700;">Cantitate</th>
+                <th data-i18n="inv_total_price" style="padding:15px; border:1px solid #ddd; font-weight: 700;">Preț Total</th>
               </tr>
           </thead>
           <tbody id="inv-body"></tbody>
           <tfoot>
              <tr>
-               <td colspan="2" style="text-align: right; padding: 12px; border:1px solid #ddd;"><strong data-i18n="summary_shipping">Livrare</strong></td>
-               <td id="inv-shipping-fee" style="text-align: center; padding: 12px; border:1px solid #ddd;"></td>
+               <td colspan="2" style="text-align: right; padding: 15px; border:1px solid #ddd;"><strong data-i18n="summary_shipping">Livrare</strong></td>
+               <td id="inv-shipping-fee" style="text-align: center; padding: 15px; border:1px solid #ddd;"></td>
              </tr>
              <tr>
-               <td colspan="2" style="text-align: right; padding: 12px; border:1px solid #ddd;"><strong data-i18n="inv_grand_total">Total General:</strong></td>
-               <td id="inv-total-val" style="text-align: center; padding: 12px; border:1px solid #ddd; font-weight: 700; font-size: 1.1rem;"></td>
+               <td colspan="2" style="text-align: right; padding: 15px; border:1px solid #ddd;"><strong data-i18n="inv_grand_total">Total General:</strong></td>
+               <td id="inv-total-val" style="text-align: center; padding: 15px; border:1px solid #ddd; font-weight: 700; font-size: 1.2rem; color: var(--peach);"></td>
              </tr>
           </tfoot>
       </table>
-      <div style="margin-top: 50px; text-align: center; font-size: 0.9rem; color: #777;" data-i18n="inv_footer_msg">
+      <div style="margin-top: 60px; text-align: center; font-size: 0.95rem; color: #777; font-style: italic;" data-i18n="inv_footer_msg">
         Vă mulțumim pentru cumpărături! Acest document reprezintă confirmarea comenzii dumneavoastră.
       </div>
   </div>
@@ -425,9 +465,15 @@
       <h2>H-TIME</h2>
       <p class="footer-desc" data-i18n="footer_desc">Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul, calitatea superioară și poveștile spuse prin intermediul bijuteriilor și ceasurilor unice.</p>
       <div class="social-links">
-        <a href="#" class="social-icon-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
-        <a href="https://www.instagram.com/bijuterii.h_time/" class="social-icon-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
-        <a href="#" class="social-icon-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg></a>
+        <a href="#" class="social-icon-circle" title="Facebook">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+        </a>
+        <a href="https://www.instagram.com/bijuterii.h_time/" class="social-icon-circle" title="Instagram" target="_blank">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+        </a>
+        <a href="#" class="social-icon-circle" title="TikTok">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
+        </a>
       </div>
       <div class="company-info">
         <p><strong>CUI:</strong> 83241620</p>
@@ -435,6 +481,7 @@
         <p><strong>Sediu:</strong> Strada Milcov 18A, Iași 70025</p>
       </div>
     </div>
+
     <div class="footer-col">
       <h3 data-i18n="footer_nav">NAVIGARE RAPIDĂ</h3>
       <ul>
@@ -444,6 +491,7 @@
         <li><a href="contact.html" data-i18n="footer_contact">Contact & Suport</a></li>
       </ul>
     </div>
+
     <div class="footer-col">
       <h3 data-i18n="footer_info">INFORMAȚII & POLITICI</h3>
       <ul>
@@ -456,13 +504,19 @@
         <li><a href="date_identificare.html" data-i18n="footer_id_data">Date de identificare ale societății</a></li>
       </ul>
     </div>
+
     <div class="footer-col">
       <h3 data-i18n="footer_consumer">PROTECȚIA CONSUMATORULUI</h3>
       <div>
-        <a href="https://anpc.ro/ce-este-sal/" target="_blank"><img src="https://ro.pandora.net/mobify/bundle/1108/static/img/SAL-PICTOGRAMA.png?app=pdp" alt="ANPC SAL" class="anpc-img"></a>
-        <a href="https://ec.europa.eu/consumers/odr" target="_blank"><img src="https://ro.pandora.net/mobify/bundle/1108/static/img/pictogramaSOL.png?app=pdp" alt="ANPC SOL" class="anpc-img"></a>
+        <a href="https://anpc.ro/ce-este-sal/" target="_blank">
+          <img src="https://ro.pandora.net/mobify/bundle/1108/static/img/SAL-PICTOGRAMA.png?app=pdp" alt="ANPC SAL" class="anpc-img">
+        </a>
+        <a href="https://ec.europa.eu/consumers/odr" target="_blank">
+          <img src="https://ro.pandora.net/mobify/bundle/1108/static/img/pictogramaSOL.png?app=pdp" alt="ANPC SOL" class="anpc-img">
+        </a>
       </div>
     </div>
+
     <div class="footer-bottom">© 2024 - 2026 H-TIME Luxury Experience. Toate drepturile sunt rezervate.</div>
   </footer>
 
@@ -499,7 +553,7 @@
       const dict = translations[currentLang] || translations.ro;
 
       if (rawCart.length === 0) {
-        listContainer.innerHTML = `<p style="text-align:center; padding:40px; font-weight: 500;">${dict.cart_empty}</p>`;
+        listContainer.innerHTML = `<p style="text-align:center; padding:40px; font-weight: 500; font-size: 1.1rem; color: #666;">${dict.cart_empty}</p>`;
         document.getElementById('sum-subtotal').innerText = formatPrice(0, currentLang);
         document.getElementById('sum-shipping').innerText = formatPrice(0, currentLang);
         document.getElementById('sum-total').innerText = formatPrice(0, currentLang);
@@ -519,7 +573,7 @@
       }
 
       listContainer.innerHTML = groupedCart.map((item, idx) => {
-        // --- MODIFICARE AICI PENTRU A PRELUA IMAGINEA DIN PRODUSE.JS ÎN FORMAT WEBP ---
+        // --- MODIFICARE PENTRU WEBP ---
         const dbProduct = typeof produse !== 'undefined' ? produse.find(p => p.id === item.id) : null;
         let rawImg = dbProduct ? dbProduct.imagine : (item.imagine || 'poza1.webp');
         let imageSource = rawImg ? rawImg.replace('.png', '.webp') : 'poza1.webp';
@@ -530,14 +584,14 @@
             <img src="${imageSource}" alt="${item.nume}" onerror="this.src='poza1.webp'">
             <div>
               <h4>${item.nume}</h4>
-              <p>${dict.unit_price} ${formatPrice(item.pret, currentLang)}</p>
+              <p>${dict.unit_price} <strong>${formatPrice(item.pret, currentLang)}</strong></p>
             </div>
           </div>
           <div class="item-actions">
             <span class="item-price">${formatPrice(item.pret * (item.qty || 1), currentLang)}</span>
             <div class="qty-controls">
               <button type="button" class="qty-btn-small" onclick="schimbaCantitate(${idx}, -1)">-</button>
-              <span>${item.qty || 1}</span>
+              <span style="font-weight: 600; width: 20px; text-align: center;">${item.qty || 1}</span>
               <button type="button" class="qty-btn-small" onclick="schimbaCantitate(${idx}, 1)">+</button>
             </div>
             <button type="button" onclick="eliminaDinCos(${idx})" class="btn-remove">${dict.btn_delete}</button>
@@ -550,7 +604,6 @@
       const subtotalEur = groupedCart.reduce((acc, item) => acc + (item.pret * (item.qty || 1)), 0);
       const subtotalRon = subtotalEur * 4.97;
       
-      // Metode de livrare: Curier (25 lei) sau Locker (15 lei)
       const deliveryMethodEl = document.querySelector('input[name="delivery"]:checked');
       const deliveryMethod = deliveryMethodEl ? deliveryMethodEl.value : 'Curier';
       
@@ -601,7 +654,7 @@
       document.getElementById('succ-order-no').innerText = orderNumber;
       document.getElementById('inv-order-id').innerText = "Comanda: " + orderNumber;
 
-      // Completare Factura Proforma (pentru cand va fi afisata/printata)
+      // Completare Factura Proforma
       document.getElementById('inv-name').innerText = document.getElementById('fname').value + " " + document.getElementById('lname').value;
       document.getElementById('inv-addr').innerText = document.getElementById('address').value;
       document.getElementById('inv-phone-val').innerText = document.getElementById('phone').value;
@@ -614,23 +667,23 @@
       
       document.getElementById('inv-body').innerHTML = cart.map(i => `
           <tr>
-              <td style="padding:12px; border:1px solid #ddd;">${i.nume}</td>
-              <td style="text-align:center; padding:12px; border:1px solid #ddd;">${i.qty || 1}</td>
-              <td style="text-align:center; padding:12px; border:1px solid #ddd;">${formatPrice(i.pret * (i.qty || 1), currentLang)}</td>
+              <td style="padding:15px; border:1px solid #ddd;">${i.nume}</td>
+              <td style="text-align:center; padding:15px; border:1px solid #ddd;">${i.qty || 1}</td>
+              <td style="text-align:center; padding:15px; border:1px solid #ddd; font-weight: 600;">${formatPrice(i.pret * (i.qty || 1), currentLang)}</td>
           </tr>
       `).join('');
 
       // Ștergem coșul din LocalStorage
       localStorage.removeItem('htimeCart');
-      updateCartUI(); // Reset nav counter
+      updateCartUI();
 
       // Ascundem formularul si aratam pagina de succes
       document.getElementById('main-checkout').style.display = 'none';
+      document.querySelector('.checkout-hero').style.display = 'none';
       document.getElementById('success-container').style.display = 'block';
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Functie pentru vizualizarea facturii direct pe pagina
     function showInvoice() {
       document.getElementById('success-container').style.display = 'none';
       document.getElementById('invoice-container').style.display = 'block';
@@ -640,6 +693,7 @@
     const translations = {
       ro: { 
         nav_home: "Acasă", nav_shop: "Magazin", nav_about: "Despre Noi", nav_team: "Echipa H-Time", nav_contact: "Contactează-ne", 
+        checkout_title: "Finalizare Comandă", checkout_subtitle: "Verifică produsele alese și completează detaliile pentru a finaliza achiziția.",
         checkout_cart_title: "Coșul de cumpărături", checkout_details_title: "Detalii Expediere", checkout_summary_title: "Sumar Comandă", 
         summary_subtotal: "Subtotal", summary_shipping: "Livrare", summary_total: "Total", 
         form_fname: "Nume", form_lname: "Prenume", form_address: "Adresă completă", form_phone: "Telefon", form_email: "Email", 
@@ -658,6 +712,7 @@
       },
       en: { 
         nav_home: "Home", nav_shop: "Shop", nav_about: "About Us", nav_team: "H-Time Team", nav_contact: "Contact Us", 
+        checkout_title: "Checkout", checkout_subtitle: "Review your chosen items and fill in the details to complete your purchase.",
         checkout_cart_title: "Shopping Cart", checkout_details_title: "Shipping Details", checkout_summary_title: "Order Summary", 
         summary_subtotal: "Subtotal", summary_shipping: "Shipping", summary_total: "Total", 
         form_fname: "First Name", form_lname: "Last Name", form_address: "Full Address", form_phone: "Phone", form_email: "Email", 
@@ -676,6 +731,7 @@
       },
       fr: {
         nav_home: "Accueil", nav_shop: "Boutique", nav_about: "À propos", nav_team: "Équipe H-Time", nav_contact: "Contactez-nous",
+        checkout_title: "Paiement", checkout_subtitle: "Vérifiez vos articles choisis et remplissez les détails pour finaliser votre achat.",
         checkout_cart_title: "Panier d'achat", checkout_details_title: "Détails d'expédition", checkout_summary_title: "Résumé de la commande",
         summary_subtotal: "Sous-total", summary_shipping: "Livraison", summary_total: "Total",
         form_fname: "Prénom", form_lname: "Nom", form_address: "Adresse complète", form_phone: "Téléphone", form_email: "Email",
@@ -694,6 +750,7 @@
       },
       de: {
         nav_home: "Startseite", nav_shop: "Shop", nav_about: "Über uns", nav_team: "H-Time Team", nav_contact: "Kontakt",
+        checkout_title: "Kasse", checkout_subtitle: "Überprüfen Sie Ihre ausgewählten Artikel und füllen Sie die Details aus, um Ihren Kauf abzuschließen.",
         checkout_cart_title: "Warenkorb", checkout_details_title: "Versanddetails", checkout_summary_title: "Bestellübersicht",
         summary_subtotal: "Zwischensumme", summary_shipping: "Versand", summary_total: "Gesamt",
         form_fname: "Vorname", form_lname: "Nachname", form_address: "Vollständige Adresse", form_phone: "Telefon", form_email: "E-Mail",
@@ -712,6 +769,7 @@
       },
       es: {
         nav_home: "Inicio", nav_shop: "Tienda", nav_about: "Sobre Nosotros", nav_team: "Equipo H-Time", nav_contact: "Contáctanos",
+        checkout_title: "Pago", checkout_subtitle: "Revise sus artículos elegidos y complete los detalles para finalizar su compra.",
         checkout_cart_title: "Carrito de compras", checkout_details_title: "Detalles de envío", checkout_summary_title: "Resumen del pedido",
         summary_subtotal: "Subtotal", summary_shipping: "Envío", summary_total: "Total",
         form_fname: "Nombre", form_lname: "Apellido", form_address: "Dirección completa", form_phone: "Teléfono", form_email: "Correo electrónico",
@@ -730,6 +788,7 @@
       },
       it: {
         nav_home: "Home", nav_shop: "Negozio", nav_about: "Chi Siamo", nav_team: "Team H-Time", nav_contact: "Contattaci",
+        checkout_title: "Cassa", checkout_subtitle: "Controlla i tuoi articoli scelti e compila i dettagli per completare l'acquisto.",
         checkout_cart_title: "Carrello", checkout_details_title: "Dettagli di spedizione", checkout_summary_title: "Riepilogo ordine",
         summary_subtotal: "Subtotale", summary_shipping: "Spedizione", summary_total: "Totale",
         form_fname: "Nome", form_lname: "Cognome", form_address: "Indirizzo completo", form_phone: "Telefono", form_email: "Email",
