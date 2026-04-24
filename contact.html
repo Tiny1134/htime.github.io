@@ -3,253 +3,262 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Checkout | H-TIME</title>
+  <title>Contact | H-TIME</title>
   <link rel="icon" href="logo.webp" type="image/webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
 
   <style>
-    :root {
-      --peach: #fcbf88;
-      --pink: #ffb6c1;
-      --dark: #111111;
-      --light-bg: #f8f5f2;
+    /* ================= VARIABILE & BAZĂ ================= */
+    :root { 
+      --peach: #fcbf88; 
+      --pink: #ffb6c1; 
+      --dark: #111111; 
+      --dark-gray: #1a1a1a;
+      --light-bg: #fdfbf9; 
+      --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     }
-
     * { margin:0; padding:0; box-sizing:border-box; }
-    body {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 300;
-      background-color: var(--light-bg);
-      color: var(--dark);
-      overflow-x: hidden;
-      display: flex; 
-      flex-direction: column; 
-      min-height: 100vh;
-      padding-top: 100px;
-    }
-    h1,h2,h3,h4 { font-weight: normal; }
+    body { font-family: 'Montserrat', sans-serif; font-weight: 300; background-color: var(--light-bg); color: var(--dark); overflow-x: hidden; display: flex; flex-direction: column; min-height: 100vh; padding-top: 100px; }
+    
+    a, a:hover, a:visited, a:active { text-decoration: none !important; color: inherit !important; }
 
-    /* ================= NAVIGAȚIE ================= */
+    /* ================= NAVIGAȚIE (Glassmorphism) ================= */
     nav {
       position: fixed;
       top:0; left:0; width:100%;
       padding:15px 50px;
       display:flex; justify-content:space-between; align-items:center;
       z-index:1000;
-      background-color: var(--dark);
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+      background-color: rgba(17, 17, 17, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      transition: var(--transition);
     }
-    .logo img { height:75px; }
-    .nav-links { display:flex; gap:30px; }
+    .logo img { height:75px; transition: transform 0.3s; }
+    .logo img:hover { transform: scale(1.02); }
+
+    .nav-links { display:flex; gap:35px; }
     .nav-links a {
-      color:white; text-decoration:none; font-weight:500; font-size:0.9rem;
-      text-transform:uppercase; letter-spacing:1px; transition: color .3s;
+      color:white !important; font-weight:500; font-size:0.85rem;
+      text-transform:uppercase; letter-spacing:1.5px; 
+      position: relative;
+      padding-bottom: 5px;
     }
-    .nav-links a:hover { color: var(--peach); }
+    .nav-links a::after {
+      content: ''; position: absolute; width: 0; height: 2px;
+      bottom: 0; left: 50%; background-color: var(--peach);
+      transition: width 0.3s ease, left 0.3s ease;
+    }
+    .nav-links a:hover::after { width: 100%; left: 0; }
+    .nav-links a:hover { color: var(--peach) !important; }
 
-    .nav-icons { display:flex; align-items:center; gap:20px; }
-    .nav-icons a { color:white; text-decoration:none; font-size:0.9rem; text-transform:uppercase; transition: all .3s; }
-    .nav-icons a:hover { color: var(--peach); }
+    .nav-icons { display:flex; align-items:center; gap:25px; }
+    
     .cart-btn {
-      border:1px solid white; padding:8px 18px; border-radius:30px;
-      display:inline-flex; align-items:center; justify-content:center; transition: all .3s;
-      color: white; text-decoration: none; cursor: pointer;
+      border: 1px solid rgba(255,255,255,0.3); padding: 10px 22px; border-radius: 30px;
+      font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; font-weight: 500;
+      display: inline-flex; align-items: center; justify-content: center; 
+      transition: var(--transition); background: transparent; color: white !important;
+      cursor: pointer;
     }
-    .cart-btn:hover { border-color: var(--peach); color: var(--peach); }
+    .cart-btn:hover { 
+      border-color: var(--peach); background: var(--peach);
+      color: var(--dark) !important; transform: translateY(-2px);
+    }
 
-    /* ================= SECȚIUNE CHECKOUT ================= */
-    .checkout-container {
-      max-width: 1400px;
-      margin: 40px auto 80px;
-      padding: 0 40px;
+    #languageSwitcher {
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2);
+      color: white; padding: 8px 12px; border-radius: 20px; font-size: 0.8rem;
+      text-transform: uppercase; font-family: 'Montserrat', sans-serif;
+      cursor: pointer; outline: none; transition: all 0.3s;
+    }
+    #languageSwitcher:hover { border-color: var(--peach); }
+    #languageSwitcher option { background: var(--dark); color: white; }
+
+    /* ================= CONTACT HERO ================= */
+    .contact-hero {
+      background-color: var(--dark);
+      color: white;
+      text-align: center;
+      padding: 80px 20px 180px;
+      position: relative;
+    }
+    .contact-hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+      background: linear-gradient(135deg, var(--peach), var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+    .contact-hero p {
+      max-width: 650px;
+      margin: 0 auto;
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: #ccc;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+    }
+
+    /* ================= CONTACT LAYOUT ================= */
+    .contact-wrapper {
+      max-width: 1200px;
+      margin: -100px auto 80px;
+      padding: 0 20px;
       display: flex;
-      gap: 50px;
+      gap: 0;
+      position: relative;
+      z-index: 10;
       flex: 1;
       width: 100%;
     }
 
-    .checkout-main { flex: 2; }
-    .checkout-side { flex: 1; }
-
-    .white-card {
-      background: white;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-      margin-bottom: 30px;
-    }
-
-    .section-title {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      font-size: 1.4rem;
-      margin-bottom: 25px;
-      color: var(--dark);
-      border-bottom: 2px solid var(--peach);
-      padding-bottom: 10px;
-      text-transform: uppercase;
-    }
-
-    /* Cart Items */
-    .cart-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 0;
-      border-bottom: 1px solid #eee;
-    }
-    .cart-item:last-child { border-bottom: none; }
-    .item-info { display: flex; align-items: center; gap: 20px; }
-    .item-info img { width: 90px; height: 90px; object-fit: cover; border-radius: 10px; border: 1px solid #eee; }
-    .item-info h4 { font-weight: 700; font-size: 1.1rem; color: var(--dark); }
-    .item-info p { font-size: 0.85rem; color: #777; margin-top: 5px; }
-    
-    .item-actions { text-align: right; }
-    .qty-controls { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; justify-content: flex-end; }
-    .qty-btn-small { 
-      width: 28px; height: 28px; border: 1px solid #ddd; 
-      background: white; border-radius: 5px; cursor: pointer; font-weight: bold; 
-      display: flex; align-items: center; justify-content: center; transition: 0.2s;
-    }
-    .qty-btn-small:hover { background: var(--peach); border-color: var(--peach); }
-    
-    .item-price { font-weight: 700; font-size: 1.1rem; display: block; margin-bottom: 5px; }
-    .btn-remove { 
-      background: none; border: none; color: #ff4757; cursor: pointer; 
-      font-size: 0.75rem; text-transform: uppercase; font-weight: 700;
-    }
-    .btn-remove:hover { text-decoration: underline; }
-
-    /* Formular */
-    .billing-form { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    .form-group { display: flex; flex-direction: column; gap: 8px; }
-    .form-group.full { grid-column: span 2; }
-    .form-group label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: #555; }
-    .form-group input {
-      padding: 14px; border: 1px solid #ddd; border-radius: 10px; font-family: 'Montserrat', sans-serif; outline: none;
-    }
-    .form-group input:focus { border-color: var(--peach); box-shadow: 0 0 10px rgba(252, 191, 136, 0.1); }
-
-    /* Sumar */
-    .summary-line { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 1rem; }
-    .summary-line.total { 
-      margin-top: 20px; padding-top: 20px; border-top: 2px solid var(--light-bg);
-      font-weight: 700; font-size: 1.4rem; color: var(--dark);
-    }
-
-    .payment-methods, .delivery-methods { margin-top: 25px; border-top: 1px solid #eee; padding-top: 20px; }
-    .payment-option { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; cursor: pointer; }
-    .payment-option input { accent-color: var(--peach); cursor: pointer; width: 18px; height: 18px; }
-    .payment-option span { font-weight: 500; font-size: 0.95rem; }
-
-    .btn-primary {
-      width: 100%;
-      background: var(--dark);
+    /* Panoul din Stânga - Info + Harta */
+    .contact-info-panel {
+      flex: 1;
+      background: var(--dark-gray);
       color: white;
-      border: none;
-      padding: 18px;
-      border-radius: 40px;
+      padding: 60px 50px;
+      border-radius: 20px 0 0 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+    }
+    .contact-info-panel h2 {
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
+      font-size: 1.8rem;
+      margin-bottom: 40px;
+      color: white;
       text-transform: uppercase;
       letter-spacing: 1px;
-      cursor: pointer;
-      transition: 0.3s;
-      margin-top: 20px;
     }
-    .btn-primary:hover { 
-      background: linear-gradient(to right, var(--pink), var(--peach));
-      color: black;
-      transform: translateY(-2px); 
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    .info-item { display: flex; align-items: flex-start; gap: 20px; margin-bottom: 30px; }
+    .info-icon {
+      width: 45px;
+      height: 45px;
+      background: rgba(252, 191, 136, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--peach);
+      flex-shrink: 0;
     }
-    .btn-secondary {
-      background: white;
-      color: var(--dark);
-      border: 2px solid var(--dark);
-    }
-    .btn-secondary:hover {
-      background: var(--dark);
-      color: white;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    }
+    .info-text h4 { font-weight: 700; text-transform: uppercase; font-size: 0.9rem; color: var(--peach); margin-bottom: 8px; letter-spacing: 1px; }
+    .info-text p { font-size: 0.95rem; line-height: 1.6; color: #ddd; }
 
-    /* Success Screen */
-    #success-container {
-      display: none;
-      text-align: center;
-      max-width: 600px;
-      margin: 80px auto 120px;
-      background: white;
-      padding: 60px 40px;
+    /* Harta Mică */
+    .map-wrapper-small {
+      width: 100%;
+      height: 250px;
       border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-      flex: 1;
+      overflow: hidden;
+      margin-top: auto;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      background: var(--dark);
+    }
+    .map-wrapper-small iframe { width: 100%; height: 100%; border: none; filter: grayscale(15%) contrast(105%); }
+
+    /* Panoul din Dreapta - Formular */
+    .contact-form-panel {
+      flex: 1.3;
+      background: white;
+      padding: 60px 50px;
+      border-radius: 0 20px 20px 0;
+      box-shadow: 10px 20px 40px rgba(0,0,0,0.08);
+    }
+    .contact-form-panel h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.8rem;
+      margin-bottom: 40px;
+      color: var(--dark);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .form-group { margin-bottom: 25px; position: relative; }
+    .form-group label {
+      display: block; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: #555; margin-bottom: 10px;
+    }
+    .form-group input, .form-group textarea {
+      width: 100%; padding: 16px 20px; background: #f9f9f9; border: 1px solid #eee; border-radius: 12px;
+      font-family: 'Montserrat', sans-serif; font-size: 0.95rem; outline: none; transition: all 0.3s; color: var(--dark);
+    }
+    .form-group input:focus, .form-group textarea:focus {
+      background: white; border-color: var(--peach); box-shadow: 0 0 0 4px rgba(252, 191, 136, 0.15);
+    }
+    .form-group textarea { resize: vertical; min-height: 150px; }
+    
+    .btn-submit {
+      width: 100%; background: var(--dark); color: white; border: none; padding: 18px; border-radius: 40px;
+      font-family: 'Montserrat', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+      cursor: pointer; transition: 0.3s; margin-top: 10px;
+    }
+    .btn-submit:hover { 
+      background: linear-gradient(to right, var(--pink), var(--peach)); color: var(--dark);
+      transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); 
     }
 
-    /* Factura (Hidden initially) */
-    #invoice-container { 
-      display: none; 
-      background: white; 
-      padding: 50px; 
-      border: 1px solid #ddd; 
-      max-width: 800px; 
-      margin: 40px auto; 
-      color: black; 
-      font-family: 'Montserrat', sans-serif; 
-      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-    }
-
-    /* ================= CSS PENTRU PRINTARE PDF ================= */
-    @media print {
-      body * { visibility: hidden; }
-      nav, footer, .checkout-container, #success-container { display: none !important; }
-      #invoice-container, #invoice-container * { visibility: visible; }
-      #invoice-container { 
-        position: absolute; 
-        left: 0; 
-        top: 0; 
-        width: 100%; 
-        border: none; 
-        padding: 0; 
-        margin: 0; 
-        box-shadow: none; 
-        display: block !important; 
-      }
+    /* Nota informativă despre mesaj */
+    .form-warning-note {
+      font-size: 0.8rem;
+      color: #888;
+      margin-top: 15px;
+      text-align: center;
+      line-height: 1.5;
     }
 
     /* ================= FOOTER ================= */
     footer { 
-      background-color:#0b0b0b; 
-      padding:80px 50px 30px; 
-      display:grid; 
-      grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); 
-      gap:40px; 
-      color:#fff; 
-      border-top:1px solid #222; 
+      background-color:#0b0b0b; padding:80px 50px 30px; 
+      display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:50px; 
+      color:#fff; border-top:1px solid #222; 
     }
-    .footer-col h2 { font-family:'DM Serif Display',serif; color:var(--peach); font-size:2.2rem; margin-bottom:20px; }
-    .footer-col h3 { font-size:1rem; font-weight:700; margin-bottom:30px; letter-spacing:1px; text-transform:uppercase; color:#fff; }
+    .footer-col h2 { font-family:'DM Serif Display',serif; color:var(--peach); font-size:2.2rem; margin-bottom:20px; font-weight: normal;}
+    .footer-col h3 { font-size:1rem; font-weight:700; margin-bottom:30px; letter-spacing:1.5px; text-transform:uppercase; color:#fff; }
     .footer-desc { font-size:0.9rem; color:#999; line-height:1.8; margin-bottom:30px; }
+    
     .social-links { display:flex; gap:15px; }
-    .social-icon-circle { width:40px; height:40px; background:#222; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; text-decoration:none; transition:.3s; }
-    .social-icon-circle:hover { background: linear-gradient(to right, var(--pink), var(--peach)); color:black; transform:translateY(-3px); }
-    .footer-col ul { list-style:none; padding:0; display:flex; flex-direction:column; gap:15px; }
-    .footer-col ul a { text-decoration:none; color:#999; font-size:0.9rem; transition:.3s; display:inline-block; }
-    .footer-col ul a:hover { color:var(--peach); transform:translateX(5px); }
-    .footer-bottom { grid-column:1 / -1; text-align:center; padding-top:40px; border-top:1px solid #222; color:#555; font-size:0.8rem; margin-top:20px; }
-    .anpc-img { max-width:180px; width:100%; height:auto; display:block; margin-bottom:15px; transition:opacity .3s; }
-    .anpc-img:hover { opacity:0.7; }
-    .company-info { margin-top: 25px; font-size: 0.85rem; color: #888; line-height: 1.6; }
+    .social-icon-circle { 
+      width:42px; height:42px; background:rgba(255,255,255,0.05); border-radius:50%; 
+      display:flex; align-items:center; justify-content:center; color:white !important; 
+      transition: var(--transition); border: 1px solid rgba(255,255,255,0.1);
+    }
+    .social-icon-circle:hover { background: var(--peach); color:var(--dark) !important; border-color: var(--peach); transform:translateY(-5px); }
+    
+    .footer-col ul { list-style:none; padding:0; display:flex; flex-direction:column; gap:16px; }
+    .footer-col ul a { color:#999 !important; font-size:0.9rem; transition: var(--transition); display:inline-block; }
+    .footer-col ul a:hover { color:var(--peach) !important; transform:translateX(8px); }
+    
+    .company-info { margin-top: 25px; font-size: 0.85rem; color: #888; line-height: 1.8; }
+    .anpc-img { max-width:180px; width:100%; height:auto; display:block; margin-bottom:15px; transition:opacity .3s; opacity: 0.7; }
+    .anpc-img:hover { opacity:1; }
 
-    @media (max-width:900px) {
-      .checkout-container { flex-direction: column; padding: 0 20px; }
-      nav { flex-direction:column; gap:15px; padding:15px; background:rgba(0,0,0,0.8); }
-      body { padding-top: 130px; }
-      footer { padding: 40px 20px; }
-      #success-container { margin: 40px 20px; padding: 40px 20px; }
+    .footer-bottom { 
+      grid-column:1 / -1; text-align:center; padding-top:40px; border-top:1px solid rgba(255,255,255,0.05); 
+      color:#666; font-size:0.85rem; margin-top:30px; letter-spacing: 0.5px;
+    }
+
+    /* ================= RESPONSIVE ================= */
+    @media (max-width:992px) { 
+      .contact-wrapper { flex-direction: column; margin-top: -60px;}
+      .contact-info-panel { border-radius: 20px 20px 0 0; padding: 40px 30px; }
+      .contact-form-panel { border-radius: 0 0 20px 20px; padding: 40px 30px; }
+      .map-wrapper-small { margin-top: 30px; }
+    }
+    @media (max-width:768px) { 
+      nav { flex-direction:column; gap:15px; padding:15px; background:rgba(17,17,17,0.98); } 
+      .nav-links { flex-wrap:wrap; justify-content:center; gap:20px; }
+      body { padding-top: 130px; } 
+      .contact-hero { padding: 40px 20px 120px; }
+      footer { padding:60px 20px 30px; display:flex; flex-direction:column; gap: 40px; }
     }
   </style>
 </head>
@@ -257,16 +266,16 @@
 
   <!-- NAVBAR -->
   <nav>
-    <a href="index.html" class="logo"><img src="logo.webp" alt="H-TIME Logo"></a>
+    <a href="index.html" class="logo"><img src="logo.webp" alt="H-TIME Logo" onerror="this.src='logo.png'"></a>
     <div class="nav-links">
       <a href="index.html" data-i18n="nav_home">Acasă</a>
       <a href="magazin.html" data-i18n="nav_shop">Magazin</a>
       <a href="despre-noi.html" data-i18n="nav_about">Despre Noi</a>
       <a href="echipa.html" data-i18n="nav_team">Echipa H-Time</a>
-      <a href="contact.html" data-i18n="nav_contact">Contactează-ne</a>
+      <a href="contact.html" data-i18n="nav_contact" style="color:var(--peach) !important;">Contactează-ne</a>
     </div>
     <div class="nav-icons">
-      <select id="languageSwitcher" style="background:black;border:1px solid rgba(255,255,255,0.12);color:white;padding:6px 8px;border-radius:6px;font-size:0.85rem;text-transform:uppercase; font-family:'Montserrat';">
+      <select id="languageSwitcher" aria-label="Selectează limba">
         <option value="ro">RO</option>
         <option value="en">EN</option>
         <option value="fr">FR</option>
@@ -278,146 +287,100 @@
     </div>
   </nav>
 
-  <!-- ECRAN CHECKOUT (FORMULAR + COS) -->
-  <main id="main-checkout" class="checkout-container">
-    <div class="checkout-main">
-      <div class="white-card">
-        <h2 class="section-title" data-i18n="checkout_cart_title">Coșul de cumpărături</h2>
-        <div id="checkout-cart-list">
-          <!-- Produsele vin din JS -->
-        </div>
-      </div>
+  <!-- HERO SECTION -->
+  <header class="contact-hero">
+    <h1 data-i18n="contact_title">Contactează-ne</h1>
+    <p data-i18n="contact_desc">Suntem aici pentru a vă oferi o experiență de neuitat. Echipa noastră de experți vă stă la dispoziție pentru orice întrebare, sugestie sau consultanță privind colecțiile H-TIME.</p>
+  </header>
 
-      <div class="white-card">
-        <h2 class="section-title" data-i18n="checkout_details_title">Detalii Expediere</h2>
-        <form id="order-form" onsubmit="handleOrder(event)">
-          <div class="billing-form">
-            <div class="form-group"><label data-i18n="form_fname">Nume</label><input type="text" id="fname" required placeholder="Popescu" data-i18n-placeholder="ph_lname"></div>
-            <div class="form-group"><label data-i18n="form_lname">Prenume</label><input type="text" id="lname" required placeholder="Ion" data-i18n-placeholder="ph_fname"></div>
-            <div class="form-group full"><label data-i18n="form_address">Adresă completă</label><input type="text" id="address" required placeholder="Strada, Nr, Oraș, Județ" data-i18n-placeholder="ph_address"></div>
-            <div class="form-group"><label data-i18n="form_phone">Telefon</label><input type="tel" id="phone" required placeholder="07xx xxx xxx" data-i18n-placeholder="ph_phone"></div>
-            <div class="form-group"><label data-i18n="form_email">Email</label><input type="email" id="email" required placeholder="contact@exemplu.ro" data-i18n-placeholder="ph_email"></div>
-          </div>
-        </form>
-      </div>
-    </div>
-
-    <aside class="checkout-side">
-      <div class="white-card">
-        <h2 class="section-title" data-i18n="checkout_summary_title" style="font-size: 1.2rem;">Sumar Comandă</h2>
-        <div class="summary-line">
-          <span data-i18n="summary_subtotal">Subtotal</span>
-          <span id="sum-subtotal">0 Lei</span>
-        </div>
-        <div class="summary-line">
-          <span data-i18n="summary_shipping">Livrare</span>
-          <span id="sum-shipping">0 Lei</span>
-        </div>
-        <div class="summary-line total">
-          <span data-i18n="summary_total">Total</span>
-          <span id="sum-total">0 Lei</span>
-        </div>
-
-        <!-- Metode de Livrare -->
-        <div class="delivery-methods">
-          <h4 data-i18n="delivery_method_title" style="margin-bottom: 15px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase;">Metodă de livrare</h4>
-          <label class="payment-option">
-            <input type="radio" name="delivery" value="Curier" checked onchange="updateCartUI()">
-            <span data-i18n="del_courier">Curier Rapid (FAN Courier / Cargus)</span>
-          </label>
-          <label class="payment-option">
-            <input type="radio" name="delivery" value="Locker" onchange="updateCartUI()">
-            <span data-i18n="del_locker">Locker (easybox / FANbox)</span>
-          </label>
-        </div>
-
-        <!-- Metode de Plată -->
-        <div class="payment-methods">
-          <h4 data-i18n="payment_method_title" style="margin-bottom: 15px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase;">Metodă de plată</h4>
-          <label class="payment-option">
-            <input type="radio" name="payment" value="Card Online" checked>
-            <span data-i18n="pay_card">Card Online</span>
-          </label>
-          <label class="payment-option">
-            <input type="radio" name="payment" value="Ramburs">
-            <span data-i18n="pay_cash">Ramburs</span>
-          </label>
-          <label class="payment-option">
-            <input type="radio" name="payment" value="Transfer Bancar">
-            <span data-i18n="pay_bank">Transfer Bancar</span>
-          </label>
-        </div>
-
-        <button type="submit" form="order-form" class="btn-primary" data-i18n="btn_place_order">Plasează Comanda</button>
-      </div>
-    </aside>
-  </main>
-
-  <!-- ECRAN MESAJ SUCCES -->
-  <div id="success-container">
-    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--peach)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 20px;">
-      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-      <polyline points="22 4 12 14.01 9 11.01"></polyline>
-    </svg>
-    <h1 style="color: var(--dark); margin-bottom: 15px; font-family: 'DM Serif Display', serif; font-size: 2.5rem;" data-i18n="succ_title">Comandă Plasată!</h1>
-    <p style="font-size: 1.1rem; color: #555; margin-bottom: 30px;" data-i18n="succ_desc">Îți mulțumim pentru comanda plasată. Numărul comenzii tale este:</p>
-    <div id="succ-order-no" style="font-size: 1.8rem; font-weight: 700; color: var(--peach); margin-bottom: 40px; letter-spacing: 2px;"></div>
+  <!-- MAIN CONTACT LAYOUT -->
+  <main class="contact-wrapper">
     
-    <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
-      <button class="btn-primary" onclick="showInvoice()" style="width: auto; padding: 15px 30px; margin-top: 0;" data-i18n="btn_view_invoice">Vezi Factura</button>
-      <button class="btn-primary btn-secondary" onclick="window.print()" style="width: auto; padding: 15px 30px; margin-top: 0;" data-i18n="btn_download_pdf">Descarcă Bon PDF</button>
-    </div>
-  </div>
+    <!-- INFO PANEL (Stânga) -->
+    <div class="contact-info-panel">
+      <h2 data-i18n="contact_info_heading">Date de contact</h2>
+      
+      <div class="info-item">
+        <div class="info-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+        </div>
+        <div class="info-text">
+          <h4 data-i18n="contact_address_title">Adresă</h4>
+          <p>Liceul Tehnologic Economic de Turism<br>Strada Milcov 18A, Iași 70025</p>
+        </div>
+      </div>
 
-  <!-- FACTURA (PENTRU VIZUALIZARE / PRINT) -->
-  <div id="invoice-container">
-      <div style="display:flex; justify-content:space-between; border-bottom:2px solid black; padding-bottom:20px;">
-          <div>
-            <h1 style="font-family:'DM Serif Display'; color:var(--peach); margin-bottom: 5px;">H-TIME</h1>
-            <p style="font-size: 0.85rem; color: #555;">CUI: 83241620 | J22/4620/2024</p>
-            <p style="font-size: 0.85rem; color: #555;">Str. Milcov 18A, Iași</p>
-          </div>
-          <div style="text-align:right;">
-            <p><strong data-i18n="inv_title" style="font-size: 1.2rem; text-transform: uppercase;">Factură Proformă</strong></p>
-            <p id="inv-order-id" style="font-weight: 600; margin-top: 5px;"></p>
-            <p id="inv-date"></p>
-          </div>
+      <div class="info-item">
+        <div class="info-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+        </div>
+        <div class="info-text">
+          <h4 data-i18n="contact_phone_title">Telefon</h4>
+          <p>+40 737 350 945</p>
+        </div>
       </div>
-      <div style="margin:30px 0; display: flex; justify-content: space-between;">
-          <div>
-            <p style="margin-bottom: 5px;"><strong data-i18n="inv_client">Client:</strong> <span id="inv-name"></span></p>
-            <p style="margin-bottom: 5px;"><strong data-i18n="inv_address">Adresă:</strong> <span id="inv-addr"></span></p>
-            <p style="margin-bottom: 5px;"><strong data-i18n="inv_phone">Telefon:</strong> <span id="inv-phone-val"></span></p>
-          </div>
-          <div style="text-align: right;">
-            <p style="margin-bottom: 5px;"><strong data-i18n="inv_pay_method">Metodă Plată:</strong> <span id="inv-payment"></span></p>
-            <p style="margin-bottom: 5px;"><strong data-i18n="inv_del_method">Metodă Livrare:</strong> <span id="inv-delivery"></span></p>
-          </div>
+
+      <div class="info-item">
+        <div class="info-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+        </div>
+        <div class="info-text">
+          <h4 data-i18n="contact_email_title">E-mail</h4>
+          <p>h.time.business@gmail.com</p>
+        </div>
       </div>
-      <table style="width:100%; border-collapse:collapse; margin-top:20px;">
-          <thead style="background:#f5f5f5;">
-              <tr>
-                <th data-i18n="inv_product" style="padding:12px; border:1px solid #ddd; text-align:left;">Produs</th>
-                <th data-i18n="inv_qty" style="padding:12px; border:1px solid #ddd;">Cantitate</th>
-                <th data-i18n="inv_total_price" style="padding:12px; border:1px solid #ddd;">Preț Total</th>
-              </tr>
-          </thead>
-          <tbody id="inv-body"></tbody>
-          <tfoot>
-             <tr>
-               <td colspan="2" style="text-align: right; padding: 12px; border:1px solid #ddd;"><strong data-i18n="summary_shipping">Livrare</strong></td>
-               <td id="inv-shipping-fee" style="text-align: center; padding: 12px; border:1px solid #ddd;"></td>
-             </tr>
-             <tr>
-               <td colspan="2" style="text-align: right; padding: 12px; border:1px solid #ddd;"><strong data-i18n="inv_grand_total">Total General:</strong></td>
-               <td id="inv-total-val" style="text-align: center; padding: 12px; border:1px solid #ddd; font-weight: 700; font-size: 1.1rem;"></td>
-             </tr>
-          </tfoot>
-      </table>
-      <div style="margin-top: 50px; text-align: center; font-size: 0.9rem; color: #777;" data-i18n="inv_footer_msg">
-        Vă mulțumim pentru cumpărături! Acest document reprezintă confirmarea comenzii dumneavoastră.
+
+      <div class="info-item">
+        <div class="info-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        </div>
+        <div class="info-text">
+          <h4 data-i18n="contact_program_title">Program</h4>
+          <p data-i18n="contact_program_val">Luni - Vineri: 10:00 - 18:00</p>
+        </div>
       </div>
-  </div>
+
+      <!-- Harta Mică -->
+      <div class="map-wrapper-small">
+        <iframe src="https://maps.google.com/maps?q=Liceul%20Tehnologic%20Economic%20de%20Turism,%20Strada%20Milcov%2018A,%20Iasi&t=&z=16&ie=UTF8&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+
+    </div>
+
+    <!-- FORM PANEL (Dreapta) -->
+    <div class="contact-form-panel">
+      <h2 data-i18n="contact_form_title">Trimite un mesaj</h2>
+      
+      <form id="contactForm">
+        
+        <input type="hidden" name="_subject" value="Mesaj nou de contact H-TIME">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_autoresponse" value="Confirmare de primire: Mesajul tău a fost livrat cu succes către echipa H-TIME! Găsești o copie a mesajului tău mai jos. Te vom contacta în curând.">
+        
+        <div class="form-group">
+          <label data-i18n="form_name">Nume complet</label>
+          <input type="text" name="Nume" required data-i18n-placeholder="ph_fname" placeholder="Popescu Ion">
+        </div>
+        <div class="form-group">
+          <label data-i18n="form_email">Adresa de E-mail</label>
+          <input type="email" name="email" required data-i18n-placeholder="ph_email" placeholder="contact@exemplu.ro">
+        </div>
+        <div class="form-group">
+          <label data-i18n="form_message">Mesaj</label>
+          <textarea name="Mesaj" required data-i18n-placeholder="ph_message" placeholder="Scrieți mesajul aici..."></textarea>
+        </div>
+        <button type="submit" class="btn-submit" id="submitBtn">
+          <span data-i18n="btn_send">Trimite Mesajul</span>
+        </button>
+        <div id="formMessage" style="display:none; margin-top:15px; font-weight:600; font-size:0.9rem; padding:12px; border-radius:8px; text-align:center;"></div>
+        
+        <!-- Nota explicativă adăugată sub caseta de trimitere -->
+        <p class="form-warning-note" data-i18n="form_warning_note">* În cazul în care întâmpinați erori la trimitere (datorită unor restricții de rețea), vă rugăm să ne scrieți direct pe e-mail.</p>
+
+      </form>
+    </div>
+
+  </main>
 
   <!-- FOOTER -->
   <footer>
@@ -425,9 +388,15 @@
       <h2>H-TIME</h2>
       <p class="footer-desc" data-i18n="footer_desc">Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul, calitatea superioară și poveștile spuse prin intermediul bijuteriilor și ceasurilor unice.</p>
       <div class="social-links">
-        <a href="#" class="social-icon-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
-        <a href="https://www.instagram.com/bijuterii.h_time/" class="social-icon-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
-        <a href="#" class="social-icon-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg></a>
+        <a href="#" class="social-icon-circle" title="Facebook">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+        </a>
+        <a href="https://www.instagram.com/bijuterii.h_time/" class="social-icon-circle" title="Instagram" target="_blank">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+        </a>
+        <a href="#" class="social-icon-circle" title="TikTok">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
+        </a>
       </div>
       <div class="company-info">
         <p><strong>CUI:</strong> 83241620</p>
@@ -435,15 +404,17 @@
         <p><strong>Sediu:</strong> Strada Milcov 18A, Iași 70025</p>
       </div>
     </div>
+
     <div class="footer-col">
       <h3 data-i18n="footer_nav">NAVIGARE RAPIDĂ</h3>
       <ul>
         <li><a href="index.html" data-i18n="footer_home">Acasă - Pagina principală</a></li>
         <li><a href="magazin.html" data-i18n="footer_shop">Magazin - Toate Colecțiile</a></li>
         <li><a href="despre-noi.html" data-i18n="footer_about">Povestea Noastră</a></li>
-        <li><a href="contact.html" data-i18n="footer_contact">Contact & Suport</a></li>
+        <li><a href="contact.html" data-i18n="footer_contact" style="color:var(--peach) !important;">Contact & Suport</a></li>
       </ul>
     </div>
+
     <div class="footer-col">
       <h3 data-i18n="footer_info">INFORMAȚII & POLITICI</h3>
       <ul>
@@ -456,356 +427,217 @@
         <li><a href="date_identificare.html" data-i18n="footer_id_data">Date de identificare ale societății</a></li>
       </ul>
     </div>
+
     <div class="footer-col">
       <h3 data-i18n="footer_consumer">PROTECȚIA CONSUMATORULUI</h3>
       <div>
-        <a href="https://anpc.ro/ce-este-sal/" target="_blank"><img src="https://ro.pandora.net/mobify/bundle/1108/static/img/SAL-PICTOGRAMA.png?app=pdp" alt="ANPC SAL" class="anpc-img"></a>
-        <a href="https://ec.europa.eu/consumers/odr" target="_blank"><img src="https://ro.pandora.net/mobify/bundle/1108/static/img/pictogramaSOL.png?app=pdp" alt="ANPC SOL" class="anpc-img"></a>
+        <a href="https://anpc.ro/ce-este-sal/" target="_blank">
+          <img src="https://ro.pandora.net/mobify/bundle/1108/static/img/SAL-PICTOGRAMA.png?app=pdp" alt="ANPC SAL" class="anpc-img">
+        </a>
+        <a href="https://ec.europa.eu/consumers/odr" target="_blank">
+          <img src="https://ro.pandora.net/mobify/bundle/1108/static/img/pictogramaSOL.png?app=pdp" alt="ANPC SOL" class="anpc-img">
+        </a>
       </div>
     </div>
+
     <div class="footer-bottom">© 2024 - 2026 H-TIME Luxury Experience. Toate drepturile sunt rezervate.</div>
   </footer>
 
-  <script src="produse.js"></script>
   <script src="script.js"></script>
   <script>
-    const currencyConfig = {
-      ro: { symbol: 'Lei', rate: 4.97, position: 'right' },
-      en: { symbol: '$', rate: 1.08, position: 'left' },
-      fr: { symbol: '€', rate: 1.0, position: 'right' },
-      de: { symbol: '€', rate: 1.0, position: 'right' },
-      es: { symbol: '€', rate: 1.0, position: 'right' },
-      it: { symbol: '€', rate: 1.0, position: 'right' }
-    };
-
-    function formatPrice(priceEur, lang) {
-      const config = currencyConfig[lang] || currencyConfig.ro;
-      const converted = Math.round(priceEur * config.rate);
-      return config.position === 'left' ? `${config.symbol}${converted}` : `${converted} ${config.symbol}`;
-    }
-
-    /* ----------------------------------------------------
-       FUNCTII INDEPENDENTE PENTRU MODIFICARE/STERGERE
-       Adaugate pentru a evita erorile in caz ca lipsesc din script.js
-    -----------------------------------------------------*/
-    function schimbaCantitate(idx, delta) {
+    function updateCartCount() {
+      if (typeof actualizeazaNumarCos === 'function') {
+        actualizeazaNumarCos();
+      } else {
         let cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
-        if (cart[idx]) {
-            cart[idx].qty = (cart[idx].qty || 1) + delta;
-            if (cart[idx].qty <= 0) {
-                cart.splice(idx, 1);
-            }
-            localStorage.setItem('htimeCart', JSON.stringify(cart));
-            updateCartUI();
-        }
-    }
-
-    function eliminaDinCos(idx) {
-        let cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
-        cart.splice(idx, 1);
-        localStorage.setItem('htimeCart', JSON.stringify(cart));
-        updateCartUI();
-    }
-
-
-    /**
-     * MAIN UI UPDATE FUNCTION
-     */
-    function updateCartUI() {
-      const currentLang = localStorage.getItem('htime_lang') || 'ro';
-      const rawCart = JSON.parse(localStorage.getItem('htimeCart')) || [];
-      const listContainer = document.getElementById('checkout-cart-list');
-      const cartNavBtn = document.getElementById('cart-nav-btn');
-      
-      // Actualizare fallback pentru numarul din nav in caz ca functia externa nu merge
-      const totalItems = rawCart.reduce((acc, item) => acc + (item.qty || 1), 0);
-      if(cartNavBtn) cartNavBtn.innerText = `Cart (${totalItems})`;
-
-      if (typeof actualizeazaNumarCos === 'function') actualizeazaNumarCos();
-
-      if (!listContainer) return;
-      
-      const dict = translations[currentLang] || translations.ro;
-
-      if (rawCart.length === 0) {
-        listContainer.innerHTML = `<p style="text-align:center; padding:40px; font-weight: 500;">${dict.cart_empty}</p>`;
-        document.getElementById('sum-subtotal').innerText = formatPrice(0, currentLang);
-        document.getElementById('sum-shipping').innerText = formatPrice(0, currentLang);
-        document.getElementById('sum-total').innerText = formatPrice(0, currentLang);
-        return;
+        let count = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
+        const cartBtn = document.getElementById('cart-nav-btn');
+        if (cartBtn) cartBtn.innerText = `Cart (${count})`;
       }
-
-      // Group duplicates
-      const groupedCart = rawCart.reduce((acc, item) => {
-        const existing = acc.find(i => i.id === item.id);
-        if (existing) { existing.qty = (existing.qty || 1) + (item.qty || 1); } 
-        else { acc.push({ ...item }); }
-        return acc;
-      }, []);
-
-      if (groupedCart.length !== rawCart.length) {
-          localStorage.setItem('htimeCart', JSON.stringify(groupedCart));
-      }
-
-      /* FIX IMAGINE: Cautam mai multe campuri de imagine si adaugam un placeholder corect in onerror
-      */
-      const defaultImg = "https://via.placeholder.com/90x90?text=Imagine+Indisponibila";
-
-      listContainer.innerHTML = groupedCart.map((item, idx) => {
-        const imageSource = item.imagine || item.image || item.poza || item.img || defaultImg;
-
-        return `
-        <div class="cart-item">
-          <div class="item-info">
-            <img src="${imageSource}" alt="${item.nume}" onerror="this.onerror=null; this.src='${defaultImg}'">
-            <div>
-              <h4>${item.nume}</h4>
-              <p>${dict.unit_price} ${formatPrice(item.pret, currentLang)}</p>
-            </div>
-          </div>
-          <div class="item-actions">
-            <span class="item-price">${formatPrice(item.pret * (item.qty || 1), currentLang)}</span>
-            <div class="qty-controls">
-              <button type="button" class="qty-btn-small" onclick="schimbaCantitate(${idx}, -1)">-</button>
-              <span>${item.qty || 1}</span>
-              <button type="button" class="qty-btn-small" onclick="schimbaCantitate(${idx}, 1)">+</button>
-            </div>
-            <button type="button" onclick="eliminaDinCos(${idx})" class="btn-remove">${dict.btn_delete}</button>
-          </div>
-        </div>
-      `}).join('');
-
-      // CALCULATIONS
-      const subtotalEur = groupedCart.reduce((acc, item) => acc + (item.pret * (item.qty || 1)), 0);
-      const subtotalRon = subtotalEur * 4.97;
-      
-      // Metode de livrare: Curier (25 lei) sau Locker (15 lei)
-      const deliveryMethodEl = document.querySelector('input[name="delivery"]:checked');
-      const deliveryMethod = deliveryMethodEl ? deliveryMethodEl.value : 'Curier';
-      
-      let deliveryCostRon = 0;
-      if (subtotalRon > 0 && subtotalRon < 1500) {
-        deliveryCostRon = (deliveryMethod === 'Locker') ? 15 : 25;
-      }
-      
-      const deliveryFeeEur = deliveryCostRon / 4.97;
-      
-      const subtotalFormatted = formatPrice(subtotalEur, currentLang);
-      const deliveryFormatted = formatPrice(deliveryFeeEur, currentLang);
-      const totalFormatted = formatPrice(subtotalEur + deliveryFeeEur, currentLang);
-
-      document.getElementById('sum-subtotal').innerText = subtotalFormatted;
-      document.getElementById('sum-shipping').innerText = deliveryFormatted;
-      document.getElementById('sum-total').innerText = totalFormatted;
     }
 
-    /**
-     * ORDER HANDLING
-     */
-    function handleOrder(e) {
-      e.preventDefault();
-      const cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
-      const currentLang = localStorage.getItem('htime_lang') || 'ro';
-      const dict = translations[currentLang] || translations.ro;
-
-      if(cart.length === 0) {
-          alert(dict.alert_empty_cart);
-          return;
-      }
-
-      const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
-      const deliveryMethod = document.querySelector('input[name="delivery"]:checked').value;
-      
-      let translatedPayment = paymentMethod;
-      if (paymentMethod === "Card Online") translatedPayment = dict.pay_card;
-      if (paymentMethod === "Ramburs") translatedPayment = dict.pay_cash;
-      if (paymentMethod === "Transfer Bancar") translatedPayment = dict.pay_bank;
-
-      let translatedDelivery = deliveryMethod;
-      if (deliveryMethod === "Curier") translatedDelivery = dict.del_courier;
-      if (deliveryMethod === "Locker") translatedDelivery = dict.del_locker;
-
-      // Generare numar comanda
-      const orderNumber = "HT-" + Math.floor(100000 + Math.random() * 900000);
-      document.getElementById('succ-order-no').innerText = orderNumber;
-      document.getElementById('inv-order-id').innerText = "Comanda: " + orderNumber;
-
-      // Completare Factura Proforma (pentru cand va fi afisata/printata)
-      document.getElementById('inv-name').innerText = document.getElementById('fname').value + " " + document.getElementById('lname').value;
-      document.getElementById('inv-addr').innerText = document.getElementById('address').value;
-      document.getElementById('inv-phone-val').innerText = document.getElementById('phone').value;
-      document.getElementById('inv-payment').innerText = translatedPayment;
-      document.getElementById('inv-delivery').innerText = translatedDelivery;
-      document.getElementById('inv-date').innerText = new Date().toLocaleDateString();
-      
-      document.getElementById('inv-shipping-fee').innerText = document.getElementById('sum-shipping').innerText;
-      document.getElementById('inv-total-val').innerText = document.getElementById('sum-total').innerText;
-      
-      document.getElementById('inv-body').innerHTML = cart.map(i => `
-          <tr>
-              <td style="padding:12px; border:1px solid #ddd;">${i.nume}</td>
-              <td style="text-align:center; padding:12px; border:1px solid #ddd;">${i.qty || 1}</td>
-              <td style="text-align:center; padding:12px; border:1px solid #ddd;">${formatPrice(i.pret * (i.qty || 1), currentLang)}</td>
-          </tr>
-      `).join('');
-
-      // Ștergem coșul din LocalStorage
-      localStorage.removeItem('htimeCart');
-      updateCartUI(); // Reset nav counter
-
-      // Ascundem formularul si aratam pagina de succes
-      document.getElementById('main-checkout').style.display = 'none';
-      document.getElementById('success-container').style.display = 'block';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    // Functie pentru vizualizarea facturii direct pe pagina
-    function showInvoice() {
-      document.getElementById('success-container').style.display = 'none';
-      document.getElementById('invoice-container').style.display = 'block';
-    }
-
-    // MULTILANG DICTIONARY
+    // --- DICTIONAR TRADUCERI ---
     const translations = {
       ro: { 
         nav_home: "Acasă", nav_shop: "Magazin", nav_about: "Despre Noi", nav_team: "Echipa H-Time", nav_contact: "Contactează-ne", 
-        checkout_cart_title: "Coșul de cumpărături", checkout_details_title: "Detalii Expediere", checkout_summary_title: "Sumar Comandă", 
-        summary_subtotal: "Subtotal", summary_shipping: "Livrare", summary_total: "Total", 
-        form_fname: "Nume", form_lname: "Prenume", form_address: "Adresă completă", form_phone: "Telefon", form_email: "Email", 
-        btn_place_order: "Plasează Comanda", cart_empty: "Coșul tău este momentan gol.", unit_price: "Preț unitar:", btn_delete: "Șterge",
-        alert_empty_cart: "Adaugă produse în coș înainte de a plasa comanda.", payment_method_title: "Metodă de plată",
-        pay_card: "Card Online", pay_cash: "Ramburs", pay_bank: "Transfer Bancar",
-        delivery_method_title: "Metodă de livrare", del_courier: "Curier Rapid (FAN / Cargus)", del_locker: "Locker (easybox / FANbox)",
-        succ_title: "Comandă Plasată!", succ_desc: "Îți mulțumim pentru comanda plasată. Numărul comenzii tale este:",
-        btn_view_invoice: "Vezi Factura", btn_download_pdf: "Descarcă Bon PDF",
-        inv_title: "Factură Proformă", inv_client: "Client:", inv_address: "Adresă:", inv_phone: "Telefon:", inv_pay_method: "Plată:", inv_del_method: "Livrare:",
-        inv_product: "Produs", inv_qty: "Cantitate", inv_total_price: "Preț Total", inv_grand_total: "Total General:", inv_footer_msg: "Vă mulțumim pentru cumpărături! Acest document reprezintă confirmarea comenzii dumneavoastră.",
-        ph_lname: "Popescu", ph_fname: "Ion", ph_address: "Strada, Nr, Oraș, Județ", ph_phone: "07xx xxx xxx", ph_email: "contact@exemplu.ro",
-        footer_desc: "Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul.",
-        footer_nav: "NAVIGARE RAPIDĂ", footer_home: "Acasă - Pagina principală", footer_shop: "Magazin - Toate Colecțiile", footer_about: "Povestea Noastră", footer_contact: "Contact & Suport",
+        contact_title: "Contactează-ne", contact_desc: "Suntem aici pentru a vă oferi o experiență de neuitat. Echipa noastră de experți vă stă la dispoziție pentru orice întrebare, sugestie sau consultanță privind colecțiile H-TIME.", 
+        contact_info_heading: "Date de contact",
+        contact_address_title: "Adresă", contact_phone_title: "Telefon", contact_email_title: "E-mail", contact_program_title: "Program", contact_program_val: "Luni - Vineri: 10:00 - 18:00", 
+        contact_form_title: "Trimite un mesaj", form_name: "Nume complet", form_email: "Adresa de E-mail", form_message: "Mesaj", 
+        btn_send: "Trimite Mesajul", btn_sending: "Se trimite...",
+        form_warning_note: "* În cazul în care întâmpinați erori la trimitere (datorită unor restricții de rețea), vă rugăm să ne scrieți direct pe e-mail.",
+        form_success_msg: "Mesajul tău a fost trimis cu succes! Te vom contacta în curând.",
+        form_error_msg: "Eroare la trimitere. Formularul ar putea fi blocat de rețea. Te rugăm să ne scrii direct pe email.",
+        ph_fname: "Popescu Ion", ph_email: "contact@exemplu.ro", ph_message: "Scrieți mesajul aici...",
+        footer_desc: "Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul, calitatea superioară și poveștile spuse prin intermediul bijuteriilor și ceasurilor unice.", 
+        footer_nav: "NAVIGARE RAPIDĂ", footer_home: "Acasă - Pagina principală", footer_shop: "Magazin - Toate Colecțiile", footer_about: "Povestea Noastră", footer_contact: "Contact & Suport", 
         footer_info: "INFORMAȚII & POLITICI", footer_terms: "Termeni și Condiții", footer_privacy: "Politică de Confidențialitate", footer_cookies: "Politică de Cookies", footer_delivery: "Politică de Livrare", footer_return: "Politică de Retur (14 zile)", footer_care: "Îngrijirea Bijuteriilor", footer_id_data: "Date de identificare ale societății", footer_consumer: "PROTECȚIA CONSUMATORULUI"
       },
       en: { 
         nav_home: "Home", nav_shop: "Shop", nav_about: "About Us", nav_team: "H-Time Team", nav_contact: "Contact Us", 
-        checkout_cart_title: "Shopping Cart", checkout_details_title: "Shipping Details", checkout_summary_title: "Order Summary", 
-        summary_subtotal: "Subtotal", summary_shipping: "Shipping", summary_total: "Total", 
-        form_fname: "First Name", form_lname: "Last Name", form_address: "Full Address", form_phone: "Phone", form_email: "Email", 
-        btn_place_order: "Place Order", cart_empty: "Your cart is currently empty.", unit_price: "Unit price:", btn_delete: "Delete",
-        alert_empty_cart: "Add products to your cart before placing the order.", payment_method_title: "Payment Method",
-        pay_card: "Online Card", pay_cash: "Cash on Delivery", pay_bank: "Bank Transfer",
-        delivery_method_title: "Delivery Method", del_courier: "Courier (FAN / Cargus)", del_locker: "Locker (easybox / FANbox)",
-        succ_title: "Order Placed!", succ_desc: "Thank you for your order. Your order number is:",
-        btn_view_invoice: "View Invoice", btn_download_pdf: "Download PDF Order",
-        inv_title: "Proforma Invoice", inv_client: "Client:", inv_address: "Address:", inv_phone: "Phone:", inv_pay_method: "Payment:", inv_del_method: "Delivery:",
-        inv_product: "Product", inv_qty: "Quantity", inv_total_price: "Total Price", inv_grand_total: "Grand Total:", inv_footer_msg: "Thank you for shopping with us! This document is your order confirmation.",
-        ph_lname: "Smith", ph_fname: "John", ph_address: "Street, No., City, State", ph_phone: "+44 xxxx xxx", ph_email: "contact@example.com",
-        footer_desc: "Emotions sculpted in elegance. A luxury boutique dedicated to people who appreciate refinement.",
-        footer_nav: "QUICK NAVIGATION", footer_home: "Home - Main Page", footer_shop: "Shop - All Collections", footer_about: "Our Story", footer_contact: "Contact & Support",
+        contact_title: "Contact Us", contact_desc: "We are here to offer you an unforgettable experience. Our team of experts is at your disposal for any questions, suggestions, or advice regarding H-TIME collections.", 
+        contact_info_heading: "Contact Info",
+        contact_address_title: "Address", contact_phone_title: "Phone", contact_email_title: "E-mail", contact_program_title: "Schedule", contact_program_val: "Monday - Friday: 10:00 - 18:00", 
+        contact_form_title: "Send a message", form_name: "Full Name", form_email: "Email Address", form_message: "Message", 
+        btn_send: "Send Message", btn_sending: "Sending...",
+        form_warning_note: "* If you encounter sending errors (due to network restrictions), please email us directly.",
+        form_success_msg: "Your message has been sent successfully! We will contact you soon.",
+        form_error_msg: "Sending error. The form might be blocked by your network. Please email us directly.",
+        ph_fname: "John Doe", ph_email: "contact@example.com", ph_message: "Write your message here...",
+        footer_desc: "Emotions sculpted in elegance. A luxury boutique dedicated to people who appreciate refinement, premium quality, and stories told through unique jewelry and watches.", 
+        footer_nav: "QUICK NAVIGATION", footer_home: "Home - Main Page", footer_shop: "Shop - All Collections", footer_about: "Our Story", footer_contact: "Contact & Support", 
         footer_info: "INFORMATION & POLICIES", footer_terms: "Terms and Conditions", footer_privacy: "Privacy Policy", footer_cookies: "Cookie Policy", footer_delivery: "Delivery Policy", footer_return: "Return Policy (14 days)", footer_care: "Jewelry Care", footer_id_data: "Company Identification Data", footer_consumer: "CONSUMER PROTECTION"
       },
-      fr: {
-        nav_home: "Accueil", nav_shop: "Boutique", nav_about: "À propos", nav_team: "Équipe H-Time", nav_contact: "Contactez-nous",
-        checkout_cart_title: "Panier d'achat", checkout_details_title: "Détails d'expédition", checkout_summary_title: "Résumé de la commande",
-        summary_subtotal: "Sous-total", summary_shipping: "Livraison", summary_total: "Total",
-        form_fname: "Prénom", form_lname: "Nom", form_address: "Adresse complète", form_phone: "Téléphone", form_email: "Email",
-        btn_place_order: "Passer la commande", cart_empty: "Votre panier est actuellement vide.", unit_price: "Prix unitaire :", btn_delete: "Supprimer",
-        alert_empty_cart: "Ajoutez des produits à votre panier avant de passer la commande.", payment_method_title: "Mode de paiement",
-        pay_card: "Carte en ligne", pay_cash: "Paiement à la livraison", pay_bank: "Virement bancaire",
-        delivery_method_title: "Mode de livraison", del_courier: "Courrier rapide", del_locker: "Point Relais (Locker)",
-        succ_title: "Commande validée !", succ_desc: "Merci pour votre commande. Votre numéro de commande est :",
-        btn_view_invoice: "Voir la facture", btn_download_pdf: "Télécharger PDF",
-        inv_title: "Facture Proforma", inv_client: "Client :", inv_address: "Adresse :", inv_phone: "Téléphone :", inv_pay_method: "Paiement :", inv_del_method: "Livraison :",
-        inv_product: "Produit", inv_qty: "Quantité", inv_total_price: "Prix Total", inv_grand_total: "Total Général :", inv_footer_msg: "Merci pour vos achats ! Ce document est votre confirmation de commande.",
-        ph_lname: "Martin", ph_fname: "Jean", ph_address: "Rue, Numéro, Ville, Région", ph_phone: "+33 x xxxx", ph_email: "contact@exemple.fr",
-        footer_desc: "Émotions sculptées dans l'élégance. Une boutique de luxe dédiée à ceux qui apprécient le raffinement.",
-        footer_nav: "NAVIGATION RAPIDE", footer_home: "Accueil - Page principale", footer_shop: "Boutique - Toutes les collections", footer_about: "Notre histoire", footer_contact: "Contact & Support",
+      fr: { 
+        nav_home: "Accueil", nav_shop: "Boutique", nav_about: "À propos", nav_team: "Équipe H-Time", nav_contact: "Contactez-nous", 
+        contact_title: "Contactez-nous", contact_desc: "Nous sommes là pour vous offrir une expérience inoubliable. Notre équipe d'experts est à votre disposition pour toute question ou conseil sur les collections H-TIME.", 
+        contact_info_heading: "Coordonnées",
+        contact_address_title: "Adresse", contact_phone_title: "Téléphone", contact_email_title: "E-mail", contact_program_title: "Horaires", contact_program_val: "Lundi - Vendredi: 10:00 - 18:00", 
+        contact_form_title: "Envoyer un message", form_name: "Nom complet", form_email: "Adresse Email", form_message: "Message", 
+        btn_send: "Envoyer", btn_sending: "Envoi en cours...",
+        form_warning_note: "* Si vous rencontrez des erreurs d'envoi (en raison de restrictions de réseau), veuillez nous envoyer un e-mail directement.",
+        form_success_msg: "Votre message a été envoyé avec succès ! Nous vous contacterons bientôt.",
+        form_error_msg: "Erreur d'envoi. Veuillez nous envoyer un email directement.",
+        ph_fname: "Jean Dupont", ph_email: "contact@exemple.fr", ph_message: "Écrivez votre message ici...",
+        footer_desc: "Émotions sculptées dans l'élégance. Une boutique de luxe dédiée aux personnes qui apprécient le raffinement.", 
+        footer_nav: "NAVIGATION RAPIDE", footer_home: "Accueil - Page principale", footer_shop: "Boutique - Toutes les collections", footer_about: "Notre histoire", footer_contact: "Contact & Support", 
         footer_info: "INFORMATIONS & POLITIQUES", footer_terms: "Conditions générales", footer_privacy: "Politique de confidentialité", footer_cookies: "Politique de cookies", footer_delivery: "Politique de livraison", footer_return: "Politique de retour (14 jours)", footer_care: "Entretien des bijoux", footer_id_data: "Données d'identification de l'entreprise", footer_consumer: "PROTECTION DU CONSOMMATEUR"
       },
-      de: {
-        nav_home: "Startseite", nav_shop: "Shop", nav_about: "Über uns", nav_team: "H-Time Team", nav_contact: "Kontakt",
-        checkout_cart_title: "Warenkorb", checkout_details_title: "Versanddetails", checkout_summary_title: "Bestellübersicht",
-        summary_subtotal: "Zwischensumme", summary_shipping: "Versand", summary_total: "Gesamt",
-        form_fname: "Vorname", form_lname: "Nachname", form_address: "Vollständige Adresse", form_phone: "Telefon", form_email: "E-Mail",
-        btn_place_order: "Bestellung aufgeben", cart_empty: "Ihr Warenkorb ist derzeit leer.", unit_price: "Einzelpreis:", btn_delete: "Löschen",
-        alert_empty_cart: "Fügen Sie Produkte zum Warenkorb hinzu, bevor Sie die Bestellung aufgeben.", payment_method_title: "Zahlungsmethode",
-        pay_card: "Online-Karte", pay_cash: "Nachnahme", pay_bank: "Banküberweisung",
-        delivery_method_title: "Versandart", del_courier: "Schnellkurier", del_locker: "Paketstation (Locker)",
-        succ_title: "Bestellung aufgegeben!", succ_desc: "Vielen Dank für Ihre Bestellung. Ihre Bestellnummer lautet:",
-        btn_view_invoice: "Rechnung anzeigen", btn_download_pdf: "PDF Herunterladen",
-        inv_title: "Proforma-Rechnung", inv_client: "Kunde:", inv_address: "Adresse:", inv_phone: "Telefon:", inv_pay_method: "Zahlung:", inv_del_method: "Versandart:",
-        inv_product: "Produkt", inv_qty: "Menge", inv_total_price: "Gesamtpreis", inv_grand_total: "Gesamtsumme:", inv_footer_msg: "Vielen Dank für Ihren Einkauf! Dieses Dokument ist Ihre Bestellbestätigung.",
-        ph_lname: "Müller", ph_fname: "Hans", ph_address: "Straße, Nr., Stadt, Region", ph_phone: "+49 xxxx xxx", ph_email: "kontakt@beispiel.de",
-        footer_desc: "Emotionen in Eleganz gemeißelt. Eine Luxus-Boutique für Liebhaber von Raffinesse.",
-        footer_nav: "SCHNELLNAVIGATION", footer_home: "Startseite - Hauptseite", footer_shop: "Shop - Alle Kollektionen", footer_about: "Unsere Geschichte", footer_contact: "Kontakt & Support",
+      de: { 
+        nav_home: "Startseite", nav_shop: "Shop", nav_about: "Über uns", nav_team: "H-Time Team", nav_contact: "Kontakt", 
+        contact_title: "Kontaktiere uns", contact_desc: "Wir sind hier, um Ihnen ein unvergessliches Erlebnis zu bieten. Unser Expertenteam steht Ihnen für Fragen oder Beratung zu unseren Kollektionen zur Verfügung.", 
+        contact_info_heading: "Kontaktdaten",
+        contact_address_title: "Adresse", contact_phone_title: "Telefon", contact_email_title: "E-Mail", contact_program_title: "Öffnungszeiten", contact_program_val: "Montag - Freitag: 10:00 - 18:00", 
+        contact_form_title: "Nachricht senden", form_name: "Vollständiger Name", form_email: "E-Mail Adresse", form_message: "Nachricht", 
+        btn_send: "Senden", btn_sending: "Wird gesendet...",
+        form_warning_note: "* Sollten beim Senden Fehler auftreten (aufgrund von Netzwerkeinschränkungen), senden Sie uns bitte direkt eine E-Mail.",
+        form_success_msg: "Ihre Nachricht wurde erfolgreich gesendet! Wir werden Sie bald kontaktieren.",
+        form_error_msg: "Fehler beim Senden. Bitte senden Sie uns direkt eine E-Mail.",
+        ph_fname: "Hans Müller", ph_email: "kontakt@beispiel.de", ph_message: "Schreiben Sie hier Ihre Nachricht...",
+        footer_desc: "Emotionen in Eleganz gemeißelt. Eine Luxus-Boutique für Liebhaber von Raffinesse.", 
+        footer_nav: "SCHNELLNAVIGATION", footer_home: "Startseite - Hauptseite", footer_shop: "Shop - Alle Kollektionen", footer_about: "Unsere Geschichte", footer_contact: "Kontakt & Support", 
         footer_info: "INFORMATIONEN & RICHTLINIEN", footer_terms: "Allgemeine Geschäftsbedingungen", footer_privacy: "Datenschutzrichtlinie", footer_cookies: "Cookie-Richtlinie", footer_delivery: "Lieferbedingungen", footer_return: "Rückgaberecht (14 Tage)", footer_care: "Schmuckpflege", footer_id_data: "Unternehmensidentifikationsdaten", footer_consumer: "VERBRAUCHERSCHUTZ"
       },
-      es: {
-        nav_home: "Inicio", nav_shop: "Tienda", nav_about: "Sobre Nosotros", nav_team: "Equipo H-Time", nav_contact: "Contáctanos",
-        checkout_cart_title: "Carrito de compras", checkout_details_title: "Detalles de envío", checkout_summary_title: "Resumen del pedido",
-        summary_subtotal: "Subtotal", summary_shipping: "Envío", summary_total: "Total",
-        form_fname: "Nombre", form_lname: "Apellido", form_address: "Dirección completa", form_phone: "Teléfono", form_email: "Correo electrónico",
-        btn_place_order: "Realizar pedido", cart_empty: "Tu carrito está actualmente vacío.", unit_price: "Precio unitario:", btn_delete: "Eliminar",
-        alert_empty_cart: "Añade productos a tu carrito antes de realizar el pedido.", payment_method_title: "Método de pago",
-        pay_card: "Tarjeta en línea", pay_cash: "Pago contra reembolso", pay_bank: "Transferencia bancaria",
-        delivery_method_title: "Método de entrega", del_courier: "Mensajería rápida", del_locker: "Punto de recogida (Locker)",
-        succ_title: "¡Pedido realizado!", succ_desc: "Gracias por su pedido. Su número de pedido es:",
-        btn_view_invoice: "Ver Factura", btn_download_pdf: "Descargar PDF",
-        inv_title: "Factura Proforma", inv_client: "Cliente:", inv_address: "Dirección:", inv_phone: "Teléfono:", inv_pay_method: "Pago:", inv_del_method: "Entrega:",
-        inv_product: "Producto", inv_qty: "Cantidad", inv_total_price: "Precio Total", inv_grand_total: "Total General:", inv_footer_msg: "¡Gracias por su compra! Este documento es la confirmación de su pedido.",
-        ph_lname: "García", ph_fname: "Juan", ph_address: "Calle, No., Ciudad, Provincia", ph_phone: "+34 xxxx xxx", ph_email: "contacto@ejemplo.es",
-        footer_desc: "Emociones esculpidas en elegancia. Una boutique de lujo dedicada a quienes aprecian el refinamiento.",
-        footer_nav: "NAVEGACIÓN RÁPIDA", footer_home: "Inicio - Página principal", footer_shop: "Tienda - Todas las colecciones", footer_about: "Nuestra historia", footer_contact: "Contacto & Soporte",
+      es: { 
+        nav_home: "Inicio", nav_shop: "Tienda", nav_about: "Sobre Nosotros", nav_team: "Equipo H-Time", nav_contact: "Contáctanos", 
+        contact_title: "Contáctanos", contact_desc: "Estamos aquí para ofrecerle una experiencia inolvidable. Nuestro equipo de expertos está a su disposición para cualquier duda o asesoramiento sobre nuestras colecciones.", 
+        contact_info_heading: "Datos de contacto",
+        contact_address_title: "Dirección", contact_phone_title: "Teléfono", contact_email_title: "Correo", contact_program_title: "Horario", contact_program_val: "Lunes - Viernes: 10:00 - 18:00", 
+        contact_form_title: "Enviar un mensaje", form_name: "Nombre completo", form_email: "Correo Electrónico", form_message: "Mensaje", 
+        btn_send: "Enviar Mensaje", btn_sending: "Enviando...",
+        form_warning_note: "* Si encuentra errores de envío (debido a restricciones de red), envíenos un correo electrónico directamente.",
+        form_success_msg: "¡Tu mensaje ha sido enviado con éxito! Nos pondremos en contacto contigo pronto.",
+        form_error_msg: "Error de envío. Por favor envíenos un correo electrónico directamente.",
+        ph_fname: "Carlos García", ph_email: "contacto@ejemplo.es", ph_message: "Escribe tu mensaje aquí...",
+        footer_desc: "Emociones esculpidas en elegancia. Una boutique de lujo dedicada a quienes aprecian el refinamiento.", 
+        footer_nav: "NAVEGACIÓN RÁPIDA", footer_home: "Inicio - Página principal", footer_shop: "Tienda - Todas las colecciones", footer_about: "Nuestra historia", footer_contact: "Contacto & Soporte", 
         footer_info: "INFORMACIÓN & POLÍTICAS", footer_terms: "Términos y condiciones", footer_privacy: "Política de privacidad", footer_cookies: "Política de Cookies", footer_delivery: "Política de entrega", footer_return: "Política de devolución (14 días)", footer_care: "Cuidado de las joyas", footer_id_data: "Datos de identificación de la empresa", footer_consumer: "PROTECCIÓN AL CONSUMIDOR"
       },
-      it: {
-        nav_home: "Home", nav_shop: "Negozio", nav_about: "Chi Siamo", nav_team: "Team H-Time", nav_contact: "Contattaci",
-        checkout_cart_title: "Carrello", checkout_details_title: "Dettagli di spedizione", checkout_summary_title: "Riepilogo ordine",
-        summary_subtotal: "Subtotale", summary_shipping: "Spedizione", summary_total: "Totale",
-        form_fname: "Nome", form_lname: "Cognome", form_address: "Indirizzo completo", form_phone: "Telefono", form_email: "Email",
-        btn_place_order: "Effettua ordine", cart_empty: "Il tuo carrello è attualmente vuoto.", unit_price: "Prezzo unitario:", btn_delete: "Elimina",
-        alert_empty_cart: "Aggiungi prodotti al carrello prima di effettuare l'ordine.", payment_method_title: "Metodo di pagamento",
-        pay_card: "Carta online", pay_cash: "Pagamento alla consegna", pay_bank: "Bonifico bancario",
-        delivery_method_title: "Metodo di consegna", del_courier: "Corriere espresso", del_locker: "Punto di ritiro (Locker)",
-        succ_title: "Ordine Effettuato!", succ_desc: "Grazie per il tuo ordine. Il numero del tuo ordine è:",
-        btn_view_invoice: "Vedi Fattura", btn_download_pdf: "Scarica PDF",
-        inv_title: "Fattura Proforma", inv_client: "Cliente:", inv_address: "Indirizzo:", inv_phone: "Telefono:", inv_pay_method: "Pagamento:", inv_del_method: "Consegna:",
-        inv_product: "Prodotto", inv_qty: "Quantità", inv_total_price: "Prezzo Totale", inv_grand_total: "Totale Generale:", inv_footer_msg: "Grazie per l'acquisto! Questo documento è la conferma del tuo ordine.",
-        ph_lname: "Rossi", ph_fname: "Mario", ph_address: "Via, N., Città, Provincia", ph_phone: "+39 xxxx xxx", ph_email: "contatto@esempio.it",
-        footer_desc: "Emozioni scolpite nell'eleganza. Una boutique di lusso dedicata a chi apprezza la raffinatezza.",
-        footer_nav: "NAVIGAZIONE RAPIDA", footer_home: "Home - Pagina principale", footer_shop: "Negozio - Tutte le collezioni", footer_about: "La nostra storia", footer_contact: "Contatto & Supporto",
+      it: { 
+        nav_home: "Home", nav_shop: "Negozio", nav_about: "Chi Siamo", nav_team: "Team H-Time", nav_contact: "Contattaci", 
+        contact_title: "Contattaci", contact_desc: "Il nostro team di esperti è a tua disposizione per qualsiasi domanda o consulenza riguardante le nostre collezioni H-TIME.", 
+        contact_info_heading: "Info Contatti",
+        contact_address_title: "Indirizzo", contact_phone_title: "Telefono", contact_email_title: "E-mail", contact_program_title: "Orari", contact_program_val: "Lunedì - Venerdì: 10:00 - 18:00", 
+        contact_form_title: "Invia un messaggio", form_name: "Nome completo", form_email: "Indirizzo Email", form_message: "Messaggio", 
+        btn_send: "Invia Messaggio", btn_sending: "Invio in corso...",
+        form_warning_note: "* In caso di errori di invio (dovuti a restrizioni di rete), ti preghiamo di scriverci direttamente via e-mail.",
+        form_success_msg: "Il tuo messaggio è stato inviato con successo! Ti contatteremo presto.",
+        form_error_msg: "Errore di invio. Vi preghiamo di inviarci un'e-mail direttamente.",
+        ph_fname: "Mario Rossi", ph_email: "contatto@esempio.it", ph_message: "Scrivi qui il tuo messaggio...",
+        footer_desc: "Emozioni scolpite nell'eleganza. Una boutique di lusso dedicata a chi apprezza la raffinatezza.", 
+        footer_nav: "NAVIGAZIONE RAPIDA", footer_home: "Home - Pagina principale", footer_shop: "Negozio - Tutte le collezioni", footer_about: "La nostra storia", footer_contact: "Contatto & Supporto", 
         footer_info: "INFORMAZIONI & POLITICHE", footer_terms: "Termini e condizioni", footer_privacy: "Informativa sulla privacy", footer_cookies: "Informativa sui cookie", footer_delivery: "Politica di consegna", footer_return: "Politica di reso (14 giorni)", footer_care: "Cura dei gioielli", footer_id_data: "Dati identificativi dell'azienda", footer_consumer: "PROTEZIONE DEL CONSUMATORE"
       }
     };
-
-    function applyTranslations(lang) {
-      const dict = translations[lang] || translations.ro;
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (dict[key]) el.innerText = dict[key];
-      });
-      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-        const key = el.getAttribute('data-i18n-placeholder');
-        if (dict[key]) el.placeholder = dict[key];
+    
+    function applyTranslations(lang) { 
+      const dict = translations[lang] || translations.ro; 
+      document.querySelectorAll('[data-i18n]').forEach(el => { 
+        const key = el.getAttribute('data-i18n'); 
+        if (dict[key]) el.innerText = dict[key]; 
+      }); 
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => { 
+        const key = el.getAttribute('data-i18n-placeholder'); 
+        if (dict[key]) el.placeholder = dict[key]; 
       });
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      if(typeof actualizeazaNumarCos === 'function') {
-        actualizeazaNumarCos();
-      }
-
+      updateCartCount();
       const switcher = document.getElementById('languageSwitcher');
-      const savedLang = localStorage.getItem('htime_lang') || 'ro';
-      if(switcher) {
-        switcher.value = savedLang;
-        switcher.addEventListener('change', () => {
-          localStorage.setItem('htime_lang', switcher.value);
-          applyTranslations(switcher.value);
-          updateCartUI();
+      if(switcher) { 
+        switcher.value = localStorage.getItem('htime_lang') || 'ro'; 
+        switcher.addEventListener('change', () => { 
+          localStorage.setItem('htime_lang', switcher.value); 
+          applyTranslations(switcher.value); 
+        }); 
+      }
+      applyTranslations(localStorage.getItem('htime_lang') || 'ro');
+      
+      // LOGICA DE TRIMITERE FORMULAR PRIN AJAX
+      const form = document.getElementById('contactForm');
+      const formMessage = document.getElementById('formMessage');
+      const submitBtn = document.getElementById('submitBtn');
+
+      if (form) {
+        form.addEventListener('submit', function(e) {
+          e.preventDefault(); // Previne redirecționarea paginii
+          
+          const currentLang = localStorage.getItem('htime_lang') || 'ro';
+          const dict = translations[currentLang] || translations.ro;
+          
+          // Dezactivăm butonul și schimbăm textul pentru feedback vizual
+          const spanText = submitBtn.querySelector('span');
+          const originalText = spanText.innerText;
+          submitBtn.disabled = true;
+          spanText.innerText = dict.btn_sending || "Se trimite...";
+          formMessage.style.display = 'none';
+
+          const formData = new FormData(form);
+
+          fetch("https://formsubmit.co/ajax/h.time.business@gmail.com", {
+            method: "POST",
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+          })
+          .then(response => response.json())
+          .then(data => {
+            formMessage.style.display = 'block';
+            if (data.success) {
+              formMessage.style.color = '#155724';
+              formMessage.style.backgroundColor = '#d4edda';
+              formMessage.style.border = '1px solid #c3e6cb';
+              formMessage.innerText = dict.form_success_msg || "Mesajul a fost trimis cu succes!";
+              form.reset(); // Golim formularul
+            } else {
+              formMessage.style.color = '#721c24';
+              formMessage.style.backgroundColor = '#f8d7da';
+              formMessage.style.border = '1px solid #f5c6cb';
+              formMessage.innerText = dict.form_error_msg || "Eroare la trimitere.";
+            }
+          })
+          .catch(error => {
+            // Aici intră dacă Orange blochează request-ul de fetch
+            formMessage.style.display = 'block';
+            formMessage.style.color = '#721c24';
+            formMessage.style.backgroundColor = '#f8d7da';
+            formMessage.style.border = '1px solid #f5c6cb';
+            formMessage.innerText = dict.form_error_msg || "Eroare de rețea. Te rugăm să ne scrii pe email.";
+          })
+          .finally(() => {
+            // Resetăm butonul înapoi
+            submitBtn.disabled = false;
+            spanText.innerText = originalText;
+            
+            // Ascundem mesajul după 7 secunde
+            setTimeout(() => {
+              formMessage.style.display = 'none';
+            }, 7000);
+          });
         });
       }
-      applyTranslations(savedLang);
-      updateCartUI();
     });
   </script>
 </body>
