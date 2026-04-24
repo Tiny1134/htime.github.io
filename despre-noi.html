@@ -11,39 +11,18 @@
 
   <style>
     /* ================= VARIABILE & BAZĂ ================= */
-    :root {
-      --peach: #fcbf88;
-      --pink: #ffb6c1;
-      --dark: #111111;
-      --light-bg: #fdfbf9;
-      --card-bg: #ffffff;
-      --shadow-sm: 0 4px 15px rgba(0,0,0,0.03);
-      --shadow-md: 0 15px 35px rgba(0,0,0,0.06);
+    :root { 
+      --peach: #fcbf88; 
+      --pink: #ffb6c1; 
+      --dark: #111111; 
+      --dark-gray: #1a1a1a;
+      --light-bg: #fdfbf9; 
       --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     }
-
     * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: 'Montserrat', sans-serif; font-weight: 300; background-color: var(--light-bg); color: var(--dark); overflow-x: hidden; display: flex; flex-direction: column; min-height: 100vh; padding-top: 100px; }
     
     a, a:hover, a:visited, a:active { text-decoration: none !important; color: inherit !important; }
-
-    body {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 300;
-      background-color: var(--light-bg);
-      color: var(--dark);
-      overflow-x: hidden;
-      display: flex; 
-      flex-direction: column; 
-      min-height: 100vh;
-      padding-top: 100px;
-    }
-    h1,h2,h3,h4 { font-weight: normal; }
-
-    /* ================= ANIMAȚIA GRADIENTULUI ================= */
-    @keyframes textGradientMove { 
-      0% { background-position: 0% 50%; } 
-      100% { background-position: 200% 50%; } 
-    }
 
     /* ================= NAVIGAȚIE (Glassmorphism) ================= */
     nav {
@@ -58,7 +37,6 @@
       border-bottom: 1px solid rgba(255,255,255,0.05);
       transition: var(--transition);
     }
-
     .logo img { height:75px; transition: transform 0.3s; }
     .logo img:hover { transform: scale(1.02); }
 
@@ -82,14 +60,14 @@
     a.cart-btn, a.cart-btn:visited {
       border: 1px solid rgba(255,255,255,0.3); padding: 10px 22px; border-radius: 30px;
       font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; 
-      font-weight: 700 !important; /* Setat pe Bold */
+      font-weight: 700 !important; 
       display: inline-flex; align-items: center; justify-content: center; 
       transition: var(--transition); background: transparent; 
-      color: white !important; /* Fortat culoarea alba */
+      color: white !important; 
     }
     a.cart-btn:hover { 
       border-color: var(--peach); background: var(--peach);
-      color: var(--dark) !important; /* Daca vrei ca si la hover sa fie alb, schimba var(--dark) cu white */
+      color: var(--dark) !important; 
       transform: translateY(-2px);
     }
 
@@ -102,18 +80,10 @@
     #languageSwitcher:hover { border-color: var(--peach); }
     #languageSwitcher option { background: var(--dark); color: white; }
 
-    .gradient-underline { position:relative; display:inline-block; padding-bottom:15px; }
-    .gradient-underline::after {
-      content:''; position:absolute; left:0; bottom:0; width:100%; height:4px;
-      background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink));
-      background-size:200% auto; animation:textGradientMove 4s linear infinite; border-radius:2px;
-    }
-
-
-    /* ================= ANIMAȚII SCROLL ================= */
+    /* ================= ANIMATII SCROLL ================= */
     .animate-on-scroll {
       opacity: 0;
-      transform: translateY(40px);
+      transform: translateY(30px);
       transition: opacity 0.8s ease-out, transform 0.8s ease-out;
       will-change: opacity, transform;
     }
@@ -121,124 +91,95 @@
       opacity: 1;
       transform: translateY(0);
     }
-    .delay-1 { transition-delay: 0.1s; }
-    .delay-2 { transition-delay: 0.2s; }
-    .delay-3 { transition-delay: 0.3s; }
 
-    /* ================= HEADER ================= */
-    .page-header { 
-      text-align: center; 
-      padding: 60px 20px 20px; 
+    /* ================= ABOUT HERO ================= */
+    .about-hero {
+      background-color: var(--dark);
+      color: white;
+      text-align: center;
+      padding: 80px 20px 180px;
+      position: relative;
     }
-    .page-header h1 { 
-      font-family: 'Montserrat', sans-serif; 
-      font-weight: 700;
-      font-size: clamp(2.5rem, 5vw, 4.5rem); 
-      color: var(--dark); 
-      margin-bottom: 15px;
+    .about-hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+      background: linear-gradient(135deg, var(--peach), var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
     }
-    .page-header p { 
-      color: #555; 
-      max-width: 650px; 
-      margin: 0 auto; 
+    .about-hero p {
+      max-width: 650px;
+      margin: 0 auto;
       font-size: 1.15rem;
-      line-height: 1.8;
+      line-height: 1.7;
+      color: #ccc;
       font-family: 'Playfair Display', serif;
       font-style: italic;
     }
 
-    /* ================= LAYOUT ASIMETRIC ================= */
-    .split-layout {
-      display: flex;
-      max-width: 1300px;
-      margin: 40px auto 100px;
-      padding: 0 40px;
-      gap: 70px;
-      align-items: flex-start; /* CRUCIAL pentru funcționarea naturală a Sticky */
-      flex: 1;
+    /* ================= ABOUT LAYOUT (MATCHING CONTACT WRAPPER) ================= */
+    .about-wrapper {
+      max-width: 1200px;
+      margin: -100px auto 80px;
+      padding: 0 20px;
       position: relative;
+      z-index: 10;
+      width: 100%;
+      flex: 1;
     }
 
-    .split-text {
-      flex: 1;
+    .about-panel {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 10px 20px 40px rgba(0,0,0,0.08);
+      padding: 60px 50px;
+      display: flex;
+      gap: 50px;
+      align-items: flex-start;
+    }
+
+    .about-text-panel {
+      flex: 1.3;
       display: flex;
       flex-direction: column;
-      gap: 90px;
-      padding-bottom: 50px;
+      gap: 40px;
     }
 
     .content-block h2 {
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
-      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      font-size: 1.8rem;
+      margin-bottom: 20px;
       color: var(--dark);
-      margin-bottom: 35px;
-      line-height: 1.1;
-      position: relative;
-      display: inline-block;
-    }
-    
-    .content-block h2::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: -12px;
-      width: 70px;
-      height: 4px;
-      background: linear-gradient(to right, var(--pink), var(--peach), var(--pink), var(--peach), var(--pink));
-      background-size: 200% auto;
-      animation: textGradientMove 4s linear infinite;
-      border-radius: 2px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
     .content-block p {
-      font-size: 1.15rem;
-      line-height: 1.9;
-      color: #444;
-      margin-bottom: 25px;
-      font-weight: 300;
-      padding-left: 20px;
-      border-left: 2px solid transparent;
-      transition: all 0.4s ease;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: #555;
+      margin-bottom: 15px;
     }
 
-    .content-block p:hover {
-      border-left-color: var(--peach);
-      color: var(--dark);
-      transform: translateX(8px);
-    }
-
-    .content-block p:last-child {
-      margin-bottom: 0;
-    }
-
-    /* ================= COLOANA DIN DREAPTA: STICKY REPARAT ================= */
-    .split-image {
+    .about-image-panel {
       flex: 1;
       position: sticky;
-      
-      /* Secretul aici: top 18vh lasă spațiu pentru bara de navigație.
-         Am scos transform: translateY care strica marginile părintelui. */
-      top: 18vh; 
-      align-self: flex-start; /* O blochează strict în spațiul părinte */
-      height: max-content; /* Îi dă voie să se oprească natural jos */
-      
-      padding: 6px;
-      border-radius: 12px;
-      background: linear-gradient(45deg, var(--pink), var(--peach), var(--pink), var(--peach), var(--pink));
-      background-size: 200% auto;
-      animation: textGradientMove 4s linear infinite;
-      box-shadow: 0 30px 60px rgba(0,0,0,0.12);
+      top: 120px; /* Offset to stay below fixed navbar */
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     }
-
-    .split-image img {
+    
+    .about-image-panel img {
       width: 100%;
       height: auto;
       display: block;
       object-fit: cover;
       object-position: center;
-      border-radius: 6px; 
-      border: 3px solid var(--dark);
     }
 
     /* ================= FOOTER ================= */
@@ -273,21 +214,17 @@
     }
 
     /* ================= RESPONSIVE ================= */
-    @media (max-width: 992px) {
-      .split-layout { flex-direction: column; padding: 0 20px; }
-      .split-image {
-        position: relative; top: 0; transform: none; height: auto;
-        width: 100%; margin-top: 20px; align-self: center;
-      }
-      .split-text { padding-bottom: 20px; gap: 60px; }
+    @media (max-width:992px) { 
+      .about-wrapper { margin-top: -60px; }
+      .about-panel { flex-direction: column; padding: 40px 30px; gap: 40px; }
+      .about-image-panel { position: relative; top: 0; width: 100%; }
     }
-
-    @media (max-width:768px) {
-      nav { flex-direction:column; gap:15px; padding:15px; background:rgba(17,17,17,0.98); }
+    @media (max-width:768px) { 
+      nav { flex-direction:column; gap:15px; padding:15px; background:rgba(17,17,17,0.98); } 
       .nav-links { flex-wrap:wrap; justify-content:center; gap:20px; }
+      body { padding-top: 130px; } 
+      .about-hero { padding: 40px 20px 120px; }
       footer { padding:60px 20px 30px; display:flex; flex-direction:column; gap: 40px; }
-      body { padding-top: 130px; }
-      .page-header h1 { font-size: 2.2rem; }
     }
   </style>
 </head>
@@ -296,7 +233,6 @@
   <!-- NAVBAR -->
   <nav>
     <a href="index.html" class="logo"><img src="logo.webp" alt="H-TIME Logo" onerror="this.src='logo.png'"></a>
-
     <div class="nav-links">
       <a href="index.html" data-i18n="nav_home">Acasă</a>
       <a href="magazin.html" data-i18n="nav_shop">Magazin</a>
@@ -304,7 +240,6 @@
       <a href="echipa.html" data-i18n="nav_team">Echipa H-Time</a>
       <a href="contact.html" data-i18n="nav_contact">Contactează-ne</a>
     </div>
-
     <div class="nav-icons">
       <select id="languageSwitcher" aria-label="Selectează limba">
         <option value="ro">RO</option>
@@ -318,38 +253,40 @@
     </div>
   </nav>
 
-  <!-- HEADER DESPRE NOI -->
-  <div class="page-header animate-on-scroll">
-    <h1 data-i18n="about_title">Povestea Noastră</h1>
-    <p data-i18n="about_subtitle">„Descoperă pasiunea și inspirația din spatele fiecărei bijuterii H-TIME.”</p>
-  </div>
+  <!-- HERO SECTION -->
+  <header class="about-hero">
+    <h1 class="animate-on-scroll" data-i18n="about_title">Povestea Noastră</h1>
+    <p class="animate-on-scroll" data-i18n="about_subtitle">„Descoperă pasiunea și inspirația din spatele fiecărei bijuterii H-TIME.”</p>
+  </header>
 
-  <!-- LAYOUT ASIMETRIC -->
-  <section class="split-layout">
-    
-    <!-- PARTEA STÂNGĂ: TEXTUL CARE SCROLEAZĂ -->
-    <div class="split-text">
-      <!-- CINE SUNTEM -->
-      <div class="content-block animate-on-scroll delay-1">
-        <h2 data-i18n="about_who_title">Cine suntem noi?</h2>
-        <p data-i18n="about_who_text_1">Firma de exercițiu H-TIME a luat naștere din pasiunea pentru frumos și din dorința de a capta esența însăși a timpului. Cu o viziune curajoasă ce îmbină mitologia greacă cu estetica modernă, ne propunem să îmbogățim lumea accesoriilor cu un strop de rafinament mitologic. Fiecare creație a noastră este o odă adusă legendelor, transpusă într-un design contemporan.</p>
-        <p data-i18n="about_who_text_2">Dincolo de simpla creare a unor bijuterii, misiunea noastră este să reamintim fiecărui client că fiecare clipă merită celebrată cu adevărat. Suntem o echipă tânără și dedicată, unde creativitatea se întâlnește cu precizia. Ne asigurăm că fiecare piesă H-TIME devine un martor tăcut al celor mai prețioase amintiri, transformând momentele efemere într-o moștenire eternă.</p>
+  <!-- MAIN ABOUT LAYOUT -->
+  <main class="about-wrapper">
+    <div class="about-panel">
+      
+      <!-- INFO PANEL (Stânga) -->
+      <div class="about-text-panel">
+        
+        <div class="content-block animate-on-scroll">
+          <h2 data-i18n="about_who_title">Cine suntem noi?</h2>
+          <p data-i18n="about_who_text_1">Firma de exercițiu H-TIME a luat naștere din pasiunea pentru frumos și din dorința de a capta esența însăși a timpului. Cu o viziune curajoasă ce îmbină mitologia greacă cu estetica modernă, ne propunem să îmbogățim lumea accesoriilor cu un strop de rafinament mitologic. Fiecare creație a noastră este o odă adusă legendelor, transpusă într-un design contemporan.</p>
+          <p data-i18n="about_who_text_2">Dincolo de simpla creare a unor bijuterii, misiunea noastră este să reamintim fiecărui client că fiecare clipă merită celebrată cu adevărat. Suntem o echipă tânără și dedicată, unde creativitatea se întâlnește cu precizia. Ne asigurăm că fiecare piesă H-TIME devine un martor tăcut al celor mai prețioase amintiri, transformând momentele efemere într-o moștenire eternă.</p>
+        </div>
+
+        <div class="content-block animate-on-scroll">
+          <h2 data-i18n="about_insp_title">Ce ne-a inspirat?</h2>
+          <p data-i18n="about_insp_text_1">Inspirația noastră a pornit din dorința pură de a captura momentele efemere din viață și a le oferi o formă eternă. Am observat cum bijuteriile și ceasurile nu sunt doar obiecte materiale, ci martori tăcuți ai celor mai importante capitole din viața unui om: logodne, aniversări, reușite personale sau simple dovezi de iubire.</p>
+          <p data-i18n="about_insp_text_2">Fascinați de legende străvechi, de mitologie și de frumusețea inegalabilă a naturii, am decis să creăm o punte între artă și emoție. Astfel s-a născut H-TIME — din dorința de a oferi nu doar accesorii de lux, ci talismane personale, purtătoare de energie, care să rezoneze cu sufletul celui care le poartă și să poată fi lăsate moștenire generațiilor viitoare.</p>
+        </div>
+
       </div>
 
-      <!-- CE NE-A INSPIRAT -->
-      <div class="content-block animate-on-scroll delay-2">
-        <h2 data-i18n="about_insp_title">Ce ne-a inspirat?</h2>
-        <p data-i18n="about_insp_text_1">Inspirația noastră a pornit din dorința pură de a captura momentele efemere din viață și a le oferi o formă eternă. Am observat cum bijuteriile și ceasurile nu sunt doar obiecte materiale, ci martori tăcuți ai celor mai importante capitole din viața unui om: logodne, aniversări, reușite personale sau simple dovezi de iubire.</p>
-        <p data-i18n="about_insp_text_2">Fascinați de legende străvechi, de mitologie și de frumusețea inegalabilă a naturii, am decis să creăm o punte între artă și emoție. Astfel s-a născut H-TIME — din dorința de a oferi nu doar accesorii de lux, ci talismane personale, purtătoare de energie, care să rezoneze cu sufletul celui care le poartă și să poată fi lăsate moștenire generațiilor viitoare.</p>
+      <!-- IMAGE PANEL (Dreapta) -->
+      <div class="about-image-panel animate-on-scroll">
+        <img src="echipa.webp" alt="Echipa H-TIME" onerror="this.src='https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1000'; this.alt='Imagine de grup placeholder'">
       </div>
-    </div>
 
-    <!-- PARTEA DREAPTĂ: IMAGINEA BLOCATĂ (CU GRADIENT BORDER) -->
-    <div class="split-image animate-on-scroll delay-3">
-      <img src="echipa.webp" alt="Echipa H-TIME" onerror="this.src='https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1000'; this.alt='Imagine de grup placeholder'">
     </div>
-
-  </section>
+  </main>
 
   <!-- FOOTER -->
   <footer>
@@ -360,7 +297,7 @@
         <a href="#" class="social-icon-circle" title="Facebook">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
         </a>
-        <a href="https://www.instagram.com/bijuterii.h_time/" class="social-icon-circle" title="Instagram">
+        <a href="https://www.instagram.com/bijuterii.h_time/" class="social-icon-circle" title="Instagram" target="_blank">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
         </a>
         <a href="#" class="social-icon-circle" title="TikTok">
@@ -412,7 +349,6 @@
     <div class="footer-bottom">© 2024 - 2026 H-TIME Luxury Experience. Toate drepturile sunt rezervate.</div>
   </footer>
 
-  <!-- SCRIPTURI: Traduceri, Switcher Limbă, Actualizare Coș & Animații -->
   <script src="script.js"></script>
   <script>
     // --- Logică Animații Scroll ---
