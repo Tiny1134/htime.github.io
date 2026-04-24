@@ -518,10 +518,16 @@
           localStorage.setItem('htimeCart', JSON.stringify(groupedCart));
       }
 
-      listContainer.innerHTML = groupedCart.map((item, idx) => `
+      listContainer.innerHTML = groupedCart.map((item, idx) => {
+        // --- MODIFICARE AICI PENTRU A PRELUA IMAGINEA DIN PRODUSE.JS ÎN FORMAT WEBP ---
+        const dbProduct = typeof produse !== 'undefined' ? produse.find(p => p.id === item.id) : null;
+        let rawImg = dbProduct ? dbProduct.imagine : (item.imagine || 'poza1.webp');
+        let imageSource = rawImg ? rawImg.replace('.png', '.webp') : 'poza1.webp';
+
+        return `
         <div class="cart-item">
           <div class="item-info">
-            <img src="${item.imagine || 'poza1.webp'}" alt="${item.nume}" onerror="this.src='poza1.webp'">
+            <img src="${imageSource}" alt="${item.nume}" onerror="this.src='poza1.webp'">
             <div>
               <h4>${item.nume}</h4>
               <p>${dict.unit_price} ${formatPrice(item.pret, currentLang)}</p>
@@ -537,7 +543,8 @@
             <button type="button" onclick="eliminaDinCos(${idx})" class="btn-remove">${dict.btn_delete}</button>
           </div>
         </div>
-      `).join('');
+      `;
+      }).join('');
 
       // CALCULATIONS
       const subtotalEur = groupedCart.reduce((acc, item) => acc + (item.pret * (item.qty || 1)), 0);
